@@ -1,3 +1,10 @@
+:root {
+    --dark-blue: #469597;
+    --mch-dark-barcha-blue: #5BA199;
+    --dark-gray: #BBC6C8;
+    --gray: #E5E3E4;
+    --marron: #DDBEAA;
+}
 /*General*/
 body {
     font-family: "Open Sans", sans-serif;
@@ -5,12 +12,12 @@ body {
 }
 
 a {
-    color: #1acc8d;
+    color: var(--dark-blue);
     text-decoration: none;
 }
 
 a:hover {
-    color: #34e5a6;
+    color: var(--mch-dark-barcha-blue);
     text-decoration: none;
 }
 
@@ -23,7 +30,8 @@ h1, h2, h3, h4, h5, h6 {
     height: 80px;
     z-index: 997;
     transition: all 0.5s;
-    background: rgba(1, 4, 136, 0.9);
+    background: var(--mch-dark-barcha-blue);
+    opacity: 0.9;
 }
 
 #header .logo h1 {
@@ -36,7 +44,7 @@ h1, h2, h3, h4, h5, h6 {
 
 #header .logo h1 a,
 #header .logo h1 a:hover {
-    color: #fff;
+    color: var(--gray);
     text-decoration: none;
 }
 
@@ -171,11 +179,11 @@ h1, h2, h3, h4, h5, h6 {
 .navbar-mobile a:focus {
     padding: 10px 20px;
     font-size: 15px;
-    color: #0205a1;
+    color: var(--dark-blue);
 }
 
 .navbar-mobile a:hover,
 .navbar-mobile .active,
 .navbar-mobile li:hover > a {
-    color: #3f43fd;
+    color: var(--mch-dark-barcha-blue);
 }
