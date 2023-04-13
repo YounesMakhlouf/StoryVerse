@@ -7,15 +7,35 @@ html { overflow-y: scroll;
  }
 img {
     width: 10%; 
-    height: auto; /* this keeps the aspect ratio */
+    height: auto; 
   }
+  .gradient {
+    background: linear-gradient(-45deg, #492e92, #88d3ce, #392fc0);
+    background-size: 400% 400%;
+    animation: gradient-bg 12s ease infinite;
+    -webkit-animation: gradient-bg 12s ease infinite;
+}
+
+@keyframes gradient-bg {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
 body{
-  height: 100vh;
+  /* height: 100%; */
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 10px;
-  background:  linear-gradient(-20deg, #6e45e2 0%, #88d3ce 100%);
+  background-attachment:fixed;
+  background-repeat: no-repeat;
+  background:  linear-gradient(to top, #6e45e2 0%, #88d3ce 100%);
 }
 .container{
   max-width: 700px;
@@ -120,6 +140,7 @@ form .input-box span.details{
  }
  footer{  
   transition: all 0.3s ease;
+  text-align: center;
 
  }
  form .button input{
