@@ -195,10 +195,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Hero Section */
+/* Hero Section */
 #hero {
-    width: 100%;
-    position: relative;
-    padding: 120px 0 0 0;
+  width: 100%;
+  background: url("../img/hero-bg.jpg");
+  position: relative;
+  padding: 120px 0 0 0;
+    z-index: 1;
 }
 
 #hero:before {
@@ -212,6 +215,7 @@ h1, h2, h3, h4, h5, h6 {
     right: 0;
     z-index: -1;
 }
+
 
 #hero h1 {
     margin: 0 0 20px 0;
@@ -233,20 +237,20 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #hero .btn-get-started {
-    font-family: "Montserrat", sans-serif;
-    font-weight: 500;
-    font-size: 16px;
-    letter-spacing: 1px;
-    display: inline-block;
-    padding: 10px 30px;
-    border-radius: 50px;
-    transition: 0.5s;
-    color: #fff;
-    background: var(--gray);
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  letter-spacing: 1px;
+  display: inline-block;
+  padding: 10px 30px;
+  border-radius: 50px;
+  transition: 0.5s;
+  color: #fff;
+  background: var(--marron);
 }
 
 #hero .btn-get-started:hover {
-    background: var(--dark-gray);
+  background: #BB9C88;
 }
 
 #hero .animated {
