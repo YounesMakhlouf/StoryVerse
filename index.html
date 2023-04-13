@@ -13,7 +13,7 @@
     <link href="assets/css/style.css" rel="stylesheet">
 </head>
 <body>
-<header class="fixed-top d-flex align-items-center " id="header">
+<header class="fixed-top d-flex align-items-center header-transparent" id="header">
     <div class="container d-flex align-items-center justify-content-between">
         <div class="logo">
             <h1><a href="index.html"><span><img alt="StoryVerse logo" class="img-fluid" src="assets/img/logo2.png">StoryVerse</span></a>
@@ -49,24 +49,26 @@
                 </div>
             </div>
             <div class="col-lg-4 order-1 order-lg-2 hero-img" data-aos="zoom-out" data-aos-delay="300">
-                <img alt="kids sharing stories around a campfire" class="img-fluid rounded animated" src="assets/img/hero-img.jpg">
+                <img alt="kids sharing stories around a campfire" class="img-fluid rounded animated"
+                     src="assets/img/hero-img.jpg">
             </div>
         </div>
     </div>
 
-    <svg class="hero-waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28 " preserveAspectRatio="none">
-      <defs>
-          <path id="wave-path" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"></path>
-      </defs>
-      <g class="wave1">
-          <use xlink:href="#wave-path" x="50" y="3" fill="rgba(255,255,255, .1)"></use>
-      </g>
-      <g class="wave2">
-          <use xlink:href="#wave-path" x="50" y="0" fill="rgba(255,255,255, .2)"></use>
-      </g>
-      <g class="wave3">
-          <use xlink:href="#wave-path" x="50" y="9" fill="#fff"></use>
-      </g>
+    <svg class="hero-waves" preserveAspectRatio="none" viewBox="0 24 150 28 "
+         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <defs>
+            <path d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" id="wave-path"></path>
+        </defs>
+        <g class="wave1">
+            <use fill="rgba(255,255,255, .1)" x="50" xlink:href="#wave-path" y="3"></use>
+        </g>
+        <g class="wave2">
+            <use fill="rgba(255,255,255, .2)" x="50" xlink:href="#wave-path" y="0"></use>
+        </g>
+        <g class="wave3">
+            <use fill="#fff" x="50" xlink:href="#wave-path" y="9"></use>
+        </g>
     </svg>
 </section>
 
