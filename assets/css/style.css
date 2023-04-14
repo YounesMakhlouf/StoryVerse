@@ -197,10 +197,10 @@ h1, h2, h3, h4, h5, h6 {
 /* Hero Section */
 /* Hero Section */
 #hero {
-  width: 100%;
-  background: url("../img/hero-bg.jpg");
-  position: relative;
-  padding: 120px 0 0 0;
+    width: 100%;
+    background: url("../img/hero-bg.jpg");
+    position: relative;
+    padding: 120px 0 0 0;
     z-index: 1;
 }
 
@@ -237,20 +237,20 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #hero .btn-get-started {
-  font-family: "Montserrat", sans-serif;
-  font-weight: 500;
-  font-size: 16px;
-  letter-spacing: 1px;
-  display: inline-block;
-  padding: 10px 30px;
-  border-radius: 50px;
-  transition: 0.5s;
-  color: #fff;
-  background: var(--marron);
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    letter-spacing: 1px;
+    display: inline-block;
+    padding: 10px 30px;
+    border-radius: 50px;
+    transition: 0.5s;
+    color: #fff;
+    background: var(--marron);
 }
 
 #hero .btn-get-started:hover {
-  background: #BB9C88;
+    background: #BB9C88;
 }
 
 #hero .animated {
@@ -357,4 +357,76 @@ h1, h2, h3, h4, h5, h6 {
     100% {
         transform: translate(85px, 0%);
     }
+}
+
+/* Sections */
+section {
+  padding: 60px 0;
+  overflow: hidden;
+}
+
+.section-bg {
+  background-color: var(--gray);
+}
+
+.section-title {
+  padding-bottom: 40px;
+}
+
+.section-title h2 {
+  font-size: 14px;
+  font-weight: 500;
+  padding: 0;
+  line-height: 1px;
+  margin: 0 0 5px 0;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--dark-gray);
+  font-family: "Poppins", sans-serif;
+}
+
+.section-title h2::after {
+  content: "";
+  width: 120px;
+  height: 1px;
+  display: inline-block;
+  background: var(--mch-dark-barcha-blue);
+  margin: 4px 10px;
+}
+
+.section-title p {
+  margin: 0;
+  margin: 0;
+  font-size: 36px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-family: "Poppins", sans-serif;
+  color: var(--dark-blue);
+}
+
+/* Trending */
+.trending  h5 {
+  font-weight: 700;
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+  font-size: 16px;
+}
+
+.trending a {
+  color: var(--dark-blue);
+  transition: ease-in-out 0.3s;
+}
+
+.trending a:hover {
+    color: var(--mch-dark-barcha-blue);
+}
+
+.trending .card:hover {
+  background: var(--gray);
+}
+
+.card-img-top {
+    aspect-ratio: 1;
+    object-fit: cover; /* ensure the images fill the card without distortion */
 }
