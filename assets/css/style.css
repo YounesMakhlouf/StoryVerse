@@ -19,14 +19,18 @@ a {
 
 a:hover {
     color: var(--mch-dark-barcha-blue);
-    text-decoration: none;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-family: "Montserrat", sans-serif;
 }
 
-/* Header */
+/*Header*/
 #header {
     height: 80px;
     z-index: 997;
@@ -36,7 +40,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #header.header-transparent {
-    background: transparent;
+    background-color: transparent;
 }
 
 #header .logo h1 {
@@ -50,7 +54,6 @@ h1, h2, h3, h4, h5, h6 {
 #header .logo h1 a,
 #header .logo h1 a:hover {
     color: var(--gray);
-    text-decoration: none;
 }
 
 #header .logo img {
@@ -59,8 +62,8 @@ h1, h2, h3, h4, h5, h6 {
     max-height: 40px;
 }
 
-/* Navigation Menu */
-/* Desktop Navigation */
+/*Navigation Menu/
+/Desktop Navigation*/
 .navbar {
     padding: 0;
 }
@@ -195,12 +198,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Hero Section */
-/* Hero Section */
 #hero {
-  width: 100%;
-  background: url("../img/hero-bg.webp");
-  position: relative;
-  padding: 120px 0 0 0;
+    width: 100%;
+    background: url("../img/hero-bg.webp");
+    position: relative;
+    padding: 120px 0 0 0;
     z-index: 1;
 }
 
@@ -215,7 +217,6 @@ h1, h2, h3, h4, h5, h6 {
     right: 0;
     z-index: -1;
 }
-
 
 #hero h1 {
     margin: 0 0 20px 0;
@@ -237,20 +238,20 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #hero .btn-get-started {
-  font-family: "Montserrat", sans-serif;
-  font-weight: 500;
-  font-size: 16px;
-  letter-spacing: 1px;
-  display: inline-block;
-  padding: 10px 30px;
-  border-radius: 50px;
-  transition: 0.5s;
-  color: #fff;
-  background: var(--marron);
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    letter-spacing: 1px;
+    display: inline-block;
+    padding: 10px 30px;
+    border-radius: 50px;
+    transition: 0.5s;
+    color: #fff;
+    background: var(--marron);
 }
 
 #hero .btn-get-started:hover {
-  background: #BB9C88;
+    background: #BB9C88;
 }
 
 #hero .animated {
@@ -361,61 +362,60 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Sections */
 section {
-  padding: 60px 0;
-  overflow: hidden;
+    padding: 60px 0;
+    overflow: hidden;
 }
 
 .section-bg {
-  background-color: var(--gray);
+    background-color: var(--gray);
 }
 
 .section-title {
-  padding-bottom: 40px;
+    padding-bottom: 40px;
 }
 
 .section-title h2 {
-  font-size: 14px;
-  font-weight: 500;
-  padding: 0;
-  line-height: 1px;
-  margin: 0 0 5px 0;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--dark-gray);
-  font-family: "Poppins", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 0;
+    line-height: 1px;
+    margin: 0 0 5px 0;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--dark-gray);
+    font-family: "Poppins", sans-serif;
 }
 
 .section-title h2::after {
-  content: "";
-  width: 120px;
-  height: 1px;
-  display: inline-block;
-  background: var(--mch-dark-barcha-blue);
-  margin: 4px 10px;
+    content: "";
+    width: 120px;
+    height: 1px;
+    display: inline-block;
+    background: var(--mch-dark-barcha-blue);
+    margin: 4px 10px;
 }
 
 .section-title p {
-  margin: 0;
-  margin: 0;
-  font-size: 36px;
-  font-weight: 700;
-  text-transform: uppercase;
-  font-family: "Poppins", sans-serif;
-  color: var(--dark-blue);
+    margin: 0;
+    font-size: 36px;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-family: "Poppins", sans-serif;
+    color: var(--dark-blue);
 }
 
 /* Trending */
-.trending  h5 {
-  font-weight: 700;
-  margin: 0;
-  padding: 0;
-  line-height: 1;
-  font-size: 16px;
+.trending h5 {
+    font-weight: 700;
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+    font-size: 1em;
 }
 
 .trending a {
-  color: var(--dark-blue);
-  transition: ease-in-out 0.3s;
+    color: var(--dark-blue);
+    transition: ease-in-out 0.3s;
 }
 
 .trending a:hover {
@@ -423,10 +423,13 @@ section {
 }
 
 .trending .card:hover {
-  background: var(--gray);
+    background: var(--gray);
 }
 
 .card-img-top {
     aspect-ratio: 1;
     object-fit: cover; /* ensure the images fill the card without distortion */
+    width: 100%;
+    height: auto;
+    max-height: 100%;
 }
