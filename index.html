@@ -27,22 +27,21 @@
         </div>
         <nav class="navbar" id="navbar">
             <ul>
-                <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-                <li><a class="nav-link scrollto" href="#about">About</a></li>
-                <li><a class="nav-link scrollto" href="#features">Features</a></li>
-                <li><a class="nav-link scrollto" href="#trending">Trending</a></li>
-                <li><a class="nav-link scrollto" href="#team">Team</a></li>
-                <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
-                <li><a class="nav-link scrollto" href="">Login</a></li>
-                <li><a class="nav-link scrollto" href="">Sign up</a></li>
+                <li><a class="nav-link scrollto active" href="#hero" title="Home">Home</a></li>
+                <li><a class="nav-link scrollto" href="#about" title="About">About</a></li>
+                <li><a class="nav-link scrollto" href="#trending" title="Trending">Trending</a></li>
+                <li><a class="nav-link scrollto" href="#team" title="Team">Team</a></li>
+                <li><a class="nav-link scrollto" href="#contact" title="Contact">Contact</a></li>
+                <li><a class="nav-link scrollto" href="#" title="Login">Login</a></li>
+                <li><a class="nav-link scrollto" href="#" title="Sign up">Sign up</a></li>
             </ul>
-            <i class="bi bi-list mobile-nav-toggle"></i>
+            <button aria-label="Menu" class="bi bi-list mobile-nav-toggle"></button>
         </nav>
     </div>
 </header>
 <main>
     <!-- ======= Hero Section ======= -->
-    <section aria-label="Hero section" id="hero">
+    <section aria-label="Hero section introducing StoryVerse platform" id="hero">
         <div class="container">
             <div class="row justify-content-between">
                 <div class="col-lg-7 pt-5 pt-lg-0 order-2 order-lg-1 d-flex align-items-center">
@@ -54,18 +53,20 @@
                             Don't just read stories, be a part of creating them. Get involved and start writing
                             today.</h2>
                         <div class="text-center text-lg-start">
-                            <a class="btn-get-started scrollto" href="#about">Start writing now</a>
+                            <a class="btn-get-started scrollto" data-aos="zoom-out" data-aos-delay="400" href="#about">Start
+                                writing now</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 order-1 order-lg-2 hero-img" data-aos="zoom-out" data-aos-delay="300">
-                    <img alt="Kids sharing stories around a campfire" class="img-fluid rounded animated"
-                         src="assets/img/hero-img.webp">
+                    <img alt="Kids sharing stories around a campfire at a StoryVerse writing camp"
+                         class="img-fluid rounded animated" src="assets/img/hero-img.webp">
                 </div>
             </div>
         </div>
-        <svg aria-hidden="true" class="hero-waves" preserveAspectRatio="none"
-             viewBox="0 24 150 28 " xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <svg aria-label="Waves decoration" class="hero-waves" preserveAspectRatio="none"
+             viewBox="0 24 150 28" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <desc>Decorative waves for the hero section</desc>
             <defs>
                 <path d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"
                       id="wave-path"></path>
@@ -82,24 +83,24 @@
         </svg>
     </section>
     <!-- End Hero Section -->
+
     <!-- ======= Trending Section ======= -->
     <section class="trending" id="trending">
         <div class="container">
-            <div class="section-title" data-aos="fade-up">
+            <header class="section-title" data-aos="fade-up">
                 <h2>Trending Stories</h2>
                 <p>Discover Our Hottest Stories</p>
-            </div>
-            <div class="row row-cols-1 row-cols-md-3 g-4" data-aos="fade-left">
+            </header>
+            <article class="row row-cols-1 row-cols-md-3 g-4" data-aos="fade-left">
                 <div class="col">
-                    <a href="">
+                    <a href="#" rel="bookmark">
                         <div class="card h-100" data-aos="zoom-in" data-aos-delay="400">
                             <img alt="..." class="card-img-top" src="assets/img/trending1.webp">
                             <div class="card-body">
                                 <h5 class="card-title">My Awkward Encounter with a Celebrity</h5>
                                 <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                    Pellentesque in eros
-                                    ac ligula auctor fermentum eu sit amet leo. Praesent a accumsan nisi, vel ultricies
-                                    nulla.
+                                    Pellentesque in eros ac ligula auctor fermentum eu sit amet leo. Praesent a accumsan
+                                    nisi, vel ultricies nulla.
                                 </p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <small class="text-muted">3 mins</small>
@@ -147,7 +148,7 @@
                         </div>
                     </a>
                 </div>
-            </div>
+            </article>
         </div>
     </section>
     <!-- End Trending Section -->
@@ -159,87 +160,129 @@
                 <h2>Our Team</h2>
                 <p>Meet Our Amazing Team</p>
             </div>
-            <div class="container">
-                <div class="row text-center justify-content-center" data-aos="fade-left">
-                    <div class="col d-flex align-items-stretch">
-                        <div class="member" data-aos="zoom-in" data-aos-delay="100">
-                            <div class="pic"><img alt="" class="img-fluid" src="assets/img/team/younes.webp"></div>
-                            <div class="member-info">
-                                <h4>Younes Makhlouf</h4>
-                                <span>Master of Memes</span>
-                                <div class="social">
-                                    <a href="https://www.facebook.com/BabyFaker24/" target="_blank"><i
-                                            class="bi bi-facebook"></i></a>
-                                    <a href="https://www.instagram.com/younes___makhlouf/" target="_blank"><i
-                                            class="bi bi-instagram"></i></a>
-                                    <a href="https://www.linkedin.com/in/younes-makhlouf-608321255/" target="_blank"><i
-                                            class="bi bi-linkedin"></i></a>
-                                </div>
+            <div class="row text-center justify-content-center" data-aos="fade-left">
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="member" data-aos="zoom-in" data-aos-delay="100">
+                        <div class="pic">
+                            <img alt="Younes Makhlouf" class="img-fluid" src="assets/img/team/younes.webp">
+                        </div>
+                        <div class="member-info">
+                            <h4>Younes Makhlouf</h4>
+                            <span>Master of Memes</span>
+                            <div class="social">
+                                <a href="https://www.facebook.com/BabyFaker24/" rel="noopener noreferrer"
+                                   target="_blank">
+                                    <i class="bi bi-facebook"></i>
+                                </a>
+                                <a href="https://www.instagram.com/younes___makhlouf/" rel="noopener noreferrer"
+                                   target="_blank">
+                                    <i class="bi bi-instagram"></i>
+                                </a>
+                                <a href="https://www.linkedin.com/in/younes-makhlouf-608321255/"
+                                   rel="noopener noreferrer"
+                                   target="_blank">
+                                    <i class="bi bi-linkedin"></i>
+                                </a>
                             </div>
                         </div>
                     </div>
-                    <div class="col d-flex align-items-stretch">
-                        <div class="member" data-aos="zoom-in" data-aos-delay="100">
-                            <div class="pic"><img alt="" class="img-fluid" src="assets/img/team/salma.webp"></div>
-                            <div class="member-info">
-                                <h4>Selma Bouabidi</h4>
-                                <span>Ambassador of Awesomeness</span>
-                                <div class="social">
-                                    <a href="https://www.facebook.com/salma.bouabidi" target="_blank"><i
-                                            class="bi bi-facebook"></i></a>
-                                    <a href="https://www.instagram.com/salmabouabidi_19/" target="_blank"><i
-                                            class="bi bi-instagram"></i></a>
-                                    <a href="https://www.linkedin.com/in/selma-bouabidi-938b08237/" target="_blank"><i
-                                            class="bi bi-linkedin"></i></a>
-                                </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="member" data-aos="zoom-in" data-aos-delay="100">
+                        <div class="pic">
+                            <img alt="Salma Bouabidi" class="img-fluid" src="assets/img/team/salma.webp">
+                        </div>
+                        <div class="member-info">
+                            <h4>Salma Bouabidi</h4>
+                            <span>Ambassador of Awesomeness</span>
+                            <div class="social">
+                                <a href="https://www.facebook.com/salma.bouabidi" rel="noopener noreferrer"
+                                   target="_blank">
+                                    <i class="bi bi-facebook"></i>
+                                </a>
+                                <a href="https://www.instagram.com/salmabouabidi_19/" rel="noopener noreferrer"
+                                   target="_blank">
+                                    <i class="bi bi-instagram"></i>
+                                </a>
+                                <a href="https://www.linkedin.com/in/selma-bouabidi-938b08237/"
+                                   rel="noopener noreferrer"
+                                   target="_blank">
+                                    <i class="bi bi-linkedin"></i>
+                                </a>
                             </div>
                         </div>
                     </div>
-                    <div class="col d-flex align-items-stretch">
-                        <div class="member" data-aos="zoom-in" data-aos-delay="100">
-                            <div class="pic"><img alt="" class="img-fluid" src="assets/img/team/wided.webp"></div>
-                            <div class="member-info">
-                                <h4>Wided Oueslati</h4>
-                                <span>Captain of Comedy</span>
-                                <div class="social">
-                                    <a href="https://www.facebook.com/profile.php?id=100069807314531" target="_blank"><i
-                                            class="bi bi-facebook"></i></a>
-                                    <a href="https://www.instagram.com/wided_ouesletyy/" target="_blank"><i
-                                            class="bi bi-instagram"></i></a>
-                                    <a href="" target="_blank"><i class="bi bi-linkedin"></i></a>
-                                </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="member" data-aos="zoom-in" data-aos-delay="100">
+                        <div class="pic">
+                            <img alt="Wided Oueslati" class="img-fluid" src="assets/img/team/wided.webp">
+                        </div>
+                        <div class="member-info">
+                            <h4>Wided Oueslati</h4>
+                            <span>Captain of Comedy</span>
+                            <div class="social">
+                                <a href="https://www.facebook.com/profile.php?id=100069807314531"
+                                   rel="noopener noreferrer"
+                                   target="_blank">
+                                    <i class="bi bi-facebook"></i>
+                                </a>
+                                <a href="https://www.instagram.com/wided_ouesletyy/" rel="noopener noreferrer"
+                                   target="_blank">
+                                    <i class="bi bi-instagram"></i>
+                                </a>
+                                <a href="" rel="noopener noreferrer" target="_blank">
+                                    <i class="bi bi-linkedin"></i>
+                                </a>
                             </div>
                         </div>
                     </div>
-                    <div class="col d-flex align-items-stretch">
-                        <div class="member" data-aos="zoom-in" data-aos-delay="100">
-                            <div class="pic"><img alt="" class="img-fluid" src="assets/img/team/skander.webp"></div>
-                            <div class="member-info">
-                                <h4>Skander Ben Achour</h4>
-                                <span>Head of Snack Acquisition</span>
-                                <div class="social">
-                                    <a href="https://www.facebook.com/skander.benachour.1" target="_blank"><i
-                                            class="bi bi-facebook"></i></a>
-                                    <a href="https://www.instagram.com/skander_ben_achour/" target="_blank"><i
-                                            class="bi bi-instagram"></i></a>
-                                    <a href="" target="_blank"><i class="bi bi-linkedin"></i></a>
-                                </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="member" data-aos="zoom-in" data-aos-delay="100">
+                        <div class="pic">
+                            <img alt="Skander Ben Achour" class="img-fluid" src="assets/img/team/skander.webp">
+                        </div>
+                        <div class="member-info">
+                            <h4>Skander Ben Achour</h4>
+                            <span>Head of Snack Acquisition</span>
+                            <div class="social">
+                                <a href="https://www.facebook.com/skander.benachour.1" rel="noopener noreferrer"
+                                   target="_blank">
+                                    <i class="bi bi-facebook"></i>
+                                </a>
+                                <a href="https://www.instagram.com/skander_ben_achour/" rel="noopener noreferrer"
+                                   target="_blank">
+                                    <i class="bi bi-instagram"></i>
+                                </a>
+                                <a href="" rel="noopener noreferrer" target="_blank">
+                                    <i class="bi bi-linkedin"></i>
+                                </a>
                             </div>
                         </div>
                     </div>
-                    <div class="col d-flex align-items-stretch">
-                        <div class="member" data-aos="zoom-in" data-aos-delay="100">
-                            <div class="pic"><img alt="" class="img-fluid" src="assets/img/team/yasmine.webp"></div>
-                            <div class="member-info">
-                                <h4>Yasmine Riahi</h4>
-                                <span>Vibe Manager</span>
-                                <div class="social">
-                                    <a href="https://www.facebook.com/windy.jasmin.12072001" target="_blank"><i
-                                            class="bi bi-facebook"></i></a>
-                                    <a href="" target="_blank"><i class="bi bi-instagram"></i></a>
-                                    <a href="https://www.linkedin.com/in/yassmine-riahi-4685bb250/" target="_blank"><i
-                                            class="bi bi-linkedin"></i></a>
-                                </div>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="member" data-aos="zoom-in" data-aos-delay="100">
+                        <div class="pic">
+                            <img alt="Yasmine Riahi" class="img-fluid" src="assets/img/team/yasmine.webp">
+                        </div>
+                        <div class="member-info">
+                            <h4>Yasmine Riahi</h4>
+                            <span>Vibe Manager</span>
+                            <div class="social">
+                                <a href="https://www.facebook.com/windy.jasmin.12072001" rel="noopener noreferrer"
+                                   target="_blank">
+                                    <i class="bi bi-facebook"></i>
+                                </a>
+                                <a href="" rel="noopener noreferrer" target="_blank">
+                                    <i class="bi bi-instagram"></i>
+                                </a>
+                                <a href="https://www.linkedin.com/in/yassmine-riahi-4685bb250/"
+                                   rel="noopener noreferrer"
+                                   target="_blank">
+                                    <i class="bi bi-linkedin"></i>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -248,7 +291,6 @@
         </div>
     </section>
     <!-- End Team Section -->
-
 </main>
 <script src="./node_modules/bootstrap/dist/js/bootstrap.js"></script>
 <script src="./node_modules/aos/dist/aos.js"></script>
