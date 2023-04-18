@@ -1,0 +1,48 @@
+:root {
+  --mch-dark-barcha-blue: #5ba199;
+  --bb: rgb(255, 162, 0);
+}
+
+body {
+  background-color: rgb(196, 214, 213);
+}
+header {
+  background-color: var(--mch-dark-barcha-blue);
+}
+main {
+  width: 55%;
+  margin: 0 auto;
+}
+section .sub-section:hover {
+  background-color: rgba(187, 213, 212, 0.923);
+  box-shadow: 0 5px 15px rgba(30, 29, 29, 0.727);
+}
+
+section {
+  margin-bottom: 20px;
+}
+/* Add an underline on hover */
+.nav-link {
+  text-decoration: none;
+  position: relative;
+}
+
+.nav-link:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 0%;
+  height: 2px;
+  background-color: var(--bb);
+  transition: width 0.3s ease;
+}
+#add-section {
+  border-radius: 50%;
+}
+
+.nav-link:hover:after,
+.nav-link:active:after {
+  width: 100%;
+}
+/* main */
