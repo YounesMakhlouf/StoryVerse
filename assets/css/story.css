@@ -13,7 +13,7 @@ main {
   width: 55%;
   margin: 0 auto;
 }
-section .sub-section:hover {
+.sub-section:hover {
   background-color: rgba(187, 213, 212, 0.923);
   box-shadow: 0 5px 15px rgba(30, 29, 29, 0.727);
 }
