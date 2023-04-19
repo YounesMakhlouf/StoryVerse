@@ -10,12 +10,23 @@ for (let i = 0; i < childElements.length; i++) {
 }
 
 const addSectionBtn = document.getElementById("add-section");
+
 addSectionBtn.addEventListener("click", function () {
   const section = document.createElement("section");
+
+  const sectionInput = document.createElement("textarea");
+  sectionInput.setAttribute(
+    "placeholder",
+    "and they lived happily ever after "
+  );
+  sectionInput.classList.add("text-input");
+
   const p = document.createElement("p");
   const text = document.createTextNode("section babyyyy");
   p.appendChild(text);
-  section.append(p);
+  section.appendChild(p);
 
+  section.appendChild(sectionInput);
+  section.classList.add("sub-section");
   mainSection.insertBefore(section, addSectionBtn);
 });

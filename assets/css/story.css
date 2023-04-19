@@ -1,10 +1,11 @@
 :root {
   --mch-dark-barcha-blue: #5ba199;
   --bb: rgb(255, 162, 0);
+  --bg: rgb(196, 214, 213);
 }
 
 body {
-  background-color: rgb(196, 214, 213);
+  background-color: var(--bg);
 }
 header {
   background-color: var(--mch-dark-barcha-blue);
@@ -20,6 +21,9 @@ main {
 
 section {
   margin-bottom: 20px;
+}
+.text-input {
+  background-color: var(--bg);
 }
 /* Add an underline on hover */
 .nav-link {
