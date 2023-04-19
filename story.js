@@ -33,10 +33,18 @@ const mainSection = document.getElementById("main");
 
 // Get all the child elements of the main section
 const childElements = mainSection.children;
-
+let jsection = 1;
 // Loop through the child elements and add the class to each one
 for (let i = 0; i < childElements.length; i++) {
   childElements[i].classList.add("sub-section");
+
+  if (childElements[i].nodeName == "SECTION") {
+    const sectionCorner = document.createElement("div");
+    sectionCorner.classList.add("section-corner");
+    sectionCorner.innerHTML = jsection;
+    childElements[i].append(sectionCorner);
+    jsection++;
+  }
 }
 
 const addSectionBtn = document.getElementById("add-section");

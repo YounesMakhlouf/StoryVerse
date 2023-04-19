@@ -21,7 +21,15 @@ main {
 
 section {
   margin-bottom: 20px;
+  position: relative;
 }
+
+.section-corner {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
 .section-input {
   margin-left: 0.5%;
   outline: none;
