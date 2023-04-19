@@ -22,9 +22,16 @@ main {
 section {
   margin-bottom: 20px;
 }
-.text-input {
-  background-color: var(--bg);
+.section-input {
+  margin-left: 0.5%;
+  outline: none;
+  resize: none;
+  background-color: inherit;
+  width: 99%;
+  overflow: hidden;
+  min-height: 200 px;
 }
+
 /* Add an underline on hover */
 .nav-link {
   text-decoration: none;

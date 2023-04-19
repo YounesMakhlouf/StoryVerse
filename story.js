@@ -1,3 +1,33 @@
+// functions babyyyyy
+function resizetextarea(tr) {
+  // reset the height to auto to allow the textarea to resize
+  tr.style.height = tr.scrollHeight + "px";
+}
+
+function addsection() {
+  const section = document.createElement("section");
+  const sectionInput = document.createElement("textarea");
+  sectionInput.setAttribute(
+    "placeholder",
+    "and they lived happily ever after "
+  );
+
+  const p = document.createElement("p");
+  const text = document.createTextNode("section babyyyy");
+
+  p.appendChild(text);
+  section.appendChild(p);
+  section.appendChild(sectionInput);
+  sectionInput.classList.add("section-input");
+  section.classList.add("sub-section");
+  sectionInput.focus();
+  sectionInput.addEventListener("input", function () {
+    resizetextarea(sectionInput);
+  });
+
+  mainSection.insertBefore(section, addSectionBtn);
+}
+
 // Get the main section
 const mainSection = document.getElementById("main");
 
@@ -11,22 +41,4 @@ for (let i = 0; i < childElements.length; i++) {
 
 const addSectionBtn = document.getElementById("add-section");
 
-addSectionBtn.addEventListener("click", function () {
-  const section = document.createElement("section");
-
-  const sectionInput = document.createElement("textarea");
-  sectionInput.setAttribute(
-    "placeholder",
-    "and they lived happily ever after "
-  );
-  sectionInput.classList.add("text-input");
-
-  const p = document.createElement("p");
-  const text = document.createTextNode("section babyyyy");
-  p.appendChild(text);
-  section.appendChild(p);
-
-  section.appendChild(sectionInput);
-  section.classList.add("sub-section");
-  mainSection.insertBefore(section, addSectionBtn);
-});
+addSectionBtn.addEventListener("click", addsection);
