@@ -1,15 +1,16 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Register{% endblock %}
- {% block stylesheets %}
-<link href={{asset('assets/app.css')}} rel='stylesheets' >   
-     {% endblock %}
+
 
 
 {% block body %}
     <body class="gradient">
 <div class="container">
-<div class="title">        <img alt="StoryVerse logo" class="img-fluid" src={{ asset('assets/logo2.png') }}>
+<div class="title">
+  {% set image_path = '/build/images/' %}
+    <img src="{{ asset(image_path ~ 'logo2.532d2d4b.png') }}" class="img-fluid" alt="Example Image">
+        
         Story Verse Registration Form</div>
         <div class="content">
             <div class="user-details">
