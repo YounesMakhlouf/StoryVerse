@@ -15,8 +15,8 @@ class MailerService{
     }
 
     public function sendEmail($to='salmabouabidi019@gmail.com',
-    $content='<p>See Twig integration for better HTML integration!</p>',
-    $subject='Time for Symfony Mailer!'): void
+    $content='<p>Welcome to StoryVerse!</p>',
+    $subject='Welcome to StoryVerse!'): void
    {
         $email = (new Email())
 
@@ -27,14 +27,12 @@ class MailerService{
             //->replyTo('fabien@example.com')
             //->priority(Email::PRIORITY_HIGH)
             ->subject($subject)
-            ->text('Sending emails is fun again!')
+            ->text('')
             ->html($content);
 
             try {
                 $this->mailer->send($email);
-            
-            } catch (TransportExceptionInterface $e) {            
-            
+            } catch (TransportExceptionInterface $e) {
             }
 
         // ...
