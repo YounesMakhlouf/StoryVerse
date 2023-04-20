@@ -8,25 +8,30 @@ saveBtns.forEach(saveBtn => {
 function addContribution(e) {
     const button = e.target;
     const list = button.parentNode.parentNode.parentNode;
-      const li = button.parentNode.parentNode;
-  const input = li.querySelector(".card-text").value.trim();
-
+    const li = button.parentNode.parentNode;
+    let textArea = li.querySelector(".card-text");
+    let input = textArea.value.trim();
     let contribution = document.createElement("li");
     contribution.className = "card";
-    contribution.innerHTML = `<div class="card-header">
-                      <h4 class="card-title">9atous</h4>
-                      <button class="btn btn-follow">Follow</button>
-                    </div>
-                    <div class="card-body">
-                      <p class="card-text">${input}</p>
-                    </div>
-                    <div class="card-footer">
-                      <div class="post-vote-buttons">
-                        <div class="upvote"></div>
-                        <div class="downvote"></div>
-                      </div>
-                    </div>`;
+    contribution.innerHTML = getContributionTemplate(input);
     list.insertBefore(contribution, button.parentNode.parentNode);
+    textArea.value = "";
+}
+
+function getContributionTemplate(inputValue) {
+    return `<div class="card-header">
+                <h4 class="card-title">9atous</h4>
+                <button class="btn btn-follow">Follow</button>
+            </div>
+            <div class="card-body">
+                <p class="card-text">${inputValue}</p>
+            </div>
+            <div class="card-footer">
+                <div class="post-vote-buttons">
+                    <div class="upvote"></div>
+                    <div class="downvote"></div>
+                </div>
+            </div>`;
 }
 
 
