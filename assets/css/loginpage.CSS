@@ -1,0 +1,15 @@
+.video-Background{
+position: relative;
+}
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+}
+.overlay p {
+  text-align: center;
+  text-decoration: wavy;
+  font-family: 'Aboreto', cursive;
+  color : whitesmoke ; 
+}
