@@ -2,13 +2,19 @@ const cards = document.querySelectorAll(".card");
 
 cards.forEach((card) => {
   card.addEventListener("mouseover", function () {
-    this.classList.remove("big");
+    let theChildren = Array.from(card.children);
+    theChildren.forEach((child) => {
+      child.classList.toggle("hidden");
+    });
   });
 });
 
 cards.forEach((card) => {
-  card.addEventListener("mouseover", function () {
-    this.classList.add("hidden");
+  card.addEventListener("mouseout", function () {
+    let theChildren = Array.from(card.children);
+    theChildren.forEach((child) => {
+      child.classList.toggle("hidden");
+    });
   });
 });
 
