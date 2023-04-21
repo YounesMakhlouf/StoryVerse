@@ -30,8 +30,16 @@ h1:before {
       0 0 50px #ffd700, 0 0 75px #ffd700;
   }
 }
+
+.parts {
+  display: flex;
+  flex-direction: column;
+}
+
 .part {
-  padding: 50px;
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
 }
 
 .card-list {
@@ -71,7 +79,12 @@ h1:before {
   transition: all 0.3s ease;
 }*/
 
-/* make it highlight and bigger*/
+/* make it highlight */
+.highlight {
+  background-color: rgba(24, 240, 233, 0.923) !important;
+  box-shadow: 0 5px 15px rgba(30, 29, 29, 0.727);
+}
+
 .card {
   margin: 20px;
   padding: 20px;

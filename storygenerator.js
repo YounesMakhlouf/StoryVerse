@@ -19,16 +19,16 @@ cards.forEach((card) => {
 });
 */
 
-const addbuttons = document.querySelectorAll(".fas"); // takes all the active addbuttons
+const addbuttons = document.querySelectorAll(".fas"); // takes all the active + addbuttons
 
 addbuttons.forEach((addbutton) => {
-  addbutton.addEventListener("click", addEmptyCard);
+  addbutton.addEventListener("click", addEmptyCard); // makes the button add empty cars
 });
 
 function addEmptyCard(e) {
   const button = e.target;
 
-  const list = button.parentNode.parentNode.parentNode;
+  const list = button.parentNode.parentNode.parentNode; // selectionne l'ul qui a tout les div
   const li = button.parentNode.parentNode;
   const emptycard = document.createElement("li");
   emptycard.classList.add("card", "empty-card");
@@ -48,7 +48,7 @@ function addEmptyCard(e) {
 function addContribution(list, emptycard) {
   const contribution = document.createElement("li");
   contribution.classList.add("card");
-  let input = emptycard.children[0].children[0].value.trim(); //takes the comm
+  let input = emptycard.children[0].children[0].value.trim(); //takes the story someone added
   contribution.innerHTML = getContributionTemplate(input);
   list.append(contribution);
   emptycard.remove();
