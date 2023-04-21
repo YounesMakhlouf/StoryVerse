@@ -1,4 +1,4 @@
-const cards = document.querySelectorAll(".card");
+/* const cards = document.querySelectorAll(".card");
 
 cards.forEach((card) => {
   card.addEventListener("mouseover", function () {
@@ -17,17 +17,13 @@ cards.forEach((card) => {
     });
   });
 });
+*/
 
-const addbuttons = document.querySelectorAll(".fas");
+const addbuttons = document.querySelectorAll(".fas"); // takes all the active addbuttons
 
 addbuttons.forEach((addbutton) => {
   addbutton.addEventListener("click", addEmptyCard);
 });
-
-// reset the height to auto to allow the textarea to resize
-function resizetextarea(tr) {
-  tr.style.height = tr.scrollHeight + "px";
-}
 
 function addEmptyCard(e) {
   const button = e.target;
@@ -44,18 +40,23 @@ function addEmptyCard(e) {
   });
 
   emptycard.children[1].children[0].addEventListener("click", function () {
-    addContribution(list, emptycard, li);
+    addContribution(list, emptycard);
   });
+  li.remove();
 }
 
-function addContribution(list, emptycard, addcard) {
+function addContribution(list, emptycard) {
   const contribution = document.createElement("li");
   contribution.classList.add("card");
   let input = emptycard.children[0].children[0].value.trim(); //takes the comm
   contribution.innerHTML = getContributionTemplate(input);
   list.append(contribution);
   emptycard.remove();
-  addcard.remove();
+}
+
+// reset the height to auto to allow the textarea to resize
+function resizetextarea(tr) {
+  tr.style.height = tr.scrollHeight + "px";
 }
 
 function emptycardhtml() {

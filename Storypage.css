@@ -1,6 +1,6 @@
-.hidden {
+/*.hidden {
   display: none !important;
-}
+}*/
 * {
   font-family: "Dancing Script", cursive;
 }
@@ -64,21 +64,20 @@ h1:before {
   cursor: pointer;
 }
 
-.card {
+/*.card {
   width: 50px;
   height: 50px;
   margin-right: 10px;
   transition: all 0.3s ease;
-}
+}*/
 
 /* make it highlight and bigger*/
-.card:hover {
-  padding: 10px;
+.card {
+  margin: 20px;
+  padding: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
   width: 300px;
-  background-color: rgba(234, 244, 243, 0.923);
-  box-shadow: 0 5px 15px rgba(25, 22, 22, 0.727);
 }
 
 /* make the text area less disgusting */
@@ -99,9 +98,6 @@ textarea {
 
 .card-text {
   margin: 0;
-}
-ul {
-  position: relative;
 }
 
 .card-footer {
@@ -141,7 +137,4 @@ ul {
 
 .plus-icon {
   font-size: 30px;
-}
-* {
-  position: relative;
 }
