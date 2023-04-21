@@ -1,123 +1,141 @@
-*{
-    font-family: 'Dancing Script', cursive;
+* {
+  font-family: "Dancing Script", cursive;
 }
 /* Centered Animated Title */
 h1 {
-    font-family: 'Dancing Script', cursive;
-    font-size: 5rem;
-    text-align: center;
-    position: relative;
+  font-family: "Dancing Script", cursive;
+  font-size: 5rem;
+  text-align: center;
+  position: relative;
 }
 
 h1:before {
-    content: 'Cinderella';
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    color: transparent;
-    text-shadow: 0 0 50px #fff;
-    animation: glow 1s ease-out infinite alternate;
+  content: "Cinderella";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: transparent;
+  text-shadow: 0 0 50px #fff;
+  animation: glow 1s ease-out infinite alternate;
 }
 
 @keyframes glow {
-    to {
-        color: #ffd700;
-        text-shadow: 0 0 20px #ffd700,
-        0 0 30px #ffd700,
-        0 0 40px #ffd700,
-        0 0 50px #ffd700,
-        0 0 75px #ffd700;
-    }
+  to {
+    color: #ffd700;
+    text-shadow: 0 0 20px #ffd700, 0 0 30px #ffd700, 0 0 40px #ffd700,
+      0 0 50px #ffd700, 0 0 75px #ffd700;
+  }
 }
 .part {
-    padding: 50px;
+  padding: 50px;
 }
 
 .card-list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
-.card {
-    margin: 20px;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    width: 300px;
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }
 
 .card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .card-title {
-    margin: 0;
+  margin: 0;
 }
 
 .btn-follow {
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    color: #333;
-    padding: 5px 10px;
-    font-size: 14px;
-    cursor: pointer;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  color: #333;
+  padding: 5px 10px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.card {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+  transition: all 0.3s ease;
+}
+
+/* make it highlight and bigger*/
+.card:hover {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 300px;
+  background-color: rgba(234, 244, 243, 0.923);
+  box-shadow: 0 5px 15px rgba(25, 22, 22, 0.727);
+}
+.card:hover .card-text {
+  display: block;
+}
+/* make the text area less disgusting */
+textarea {
+  margin-left: 0.5%;
+  outline: none;
+  width: 99%;
+  overflow: hidden !important;
 }
 
 .btn-follow:hover {
-    background-color: #f4f4f4;
+  background-color: #f4f4f4;
 }
 
 .card-body {
-    margin: 10px 0;
+  margin: 10px 0;
 }
 
 .card-text {
-    margin: 0;
+  margin: 0;
+  display: none;
 }
 
 .card-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
 }
 
 .post-vote-buttons {
-    display: flex;
+  display: flex;
 }
 
 .upvote {
-    width: 20px;
-    height: 20px;
-    background-color: #ccc;
-    border-radius: 50%;
-    margin-right: 5px;
+  width: 20px;
+  height: 20px;
+  background-color: #ccc;
+  border-radius: 50%;
+  margin-right: 5px;
 }
 
 .downvote {
-    width: 20px;
-    height: 20px;
-    background-color: #ccc;
-    border-radius: 50%;
-    margin-left: 5px;
+  width: 20px;
+  height: 20px;
+  background-color: #ccc;
+  border-radius: 50%;
+  margin-left: 5px;
 }
 .empty-card {
-    border: 1px dashed #ccc;
-    border-radius: 5px;
-    padding: 10px;
-    margin: 10px;
-    text-align: center;
-    cursor: pointer;
+  border: 1px dashed #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px;
+  text-align: center;
+  cursor: pointer;
 }
 
 .plus-icon {
-    font-size: 30px;
+  font-size: 30px;
 }

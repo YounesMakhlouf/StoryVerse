@@ -1,25 +1,73 @@
-const saveBtns = document.querySelectorAll(".save-btn");
+const cards = document.querySelectorAll(".card");
 
-// Add event listener to each save button
-saveBtns.forEach(saveBtn => {
-    saveBtn.addEventListener("click", addContribution);
+cards.forEach((card) => {
+  card.addEventListener("mouseover", function () {
+    this.classList.remove("big");
+  });
 });
 
-function addContribution(e) {
-    const button = e.target;
-    const list = button.parentNode.parentNode.parentNode;
-    const li = button.parentNode.parentNode;
-    let textArea = li.querySelector(".card-text");
-    let input = textArea.value.trim();
-    let contribution = document.createElement("li");
-    contribution.className = "card";
-    contribution.innerHTML = getContributionTemplate(input);
-    list.insertBefore(contribution, button.parentNode.parentNode);
-    textArea.value = "";
+cards.forEach((card) => {
+  card.addEventListener("mouseover", function () {
+    this.classList.add("hidden");
+  });
+});
+
+const addbuttons = document.querySelectorAll(".fas");
+
+addbuttons.forEach((addbutton) => {
+  addbutton.addEventListener("click", addEmptyCard);
+});
+
+// reset the height to auto to allow the textarea to resize
+function resizetextarea(tr) {
+  tr.style.height = tr.scrollHeight + "px";
+}
+
+function addEmptyCard(e) {
+  const button = e.target;
+
+  const list = button.parentNode.parentNode.parentNode;
+  const li = button.parentNode.parentNode;
+  const emptycard = document.createElement("li");
+  emptycard.classList.add("card", "empty-card");
+  emptycard.innerHTML = emptycardhtml();
+  list.insertBefore(emptycard, li);
+  let input = emptycard.children[0].children[0];
+  input.addEventListener("input", function () {
+    resizetextarea(input);
+  });
+
+  emptycard.children[1].children[0].addEventListener("click", function () {
+    addContribution(list, emptycard, li);
+  });
+}
+
+function addContribution(list, emptycard, addcard) {
+  const contribution = document.createElement("li");
+  contribution.classList.add("card");
+  let input = emptycard.children[0].children[0].value.trim(); //takes the comm
+  contribution.innerHTML = getContributionTemplate(input);
+  list.append(contribution);
+  emptycard.remove();
+  addcard.remove();
+}
+
+function emptycardhtml() {
+  return `
+      <div class="card-body">
+        <textarea
+          class="card-text"
+          placeholder="Enter your contribution here"
+        ></textarea>
+      </div>
+      <div class="card-footer">
+        <button class="btn btn-primary save-btn">Save</button>
+      </div>
+    `;
 }
 
 function getContributionTemplate(inputValue) {
-    return `<div class="card-header">
+  return `<div class="card-header">
                 <h4 class="card-title">9atous</h4>
                 <button class="btn btn-follow">Follow</button>
             </div>
@@ -33,7 +81,6 @@ function getContributionTemplate(inputValue) {
                 </div>
             </div>`;
 }
-
 
 /*   // Create a new list item (card)
    const card = document.createElement("li");
