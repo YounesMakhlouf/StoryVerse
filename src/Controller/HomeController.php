@@ -16,7 +16,7 @@ class HomeController extends AbstractController
                 "description" => "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque in eros ac ligula auctor fermentum eu sit amet leo. Praesent a accumsan nisi, vel ultricies nulla.",
                 "duration" => "3 mins",
                 "category" => "Comedy",
-                "image" => "assets/img/trending1.webp",
+                "image" => "build/images/trending1.webp",
                 "link" => "#"
             ],
             [
@@ -24,7 +24,7 @@ class HomeController extends AbstractController
                 "description" => "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque in eros ac ligula auctor fermentum eu sit amet leo. Praesent a accumsan nisi, vel ultricies nulla.",
                 "duration" => "10 mins",
                 "category" => "Horror",
-                "image" => "assets/img/trending2.webp",
+                "image" => "build/images/trending2.webp",
                 "link" => "#"
             ],
             [
@@ -32,16 +32,16 @@ class HomeController extends AbstractController
                 "description" => "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque in eros ac ligula auctor fermentum eu sit amet leo. Praesent a accumsan nisi, vel ultricies nulla.",
                 "duration" => "5 mins",
                 "category" => "Adventure",
-                "image" => "assets/img/trending3.webp",
+                "image" => "build/images/trending3.webp",
                 "link" => "#"
             ]
         ];
 
         $teamMembers = [
             [
-                'name' => 'Younes Makhlouf',
+                'firstName' => 'Younes',
+                'lastName' => 'Makhlouf',
                 'position' => 'Master of Memes',
-                'image' => 'assets/img/team/younes.webp',
                 'social' => [
                     'facebook' => 'https://www.facebook.com/BabyFaker24/',
                     'instagram' => 'https://www.instagram.com/younes___makhlouf/',
@@ -49,9 +49,9 @@ class HomeController extends AbstractController
                 ]
             ],
             [
-                'name' => 'Salma Bouabidi',
+                'firstName' => 'Salma',
+                'lastName' => 'Bouabidi',
                 'position' => 'Ambassador of Awesomeness',
-                'image' => 'assets/img/team/salma.webp',
                 'social' => [
                     'facebook' => 'https://www.facebook.com/salma.bouabidi',
                     'instagram' => 'https://www.instagram.com/salmabouabidi_19/',
@@ -59,9 +59,9 @@ class HomeController extends AbstractController
                 ]
             ],
             [
-                'name' => 'Wided Oueslati',
+                'firstName' => 'Wided',
+                'lastName' => 'Oueslati',
                 'position' => 'Captain of Comedy',
-                'image' => 'assets/img/team/wided.webp',
                 'social' => [
                     'facebook' => 'https://www.facebook.com/profile.php?id=100069807314531',
                     'instagram' => 'https://www.instagram.com/wided_ouesletyy/',
@@ -69,9 +69,9 @@ class HomeController extends AbstractController
                 ]
             ],
             [
-                'name' => 'Skander Ben Achour',
+                'firstName' => 'Skander',
+                'lastName' => 'Ben Achour',
                 'position' => 'Head of Snack Acquisition',
-                'image' => 'assets/img/team/skander.webp',
                 'social' => [
                     'facebook' => 'https://www.facebook.com/skander.benachour.1',
                     'instagram' => 'https://www.instagram.com/skander_ben_achour/',
@@ -79,9 +79,9 @@ class HomeController extends AbstractController
                 ]
             ],
             [
-                'name' => 'Yasmine Riahi',
+                'firstName' => 'Yasmine',
+                'lastName' => 'Riahi',
                 'position' => 'Vibe Manager',
-                'image' => 'assets/img/team/yasmine.webp',
                 'social' => [
                     'facebook' => 'https://www.facebook.com/windy.jasmin.12072001',
                     'instagram' => '',

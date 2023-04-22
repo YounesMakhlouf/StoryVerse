@@ -1,0 +1,29 @@
+/* Trending */
+.trending h5 {
+    font-weight: 700;
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+    font-size: 1em;
+}
+
+.trending a {
+    color: var(--DarkTurquoise);
+    transition: ease-in-out 0.3s;
+}
+
+.trending a:hover {
+    color: var(--Turquoise);
+}
+
+.trending .card:hover {
+    background: var(--LightGray);
+}
+
+.card-img-top {
+    aspect-ratio: 1;
+    object-fit: cover; /* ensure the images fill the card without distortion */
+    width: 100%;
+    height: auto;
+    max-height: 100%;
+}
