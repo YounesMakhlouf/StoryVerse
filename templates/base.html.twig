@@ -1,21 +1,29 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-        {% endblock %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>{% block title %}StoryVerse{% endblock %}</title>
+    <meta content="ie=edge" http-equiv="X-UA-Compatible">
+    <meta content="StoryVerse Home Page" name="description">
+       <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+              rel="stylesheet">
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+    {% endblock %}
+    <link href="{{ asset('assets/img/favicon/favicon-16x16.png') }}" rel="icon" sizes="16x16" type="image/png">
+        <link href="{{ asset('assets/img/favicon/favicon-32x32.png') }}" rel="icon" sizes="32x32" type="image/png">
+        <link href="{{ asset('assets/img/favicon/android-chrome-192x192.png') }}" rel="icon" sizes="192x192"
+              type="image/png">
+        <link href="{{ asset('assets/img/favicon/android-chrome-512x512.png') }}" rel="icon" sizes="512x512"
+              type="image/png">
+        <link href="{{ asset('assets/img/favicon/apple-touch-icon.png') }}" rel="apple-touch-icon">
 
-
-
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+    {% block javascripts %}
+        {{ encore_entry_script_tags('app') }}
+    {% endblock %}
+</head>
+<body>
+{% block body %}{% endblock %}
+</body>
 </html>
