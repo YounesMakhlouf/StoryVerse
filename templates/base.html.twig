@@ -8,9 +8,6 @@
     <meta content="StoryVerse Home Page" name="description">
        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
               rel="stylesheet">
-              {% for flash in app.flashes('error') %}
-            <div class="alert alert-danger">{{ flash }}</div>
-        {% endfor %}
     {% block stylesheets %}
         {{ encore_entry_link_tags('app') }}
     {% endblock %}
