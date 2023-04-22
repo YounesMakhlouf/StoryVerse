@@ -1,8 +1,10 @@
+{% form_theme registrationForm _self %}
+
 {% extends 'base.html.twig' %}
 
 {% block title %}Register{% endblock %}
 
-
+ 
 
 {% block body %}
     <body class="gradient">
@@ -12,19 +14,25 @@
     <img src="{{ asset(image_path ~ 'logo2.532d2d4b.png') }}" class="img-fluid" alt="Example Image">
         
         Story Verse Registration Form</div>
-        <div class="content">
+
+      
+         <div class="content">
+
             <div class="user-details">
 
                 {{ form_start(registrationForm) }}
-                {{ form_row(registrationForm.first_name,{
+
+
+
+                 {{ form_row(registrationForm.first_name,{
                 label:'First Name',
-                attr:{'placeholder':"Enter your first name"},
+                attr:{'placeholder':"Enter your first name",'autocomplete':"off"},
                 label_attr: {'class': 'details'},
                 row_attr: { class: 'input-box' }
                 }) }}
                 {{ form_row(registrationForm.last_name,{
                 label:'Last Name',
-                attr:{'placeholder':"Enter your last name"},
+                attr:{'placeholder':"Enter your last name",'autocomplete':"off"},
 
                 label_attr: {'class': 'details'},
 
@@ -32,28 +40,54 @@
                 {{ form_row(registrationForm.username,{
                 label:'Username',
                 label_attr: {'class': 'details'},
-                attr:{'placeholder':"Enter your username"},
+                attr:{'placeholder':"Enter your username",'autocomplete':"off"},
 
                 row_attr: { class: 'input-box' }
                 }) }}
-                {{ form_row(registrationForm.email,{
+                 <div class="input-box">
+     {{ form_label(registrationForm.email) }}
+    {{ form_widget(registrationForm.email,{attr:{'placeholder':"Enter your email",'autocomplete':"off"}}) }}
+
+    </div>
+
+
+                {# {{ form_row(registrationForm.email,{
                 label:'Email',
                 attr:{'placeholder':"Enter your email"},
 
                 label_attr: {'class': 'details'},
-                row_attr: { class: 'input-box' }}) }}
-                {{ form_row(registrationForm.plainPassword, {
+                row_attr: { class: 'input-box' }}) }} #}
+                <div class="input-box">
+     {{ form_label(registrationForm.plainPassword) }}
+    {{ form_widget(registrationForm.plainPassword,{attr:{'placeholder':"Enter your password",'autocomplete':"off"}}) }}
+
+    </div>
+
+
+
+                {# {{ form_row(registrationForm.plainPassword, {
                 label: 'Password',
                 attr:{'placeholder':"Enter your password"},
 
                 label_attr: {'class': 'details'},
                 row_attr: { class: 'input-box' }
-                }) }}
-               
+                }) }} #}
+
             </div>
+            <div class="gender_details">
+            
  {{ form_row(registrationForm.gender ,{
  label_attr:{class:"gender"}
  })}}
+ </div>
+         {% if form_errors(registrationForm.plainPassword)|length > 0 or form_errors(registrationForm.email)|length > 0  %}
+    <div class="alert alert-danger">
+        {{ form_errors(registrationForm.plainPassword) }}
+        {{ form_errors(registrationForm.email) }}
+    </div>
+{% endif %}
+
+    
 
 
 
