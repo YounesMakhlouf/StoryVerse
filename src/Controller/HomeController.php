@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {
-    #[Route('/', name: 'app_home_page')]
+    #[Route('/', name: 'app_home')]
     public function index(): Response
     {
         $trendingStories = [
@@ -19,8 +19,7 @@ class HomeController extends AbstractController
                 "category" => "Comedy",
                 "image" => "assets/img/trending1.webp",
                 "link" => "#"
-            ]
-            ,
+            ],
             [
                 "title" => "The Demon in the Mirror",
                 "description" => "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque in eros ac ligula auctor fermentum eu sit amet leo. Praesent a accumsan nisi, vel ultricies nulla.",
@@ -79,7 +78,8 @@ class HomeController extends AbstractController
                     'instagram' => 'https://www.instagram.com/skander_ben_achour/',
                     'linkedin' => ''
                 ]
-            ], [
+            ],
+            [
                 'name' => 'Yasmine Riahi',
                 'position' => 'Vibe Manager',
                 'image' => 'assets/img/team/yasmine.webp',
