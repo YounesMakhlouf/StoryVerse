@@ -1,7 +1,0 @@
-{
-    "require": {
-        "doctrine/doctrine-bundle": "^2.9",
-        "symfony/mailer": "^6.2",
-        "symfony/google-mailer": "^6.2"
-    }
-}
