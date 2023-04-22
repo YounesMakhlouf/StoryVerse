@@ -8,18 +8,13 @@
 
 {% block body %}
     <body class="gradient">
-<div class="container">
-<div class="title">
-  {% set image_path = '/build/images/' %}
-    <img src="{{ asset(image_path ~ 'logo2.532d2d4b.png') }}" class="img-fluid" alt="Example Image">
-        
-        Story Verse Registration Form</div>
-
-      
-         <div class="content">
-
+    <div class="container">
+        <div class="title">
+            <img src="{{ asset('build/images/logo.webp') }}" class="img-fluid" alt="Example Image">
+            Story Verse Registration Form
+        </div>
+        <div class="content">
             <div class="user-details">
-
                 {{ form_start(registrationForm) }}
 
 
@@ -34,15 +29,15 @@
                 label:'Last Name',
                 attr:{'placeholder':"Enter your last name",'autocomplete':"off"},
 
-                label_attr: {'class': 'details'},
+                    label_attr: {'class': 'details'},
 
-                row_attr: { class: 'input-box' }}) }}
+                    row_attr: { class: 'input-box' }}) }}
                 {{ form_row(registrationForm.username,{
                 label:'Username',
                 label_attr: {'class': 'details'},
                 attr:{'placeholder':"Enter your username",'autocomplete':"off"},
 
-                row_attr: { class: 'input-box' }
+                    row_attr: { class: 'input-box' }
                 }) }}
                  <div class="input-box">
      {{ form_label(registrationForm.email) }}
@@ -91,15 +86,26 @@
 
 
 
-<div class="button">
+            <div class="button">
                 <input type="submit" value="Register">
-            </div>  
-              {{ form_end(registrationForm) }}
-    </div>
-        <footer>Already have an account ? 
-        {# <a href="{{ path('app_login') }}">Login here</a> #}
+            </div>
+            {{ form_end(registrationForm) }}
+        </div>
+        <footer>Already have an account ?
+            {# <a href="{{ path('app_login') }}">Login here</a> #}
         </footer>
 
     </div>
-        </body>
+    </body>
 {% endblock %}
+
+ {% block javascripts %}
+     {{ parent() }}
+     {{ encore_entry_script_tags('login') }}
+ {% endblock %}
+
+
+ {% block stylesheets %}
+     {{ parent() }}
+     {{ encore_entry_link_tags('login') }}
+ {% endblock %}
