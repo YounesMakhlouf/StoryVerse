@@ -1,3 +1,4 @@
+@import '~bootstrap';
 *{
 
     font-family: "Open Sans", sans-serif;
@@ -113,42 +114,42 @@ body{
 flex: 1 0 100%
 }
 #registration_form_gender {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    display: block;
+   
   }
 .gender-title{
     font-size: 20px;
     font-weight: 500;
 }
 
-.category{
-    display: flex;
+.gender_details{
     width: 80%;
     margin: 14px 0 ;
-    justify-content: space-between;
 }
-.category label{
-    display: flex;
+.gender_details label{
     align-items: center;
     cursor: pointer;
 }
 
 input[type="radio"] {
+    margin-left:22px;
+    margin-top:20px;
     height: 1.2rem;
     width: 1.2rem;
     margin-right: 0.5rem;
 }
-.form-check-input {
-    /* hiding browser el */
+input[type="radio"] {
     appearance: none;
-    /* Safari support */
-    -webkit-appearance: none;
+    /*Safarisupport*/-webkit-appearance: none;
     border: 0.1rem solid #d9d9d9;
     background-color: #d9d9d9;
     border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
 }
-.form-check-input:focus-visible {
+input[type="radio"]:focus-visible {
     outline-offset: 0;
 }
 #registration_form_gender_1 ,
@@ -234,14 +235,14 @@ footer{
     .container{
         max-width: 100%;
     }
-    form .user-details .input-box{
+     .user-details .input-box{
         margin-bottom: 15px;
         width: 100%;
     }
-    form .category{
+    .category{
         width: 100%;
     }
-    .content form .user-details{
+    .content  .user-details{
         max-height: 300px;
         overflow-y: scroll;
     }
