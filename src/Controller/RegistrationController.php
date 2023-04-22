@@ -85,8 +85,7 @@ class RegistrationController extends AbstractController
                 $user->getEmail(),
             );
         } catch (VerifyEmailExceptionInterface $e) {
-            $this->addFlash('error', $e->getReason());
-            return $this->redirectToRoute('app_register');
+
         }
 
     }
