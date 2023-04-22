@@ -11,6 +11,34 @@ class HomeController extends AbstractController
     #[Route('/', name: 'app_home_page')]
     public function index(): Response
     {
+        $trendingStories = [
+            [
+                "title" => "My Awkward Encounter with a Celebrity",
+                "description" => "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque in eros ac ligula auctor fermentum eu sit amet leo. Praesent a accumsan nisi, vel ultricies nulla.",
+                "duration" => "3 mins",
+                "category" => "Comedy",
+                "image" => "assets/img/trending1.webp",
+                "link" => "#"
+            ]
+            ,
+            [
+                "title" => "The Demon in the Mirror",
+                "description" => "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque in eros ac ligula auctor fermentum eu sit amet leo. Praesent a accumsan nisi, vel ultricies nulla.",
+                "duration" => "10 mins",
+                "category" => "Horror",
+                "image" => "assets/img/trending2.webp",
+                "link" => "#"
+            ],
+            [
+                "title" => "The Time Traveler's Dilemma",
+                "description" => "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque in eros ac ligula auctor fermentum eu sit amet leo. Praesent a accumsan nisi, vel ultricies nulla.",
+                "duration" => "5 mins",
+                "category" => "Adventure",
+                "image" => "assets/img/trending3.webp",
+                "link" => "#"
+            ]
+        ];
+
         $teamMembers = [
             [
                 'name' => 'Younes Makhlouf',
@@ -64,7 +92,8 @@ class HomeController extends AbstractController
         ];
         return $this->render('/index.html.twig', [
             'controller_name' => 'HomeController',
-            'teamMembers' => $teamMembers
-        ] );
+            'teamMembers' => $teamMembers,
+            'trendingStories' => $trendingStories
+        ]);
     }
 }
