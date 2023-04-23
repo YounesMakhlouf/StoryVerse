@@ -4,14 +4,13 @@
     <header class="fixed-top d-flex align-items-center header-transparent" id="header">
         <div class="container d-flex align-items-center justify-content-between">
             <div class="logo">
-                <h1><a href="/"><span><img alt="StoryVerse logo" class="img-fluid"
-                                           src="{{ asset("build/images/logo.webp") }}">StoryVerse</span></a>
+                <h1><a href="{{ path('app_home') }}"><span><img alt="StoryVerse logo" class="img-fluid"
+                                                                src="{{ asset('build/images/logo.webp') }}">StoryVerse</span></a>
                 </h1>
             </div>
             <nav class="navbar" id="navbar">
                 <ul>
-                    <li><a class="nav-link scrollto active" href="#hero" title="Home">Home</a></li>
-                    <li><a class="nav-link scrollto" href="#about" title="About">About</a></li>
+                    <li><a class="nav-link scrollto active" href="{{ path('app_home') }}" title="Home">Home</a></li>
                     <li><a class="nav-link scrollto" href="#trending" title="Trending">Trending</a></li>
                     <li><a class="nav-link scrollto" href="#team" title="Team">Team</a></li>
                     <li><a class="nav-link scrollto" href="#contact" title="Contact">Contact</a></li>
@@ -37,14 +36,13 @@
                                 today.</h2>
                             <div class="text-center text-lg-start">
                                 <a class="btn-get-started scrollto" data-aos="zoom-out" data-aos-delay="400"
-                                   href="#about">Start
-                                    writing now</a>
+                                   href="{{ path('app_register') }}">Start writing now</a>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-4 order-1 order-lg-2 hero-img" data-aos="zoom-out" data-aos-delay="300">
                         <img alt="Kids sharing stories around a campfire at a StoryVerse writing camp"
-                             class="img-fluid rounded animated" src=" {{ asset("build/images/hero-img.webp") }}">
+                             class="img-fluid rounded animated" src="{{ asset('build/images/hero-img.webp') }}">
                     </div>
                 </div>
             </div>
@@ -80,13 +78,13 @@
                         <div class="col">
                             <a href="{{ story.link }}" rel="bookmark">
                                 <div class="card h-100" data-aos="zoom-in" data-aos-delay="400">
-                                    <img alt="..." class="card-img-top" src="{{ asset(story.image) }}">
+                                    <img alt="{{ story.description }}" class="card-img-top" src="{{ asset(story.image) }}">
                                     <div class="card-body">
                                         <h5 class="card-title">{{ story.title }}</h5>
                                         <p class="card-text">{{ story.description }}</p>
                                         <div class="d-flex justify-content-between align-items-center">
                                             <small class="text-muted">{{ story.duration }}</small>
-                                            <span class="badge bg-black rounded-pill">{{ story.category }}</span>
+                                            <span class="badge rounded-pill">{{ story.category }}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -140,5 +138,4 @@
         </section>
         <!-- End Team Section -->
     </main>
-
 {% endblock %}
