@@ -1,4 +1,3 @@
-/* Team */
 .team {
     background: #fff;
 }
@@ -37,7 +36,7 @@
     font-weight: 700;
     margin-bottom: 10px;
     font-size: 16px;
-    color: var(--DarkTurquoise);
+    color: $DarkTurquoise;
     position: relative;
     padding-bottom: 10px;
 }
@@ -48,7 +47,7 @@
     display: block;
     width: 50px;
     height: 1px;
-    color: var(--Turquoise);
+    color: $Turquoise;
     bottom: 0;
     left: calc(50% - 25px);
 }
@@ -57,7 +56,7 @@
     font-style: italic;
     display: block;
     font-size: 13px;
-    color: var(--DarkTurquoise);
+    color: $DarkTurquoise;
 }
 
 .team .member .social {
@@ -66,11 +65,11 @@
 
 .team .member .social a {
     transition: color 0.3s;
-    color: var(--DarkTurquoise);
+    color: $DarkTurquoise;
 }
 
 .team .member .social a:hover {
-    color: var(--Turquoise);
+    color: $Turquoise;
 }
 
 .team .member .social i {

@@ -92,7 +92,9 @@ class HomeController extends AbstractController
         return $this->render('/index.html.twig', [
             'controller_name' => 'HomeController',
             'teamMembers' => $teamMembers,
-            'trendingStories' => $trendingStories
+            'trendingStories' => $trendingStories,
+            'phoneNumber' => '+216 55 216 719',
+            'email' => 'storyverse19@gmail.com'
         ]);
     }
 }
