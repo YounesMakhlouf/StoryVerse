@@ -1,14 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description"
+          content="StoryVerse is an online platform for writers and readers to share, discover and connect through stories. Join us to explore a world of imagination and creativity.">
     <title>{% block title %}StoryVerse{% endblock %}</title>
-    <meta content="ie=edge" http-equiv="X-UA-Compatible">
-    <meta content="StoryVerse Home Page" name="description">
-    {% block stylesheets %}
-        {{ encore_entry_link_tags('app') }}
-    {% endblock %}
+
     <link href="{{ asset('build/images/favicon/favicon-16x16.png') }}" rel="icon" sizes="16x16" type="image/png">
     <link href="{{ asset('build/images/favicon/favicon-32x32.png') }}" rel="icon" sizes="32x32" type="image/png">
     <link href="{{ asset('build/images/favicon/android-chrome-192x192.png') }}" rel="icon" sizes="192x192"
@@ -16,12 +15,15 @@
     <link href="{{ asset('build/images/favicon/android-chrome-512x512.png') }}" rel="icon" sizes="512x512"
           type="image/png">
     <link href="{{ asset('build/images/favicon/apple-touch-icon.png') }}" rel="apple-touch-icon">
-
-    {% block javascripts %}
-        {{ encore_entry_script_tags('app') }}
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
     {% endblock %}
 </head>
 <body>
 {% block body %}{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('app') }}
+{% endblock %}
 </body>
 </html>
