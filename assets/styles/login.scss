@@ -31,13 +31,13 @@ form {
 
 @keyframes gradient-bg {
   0% {
-    background-position: 0% 50%;
+    background-position: 0 50%;
   }
   50% {
     background-position: 100% 50%;
   }
   100% {
-    background-position: 0% 50%;
+    background-position: 0 50%;
   }
 }
 
@@ -47,9 +47,7 @@ body {
   justify-content: center;
   align-items: center;
   padding: 10px;
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-  background: linear-gradient(to top, #469597 0%, #88d3ce 100%);
+  background: linear-gradient(to top, #469597 0%, #88d3ce 100%) no-repeat fixed;
 }
 
 .container {
