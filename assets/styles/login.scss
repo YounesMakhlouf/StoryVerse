@@ -12,6 +12,14 @@ img {
     width: 10%;
     height: auto;
 }
+#login{
+    display: flex;
+    justify-content: center;
+    margin: 20px 0 12px 0;
+    flex-wrap: wrap;
+    flex-direction: column;
+    
+}
 form{
     display: flex;
     flex-wrap: wrap;

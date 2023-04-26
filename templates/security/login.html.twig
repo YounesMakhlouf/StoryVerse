@@ -1,42 +1,70 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Log in!{% endblock %}
+{% block title %}Login{% endblock %}
 
 {% block body %}
-<form method="post">
+<body class="gradient">
+    <div class="container">
+
+<form method="post" id="login">
     {% if error %}
         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
 
     {% if app.user %}
-        <div class="mb-3">
+        <div class="alert alert-success">
             You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
         </div>
-    {% endif %}
+        {% else %}
+        {% for flash in app.flashes('success') %}
+            <div class="alert alert-success">{{ flash }}</div>
+        {% endfor %}
 
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    <label for="inputEmail">Email</label>
-    <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
-    <label for="inputPassword">Password</label>
-    <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
-
+  <div class="title">
+            <img src="{{ asset('build/images/logo.webp') }}" class="img-fluid" alt="Example Image">
+            Please sign in
+        </div>
+ <div class="content">
+            <div class="user-details">
+            <div class="input-box">
+    <label class="details" for="inputEmail">Email</label>
+    <input type="email" value="{{ last_username }}" name="email" placeholder="Enter your email" id="inputEmail"  autocomplete="email" required autofocus>
+                </div>
+                  <div class="input-box">
+    <label class="details" for="inputPassword">Password</label>
+    <input type="password" name="password" id="inputPassword" placeholder="Enter your password" autocomplete="current-password" required>
+</div>
     <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
-
-    {#
-        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-        See https://symfony.com/doc/current/security/remember_me.html
+           value="{{ csrf_token('authenticate') }}">
+</div>
 
         <div class="checkbox mb-3">
             <label>
                 <input type="checkbox" name="_remember_me"> Remember me
             </label>
         </div>
-    #}
 
-    <button class="btn btn-lg btn-primary" type="submit">
-        Sign in
-    </button>
+
+    <div class="button">
+                <a href="{{ path('app_home') }}">
+                <input type="submit" value="Register">
+                </a>
+            </div>
 </form>
+</div>
+<footer>not a member ?
+             <a href="{{ path('app_register') }}">SignUp here</a>
+        </footer>
+</div>
+  {% endif %}
 {% endblock %}
+{% block javascripts %}
+     {{ parent() }}
+     {{ encore_entry_script_tags('login') }}
+ {% endblock %}
+
+
+ {% block stylesheets %}
+     {{ parent() }}
+     {{ encore_entry_link_tags('login') }}
+ {% endblock %}
