@@ -46,12 +46,7 @@
     </div>
 
 
-                {# {{ form_row(registrationForm.email,{
-                label:'Email',
-                attr:{'placeholder':"Enter your email"},
-
-                label_attr: {'class': 'details'},
-                row_attr: { class: 'input-box' }}) }} #}
+               
                 <div class="input-box">
      {{ form_label(registrationForm.plainPassword, 'Password') }}
     {{ form_widget(registrationForm.plainPassword,{attr:{'placeholder':"Enter your password",'autocomplete':"off"}}) }}
@@ -60,17 +55,11 @@
 
 
 
-                {# {{ form_row(registrationForm.plainPassword, {
-                label: 'Password',
-                attr:{'placeholder':"Enter your password"},
 
-                label_attr: {'class': 'details'},
-                row_attr: { class: 'input-box' }
-                }) }} #}
 
             </div>
             <div class="gender_details">
-            
+
  {{ form_row(registrationForm.gender ,{
  label_attr:{class:"gender"}
  })}}
