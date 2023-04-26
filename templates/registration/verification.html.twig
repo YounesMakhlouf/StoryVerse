@@ -1,0 +1,51 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Email Verification{% endblock %}
+
+ 
+
+{% block body %}
+    <body class="gradient">
+    
+           <div class="card text-center" style="width: 40rem;">
+  <div class="card-body">
+    <h4 class="card-title"><img src="{{ asset('build/images/logo.webp') }}" class="img-fluid" alt="Example Image">
+            Welcome to StoryVerse <i class="fa fa-heart" style="font-size:30px;color:red;"></i></h4>
+    <div class="card-text">We’ve sent you a welcome email with an activation link. Simply click the link and you’re good to go.
+    </div>
+    <div >Did not receive the email?</div>
+    <footer><a href='{{link}}' class="btn btn-primary">click here to resend</a> </footer>
+  </div>
+</div>
+        {# <div class="content user-details">
+        
+        
+        <div class="row"> Activate your account to finish signing up.
+</div>
+
+ <footer>
+ <div >Did not receive the email?</div>
+ <button type="button" class="btn btn-info" >
+ <a href={{link}}>click here to resend </a>
+ </buttonv>
+ </footer> #}
+
+</div>
+
+    </div>
+    </body>
+{% endblock %}
+
+ {% block javascripts %}
+     {{ parent() }}
+     {{ encore_entry_script_tags('login') }}
+ {% endblock %}
+
+
+ {% block stylesheets %}
+     {{ parent() }}
+     {{ encore_entry_link_tags('login') }}
+ {% endblock %} 
+ 
+ 
