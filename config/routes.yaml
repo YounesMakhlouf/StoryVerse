@@ -1,0 +1,9 @@
+controllers:
+    resource:
+        path: ../src/Controller/
+        namespace: App\Controller
+    type: attribute
+profile:
+    path: /profile/{id}
+    controller: App\Controller\ProfileController::showProfile
+
