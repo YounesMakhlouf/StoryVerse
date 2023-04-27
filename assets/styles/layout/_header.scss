@@ -10,6 +10,11 @@
     background-color: transparent;
 }
 
+#header.header-scrolled {
+  background: $Turquoise;
+  height: 60px;
+}
+
 #header .logo h1 {
     font-size: 28px;
     margin: 0;
