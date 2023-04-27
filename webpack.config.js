@@ -22,6 +22,8 @@ Encore
      */
     .addEntry('app', './assets/js/app.js')
     .addEntry('login', './assets/js/login.js')
+    .addEntry('profile', './assets/js/profile.js')
+    .addEntry('story', './assets/js/story.js')
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
     .enableStimulusBridge('./assets/controllers.json')
@@ -62,6 +64,7 @@ Encore
 
     // enables Sass/SCSS support
     .enableSassLoader()
+    .enablePostCssLoader()
 
 // uncomment if you use TypeScript
 //.enableTypeScriptLoader()
