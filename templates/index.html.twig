@@ -1,27 +1,6 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <header class="fixed-top d-flex align-items-center header-transparent" id="header">
-        <div class="container d-flex align-items-center justify-content-between">
-            <div class="logo">
-                <h1><a href="{{ path('app_home') }}"><span><img alt="StoryVerse logo" class="img-fluid"
-                                                                src="{{ asset('build/images/logo.webp') }}">StoryVerse</span></a>
-                </h1>
-            </div>
-            <nav class="navbar" id="navbar">
-                <ul>
-                    <li><a class="nav-link scrollto active" href="{{ path('app_home') }}" title="Home">Home</a></li>
-                    <li><a class="nav-link scrollto" href="#trending" title="Trending">Trending</a></li>
-                    <li><a class="nav-link scrollto" href="#team" title="Team">Team</a></li>
-                    <li><a class="nav-link scrollto" href="#contact" title="Contact">Contact</a></li>
-                    <li><a class="nav-link scrollto" href="{{ path('app_register') }}" title="Login">Login</a></li>
-                    <li><a class="nav-link scrollto" href="{{ path('app_register') }}" title="Sign up">Sign up</a></li>
-                </ul>
-                <button aria-label="Menu" class="fa-solid fa-bars mobile-nav-toggle"></button>
-            </nav>
-        </div>
-    </header>
-
     <main>
         <!-- ======= Hero Section ======= -->
         <section aria-label="Hero section introducing StoryVerse platform" id="hero">
