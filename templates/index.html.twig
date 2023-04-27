@@ -1,0 +1,184 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <main>
+        <!-- ======= Hero Section ======= -->
+        <section aria-label="Hero section introducing StoryVerse platform" id="hero">
+            <div class="container">
+                <div class="row justify-content-between">
+                    <div class="col-lg-7 pt-5 pt-lg-0 order-2 order-lg-1 d-flex align-items-center">
+                        <div data-aos="zoom-out">
+                            <h1>Welcome to <span>StoryVerse</span>, where creativity knows no bounds.</h1>
+                            <h2> Join our community of passionate storytellers to collaborate on captivating tales and
+                                create the perfect ending. Let your imagination run wild and get inspired by the endless
+                                possibilities.
+                                Don't just read stories, be a part of creating them. Get involved and start writing
+                                today.</h2>
+                            <div class="text-center text-lg-start">
+                                <a class="btn-get-started scrollto" data-aos="zoom-out" data-aos-delay="400"
+                                   href="{{ path('app_register') }}">Start writing now</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 order-1 order-lg-2 hero-img" data-aos="zoom-out" data-aos-delay="300">
+                        <img alt="Kids sharing stories around a campfire at a StoryVerse writing camp"
+                             class="img-fluid rounded animated" src="{{ asset('build/images/hero-img.webp') }}">
+                    </div>
+                </div>
+            </div>
+            <svg aria-label="Waves decoration" class="hero-waves" preserveAspectRatio="none"
+                 viewBox="0 24 150 28" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <desc>Decorative waves for the hero section</desc>
+                <defs>
+                    <path d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"
+                          id="wave-path"></path>
+                </defs>
+                <g class="wave1">
+                    <use fill="rgba(255,255,255, .1)" x="50" xlink:href="#wave-path" y="3"></use>
+                </g>
+                <g class="wave2">
+                    <use fill="rgba(255,255,255, .2)" x="50" xlink:href="#wave-path" y="0"></use>
+                </g>
+                <g class="wave3">
+                    <use fill="#fff" x="50" xlink:href="#wave-path" y="9"></use>
+                </g>
+            </svg>
+        </section>
+        <!-- End Hero Section -->
+
+        <!-- ======= Trending Section ======= -->
+        <section class="trending" id="trending">
+            <div class="container">
+                <header class="section-title" data-aos="fade-up">
+                    <h2>Trending Stories</h2>
+                    <p>Discover Our Hottest Stories</p>
+                </header>
+                <article class="row row-cols-1 row-cols-md-3 g-4" data-aos="fade-left">
+                    {% for story in trendingStories %}
+                        <div class="col">
+                            <a href="{{ story.link }}" rel="bookmark">
+                                <div class="card h-100" data-aos="zoom-in" data-aos-delay="400">
+                                    <img alt="{{ story.description }}" class="card-img-top"
+                                         src="{{ asset(story.image) }}">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ story.title }}</h5>
+                                        <p class="card-text">{{ story.description }}</p>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <small class="text-muted">{{ story.duration }}</small>
+                                            <span class="badge rounded-pill">{{ story.category }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    {% endfor %}
+                </article>
+            </div>
+        </section>
+        <!-- End Trending Section -->
+
+        <!-- ======= Team Section ======= -->
+        <section class="team" id="team">
+            <div class="container">
+                <div class="section-title" data-aos="fade-up">
+                    <h2>Our Team</h2>
+                    <p>Meet Our Amazing Team</p>
+                </div>
+                <div class="row text-center justify-content-center" data-aos="fade-left">
+                    {% for member in teamMembers %}
+                        <div class="col-12 col-md-6 col-lg-4">
+                            <div class="member" data-aos="zoom-in" data-aos-delay="100">
+                                <div class="pic">
+                                    <img alt="{{ member.firstName ~ ' ' ~ member.lastName }}" class="img-fluid"
+                                         src="{{ asset('build/images/team/' ~ member.firstName|lower ~ '.webp') }}">
+
+                                </div>
+                                <div class="member-info">
+                                    <h4>{{ member.firstName ~ ' ' ~ member.lastName }}</h4>
+                                    <span>{{ member.position }}</span>
+                                    <div class="social">
+                                        <a href="{{ member.social.facebook }}" rel="noopener noreferrer"
+                                           target="_blank">
+                                            <i class="fa-brands fa-facebook"></i>
+                                        </a>
+                                        <a href="{{ member.social.instagram }}" rel="noopener noreferrer"
+                                           target="_blank">
+                                            <i class="fa-brands fa-instagram"></i>
+                                        </a>
+                                        <a href="{{ member.social.linkedin }}" rel="noopener noreferrer"
+                                           target="_blank">
+                                            <i class="fa-brands fa-linkedin"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+        <!-- End Team Section -->
+
+        <!-- ======= Contact Section ======= -->
+        <section id="contact" class="contact">
+            <div class="container">
+                <div class="section-title" data-aos="fade-up">
+                    <h2>Contact</h2>
+                    <p>Contact Us</p>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4" data-aos="fade-right" data-aos-delay="100">
+                        <div class="info">
+                            <div class="address">
+                                <i class="fa-sharp fa-solid fa-location-dot"></i>
+                                <h4>Location:</h4>
+                                <p>676 INSAT Centre Urbain Nord BP, Tunis Cedex 1080</p>
+                            </div>
+                            <div class="email">
+                                <i class="fa-solid fa-envelope"></i>
+                                <h4>Email:</h4>
+                                <p>{{ email }}</p>
+                            </div>
+                            <div class="phone">
+                                <i class="fa-solid fa-phone"></i>
+                                <h4>Call:</h4>
+                                <p>{{ phoneNumber }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-8 mt-5 mt-lg-0" data-aos="fade-left" data-aos-delay="200">
+                        <form {# action="{{ path('contact') }}" #} method="post" role="form" class="php-email-form">
+                            <div class="row">
+                                <div class="col-md-6 form-group">
+                                    <label for="name">Your Name</label>
+                                    <input type="text" name="name" class="form-control" id="name" required>
+                                </div>
+                                <div class="col-md-6 form-group mt-3 mt-md-0">
+                                    <label for="email">Your Email</label>
+                                    <input type="email" class="form-control" name="email" id="email" required>
+                                </div>
+                            </div>
+                            <div class="form-group mt-3">
+                                <label for="subject">Subject</label>
+                                <input type="text" class="form-control" name="subject" id="subject" required>
+                            </div>
+                            <div class="form-group mt-3">
+                                <label for="message">Message</label>
+                                <textarea class="form-control" name="message" rows="5" id="message" required></textarea>
+                            </div>
+                            <div class="my-3">
+                                <div class="loading">Loading</div>
+                                <div class="error-message"></div>
+                                <div class="sent-message">Your message has been sent. Thank you!</div>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit">Send Message</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End Contact Section -->
+    </main>
+{% endblock %}
