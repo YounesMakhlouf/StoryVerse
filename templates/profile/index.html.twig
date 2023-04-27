@@ -65,3 +65,14 @@
 
     </div>
 {% endblock %}
+
+ {% block javascripts %}
+     {{ parent() }}
+     {{ encore_entry_script_tags('profile') }}
+ {% endblock %}
+
+
+ {% block stylesheets %}
+     {{ parent() }}
+     {{ encore_entry_link_tags('profile') }}
+ {% endblock %}
