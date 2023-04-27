@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use Symfony\Component\Security\Core\Security;
 use App\Entity\User;
 use App\Service\MailerService;
 use Doctrine\ORM\EntityManagerInterface;
@@ -18,14 +19,17 @@ use App\security\EmailVerifier;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mime\Address;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+
 
 class RegistrationController extends AbstractController
 {
-    
+        private $userRepository;
         private EmailVerifier $emailVerifier;
 
-        public function __construct(EmailVerifier $emailVerifier)
+        public function __construct(UserRepository $userRepository,EmailVerifier $emailVerifier)
         {
+            $this->userRepository = $userRepository;
             $this->emailVerifier = $emailVerifier;
         }
 
@@ -47,7 +51,6 @@ class RegistrationController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             );
-
             $entityManager->persist($user);
             $entityManager->flush();
             $signatureComponents = $verifyEmailHelper->generateSignature('app_verify_email',
@@ -94,7 +97,7 @@ class RegistrationController extends AbstractController
         try {
             $this->emailVerifier->handleEmailConfirmation($request, $this->getUser());
         } catch (VerifyEmailExceptionInterface $exception) {
-            $this->addFlash('verify_email_error', $translator->trans($exception->getReason(), [], 'VerifyEmailBundle'));
+            $this->addFlash('error', $translator->trans($exception->getReason(), [], 'VerifyEmailBundle'));
 
             return $this->redirectToRoute('app_register');
         }
@@ -103,6 +106,48 @@ class RegistrationController extends AbstractController
 
         return $this->redirectToRoute('app_login');
     }
+
+
+     #[Route("/resend-email-verification", name:"app_resend_email_verification")]
+
+    public function resendEmailVerification(VerifyEmailHelperInterface $verifyEmailHelper,Request $request,AuthenticationUtils $authenticationUtils, MailerService $mailer)
+    {
+        $lastUsername = $authenticationUtils->getLastUsername();
+        $user = $user = $this->userRepository->findOneBy(['email' => $lastUsername]);
+        if ($user->isIsVerified()) {
+            $this->addFlash('success', 'Your email address is already verified.');
+            return $this->redirectToRoute('app_login');
+        }
+        else{
+        $signatureComponents = $verifyEmailHelper->generateSignature('app_verify_email',
+        $user->getId(),
+        $user->getEmail(),
+        ['id' => $user->getId()]);
+        $link=$signatureComponents->getSignedUrl();
+        $username=$user->getUsername();
+        $body="<h2>Hello {$username},</h2>
+        <h2>Thanks for your interest in creating an account.
+        To create your account, please verify your email address by clicking below.</h2>
+        <a href={$link}>
+        <button style ='
+            background-color: #008CBA ;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 16px;
+            display: block;
+            margin: 0 auto;'>
+      Click Here
+    </button>
+    </a>";
+        $mailer->sendEmail($to=$user->getEmail(),$content=$body);
+        $this->addFlash('success', 'A new verification email has been sent to your email address.');
+
+            return $this->render('registration/verification.html.twig');
+
+        }}
 
 
 }
