@@ -20,9 +20,14 @@
     {% endblock %}
 </head>
 <body>
-{% include "layout/header.html.twig" %}
+{% block header %}
+    {% include "layout/header.html.twig" %}
+{% endblock %}
+
 {% block body %}{% endblock %}
-{% include "layout/footer.html.twig" %}
+{% block footer %}
+    {% include "layout/footer.html.twig" %}
+{% endblock %}
 
 {% block javascripts %}
     {{ encore_entry_script_tags('app') }}
