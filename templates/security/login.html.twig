@@ -5,6 +5,7 @@
 {% block body %}
 <body class="gradient">
     <div class="container">
+   {{parent()}} 
 
 <form method="post" id="login">
  {# checks if there is an error in the login form submission #}
@@ -17,7 +18,7 @@
             You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
         </div>
         {% else %}
-        
+
   <div class="title">
             <img src="{{ asset('build/images/logo.webp') }}" class="img-fluid" alt="Example Image">
             Please sign in

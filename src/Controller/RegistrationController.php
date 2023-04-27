@@ -35,10 +35,9 @@ class RegistrationController extends AbstractController
 
     #[Route('/register', name: 'app_register')]
     public function register(Request $request,
-    MailerService $mailer,
      UserPasswordHasherInterface $userPasswordHasher,
       EntityManagerInterface $entityManager,
-      VerifyEmailHelperInterface $verifyEmailHelper): Response
+      ): Response
     {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
@@ -51,16 +50,12 @@ class RegistrationController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             );
-          
             $entityManager->persist($user);
             $entityManager->flush();
-
             return $this->redirectToRoute('app_send_verification_email', [
-                'id' => $user->getId()
+                'id' => $user->getId(),
+                'resend'=>'0'
             ]);
-
-
-
         }
 
         return $this->render('registration/register.html.twig', [
@@ -70,78 +65,41 @@ class RegistrationController extends AbstractController
     }
 
 
-#[Route('/verify/email', name: 'app_verify_email')]
-    public function verifyUserEmail(Request $request, TranslatorInterface $translator): Response
+    #[Route('/verify/email/{id}', name: 'app_verify_email')]
+    public function verifyUserEmail(Request $request, TranslatorInterface $translator,$id): Response
     {
-         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
         try {
-            $this->emailVerifier->handleEmailConfirmation($request, $this->getUser());
+            $user = $this->userRepository->findOneBy(['id' => $id]);
+            $this->emailVerifier->handleEmailConfirmation($request, $user);
         } catch (VerifyEmailExceptionInterface $exception) {
-            $this->addFlash('error', $translator->trans($exception->getReason(), [], 'VerifyEmailBundle'));
+            $this->addFlash('verify_email_error', $translator->trans($exception->getReason(), [], 'VerifyEmailBundle'));
 
             return $this->redirectToRoute('app_register');
         }
 
-        $this->addFlash('success', 'Account Verified! You can now log in.');
+        $this->addFlash('success', 'Your email address has been verified.');
 
         return $this->redirectToRoute('app_login');
     }
 
 
-     #[Route("/resend-email-verification", name:"app_resend_email_verification")]
+    #[Route('/sendEmail/{id}/{resend}', name: 'app_send_verification_email', requirements: [
+        'id' => '^[1-9]\d*$',
+        'resend' => '[01]'
+    ])]
+public function SendVerification($id,$resend='0',TemplatedEmail $email){
 
-    public function resendEmailVerification(
-    VerifyEmailHelperInterface $verifyEmailHelper,
-    Request $request,AuthenticationUtils $authenticationUtils,
-     MailerService $mailer):Response
-    {
-        $lastUsername = $authenticationUtils->getLastUsername();
-        $user = $this->userRepository->findOneBy(['email' => $lastUsername]);
-        if ($user->isIsVerified()) {
-            $this->addFlash('success', 'Your email address is already verified.');
-            return $this->redirectToRoute('app_login');
-        }
-        else{
-           return $this->redirectToRoute('app_send_verification_email', [
-                'id' => $user->getEmail()
-            ]);
-
-
-        }}
-
-#[Route('/sendEmail/{id}',name:"app_send_verification_email")]
-public function SendVerification($id,VerifyEmailHelperInterface $verifyEmailHelper,
-MailerService $mailer){
     $user = $this->userRepository->findOneBy(['id' => $id]);
-
-    $signatureComponents = $verifyEmailHelper->generateSignature('app_verify_email',
-        $user->getId(),
-        $user->getEmail(),
-        ['id' => $user->getId()]);
-        $link=$signatureComponents->getSignedUrl();
-        $username=$user->getUsername();
-        $body="<h2>Hello {$username},</h2>
-        <h2>Thanks for your interest in creating an account.
-        To create your account, please verify your email address by clicking below.</h2>
-        <a href={$link}>
-        <button style ='
-            background-color: #008CBA ;
-            border: none;
-            color: white;
-            padding: 15px 32px;
-            text-align: center;
-            text-decoration: none;
-            font-size: 16px;
-            display: block;
-            margin: 0 auto;'>
-      Click Here
-    </button>
-    </a>";
-        $mailer->sendEmail($to=$user->getEmail(),$content=$body);
-        $this->addFlash('success', 'A verification email has been sent to your email address.');
-
-            return $this->render('registration/verification.html.twig');
+    $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
+                (new TemplatedEmail())
+                    ->to($user->getEmail())
+                    ->subject('Please Confirm your Email'), ['id' => $id]
+                    );
+        if($resend=='1'){
+            $this->addFlash('info', 'A new verification email has been sent to your email address.');
+        }
+        return $this->render('registration/verification.html.twig',['id'=>$id]);
 }
 
 
