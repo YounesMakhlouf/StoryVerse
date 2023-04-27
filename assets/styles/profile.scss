@@ -4,6 +4,7 @@
 
 @import "./layout/header";
 @import "./layout/footer";
+@import url('https://fonts.googleapis.com/css2?family=Old+Standard+TT&display=swap');//link to the font1
 
 .profile-container {
   margin: 0 auto;
@@ -37,7 +38,7 @@
   margin-top: 10px;
   font-size: 24px;
   font-weight: bold;
-  font-family: Nagasaki;
+  font-family: 'Old Standard TT', serif;
   color: #8943c3;;
 }
 
@@ -75,6 +76,8 @@ h5, .profile-bio {
   margin-top: 10px;
   font-size: 20px;
   color: #53186a;
+  font-weight: bold;
+
 }
 
 /* CSS pour l'effet de zoom */
