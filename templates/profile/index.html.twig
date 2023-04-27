@@ -3,15 +3,14 @@
 {% block body %}
     <div class="profile-container text-center">
         <div class="profile-cover">
-            <h1 class="profile-name"><br> Welcome to ❃ FLEN ❃ 's profile </h1>
-
-
+            {% if user %}
+                <h1 class="profile-name"><br> Welcome to {{ user.username }}'s profile </h1>
+            {% endif %}
         </div>
         <div class="profile-picture-container">
             <img src="https://us.123rf.com/450wm/yummytime/yummytime1608/yummytime160800630/61903988-anonyme-m%C3%A2le-photo-de-profil-avatar-de-l-%C3%A9motion-cr%C3%A9%C3%A9e-pour-mobile-web-d%C3%A9coration-produits-d.jpg"
                  alt="Profile Picture" class="profile-picture rounded-circle">
         </div>
-
 
         <div class="profile-bio">"Auteur audacieux | Rêveur invétéré | Amoureux des mots"</div>
         <div class="profile-stats">
@@ -21,7 +20,6 @@
         </div>
         <br>
         <br>
-
 
         <button class="btn btn-warning">Follow</button>
         <button class="btn btn-warning">Message</button>
@@ -47,23 +45,35 @@
         <br><br>
         <a href="page_destination.html" class="btn btn-warning">Continuez la lecture</a>
         </span>
+<!-- 2eme exemple -->
+<div class="text-center">
+    <img src="https://www.daily-movies.ch/wp-content/uploads/2023/02/Un-homme-heureux_4.jpg"
+         class="img-fluid rounded start, zoom-image ">
+    <h5>Romance </h5>
+</div>
+<span class="description">Il était une fois, dans un petit café au coin de la rue, que leurs regards se sont croisés pour la première fois...
+<br><br>
+<a href="page_destination.html" class="btn btn-warning">Continuez la lecture</a>
+</span>
+</div>
+</div>
+</div>
+</div>
 
-                <!-- 2eme exemple -->
-                <div class="text-center">
-                    <img src="https://www.daily-movies.ch/wp-content/uploads/2023/02/Un-homme-heureux_4.jpg"
-                         class="img-fluid rounded start, zoom-image ">
-                    <h5>Romance </h5>
-                </div>
-                <span class="description">Il était une fois, dans un petit café au coin de la rue, que leurs regards se sont croisés pour la première fois...
-        <br><br>
-        <a href="page_destination.html" class="btn btn-warning">Continuez la lecture</a>
-        </span>
 
 
-            </div>
-        </div>
+<!-- New code -->
+{% if app.user %}
+    {% if app.user.id == id %}
+        <h1 class="profile-name"><br> Welcome to {{ app.user.username }}'s profile </h1>
+    {% else %}
+        <h1 class="profile-name"><br> Welcome to this user's profile </h1>
+    {% endif %}
+{% else %}
+<script>
+        alert("Please log in to view this user's profile");
+    </script>{% endif %}
 
-    </div>
 {% endblock %}
 
  {% block javascripts %}
@@ -73,6 +83,6 @@
 
 
  {% block stylesheets %}
-     {{ parent() }}
-     {{ encore_entry_link_tags('profile') }}
+    {{ parent() }}
+    {{ encore_entry_link_tags('profile') }}
  {% endblock %}
