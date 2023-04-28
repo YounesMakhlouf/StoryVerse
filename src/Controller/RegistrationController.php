@@ -98,21 +98,27 @@ public function SendVerification($id,$resend='0',TemplatedEmail $email){
 
     $user = $this->userRepository->findOneBy(['id' => $id]);
     if(!$user){
-        $this->addFlash('error', 'no user found.');
+        $this->addFlash('error', 'user not found.');
 
     }
     else{
+        if($user->isIsVerified()){
+            $this->addFlash('success', 'Your email is already verified ! ');
+            return $this->redirectToRoute('app_login');
+        }
+        else{
     $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
                 (new TemplatedEmail())
                     ->to($user->getEmail())
                     ->subject('Please Confirm your Email'), ['id' => $id]
                     );
         if($resend=='1'){
+
             $this->addFlash('info', 'A new verification email has been sent to your email address.');
-        }}
-        return $this->render('registration/verification.html.twig',['id'=>$id]);
-}
+        }
 
+}}
+return $this->render('registration/verification.html.twig',['id'=>$id]);
 
-}
+}}
 
