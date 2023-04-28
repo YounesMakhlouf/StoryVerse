@@ -54,7 +54,6 @@ class RegistrationController extends AbstractController
                 );
             $currentDate = new DateTime('now');
             $user->setLastLoginDate($currentDate);
-            $registrationDate = DateTimeImmutable::createFromMutable($currentDate); // convert DateTime to DateTimeImmutable
             $user->setRegistrationDate($registrationDate);
             $entityManager->persist($user);
             $entityManager->flush();
