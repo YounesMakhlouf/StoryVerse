@@ -51,8 +51,9 @@ class RegistrationController extends AbstractController
                     $user,
                     $form->get('plainPassword')->getData()
                 )
-            );
-            $currentDate = new DateTime('now'); 
+                );
+            $currentDate = new DateTime('now');
+            $user->setLastLoginDate($currentDate);
             $registrationDate = DateTimeImmutable::createFromMutable($currentDate); // convert DateTime to DateTimeImmutable
             $user->setRegistrationDate($registrationDate);
             $entityManager->persist($user);
