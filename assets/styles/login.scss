@@ -15,12 +15,19 @@ img {
   width: 10%;
   height: auto;
 }
-
-form {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  margin: 20px 0 12px 0;
+#login{
+    display: flex;
+    justify-content: center;
+    margin: 20px 0 12px 0;
+    flex-wrap: wrap;
+    flex-direction: column;
+    
+}
+form{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: 20px 0 12px 0;
 }
 
 .gradient {
