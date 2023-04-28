@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use DateTime;
+use DateTimeImmutable;
 use Symfony\Component\Security\Core\Security;
 use App\Entity\User;
 use App\Service\MailerService;
@@ -49,7 +51,11 @@ class RegistrationController extends AbstractController
                     $user,
                     $form->get('plainPassword')->getData()
                 )
-            );
+                );
+            $currentDate = new DateTime('now');
+            $user->setLastLoginDate($currentDate);
+            $registrationDate = DateTimeImmutable::createFromMutable($currentDate); // convert DateTime to DateTimeImmutable
+            $user->setRegistrationDate($registrationDate);
             $entityManager->persist($user);
             $entityManager->flush();
             return $this->redirectToRoute('app_send_verification_email', [
@@ -91,17 +97,28 @@ class RegistrationController extends AbstractController
 public function SendVerification($id,$resend='0',TemplatedEmail $email){
 
     $user = $this->userRepository->findOneBy(['id' => $id]);
+    if(!$user){
+        $this->addFlash('error', 'user not found.');
+
+    }
+    else{
+        if($user->isIsVerified()){
+            $this->addFlash('success', 'Your email is already verified ! ');
+            return $this->redirectToRoute('app_login');
+        }
+        else{
     $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
                 (new TemplatedEmail())
                     ->to($user->getEmail())
                     ->subject('Please Confirm your Email'), ['id' => $id]
                     );
         if($resend=='1'){
+
             $this->addFlash('info', 'A new verification email has been sent to your email address.');
         }
-        return $this->render('registration/verification.html.twig',['id'=>$id]);
-}
 
+}}
+return $this->render('registration/verification.html.twig',['id'=>$id]);
 
-}
+}}
 
