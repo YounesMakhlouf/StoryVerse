@@ -54,7 +54,6 @@ class RegistrationController extends AbstractController
                 );
             $currentDate = new DateTime('now');
             $user->setLastLoginDate($currentDate);
-            $user->setRegistrationDate($registrationDate);
             $entityManager->persist($user);
             $entityManager->flush();
             return $this->redirectToRoute('app_send_verification_email', [
@@ -73,7 +72,6 @@ class RegistrationController extends AbstractController
     #[Route('/verify/email/{id}', name: 'app_verify_email')]
     public function verifyUserEmail(Request $request, TranslatorInterface $translator,$id): Response
     {
-
         try {
             $user =  $this->userRepository->findUserById($id);
             $this->emailVerifier->handleEmailConfirmation($request, $user);
