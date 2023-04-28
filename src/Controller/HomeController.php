@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controller;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -10,7 +11,19 @@ class HomeController extends AbstractController
     #[Route('/', name: 'app_home')]
     public function index(): Response
     {
-        $trendingStories = [
+        $trendingStories = $this->getTrendingStories();
+        $teamMembers = $this->getTeamMembers();
+
+        return $this->render('/index.html.twig', [
+            'controller_name' => 'HomeController',
+            'teamMembers' => $teamMembers,
+            'trendingStories' => $trendingStories,
+        ]);
+    }
+
+    private function getTrendingStories(): array
+    {
+        return [
             [
                 "title" => "My Awkward Encounter with a Celebrity",
                 "description" => "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque in eros ac ligula auctor fermentum eu sit amet leo. Praesent a accumsan nisi, vel ultricies nulla.",
@@ -36,8 +49,11 @@ class HomeController extends AbstractController
                 "link" => "#"
             ]
         ];
+    }
 
-        $teamMembers = [
+    private function getTeamMembers(): array
+    {
+        return [
             [
                 'firstName' => 'Younes',
                 'lastName' => 'Makhlouf',
@@ -89,12 +105,5 @@ class HomeController extends AbstractController
                 ]
             ]
         ];
-        return $this->render('/index.html.twig', [
-            'controller_name' => 'HomeController',
-            'teamMembers' => $teamMembers,
-            'trendingStories' => $trendingStories,
-            'phoneNumber' => '+216 55 216 719',
-            'email' => 'storyverse19@gmail.com'
-        ]);
     }
 }
