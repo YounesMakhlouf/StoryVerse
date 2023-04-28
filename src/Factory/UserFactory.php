@@ -8,6 +8,7 @@ use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;
 use Zenstruck\Foundry\RepositoryProxy;
 
+
 /**
  * @extends ModelFactory<User>
  *
