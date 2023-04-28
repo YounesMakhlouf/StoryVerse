@@ -36,7 +36,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 25)]
     private ?string $last_name = null;
 
-    #[ORM\Column(length: 25)]
+    #[ORM\Column(length: 25, unique: true)]
     private ?string $username = null;
 
     #[ORM\Column(length: 10)]

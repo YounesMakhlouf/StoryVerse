@@ -14,17 +14,37 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Validator\Constraints\EqualTo;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use App\Repository\UserRepository;
 
 
 
 class RegistrationFormType extends AbstractType
 {
+    private $userRepository;
+
+    public function __construct(UserRepository $userRepository)
+    {
+        $this->userRepository = $userRepository;
+    }
+    
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
         ->add('first_name')
         ->add('last_name')
-        ->add('username')
+        ->add('username', TextType::class, [
+            'constraints' => [
+                new Assert\NotBlank(),
+                new Assert\Callback(function ($value, ExecutionContextInterface $context) {
+                    if (!$this->userRepository->isUsernameUnique($value)) {
+                        $context->addViolation('This username is already in use.');
+                    }
+                }),
+            ],
+        ])
         ->add('email')
         ->add('gender', GenderType::class, [
             'expanded' => true,
@@ -34,8 +54,6 @@ class RegistrationFormType extends AbstractType
             ],
         ])
         ->add('plainPassword', PasswordType::class, [
-                // instead of being set onto the object directly,
-                // this is read and encoded in the controller
                 'mapped' => false,
                 'attr' => ['autocomplete' => 'new-password'],
                 'constraints' => [
@@ -45,7 +63,6 @@ class RegistrationFormType extends AbstractType
                     new Length([
                         'min' => 6,
                         'minMessage' => 'Your password should be at least {{ limit }} characters',
-                        // max length allowed by Symfony for security reasons
                         'max' => 4096,
                     ]),
                 ],

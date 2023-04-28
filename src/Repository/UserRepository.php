@@ -71,6 +71,15 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
 //        ;
 //    }
 
+//    public function findOneBySomeField($value): ?User
+//    {
+//        return $this->createQueryBuilder('u')
+//            ->andWhere('u.exampleField = :val')
+//            ->setParameter('val', $value)
+//            ->getQuery()
+//            ->getOneOrNullResult()
+//        ;
+// ==   }
 public function findUserById( $id): ?User
 {
     return $this->createQueryBuilder('u')
@@ -87,4 +96,19 @@ public function findUserByEmail( $email): ?User
         ->getQuery()
         ->getOneOrNullResult();
 }
+
+public function isUsernameUnique(string $username): bool
+{
+    $count = $this->createQueryBuilder('u')
+        ->select('COUNT(u.id)')
+        ->andWhere('u.username = :username')
+        ->setParameter('username', $username)
+        ->setMaxResults(1)
+        ->getQuery()
+        ->getOneOrNullResult();
+
+    return ($count === null);
 }
+}
+
+
