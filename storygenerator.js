@@ -13,7 +13,7 @@ cards.forEach((card) => {
   card.addEventListener("mouseout", function () {
     let theChildren = Array.from(card.children);
     theChildren.forEach((child) => {
-      child.classList.toggle("hidden");
+        child.classList.toggle("hidden");
     });
   });
 });
@@ -22,36 +22,38 @@ cards.forEach((card) => {
 const addbuttons = document.querySelectorAll(".fas"); // takes all the active + addbuttons
 
 addbuttons.forEach((addbutton) => {
-  addbutton.addEventListener("click", addEmptyCard); // makes the button add empty cars
+  addbutton.addEventListener("click", addEmptyContribution); // makes the button add empty cars
 });
 
-function addEmptyCard(e) {
+function addEmptyContribution(e) {
   const button = e.target;
+  const buttondiv = button.parentNode;
 
-  const list = button.parentNode.parentNode.parentNode; // selectionne l'ul qui a tout les div
-  const li = button.parentNode.parentNode;
-  const emptycard = document.createElement("li");
-  emptycard.classList.add("card", "empty-card");
-  emptycard.innerHTML = emptycardhtml();
-  list.insertBefore(emptycard, li);
-  let input = emptycard.children[0].children[0];
-  input.addEventListener("input", function () {
-    resizetextarea(input);
+  const Contributions = button.parentNode.parentNode; // selectionne l'ul qui a tout les div
+  emptyContribution = document.createElement("div");
+  emptyContribution.classList.add("empty-contribution");
+  emptyContribution.innerHTML = emptyContributionhtml();
+  Contributions.insertBefore(emptyContribution, buttondiv);
+  let inputArea = emptyContribution.querySelector(".input-area");
+  inputArea.addEventListener("input", function () {
+    resizetextarea(inputArea);
   });
 
-  emptycard.children[1].children[0].addEventListener("click", function () {
-    addContribution(list, emptycard);
+  const saveButton = emptyContribution.querySelector(".save-btn");
+  saveButton.addEventListener("click", function () {
+    addContribution(Contributions, emptyContribution);
   });
-  li.remove();
+  buttondiv.remove();
 }
 
-function addContribution(list, emptycard) {
-  const contribution = document.createElement("li");
-  contribution.classList.add("card");
-  let input = emptycard.children[0].children[0].value.trim(); //takes the story someone added
-  contribution.innerHTML = getContributionTemplate(input);
-  list.append(contribution);
-  emptycard.remove();
+function addContribution(Contributions, emptyContribution) {
+  const newContribution = document.createElement("div");
+  newContribution.classList.add("contribution");
+  addHighlight(newContribution);
+  let input = emptyContribution.querySelector(".input-area").value.trim(); //takes the story someone added
+  newContribution.innerHTML = getContributionTemplate(input);
+  Contributions.append(newContribution);
+  emptyContribution.remove();
 }
 
 // reset the height to auto to allow the textarea to resize
@@ -59,14 +61,14 @@ function resizetextarea(tr) {
   tr.style.height = tr.scrollHeight + "px";
 }
 
-function emptycardhtml() {
+function emptyContributionhtml() {
   return `
-      <div class="card-body">
-        <textarea
-          class="card-text"
-          placeholder="Enter your contribution here"
+      
+        <textarea class="input-area"
+          
+          placeholder="Enter your newContribution here"
         ></textarea>
-      </div>
+      
       <div class="card-footer">
         <button class="btn btn-primary save-btn">Save</button>
       </div>
@@ -74,19 +76,7 @@ function emptycardhtml() {
 }
 
 function getContributionTemplate(inputValue) {
-  return `<div class="card-header">
-                <h4 class="card-title">9atous</h4>
-                <button class="btn btn-follow">Follow</button>
-            </div>
-            <div class="card-body">
-                <p class="card-text">${inputValue}</p>
-            </div>
-            <div class="card-footer">
-                <div class="post-vote-buttons">
-                    <div class="upvote"></div>
-                    <div class="downvote"></div>
-                </div>
-            </div>`;
+  return `<div class="contribution">${inputValue}</div>`;
 }
 
 /*   // Create a new list item (card)
@@ -117,3 +107,77 @@ function getContributionTemplate(inputValue) {
 
    // Insert the new card before the add-card button
    list.insertBefore(card, addCardBtn);*/
+function createMainContribution(name, text, votes) {
+  const contribution = document.createElement("div");
+  contribution.classList.add("contribution", "row");
+
+  const nameDiv = document.createElement("div");
+  nameDiv.classList.add("col-2", "name");
+
+  const nameHeading = document.createElement("h3");
+  nameHeading.textContent = name;
+
+  nameDiv.appendChild(nameHeading);
+
+  const textDiv = document.createElement("div");
+  textDiv.classList.add("text", "col-9");
+
+  const textParagraph = document.createElement("p");
+  textParagraph.textContent = text;
+
+  textDiv.appendChild(textParagraph);
+
+  const votesDiv = document.createElement("div");
+  votesDiv.classList.add("votes", "col-1", "hidden");
+
+  const upvoteButton = document.createElement("button");
+  upvoteButton.classList.add("upvote");
+  upvoteButton.textContent = "Upvote";
+
+  const numberVotesParagraph = document.createElement("p");
+  numberVotesParagraph.classList.add("number-votes");
+  numberVotesParagraph.textContent = votes;
+
+  const downvoteButton = document.createElement("button");
+  downvoteButton.classList.add("downvote");
+  downvoteButton.textContent = "Downvote";
+
+  votesDiv.appendChild(upvoteButton);
+  votesDiv.appendChild(numberVotesParagraph);
+  votesDiv.appendChild(downvoteButton);
+
+  contribution.appendChild(nameDiv);
+  contribution.appendChild(textDiv);
+  contribution.appendChild(votesDiv);
+  addHighlight(contribution);
+
+  return contribution;
+}
+function createContributionForWrapper(name, paragraph) {
+  const contribution = document.createElement("div");
+  contribution.classList.add("contribution-wrapper");
+
+  const nameDiv = document.createElement("div");
+  nameDiv.classList.add("name");
+
+  const nameHeader = document.createElement("h3");
+  nameHeader.textContent = name;
+
+  nameDiv.appendChild(nameHeader);
+
+  const textDiv = document.createElement("div");
+  textDiv.classList.add("text");
+
+  const paragraphP = document.createElement("p");
+  paragraphP.textContent = paragraph;
+
+  textDiv.appendChild(paragraphP);
+
+  contribution.appendChild(nameDiv);
+  contribution.appendChild(textDiv);
+
+  /* with the highlighter*/
+  addHighlight(contribution);
+
+  return contribution;
+}

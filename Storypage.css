@@ -1,6 +1,9 @@
-/*.hidden {
+.hidden {
   display: none !important;
-}*/
+}
+.body {
+  margin: 20px;
+}
 * {
   font-family: "Dancing Script", cursive;
 }
@@ -12,37 +15,76 @@ h1 {
   position: relative;
 }
 
-h1:before {
-  content: "Cinderella";
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  color: transparent;
-  text-shadow: 0 0 50px #fff;
-  animation: glow 1s ease-out infinite alternate;
-}
-
-@keyframes glow {
-  to {
-    color: #ffd700;
-    text-shadow: 0 0 20px #ffd700, 0 0 30px #ffd700, 0 0 40px #ffd700,
-      0 0 50px #ffd700, 0 0 75px #ffd700;
-  }
-}
-
 .parts {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.contribution-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .part {
   display: flex;
   flex-direction: row;
-  padding: 10px;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+  height: auto;
+  margin: 10px;
+  background-color: #eee;
+  border-radius: 5px;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
+}
+.contributions {
+  display: flex;
+  height: auto;
+  width: 100%;
 }
 
-.card-list {
+.contribution {
+  width: auto;
+  height: auto;
+}
+
+.text {
+  display: flex;
+
+  width: 80%;
+  height: 80%;
+  font-size: 30px;
+  padding: 10px;
+  margin: 10px;
+}
+.adder {
+  padding: 50px;
+}
+
+.votes {
+  position: absolute;
+
+  display: flex;
+  margin-left: 75%; /* sometimes goes too far if you put inspect or mobile view */
+  align-items: center;
+}
+.number-votes {
+  margin: 25%;
+}
+/*.container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}*/
+
+ul {
+  padding: 10px;
   position: relative;
   display: flex;
   flex-wrap: wrap;
@@ -50,47 +92,16 @@ h1:before {
   margin: 0;
   padding: 0;
   list-style: none;
+  flex-direction: row;
 }
-
-.card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+li {
+  padding: 20 px;
 }
-
-.card-title {
-  margin: 0;
-}
-
-.btn-follow {
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  color: #333;
-  padding: 5px 10px;
-  font-size: 14px;
-  cursor: pointer;
-}
-
-/*.card {
-  width: 50px;
-  height: 50px;
-  margin-right: 10px;
-  transition: all 0.3s ease;
-}*/
 
 /* make it highlight */
 .highlight {
-  background-color: rgba(24, 240, 233, 0.923) !important;
+  background-color: rgba(189, 219, 209, 0.923) !important;
   box-shadow: 0 5px 15px rgba(30, 29, 29, 0.727);
-}
-
-.card {
-  margin: 20px;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  width: 300px;
 }
 
 /* make the text area less disgusting */
@@ -99,55 +110,32 @@ textarea {
   outline: none;
   width: 99%;
   overflow: hidden !important;
-}
-
-.btn-follow:hover {
-  background-color: #f4f4f4;
-}
-
-.card-body {
-  margin: 10px 0;
-}
-
-.card-text {
-  margin: 0;
-}
-
-.card-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 10px;
-}
-
-.post-vote-buttons {
-  display: flex;
-}
-
-.upvote {
-  width: 20px;
-  height: 20px;
-  background-color: #ccc;
-  border-radius: 50%;
-  margin-right: 5px;
-}
-
-.downvote {
-  width: 20px;
-  height: 20px;
-  background-color: #ccc;
-  border-radius: 50%;
-  margin-left: 5px;
-}
-.empty-card {
-  border: 1px dashed #ccc;
-  border-radius: 5px;
-  padding: 10px;
-  margin: 10px;
-  text-align: center;
-  cursor: pointer;
+  resize: none;
 }
 
 .plus-icon {
   font-size: 30px;
+}
+
+/* the part that will make the horizontal scrolling babyyy*/
+
+.scrolling-wrapper {
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+
+.card {
+  display: inline-block;
+  margin: 20 px;
+}
+
+.scrolling-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.scrolling-wrapper {
+  height: auto;
+  margin-bottom: 20px;
+  width: auto;
+  -webkit-overflow-scrolling: touch;
 }
