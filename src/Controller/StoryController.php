@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Story;
+use App\Repository\StoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -33,5 +34,17 @@ class StoryController extends AbstractController
         return new response (sprintf(
             "%s%s", $story->getTitle(), $story->getDescription()
         ));
+    }
+
+    #[Route('/story/browse/{slug}', name: 'app_browse_story')]
+    public function browse(StoryRepository $storyRepository, string $slug = null): Response
+    {
+        $genre = $slug;
+        $stories = $storyRepository->findAllOrderedByLikes();
+
+        return $this->render('story/browse.html.twig', [
+            'genre' => $genre,
+            'trendingStories' => $stories,
+        ]);
     }
 }
