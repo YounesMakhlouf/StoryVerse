@@ -21,36 +21,6 @@ class HomeController extends AbstractController
         ]);
     }
 
-    /*  private function getTrendingStories(): array
-      {
-          return [
-              [
-                  "title" => "My Awkward Encounter with a Celebrity",
-                  "description" => "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque in eros ac ligula auctor fermentum eu sit amet leo. Praesent a accumsan nisi, vel ultricies nulla.",
-                  "duration" => "3 mins",
-                  "category" => "Comedy",
-                  "image" => "build/images/trending1.webp",
-                  "link" => "#"
-              ],
-              [
-                  "title" => "The Demon in the Mirror",
-                  "description" => "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque in eros ac ligula auctor fermentum eu sit amet leo. Praesent a accumsan nisi, vel ultricies nulla.",
-                  "duration" => "10 mins",
-                  "category" => "Horror",
-                  "image" => "build/images/trending2.webp",
-                  "link" => "#"
-              ],
-              [
-                  "title" => "The Time Traveler's Dilemma",
-                  "description" => "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque in eros ac ligula auctor fermentum eu sit amet leo. Praesent a accumsan nisi, vel ultricies nulla.",
-                  "duration" => "5 mins",
-                  "category" => "Adventure",
-                  "image" => "build/images/trending3.webp",
-                  "link" => "#"
-              ]
-          ];
-      }*/
-
     private function getTeamMembers(): array
     {
         return [

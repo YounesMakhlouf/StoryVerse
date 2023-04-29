@@ -36,10 +36,9 @@ class StoryController extends AbstractController
         ));
     }
 
-    #[Route('/story/browse/{slug}', name: 'app_browse_story')]
-    public function browse(StoryRepository $storyRepository, string $slug = null): Response
+    #[Route('/story/browse/{genre}', name: 'app_browse_stories')]
+    public function browse(StoryRepository $storyRepository, string $genre = null): Response
     {
-        $genre = $slug;
         $stories = $storyRepository->findAllOrderedByLikes();
 
         return $this->render('story/browse.html.twig', [
@@ -47,4 +46,15 @@ class StoryController extends AbstractController
             'trendingStories' => $stories,
         ]);
     }
+
+    #[Route('/story/{id}', name: 'app_story_id')]
+    public function show($id, StoryRepository $storyRepository): Response
+    {
+        $story = $storyRepository->find($id);
+        return $this->render('story/index.html.twig', [
+            'story' => $story
+        ]);
+    }
+
+
 }
