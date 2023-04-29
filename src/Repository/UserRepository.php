@@ -100,14 +100,13 @@ public function findUserByEmail( $email): ?User
 public function isUsernameUnique(string $username): bool
 {
     $count = $this->createQueryBuilder('u')
-        ->select('COUNT(u.id)')
-        ->andWhere('u.username = :username')
-        ->setParameter('username', $username)
-        ->setMaxResults(1)
-        ->getQuery()
-        ->getOneOrNullResult();
-
-    return ($count === null);
+    ->select('COUNT(u.id)')
+    ->andWhere('u.username = :username')
+    ->setParameter('username', $username)
+    ->getQuery()
+    ->getSingleScalarResult();
+    
+return ($count === 0);
 }
 }
 

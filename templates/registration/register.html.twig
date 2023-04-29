@@ -66,7 +66,7 @@
  label_attr:{class:"gender"}
  })}}
  </div>
-         {% if form_errors(registrationForm.plainPassword)|length > 0 or form_errors(registrationForm.email)|length > 0  %}
+         {% if form_errors(registrationForm.username)|length > 0 or form_errors(registrationForm.plainPassword)|length > 0 or form_errors(registrationForm.email)|length > 0  %}
     <div class="alert alert-danger">
         {{ form_errors(registrationForm.plainPassword) }}
         {{ form_errors(registrationForm.email) }}
