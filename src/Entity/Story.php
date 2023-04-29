@@ -27,7 +27,7 @@ class Story
     private \DateTimeImmutable $createdAt;
 
     #[ORM\Column]
-    private ?\DateTimeImmutable $lastModifiedAt = null;
+    private \DateTimeImmutable $lastModifiedAt;
 
     #[ORM\Column]
     private int $likes = 0;
@@ -38,6 +38,7 @@ class Story
     public function __construct()
     {
         $this->createdAt = new \DateTimeImmutable();
+        $this->lastModifiedAt = new \DateTimeImmutable();
     }
 
     public function getId(): ?int
@@ -127,5 +128,14 @@ class Story
         $this->status = $status;
 
         return $this;
+    }
+
+    public function getImageUrl(int $width): string
+    {
+        return sprintf(
+            'https://picsum.photos/id/%d/%d',
+            ($this->getId() + 50) % 1000, // number between 0 and 1000, based on the id
+            $width
+        );
     }
 }
