@@ -12,11 +12,10 @@ class HomeController extends AbstractController
     #[Route('/', name: 'app_home')]
     public function index(StoryRepository $storyRepository): Response
     {
-        $trendingStories = $storyRepository->findBy([], ["likes" => "DESC"]);
+        $trendingStories = $storyRepository->findAllOrderedByLikes();
         $teamMembers = $this->getTeamMembers();
 
         return $this->render('/index.html.twig', [
-            'controller_name' => 'HomeController',
             'teamMembers' => $teamMembers,
             'trendingStories' => $trendingStories,
         ]);
