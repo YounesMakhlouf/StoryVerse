@@ -8,9 +8,9 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class userController extends AbstractController
 {
-
-#[Route("/user/{id}", methods: ['GET'], name : 'app_user')]
-public function User($id){
-    return new Response(''.$id);
-}
+    #[Route("/user/{id}", methods: ['GET'], name: 'app_user')]
+    public function User($id)
+    {
+        return new Response('' . $id);
+    }
 }

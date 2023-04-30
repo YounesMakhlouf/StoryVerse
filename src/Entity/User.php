@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Entity;
-
+use Gedmo\Timestampable\Traits\TimestampableEntity;
 use App\Repository\UserRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -12,6 +13,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
+    use TimestampableEntity;
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -35,7 +37,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 25)]
     private ?string $last_name = null;
 
-    #[ORM\Column(length: 25)]
+    #[ORM\Column(length: 25, unique: true)]
     private ?string $username = null;
 
     #[ORM\Column(length: 10)]
@@ -43,6 +45,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column]
     private ?bool $isVerified = false;
+
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    private ?\DateTimeInterface $Last_login_date = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $Biography = null;
 
    
 
@@ -172,6 +181,31 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsVerified(bool $isVerified): self
     {
         $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+
+    public function getLastLoginDate(): ?\DateTimeInterface
+    {
+        return $this->Last_login_date;
+    }
+
+    public function setLastLoginDate(\DateTimeInterface $Last_login_date): self
+    {
+        $this->Last_login_date = $Last_login_date;
+
+        return $this;
+    }
+
+    public function getBiography(): ?string
+    {
+        return $this->Biography;
+    }
+
+    public function setBiography(?string $Biography): self
+    {
+        $this->Biography = $Biography;
 
         return $this;
     }

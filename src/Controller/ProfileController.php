@@ -15,9 +15,7 @@ class ProfileController extends AbstractController
     public function index(): Response
     {
         return $this->render('profile/index.html.twig', [
-            'controller_name' => 'ProfileController',
-            'phoneNumber' => '+216 55 216 719',
-            'email' => 'storyverse19@gmail.com'
+            'controller_name' => 'ProfileController'
         ]);
     }*/
 
