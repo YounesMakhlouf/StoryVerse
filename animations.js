@@ -1,6 +1,6 @@
 /* adding highlight functions*/
-function addHighlightByClassName(classname) {
-  const allContribution = document.querySelectorAll("." + classname);
+function addHighlightByClassName(className) {
+  const allContribution = document.querySelectorAll("." + className);
 
   allContribution.forEach((contribution) => {
     addHighlight(contribution);
@@ -27,14 +27,12 @@ function addVotesHider() {
   });
 }
 
+// the function that makes the scrolling with the double click
 function scrollingTransformer() {
   const allContributionsDivs = document.querySelectorAll(".contributions");
   allContributionsDivs.forEach((contributions) => {
     contributions.addEventListener("dblclick", () => {
       if (contributions.classList.contains("scrolling-wrapper")) {
-        /*const allContributionsThatScroll =
-          contributions.querySelectorAll(".contribution");*/
-
         reformIntoOneContribution(contributions);
       } else {
         makeItWrap(contributions);
@@ -43,31 +41,52 @@ function scrollingTransformer() {
   });
 }
 
+//the functions of scrollingTransformer
+function reformIntoOneContribution(contributions) {
+  console.log("slKSks LS K");
+  contributions.classList.remove("scrolling-wrapper");
+  removeChildrenByClassName(contributions, "contribution-wrapper");
+
+  const newMainContribution = createMainContribution(
+    "skander",
+    "loqslkdnqlkdnqlkndùqlknùqlskndlSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSqknlk",
+    "kjslsnNSnsMS3"
+  );
+  contributions.appendChild(newMainContribution);
+}
+
+function makeItWrap(contributions) {
+  contributions.classList.add("scrolling-wrapper");
+  contributions.appendChild(
+    createContributionForWrapper(
+      "skander",
+      "qsk,qsQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQr"
+    )
+  );
+  contributions.appendChild(createContributionForWrapper("skander", "qsk,qsr"));
+  contributions.appendChild(createContributionForWrapper("skander", "qsk,qsr"));
+  for (let i = 0; i < contributions.children.length; i++) {
+    contributions.children[i].classList.add("contribution-wrapper");
+    contributions.children[i].classList.add("card");
+    contributions.children[i].classList.remove("contribution");
+  }
+  console.log("make it wrap");
+}
+
+//useful functions in general
+function removeChildrenByClassName(parentNode, className) {
+  const childs = parentNode.getElementsByClassName(className);
+  let i = 0;
+  while (childs.length > 0) {
+    childs[0].remove();
+    console.log(i);
+    i++;
+    if (i > 100) {
+      break;
+    }
+  }
+}
+
 addHighlightByClassName("contribution");
 /*addVotesHider();*/
 scrollingTransformer();
-
-function reformIntoOneContribution(contributions) {
-  contributions.classList.remove("scrolling-wrapper");
-  for (let i = 0; i < contributions.children.length; i++) {
-    contributions.children[i].remove();
-  }
-
-  contributions.appendChild(
-    createMainContribution(
-      "skander",
-      "loqslkdnqlkdnqlkndùqlknùqlskndlqknlk",
-      "kjslsnNSnsMS3"
-    )
-  );
-}
-function makeItWrap(contributions) {
-  contributions.classList.add("scrolling-wrapper");
-  contributions.appendChild(createContributionForWrapper("skander", "qsk,qsr"));
-  contributions.appendChild(createContributionForWrapper("skander", "qsk,qsr"));
-  contributions.appendChild(createContributionForWrapper("skander", "qsk,qsr"));
-  for (let i = 0; i < contributions.children.length; i++) {
-    contributions.children[i].classList.add("card");
-    console.log("FSKJ QFJZMOAZOMNZ%OZA%OJp");
-  }
-}
