@@ -1,7 +1,6 @@
 @import "helper/variables";
 
 @import '~bootstrap';
-
 @import "./layout/header";
 @import "./layout/footer";
 @import url('https://fonts.googleapis.com/css2?family=Old+Standard+TT&display=swap');//link to the font1
@@ -13,7 +12,7 @@
   font-family: Arial, sans-serif;
   color: #ffffff;
   /*background: linear-gradient(to bottom right, #11c0e3, #0a4e5e);*/
-  background: linear-gradient(to bottom right, #BBC6C8, #c08ad9);
+  background: linear-gradient(to bottom right, $Silver, $DarkTurquoise);
 }
 
 .profile-cover {

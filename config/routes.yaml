@@ -7,3 +7,12 @@ profile:
     path: /profile/{id}
     controller: App\Controller\ProfileController::showProfile
 
+app_modify_profile:
+    path: /modify-profile
+    controller: App\Controller\MyProfileController::modifyProfile
+    methods: [GET, POST]
+
+
+
+
+

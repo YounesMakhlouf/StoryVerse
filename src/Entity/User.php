@@ -9,6 +9,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
+
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
@@ -51,13 +52,58 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $Last_login_date = null;
 
-   
+    #[ORM\Column(length: 150)]
+    private ?string $bio;
+
+    #[ORM\Column]
+    private $avatar;
+
+    public function getAvatar(): ?string
+    {
+        return $this->avatar;
+    }
+
+    public function setAvatar(?string $avatar): self
+    {
+        $this->avatar = $avatar;
+
+        return $this;
+    }
+
+    #[ORM\Column]
+    private ?string $csrf_token='';
+    public function __construct()
+    {
+        $this->csrf_token = '';
+    }
+
+    public function getCsrfToken(): ?string
+    {
+        return $this->csrf_token;
+    }
+
+    public function setCsrfToken(string $csrf_token): self
+    {
+        $this->csrf_token = $csrf_token;
+
+        return $this;
+    }
+    public function getBio(): ?string
+    {
+        return $this->bio;
+    }
+
+    public function setBio(?string $bio): self
+    {
+        $this->bio = $bio;
+
+        return $this;
+    }
 
     public function getId(): ?int
     {
         return $this->id;
     }
-
     public function getEmail(): ?string
     {
         return $this->email;
@@ -117,10 +163,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @see UserInterface
      */
-    public function eraseCredentials()
+    public function eraseCredentials():void
     {
         // If you store any temporary, sensitive data on the user, clear it here
-        // $this->plainPassword = null;
+        $this->plainPassword = null;
     }
 
     public function getFirstName(): ?string
@@ -203,6 +249,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setLastLoginDate(\DateTimeInterface $Last_login_date): self
     {
         $this->Last_login_date = $Last_login_date;
+
+        return $this;
+    }
+
+    // Define the plainPassword getter method
+    public function getPlainPassword(): ?string
+    {
+        return $this->plainPassword;
+    }
+
+    // Define the plainPassword setter method
+    public function setPlainPassword(string $plainPassword): self
+    {
+        $this->plainPassword = $plainPassword;
 
         return $this;
     }
