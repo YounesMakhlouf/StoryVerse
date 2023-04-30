@@ -52,10 +52,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $Last_login_date = null;
 
-    #[ORM\Column(length: 150)]
+    #[ORM\Column(length: 150, nullable: true)]
     private ?string $bio;
 
-    #[ORM\Column]
+    #[ORM\Column (nullable:true)]
     private $avatar;
 
     public function getAvatar(): ?string
