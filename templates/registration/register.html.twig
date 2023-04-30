@@ -4,11 +4,15 @@
 
 {% block title %}Register{% endblock %}
 
-{% block header %}{% endblock %}
 
 {% block body %}
     <body class="gradient">
     <div class="container">
+     {% if app.user %}
+        <div class="alert alert-success">
+            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+        </div>
+        {% else %}
         <div class="title">
             <img src="{{ asset('build/images/logo.webp') }}" class="img-fluid" alt="Example Image">
             Story Verse Registration Form
@@ -32,13 +36,11 @@
                     label_attr: {'class': 'details'},
 
                     row_attr: { class: 'input-box' }}) }}
-                {{ form_row(registrationForm.username,{
-                label:'Username',
-                label_attr: {'class': 'details'},
-                attr:{'placeholder':"Enter your username",'autocomplete':"off"},
+                 <div class="input-box">
+     {{ form_label(registrationForm.username) }}
+    {{ form_widget(registrationForm.username,{attr:{'placeholder':"Enter your username",'autocomplete':"off"}}) }}
 
-                    row_attr: { class: 'input-box' }
-                }) }}
+    </div>
                  <div class="input-box">
      {{ form_label(registrationForm.email) }}
     {{ form_widget(registrationForm.email,{attr:{'placeholder':"Enter your email",'autocomplete':"off"}}) }}
@@ -46,39 +48,29 @@
     </div>
 
 
-                {# {{ form_row(registrationForm.email,{
-                label:'Email',
-                attr:{'placeholder':"Enter your email"},
-
-                label_attr: {'class': 'details'},
-                row_attr: { class: 'input-box' }}) }} #}
+               
                 <div class="input-box">
-     {{ form_label(registrationForm.plainPassword) }}
+     {{ form_label(registrationForm.plainPassword, 'Password') }}
     {{ form_widget(registrationForm.plainPassword,{attr:{'placeholder':"Enter your password",'autocomplete':"off"}}) }}
 
     </div>
 
 
 
-                {# {{ form_row(registrationForm.plainPassword, {
-                label: 'Password',
-                attr:{'placeholder':"Enter your password"},
 
-                label_attr: {'class': 'details'},
-                row_attr: { class: 'input-box' }
-                }) }} #}
 
             </div>
             <div class="gender_details">
-            
+
  {{ form_row(registrationForm.gender ,{
  label_attr:{class:"gender"}
  })}}
  </div>
-         {% if form_errors(registrationForm.plainPassword)|length > 0 or form_errors(registrationForm.email)|length > 0  %}
+         {% if form_errors(registrationForm.username)|length > 0 or form_errors(registrationForm.plainPassword)|length > 0 or form_errors(registrationForm.email)|length > 0  %}
     <div class="alert alert-danger">
         {{ form_errors(registrationForm.plainPassword) }}
         {{ form_errors(registrationForm.email) }}
+        {{ form_errors(registrationForm.username) }}
     </div>
 {% endif %}
 
@@ -92,16 +84,16 @@
             {{ form_end(registrationForm) }}
         </div>
         <footer>Already have an account ?
-            {# <a href="{{ path('app_login') }}">Login here</a> #}
+             <a href="{{ path('app_login') }}">Login here</a>
         </footer>
 
     </div>
     </body>
+    {% endif %}
 {% endblock %}
 
 
 
-{% block footer %}{% endblock %}
 
 
  {% block javascripts %}
@@ -114,3 +106,7 @@
      {{ parent() }}
      {{ encore_entry_link_tags('login') }}
  {% endblock %}
+  {% block footer %}
+{% endblock %}
+{% block header %}
+{% endblock %}
