@@ -9,6 +9,15 @@
 
 @import "./components/trending";
 
+/*--------------------------------------------------------------
+# Disable AOS delay on mobile
+--------------------------------------------------------------*/
+@media screen and (max-width: 768px) {
+  [data-aos-delay] {
+    transition-delay: 0 !important;
+  }
+}
+
 /*General*/
 body {
     font-family: "Open Sans", sans-serif;

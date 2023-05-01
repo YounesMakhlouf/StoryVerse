@@ -6,7 +6,7 @@
             <div class="container">
                 <header class="section-title" data-aos="fade-up">
                     <h2>Trending Stories</h2>
-                    <p>Discover Our Hottest Stories</p>
+                    <p>Discover Our Hottest Stories 🔥🔥</p>
                 </header>
                 <article class="row row-cols-1 row-cols-md-3 g-4" data-aos="fade-left">
                     {% for story in trendingStories %}
@@ -34,13 +34,3 @@
         </section>
         <!-- End Trending Section -->
 {% endblock %}
-{% block javascripts %}
-     {{ parent() }}
-     {{ encore_entry_script_tags('feed') }}
- {% endblock %}
-
-
- {% block stylesheets %}
-     {{ parent() }}
-     {{ encore_entry_link_tags('feed') }}
- {% endblock %}

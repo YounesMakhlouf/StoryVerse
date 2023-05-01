@@ -1,39 +1,47 @@
 {% block header %}
-    <header id="header">
-        <nav class="navbar navbar-expand-lg fixed-top" id="navbar">
-            <div class="container-fluid d-flex align-items-center justify-content-between">
-                <a class="navbar-brand" href="{{ path('app_home') }}">
-                    <img src="{{ asset('build/images/logo.webp') }}" alt="Logo" width="30" height="24"
+    <header class="fixed-top d-flex align-items-center" id="header">
+        <div class="container d-flex align-items-center justify-content-between">
+             <a class="navbar-brand" href="{{ path('app_browse_stories') }}">
+                    <img src="{{ asset('build/images/logo.webp') }}" alt="Logo" width="40" height="40"
                          class="d-inline-block align-text-top">
                     StoryVerse
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false"
-                        aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-                    <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
-                    </form>
-                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link scrollto active" href="{{ path('app_home') }}" title="Home">Home</a></li>
-                        <li class="nav-item">
-                            <a class="nav-link scrollto" href="#trending" title="Trending">Trending</a></li>
-                        <li class="nav-item">
-                            <a class="nav-link scrollto" href="#team" title="Team">Team</a></li>
-                        <li class="nav-item">
-                            <a class="nav-link scrollto" href="#contact" title="Contact">Contact</a></li>
-                        <li class="nav-item">
-                            <a class="nav-link scrollto" href="{{ path('app_login') }}" title="Login">Login</a></li>
-                        <li class="nav-item">
-                            <a class="nav-link scrollto" href="{{ path('app_register') }}" title="Sign up">Sign up</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+                <form class="d-flex form" role="search">
+                    <i class="fa fa-magnifying-glass"></i>
+                    <input class="form-control form-input me-2" type="search" placeholder="Search anything..."
+                           aria-label="Search">
+                </form>
+
+            <nav class="navbar" id="navbar">
+                <ul>
+                    <li><a class="nav-link" href="{{ path('app_home') }}" title="Notifications"><i
+                                    class="fa-solid fa-bell fa-lg"></i></a></li>
+                    <li><a class="nav-link" href="{{ path('app_add_story') }}" title="Add a post"><i
+                                    class="fa-solid fa-plus fa-lg"></i></a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                           aria-expanded="false">
+                            <img src="{{ asset('build/images/logo.webp') }}" alt="Avatar" width="30" height="24"
+                                 class="d-inline-block align-text-top"> Esmek
+                        </a>
+                        <ul class="dropdown-menu">
+                            {% if is_granted('ROLE_ADMIN') %}
+                                <li><a class="dropdown-item" href="#"><i class="fa-solid fa-chart-line"></i>Admin
+                                        Dashboard</a></li>
+                                <hr>
+                            {% endif %}
+                            <li><a class="dropdown-item" href="#"><i class="fa-solid fa-user-tie"></i>Profile</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="fa-solid fa-gear"></i>Settings</a></li>
+                            <hr>
+                            <li><a class="dropdown-item" href="#"><i class="fa-solid fa-coins"></i>Premium</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="fa-solid fa-arrow-right-from-bracket"></i>Log
+                                    out</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+                <i class="fa-solid fa-bars mobile-nav-toggle"></i>
+            </nav>
+        </div>
     </header>
 {% endblock %}
