@@ -51,8 +51,9 @@ final class StoryFactory extends ModelFactory
             'language' => self::faker()->languageCode(),
             'lastModifiedAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
             'likes' => self::faker()->randomNumber(),
-            'title' => self::faker()->text(255),
-            'description'=>self::faker()->paragraph(),
+            'title' => self::faker()->sentence(5),
+            'description'=>self::faker()->paragraph(3),
+            'status'=>'pending',
         ];
     }
 
