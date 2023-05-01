@@ -6,10 +6,13 @@ use App\Repository\ContributionRepository;
 use DateTimeImmutable;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 #[ORM\Entity(repositoryClass: ContributionRepository::class)]
 class Contribution
 {
+    use TimestampableEntity;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -25,15 +28,7 @@ class Contribution
     private ?bool $reported = null;
 
     #[ORM\Column]
-    private \DateTimeImmutable $createdAt;
-
-    #[ORM\Column]
     private int $likes = 0;
-
-    public function __construct()
-    {
-        $this->createdAt = new DateTimeImmutable();
-    }
 
     public function getId(): ?int
     {
@@ -72,18 +67,6 @@ class Contribution
     public function setReported(?bool $reported): self
     {
         $this->reported = $reported;
-
-        return $this;
-    }
-
-    public function getCreatedAt(): ?DateTimeImmutable
-    {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(DateTimeImmutable $createdAt): self
-    {
-        $this->createdAt = $createdAt;
 
         return $this;
     }

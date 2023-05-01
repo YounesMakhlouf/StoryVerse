@@ -5,10 +5,14 @@ namespace App\Entity;
 use App\Repository\StoryRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation\Slug;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 #[ORM\Entity(repositoryClass: StoryRepository::class)]
 class Story
 {
+    use TimestampableEntity;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -24,27 +28,14 @@ class Story
     private ?string $language = null;
 
     #[ORM\Column]
-    private \DateTimeImmutable $createdAt;
-
-    #[ORM\Column]
-    private \DateTimeImmutable $lastModifiedAt;
-
-    #[ORM\Column]
     private int $likes = 0;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $status = null;
 
-    public function __construct()
-    {
-        $this->createdAt = new \DateTimeImmutable();
-        $this->lastModifiedAt = new \DateTimeImmutable();
-    }
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
+    #[ORM\Column(length: 255, unique: true)]
+    #[Slug(fields: ['title'])]
+    private ?string $slug = null;
 
     public function getTitle(): ?string
     {
@@ -82,30 +73,6 @@ class Story
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeImmutable
-    {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(\DateTimeImmutable $createdAt): self
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    public function getLastModifiedAt(): ?\DateTimeImmutable
-    {
-        return $this->lastModifiedAt;
-    }
-
-    public function setLastModifiedAt(\DateTimeImmutable $lastModifiedAt): self
-    {
-        $this->lastModifiedAt = $lastModifiedAt;
-
-        return $this;
-    }
-
     public function getLikes(): ?int
     {
         return $this->likes;
@@ -137,5 +104,22 @@ class Story
             ($this->getId() + 50) % 1000, // number between 0 and 1000, based on the id
             $width
         );
+    }
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
+
+        return $this;
     }
 }
