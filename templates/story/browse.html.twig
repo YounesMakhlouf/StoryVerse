@@ -9,7 +9,7 @@
                     <p>Discover Our Hottest Stories 🔥🔥</p>
                 </header>
                 <article class="row row-cols-1 row-cols-md-3 g-4" data-aos="fade-left">
-                    {% for story in trendingStories %}
+                    {% for story in pager %}
                         <div class="col">
                             <a href=" {{ path('app_story_id', {slug:story.slug}) }}" rel="bookmark">
                                 <div class="card h-100" data-aos="zoom-in" data-aos-delay="400">
@@ -29,6 +29,7 @@
                             </a>
                         </div>
                     {% endfor %}
+                    {{ pagerfanta(pager) }}
                 </article>
             </div>
         </section>
