@@ -13,6 +13,8 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         StoryFactory::createMany(25);
+        UserFactory::createMany(25);
+
 
         $manager->flush();
     }
