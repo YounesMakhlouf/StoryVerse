@@ -17,8 +17,6 @@ use Symfony\Component\Security\Http\Util\TargetPathTrait;
 use Symfony\Component\Security\Http\Authenticator\Passport\Badge\RememberMeBadge;
 use Doctrine\ORM\EntityManagerInterface;
 
-
-
 class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
 {
     use TargetPathTrait;
@@ -59,11 +57,8 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
         $this->entityManager->persist($user);
         $this->entityManager->flush();
 
-
-        return new RedirectResponse($this->urlGenerator->generate('app_home'));
+        return new RedirectResponse($this->urlGenerator->generate('app_browse_stories'));
     }
-
-
 
     protected function getLoginUrl(Request $request): string
     {
