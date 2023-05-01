@@ -40,10 +40,7 @@ class StoryRepository extends ServiceEntityRepository
         }
     }
 
-    /**
-     * @return Story[] Returns an array of Story objects
-     */
-    public function findAllOrderedByLikes(string $genre = null): array
+    public function createOrderedByLikesQueryBuilder(string $genre = null): QueryBuilder
     {
         $queryBuilder = $this->addOrderByLikesQueryBuilder();
 
@@ -52,9 +49,7 @@ class StoryRepository extends ServiceEntityRepository
             -> setParameter('genre', $genre);
         }
 
-        return $queryBuilder
-            ->getQuery()
-            ->getResult();
+        return $queryBuilder;
     }
     private function addOrderByLikesQueryBuilder(QueryBuilder $queryBuilder = null): QueryBuilder{
         $queryBuilder = $queryBuilder ?? $this->createQueryBuilder('story');
