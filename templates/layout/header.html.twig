@@ -1,22 +1,39 @@
 {% block header %}
-    <header class="fixed-top d-flex align-items-center header-transparent" id="header">
-        <div class="container d-flex align-items-center justify-content-between">
-            <div class="logo">
-                <h1><a href="{{ path('app_home') }}"><span><img alt="StoryVerse logo" class="img-fluid"
-                                                                src="{{ asset('build/images/logo.webp') }}">StoryVerse</span></a>
-                </h1>
+    <header id="header">
+        <nav class="navbar navbar-expand-lg fixed-top" id="navbar">
+            <div class="container-fluid d-flex align-items-center justify-content-between">
+                <a class="navbar-brand" href="{{ path('app_home') }}">
+                    <img src="{{ asset('build/images/logo.webp') }}" alt="Logo" width="30" height="24"
+                         class="d-inline-block align-text-top">
+                    StoryVerse
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                    <form class="d-flex" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link scrollto active" href="{{ path('app_home') }}" title="Home">Home</a></li>
+                        <li class="nav-item">
+                            <a class="nav-link scrollto" href="#trending" title="Trending">Trending</a></li>
+                        <li class="nav-item">
+                            <a class="nav-link scrollto" href="#team" title="Team">Team</a></li>
+                        <li class="nav-item">
+                            <a class="nav-link scrollto" href="#contact" title="Contact">Contact</a></li>
+                        <li class="nav-item">
+                            <a class="nav-link scrollto" href="{{ path('app_login') }}" title="Login">Login</a></li>
+                        <li class="nav-item">
+                            <a class="nav-link scrollto" href="{{ path('app_register') }}" title="Sign up">Sign up</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <nav class="navbar" id="navbar">
-                <ul>
-                    <li><a class="nav-link scrollto active" href="{{ path('app_home') }}" title="Home">Home</a></li>
-                    <li><a class="nav-link scrollto" href="#trending" title="Trending">Trending</a></li>
-                    <li><a class="nav-link scrollto" href="#team" title="Team">Team</a></li>
-                    <li><a class="nav-link scrollto" href="#contact" title="Contact">Contact</a></li>
-                    <li><a class="nav-link scrollto" href="{{ path('app_login') }}" title="Login">Login</a></li>
-                    <li><a class="nav-link scrollto" href="{{ path('app_register') }}" title="Sign up">Sign up</a></li>
-                </ul>
-                <i class="fa-solid fa-bars mobile-nav-toggle"></i>
-            </nav>
-        </div>
+        </nav>
     </header>
 {% endblock %}
