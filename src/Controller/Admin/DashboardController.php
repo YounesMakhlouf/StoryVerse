@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Story;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
@@ -52,7 +53,9 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToUrl('Homepage', 'fas fa-home', $this->generateUrl('app_home'));
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-dashboard');
         yield MenuItem::linkToCrud('Users', 'fas fa-users',User::class);
-         }
+        yield MenuItem::linkToCrud('Stories', "fa-solid fa-book-open",Story::class);
+
+    }
 
     public function configureUserMenu(UserInterface $user): UserMenu
     {
