@@ -5,20 +5,17 @@ namespace App\Entity;
 use App\Repository\FavouritesListRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 #[ORM\Entity(repositoryClass: FavouritesListRepository::class)]
 class FavouritesList
 {
+    use TimestampableEntity;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
-
-    #[ORM\Column]
-    private \DateTimeImmutable $createdAt;
-
-    #[ORM\Column(nullable: true)]
-    private ?\DateTimeImmutable $LastModifiedAt = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
@@ -29,38 +26,9 @@ class FavouritesList
     #[ORM\Column(length: 255)]
     private ?string $title = null;
 
-    public function __construct()
-    {
-        $this->createdAt = new DateTimeImmutable();
-    }
-
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getCreatedAt(): ?\DateTimeImmutable
-    {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(\DateTimeImmutable $createdAt): self
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    public function getLastModifiedAt(): ?\DateTimeImmutable
-    {
-        return $this->LastModifiedAt;
-    }
-
-    public function setLastModifiedAt(?\DateTimeImmutable $LastModifiedAt): self
-    {
-        $this->LastModifiedAt = $LastModifiedAt;
-
-        return $this;
     }
 
     public function getDescription(): ?string

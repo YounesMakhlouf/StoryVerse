@@ -11,7 +11,7 @@
                 <article class="row row-cols-1 row-cols-md-3 g-4" data-aos="fade-left">
                     {% for story in trendingStories %}
                         <div class="col">
-                            <a href=" {{ path('app_story_id', {id:story.id}) }}" rel="bookmark">
+                            <a href=" {{ path('app_story_id', {slug:story.slug}) }}" rel="bookmark">
                                 <div class="card h-100" data-aos="zoom-in" data-aos-delay="400">
                                     <img alt="{{ story.description }}" class="card-img-top"
                                          src="{{ story.ImageUrl(300) }}">
@@ -19,7 +19,7 @@
                                         <h5 class="card-title">{{ story.title }}</h5>
                                         <p class="card-text">{{ story.description }}</p>
                                         <div class="d-flex justify-content-between align-items-center">
-                                            <small class="text-muted">{{ story.lastModifiedAt | ago }}</small>
+                                            <small class="text-muted">{{ story.updatedAt | ago }}</small>
                                             <small class="text-muted">{{ story.likes }} ❤️</small>
                                             <span class="badge rounded-pill">{# story.category #}</span>
                                         </div>
