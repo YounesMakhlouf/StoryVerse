@@ -4,6 +4,8 @@
     --sidebar-menu-items-padding-left:0px;
     --link-color:rgba(255, 255, 255, 0.7);
     --sidebar-menu-icon-color:rgba(255, 255, 255, 0.7);
+    --badge-boolean-true-bg: #5BA199;
+    --button-primary-bg:#5BA199;
 
 }
 #main-menu .menu .menu-item.active a {
@@ -65,4 +67,8 @@ a {
 .img-fluid {
     max-width: 100%;
     height: auto;
+}
+a {
+    color: #5BA199;
+    text-decoration: none;
 }
