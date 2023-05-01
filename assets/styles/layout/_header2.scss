@@ -1,10 +1,37 @@
-@import "~bootstrap";
 #header {
     height: 80px;
     z-index: 997;
     transition: all 0.5s;
     background: $Turquoise;
     opacity: 0.9;
+}
+
+#header.header-transparent {
+    background-color: transparent;
+}
+
+#header.header-scrolled {
+  background: $Turquoise;
+  height: 60px;
+}
+
+#header .logo h1 {
+    font-size: 28px;
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+    font-weight: 700;
+}
+
+#header .logo h1 a,
+#header .logo h1 a:hover {
+    color: $LightGray;
+}
+
+#header .logo img {
+    padding: 0;
+    margin: 0;
+    max-height: 40px;
 }
 
 /*Navigation Menu/
