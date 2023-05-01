@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Story;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -39,20 +40,26 @@ class StoryRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return Story[] Returns an array of Story objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('s')
-//            ->andWhere('s.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('s.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    /**
+     * @return Story[] Returns an array of Story objects
+     */
+    public function findAllOrderedByLikes(string $genre = null): array
+    {
+        $queryBuilder = $this->addOrderByLikesQueryBuilder();
+
+        if ($genre) {
+            $queryBuilder->andWhere('story.genre = :genre')
+            -> setParameter('genre', $genre);
+        }
+
+        return $queryBuilder
+            ->getQuery()
+            ->getResult();
+    }
+    private function addOrderByLikesQueryBuilder(QueryBuilder $queryBuilder = null): QueryBuilder{
+        $queryBuilder = $queryBuilder ?? $this->createQueryBuilder('story');
+        return $queryBuilder->orderBy('story.likes', 'DESC');
+    }
 
 //    public function findOneBySomeField($value): ?Story
 //    {
