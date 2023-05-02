@@ -46,14 +46,23 @@ class StoryRepository extends ServiceEntityRepository
 
         if ($genre) {
             $queryBuilder->andWhere('story.genre = :genre')
-            -> setParameter('genre', $genre);
+                ->setParameter('genre', $genre);
         }
 
         return $queryBuilder;
     }
-    private function addOrderByLikesQueryBuilder(QueryBuilder $queryBuilder = null): QueryBuilder{
+
+    private function addOrderByLikesQueryBuilder(QueryBuilder $queryBuilder = null): QueryBuilder
+    {
         $queryBuilder = $queryBuilder ?? $this->createQueryBuilder('story');
         return $queryBuilder->orderBy('story.likes', 'DESC');
+    }
+
+    public function findAllOrderedByLikes(string $genre = null): array
+    {
+        return $this->addOrderByLikesQueryBuilder()
+            ->getQuery()
+            ->getResult();
     }
 
 //    public function findOneBySomeField($value): ?Story

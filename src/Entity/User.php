@@ -1,10 +1,12 @@
 <?php
 
 namespace App\Entity;
-use Gedmo\Timestampable\Traits\TimestampableEntity;
+
+use DateTimeInterface;
 use App\Repository\UserRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -14,6 +16,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     use TimestampableEntity;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -46,14 +49,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?bool $isVerified = false;
 
-
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $Last_login_date = null;
+    private ?DateTimeInterface $Last_login_date = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $Biography = null;
-
-   
 
     public function getId(): ?int
     {
@@ -79,7 +79,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getUserIdentifier(): string
     {
-        return (string) $this->email;
+        return (string)$this->email;
     }
 
     /**
@@ -185,13 +185,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-
-    public function getLastLoginDate(): ?\DateTimeInterface
+    public function getLastLoginDate(): ?DateTimeInterface
     {
         return $this->Last_login_date;
     }
 
-    public function setLastLoginDate(\DateTimeInterface $Last_login_date): self
+    public function setLastLoginDate(DateTimeInterface $Last_login_date): self
     {
         $this->Last_login_date = $Last_login_date;
 

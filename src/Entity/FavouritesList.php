@@ -20,11 +20,11 @@ class FavouritesList
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
-    #[ORM\Column]
-    private ?bool $isPublic = null;
-
     #[ORM\Column(length: 255)]
     private ?string $title = null;
+
+    #[ORM\Column]
+    private bool $public = false;
 
     public function getId(): ?int
     {
@@ -43,18 +43,6 @@ class FavouritesList
         return $this;
     }
 
-    public function isIsPublic(): ?bool
-    {
-        return $this->isPublic;
-    }
-
-    public function setIsPublic(bool $isPublic): self
-    {
-        $this->isPublic = $isPublic;
-
-        return $this;
-    }
-
     public function getTitle(): ?string
     {
         return $this->title;
@@ -63,6 +51,18 @@ class FavouritesList
     public function setTitle(string $title): self
     {
         $this->title = $title;
+
+        return $this;
+    }
+
+    public function isPublic(): ?bool
+    {
+        return $this->public;
+    }
+
+    public function setPublic(bool $public): self
+    {
+        $this->public = $public;
 
         return $this;
     }

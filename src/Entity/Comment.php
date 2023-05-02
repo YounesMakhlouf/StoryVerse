@@ -22,8 +22,8 @@ class Comment
     #[ORM\Column]
     private int $likes = 0;
 
-    #[ORM\Column(nullable: true)]
-    private ?bool $reported = null;
+    #[ORM\Column]
+    private bool $reported = false;
 
     public function getId(): ?int
     {
