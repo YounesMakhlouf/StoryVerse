@@ -21,17 +21,14 @@ class Story
     #[ORM\Column(length: 255)]
     private ?string $title = null;
 
-    #[ORM\Column(type: Types::TEXT, nullable: true)]
-    private ?string $description = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $language = null;
+    #[ORM\Column(length: 25)]
+    private string $language = 'english';
 
     #[ORM\Column]
     private int $likes = 0;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $status = null;
+    #[ORM\Column(length: 25)]
+    private string $status = 'pending';
 
     #[ORM\Column(length: 255, unique: true)]
     #[Slug(fields: ['title'])]
@@ -45,18 +42,6 @@ class Story
     public function setTitle(string $title): self
     {
         $this->title = $title;
-
-        return $this;
-    }
-
-    public function getDescription(): ?string
-    {
-        return $this->description;
-    }
-
-    public function setDescription(?string $description): self
-    {
-        $this->description = $description;
 
         return $this;
     }

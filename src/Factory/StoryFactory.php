@@ -52,7 +52,6 @@ final class StoryFactory extends ModelFactory
             'likes' => self::faker()->numberBetween(0, 100),
             'title' => self::faker()->words(5, true),
             'updatedAt' => self::faker()->dateTime(),
-            'description' => self::faker()->paragraph(),
         ];
     }
 

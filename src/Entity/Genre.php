@@ -15,13 +15,13 @@ class Genre
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 25)]
     private ?string $name = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $description = null;
 
-    #[ORM\Column(length: 100, unique: true)]
+    #[ORM\Column(length: 25, unique: true)]
     #[Slug(fields: ['name'])]
     private ?string $slug = null;
 

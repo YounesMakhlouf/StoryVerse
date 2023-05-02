@@ -22,10 +22,10 @@ class Contribution
     private ?string $content = null;
 
     #[ORM\Column]
-    private ?int $position = null;
+    private int $position = 1;
 
-    #[ORM\Column(nullable: true)]
-    private ?bool $reported = null;
+    #[ORM\Column]
+    private bool $reported = false;
 
     #[ORM\Column]
     private int $likes = 0;

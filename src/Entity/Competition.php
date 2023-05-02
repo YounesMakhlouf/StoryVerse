@@ -27,11 +27,11 @@ class Competition
     #[ORM\Column]
     private ?DateTimeImmutable $endsAt = null;
 
-    #[ORM\Column]
-    private bool $isPaid = false;
-
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 25)]
     private ?string $status = null;
+
+    #[ORM\Column]
+    private bool $paid = false;
 
     public function getId(): ?int
     {
@@ -86,18 +86,6 @@ class Competition
         return $this;
     }
 
-    public function isIsPaid(): ?bool
-    {
-        return $this->isPaid;
-    }
-
-    public function setIsPaid(bool $isPaid): self
-    {
-        $this->isPaid = $isPaid;
-
-        return $this;
-    }
-
     public function getStatus(): ?string
     {
         return $this->status;
@@ -106,6 +94,18 @@ class Competition
     public function setStatus(string $status): self
     {
         $this->status = $status;
+
+        return $this;
+    }
+
+    public function isPaid(): ?bool
+    {
+        return $this->paid;
+    }
+
+    public function setPaid(bool $paid): self
+    {
+        $this->paid = $paid;
 
         return $this;
     }
