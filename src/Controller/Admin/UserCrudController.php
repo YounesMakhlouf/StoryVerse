@@ -27,7 +27,8 @@ class UserCrudController extends AbstractCrudController
         return [
         IdField::new('id')
                 ->hideOnForm(),
-            TextField::new('username'),
+            TextField::new('username')
+                ->setSortable(false),
             EmailField::new('email')
             ->hideOnIndex(),
             TextField::new('FullName')
@@ -36,7 +37,8 @@ class UserCrudController extends AbstractCrudController
                 ->onlyOnForms(),
             TextField::new('lastName')
                 ->onlyOnForms(),
-            TextEditorField::new('biography'),
+            TextEditorField::new('biography')
+                ->setSortable(false),
             BooleanField::new('IsVerified')
                 ->renderAsSwitch(false),
              DateField::new('createdAt')
@@ -46,7 +48,8 @@ class UserCrudController extends AbstractCrudController
                 ->setChoices(array_combine($roles, $roles))
                 ->allowMultipleChoices()
                 ->renderExpanded()
-                ->renderAsBadges(),
+                ->renderAsBadges()
+                ->setSortable(false),
 
         ];
     }

@@ -4,12 +4,16 @@
         "@babel/preset-env": "^7.16.0",
         "@hotwired/stimulus": "^3.0.0",
         "@symfony/stimulus-bridge": "^3.2.0",
+        "@symfony/ux-chartjs": "file:vendor/symfony/ux-chartjs/assets",
         "@symfony/webpack-encore": "^4.3.0",
         "core-js": "^3.23.0",
         "file-loader": "^6.2.0",
         "postcss": "^8.4.23",
         "postcss-loader": "^7.2.4",
         "regenerator-runtime": "^0.13.9",
+        "snarkdown": "^2.0.0",
+        "ts-loader": "^9.0.0",
+        "typescript": "^5.0.4",
         "webpack": "^5.74.0",
         "webpack-cli": "^4.10.0",
         "webpack-notifier": "^1.15.0"
@@ -27,8 +31,10 @@
         "aos": "^2.3.4",
         "autoprefixer": "^10.4.14",
         "bootstrap": "^5.2.3",
+        "chart.js": "^3.9.1",
         "sass": "^1.62.0",
-        "sass-loader": "^13.2.2"
+        "sass-loader": "^13.2.2",
+        "stimulus": "^3.2.1"
     },
     "browserslist": [
         ">.5%"

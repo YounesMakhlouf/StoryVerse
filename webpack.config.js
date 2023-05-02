@@ -83,3 +83,6 @@ Encore
 ;
 
 module.exports = Encore.getWebpackConfig();
+module.exports.externals = {
+    stimulus: 'Stimulus'
+};
