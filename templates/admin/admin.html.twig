@@ -1,14 +1,41 @@
 {# templates/admin/index.html.twig #}
 
 {% extends '@EasyAdmin/page/content.html.twig' %}
+{% block head_javascript %}
+    {{ parent() }}
+{% endblock %}
+{% block stylesheets %}
+    {{parent()}}
+{% endblock %}
+
 {% block header %}
     <span class="logo"><img alt="StoryVerse logo" class="img-fluid" src="{{ asset('build/images/logo.webp') }}">StoryVerse</span>
      {% endblock %}
-{% block menu %}
+{% block main %}
     {{ parent() }}
+
+    <canvas id="test" width="400" height="400"></canvas>
+
 {% endblock %}
 {% block page_title %}
     Admin Space
 {% endblock %}
-{% block content_top %}
-{% endblock %}
+
+    {% block body_javascript %}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/0.2.0/Chart.min.js" type="text/javascript"></script>
+        <script>
+            var pieData = [
+                {
+                    label : 'male',
+                    value: 20,
+                    color:"#878BB6"
+                },
+                {   label : 'female',
+                    value : 40,
+                    color : "#4ACAB4"
+                }
+            ];
+            var test= document.getElementById("test").getContext("2d");
+            new Chart(test).Pie(pieData);
+        </script>
+    {% endblock body_javascript %}
