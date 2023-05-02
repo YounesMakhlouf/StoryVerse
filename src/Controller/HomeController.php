@@ -13,6 +13,9 @@ class HomeController extends AbstractController
     #[Route('/', name: 'app_home')]
     public function index(StoryRepository $storyRepository): Response
     {
+        if ($this->isGranted('ROLE_USER')){
+            return $this->redirectToRoute('app_browse_stories');
+        }
         $trendingStories = $storyRepository->findAllOrderedByLikes();
         $teamMembers = $this->getTeamMembers();
 
