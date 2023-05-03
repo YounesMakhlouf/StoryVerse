@@ -1,11 +1,19 @@
 @import "helper/variables";
 :root { --sidebar-bg: #5BA199;
-    --sidebar-menu-active-item-color:#E5E3E4;
+    --sidebar-menu-active-item-color:white;
     --sidebar-menu-items-padding-left:0px;
     --link-color:rgba(255, 255, 255, 0.7);
     --sidebar-menu-icon-color:rgba(255, 255, 255, 0.7);
+    --badge-boolean-true-bg: #5BA199;
+    --button-primary-bg:#5BA199;
+    --pagination-active-bg:#5BA199;
+    --pagination-color:#5BA199;
 
 }
+body{
+    background-color: white;
+}
+
 #main-menu .menu .menu-item.active a {
     color: var(--sidebar-menu-active-item-color);
     background-color:#5BA199;
@@ -19,7 +27,6 @@
 
 #main-menu .menu .menu-item-contents {
     align-items: flex-start;
-    color: #627ba0;
     display: flex;
     padding: 10px 0;
     color: var(--link-color);
@@ -66,3 +73,32 @@ a {
     max-width: 100%;
     height: auto;
 }
+a {
+    color: #5BA199;
+}
+#gender_chart{
+    width:400px;
+    height: 400px;
+}
+.row {
+    width: 100%;
+   height: 100%;
+}
+.card-stats .card-body .card-category {
+    color: #9A9A9A;
+    font-size: 16px;
+    line-height: 1.4em;
+}
+.card {
+    border-radius: 12px;
+    box-shadow: 0 6px 10px -4px rgba(0, 0, 0, 0.15);
+    background-color: #FFFFFF;
+    color: #252422;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+.card .card-footer {
+    background-color: transparent;
+    border: 0;
+}
+
