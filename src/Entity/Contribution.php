@@ -30,6 +30,10 @@ class Contribution
     #[ORM\Column]
     private int $likes = 0;
 
+    #[ORM\ManyToOne(inversedBy: 'contribution')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Story $story = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -79,6 +83,18 @@ class Contribution
     public function setLikes(?int $likes): self
     {
         $this->likes = $likes;
+
+        return $this;
+    }
+
+    public function getStory(): ?Story
+    {
+        return $this->story;
+    }
+
+    public function setStory(?Story $story): self
+    {
+        $this->story = $story;
 
         return $this;
     }
