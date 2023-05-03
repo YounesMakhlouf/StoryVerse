@@ -25,6 +25,9 @@ class Comment
     #[ORM\Column]
     private bool $reported = false;
 
+    #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'reply')]
+    private ?self $reply = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -62,6 +65,18 @@ class Comment
     public function setReported(?bool $reported): self
     {
         $this->reported = $reported;
+
+        return $this;
+    }
+
+    public function getReply(): ?self
+    {
+        return $this->reply;
+    }
+
+    public function setReply(?self $reply): self
+    {
+        $this->reply = $reply;
 
         return $this;
     }

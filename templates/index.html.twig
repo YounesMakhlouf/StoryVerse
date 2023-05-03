@@ -5,7 +5,6 @@
         <!-- ======= Hero Section ======= -->
         <section aria-label="Hero section introducing StoryVerse platform" id="hero">
             <div class="container">
-
                 <div class="row justify-content-between">
                     <div class="col-lg-7 pt-5 pt-lg-0 order-2 order-lg-1 d-flex align-items-center">
                         <div data-aos="zoom-out">
@@ -97,18 +96,11 @@
                                     <h4>{{ member.firstName ~ ' ' ~ member.lastName }}</h4>
                                     <span>{{ member.position }}</span>
                                     <div class="social">
-                                        <a href="{{ member.social.facebook }}" rel="noopener noreferrer"
-                                           target="_blank">
-                                            <i class="fa-brands fa-facebook"></i>
-                                        </a>
-                                        <a href="{{ member.social.instagram }}" rel="noopener noreferrer"
-                                           target="_blank">
-                                            <i class="fa-brands fa-instagram"></i>
-                                        </a>
-                                        <a href="{{ member.social.linkedin }}" rel="noopener noreferrer"
-                                           target="_blank">
-                                            <i class="fa-brands fa-linkedin"></i>
-                                        </a>
+                                        {% for network, link in member.social %}
+                                            <a href="{{ link }}" rel="noopener noreferrer" target="_blank">
+                                                <i class="fa-brands fa-{{ network }}"></i>
+                                            </a>
+                                        {% endfor %}
                                     </div>
                                 </div>
                             </div>
@@ -182,6 +174,7 @@
         <!-- End Contact Section -->
     </main>
 {% endblock %}
+
 {% block header %}
     <header class="fixed-top d-flex align-items-center header-transparent" id="header">
         <div class="container d-flex align-items-center justify-content-between">
@@ -204,10 +197,11 @@
         </div>
     </header>
 {% endblock %}
+
 {% block javascripts %}
+    {{ parent() }}
     {{ encore_entry_script_tags('home') }}
 {% endblock %}
-
 
 {% block stylesheets %}
     {{ parent() }}

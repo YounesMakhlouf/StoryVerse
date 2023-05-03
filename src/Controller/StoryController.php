@@ -27,7 +27,6 @@ class StoryController extends AbstractController
     {
         $story = new Story();
         $story->setTitle("yalla habibi");
-        $story->setDescription("yalla habibiyalla habibiyalla habibiyalla habibiyalla habibiyalla habibiyalla habibiyalla habibi");
         $story->setLanguage("english");
         $story->setLikes(rand(0, 100));
         $story->setStatus("pending");
@@ -35,7 +34,7 @@ class StoryController extends AbstractController
         $entityManager->flush();
 
         return new response (sprintf(
-            "%s%s", $story->getTitle(), $story->getDescription()
+            "%s", $story->getTitle()
         ));
     }
 

@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use DateTimeInterface;
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
@@ -54,6 +56,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $Biography = null;
+
+    #[ORM\OneToMany(mappedBy: 'author', targetEntity: Story::class)]
+    private Collection $author;
+
+    public function __construct()
+    {
+        $this->author = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -205,6 +215,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setBiography(?string $Biography): self
     {
         $this->Biography = $Biography;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Story>
+     */
+    public function getAuthor(): Collection
+    {
+        return $this->author;
+    }
+
+    public function addAuthor(Story $author): self
+    {
+        if (!$this->author->contains($author)) {
+            $this->author->add($author);
+            $author->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAuthor(Story $author): self
+    {
+        if ($this->author->removeElement($author)) {
+            // set the owning side to null (unless already changed)
+            if ($author->getAuthor() === $this) {
+                $author->setAuthor(null);
+            }
+        }
 
         return $this;
     }

@@ -49,7 +49,7 @@ final class StoryFactory extends ModelFactory
         return [
             'createdAt' => self::faker()->dateTime(),
             'language' => self::faker()->randomElement(['french', 'english', 'arabic']),
-            'likes' => self::faker()->numberBetween(0, 100),
+            'likes' => self::faker()->numberBetween(0, 1000),
             'title' => self::faker()->words(5, true),
             'updatedAt' => self::faker()->dateTime(),
         ];
