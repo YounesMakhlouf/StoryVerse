@@ -15,25 +15,11 @@ use App\Repository\UserRepository;
 
 class StatController extends AbstractController
 {
-    private UserRepository $userRepository;
-
-    public function __construct(UserRepository $userRepository)
-    {
-        $this->userRepository = $userRepository;
-
-    }
     #[Route("/chart-data", name:"chart_data")]
 
-    public function chartData(): JsonResponse
+    public function chartData(UserRepository $userRepository): JsonResponse
     {
-
-        $queryBuilder = $this->userRepository->createQueryBuilder('u');
-        $queryBuilder
-            ->select('COUNT(u.id) as count')
-            ->addSelect('u.gender')
-            ->groupBy('u.gender');
-
-        $results = $queryBuilder->getQuery()->getResult();
+        $results = $this->getResult($userRepository,'u','COUNT(u.id) as count','u.gender','u.gender');
  $data =[
     'labels'=>["Male", "Female"],
 
@@ -47,12 +33,7 @@ class StatController extends AbstractController
 
     public function LangChart(StoryRepository $storyRepository): Response{
 
-        $queryBuilder = $storyRepository->createQueryBuilder('s');
-        $queryBuilder
-            ->select('COUNT(s.id) as count')
-            ->addSelect('s.language')
-            ->groupBy('s.language');
-        $results = $queryBuilder->getQuery()->getResult();
+        $results = $this->getResult($storyRepository,'s','COUNT(s.id) as count','s.language','s.language');
         $countTable = array();
         $languageTable = array();
 
@@ -68,4 +49,14 @@ class StatController extends AbstractController
 
         return new JsonResponse($data);
 
-    }}
+    }
+public function getResult($repository,$alias,$select1,$select2,$groupBy){
+    $queryBuilder = $repository->createQueryBuilder($alias);
+    $queryBuilder
+        ->select($select1)
+        ->addSelect($select2)
+        ->groupBy($groupBy);
+
+    return $queryBuilder->getQuery()->getResult();
+}
+}
