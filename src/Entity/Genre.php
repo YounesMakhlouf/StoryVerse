@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\GenreRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation\Slug;
@@ -24,6 +26,14 @@ class Genre
     #[ORM\Column(length: 25, unique: true)]
     #[Slug(fields: ['name'])]
     private ?string $slug = null;
+
+    #[ORM\ManyToMany(targetEntity: Story::class, mappedBy: 'genre')]
+    private Collection $stories;
+
+    public function __construct()
+    {
+        $this->stories = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -62,6 +72,33 @@ class Genre
     public function setSlug(string $slug): self
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Story>
+     */
+    public function getStories(): Collection
+    {
+        return $this->stories;
+    }
+
+    public function addStory(Story $story): self
+    {
+        if (!$this->stories->contains($story)) {
+            $this->stories->add($story);
+            $story->addGenre($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStory(Story $story): self
+    {
+        if ($this->stories->removeElement($story)) {
+            $story->removeGenre($this);
+        }
 
         return $this;
     }

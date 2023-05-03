@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\ContributionRepository;
 use DateTimeImmutable;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
@@ -33,6 +35,14 @@ class Contribution
     #[ORM\ManyToOne(inversedBy: 'contribution')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Story $story = null;
+
+    #[ORM\OneToMany(mappedBy: 'parent', targetEntity: Contribution::class)]
+    private Collection $children;
+
+    public function __construct()
+    {
+        $this->children = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -95,6 +105,36 @@ class Contribution
     public function setStory(?Story $story): self
     {
         $this->story = $story;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Contribution>
+     */
+    public function getchildren(): Collection
+    {
+        return $this->children;
+    }
+
+    public function addchildren(Contribution $children): self
+    {
+        if (!$this->children->contains($children)) {
+            $this->children->add($children);
+            $children->setParent($this);
+        }
+
+        return $this;
+    }
+
+    public function removechildren(Contribution $children): self
+    {
+        if ($this->children->removeElement($children)) {
+            // set the owning side to null (unless already changed)
+            if ($children->getParent() === $this) {
+                $children->setParent(null);
+            }
+        }
 
         return $this;
     }

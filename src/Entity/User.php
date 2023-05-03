@@ -57,12 +57,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $Biography = null;
 
-    #[ORM\OneToMany(mappedBy: 'author', targetEntity: Story::class)]
-    private Collection $author;
+    #[ORM\ManyToMany(targetEntity: Competition::class, inversedBy: 'users')]
+    private Collection $compete;
+
+    #[ORM\ManyToMany(targetEntity: self::class, inversedBy: 'following')]
+    private Collection $follower;
+
+    #[ORM\ManyToMany(targetEntity: self::class, mappedBy: 'follower')]
+    private Collection $following;
 
     public function __construct()
     {
-        $this->author = new ArrayCollection();
+        $this->compete = new ArrayCollection();
+        $this->follower = new ArrayCollection();
+        $this->following = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -220,30 +228,75 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
-     * @return Collection<int, Story>
+     * @return Collection<int, Competition>
      */
-    public function getAuthor(): Collection
+    public function getCompete(): Collection
     {
-        return $this->author;
+        return $this->compete;
     }
 
-    public function addAuthor(Story $author): self
+    public function addCompete(Competition $compete): self
     {
-        if (!$this->author->contains($author)) {
-            $this->author->add($author);
-            $author->setAuthor($this);
+        if (!$this->compete->contains($compete)) {
+            $this->compete->add($compete);
         }
 
         return $this;
     }
 
-    public function removeAuthor(Story $author): self
+    public function removeCompete(Competition $compete): self
     {
-        if ($this->author->removeElement($author)) {
-            // set the owning side to null (unless already changed)
-            if ($author->getAuthor() === $this) {
-                $author->setAuthor(null);
-            }
+        $this->compete->removeElement($compete);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, self>
+     */
+    public function getFollower(): Collection
+    {
+        return $this->follower;
+    }
+
+    public function addFollower(self $follower): self
+    {
+        if (!$this->follower->contains($follower)) {
+            $this->follower->add($follower);
+        }
+
+        return $this;
+    }
+
+    public function removeFollower(self $follower): self
+    {
+        $this->follower->removeElement($follower);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, self>
+     */
+    public function getFollowing(): Collection
+    {
+        return $this->following;
+    }
+
+    public function addFollowing(self $following): self
+    {
+        if (!$this->following->contains($following)) {
+            $this->following->add($following);
+            $following->addFollower($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFollowing(self $following): self
+    {
+        if ($this->following->removeElement($following)) {
+            $following->removeFollower($this);
         }
 
         return $this;
