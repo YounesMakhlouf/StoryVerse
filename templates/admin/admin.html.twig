@@ -15,8 +15,7 @@
     {{ parent() }}
     <div class="row">
 
-        <h1>Admin Space</h1>
-        <hr>
+
         <div class="col-lg-3 col-md-6 col-sm-6">
             <div class="card card-stats">
                 <div class="card-body ">
@@ -112,9 +111,10 @@
         </div>
     </div>
     <div class="row">
+        <h1>Statistics</h1>
+        <hr>
         <div class="col-md-4">
-            <h1>Statistics</h1>
-            <hr>
+
             <div class="card ">
             <div class="card-header ">
                 <h5 class="card-title">Gender Statistics</h5>
@@ -127,7 +127,21 @@
             </div>
         </div>
     </div>
+    <div class="col-md-8">
+        <div class="card card-chart">
+            <div class="card-header">
+                <h5 class="card-title">Story Language Analysis</h5>
+            </div>
+            <div class="card-body">
+                <canvas id="language_chart" style="max-width: 400px;max-height: 200px"></canvas>
+            </div>
+            <div class="card-footer">
+
+            </div>
+        </div>
     </div>
+    </div>
+
 
 {% endblock %}
 
@@ -138,3 +152,15 @@
     {% endblock body_javascript %}
 {% block content_header_wrapper %}
 {% endblock  content_header_wrapper %}
+
+  {% block content_top_header %}
+<div class="content-search">
+    {% if not has_search %}
+    <h1>Admin Space</h1>
+    {% endif %}
+    {% endblock %}
+
+
+    {% block body_attr %}style="
+        background-color: #f2f2f2;
+        "{% endblock %}

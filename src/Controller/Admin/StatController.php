@@ -3,6 +3,10 @@
 namespace App\Controller\Admin;
 
 use App\Entity\User;
+use App\Repository\StoryRepository;
+use Doctrine\DBAL\Query;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Query\ResultSetMappingBuilder;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,6 +20,7 @@ class StatController extends AbstractController
     public function __construct(UserRepository $userRepository)
     {
         $this->userRepository = $userRepository;
+
     }
     #[Route("/chart-data", name:"chart_data")]
 
@@ -39,4 +44,30 @@ class StatController extends AbstractController
         return new JsonResponse($data);
     }
 
-}
+
+    #[Route("/language", name:"app_language")]
+
+    public function LangChart(StoryRepository $storyRepository): Response{
+
+        $queryBuilder = $storyRepository->createQueryBuilder('s');
+        $queryBuilder
+            ->select('COUNT(s.id) as count')
+            ->addSelect('s.language')
+            ->groupBy('s.language');
+        $results = $queryBuilder->getQuery()->getResult();
+        $countTable = array();
+        $languageTable = array();
+
+        foreach ($results as $result) {
+            $countTable[] = $result['count'];
+            $languageTable[] = $result['language'];
+        }
+
+        $data = array(
+            'count' => $countTable,
+            'language' => $languageTable
+        );
+
+        return new JsonResponse($data);
+
+    }}

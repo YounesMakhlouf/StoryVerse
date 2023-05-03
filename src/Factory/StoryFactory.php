@@ -48,7 +48,7 @@ final class StoryFactory extends ModelFactory
     {
         return [
             'createdAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
-            'language' => self::faker()->languageCode(),
+            'language' =>self::faker()->randomElement(['french', 'english','spanish','arabic','italian']),
             'lastModifiedAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
             'likes' => self::faker()->randomNumber(),
             'title' => self::faker()->sentence(5),
