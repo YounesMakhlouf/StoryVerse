@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Repository\StoryRepository;
 use Symfony\UX\Chartjs\Builder\ChartBuilderInterface;
 use App\Entity\Story;
 use App\Repository\UserRepository;
@@ -23,20 +24,41 @@ class DashboardController extends AbstractDashboardController
 {
 //    #[IsGranted('ROLE_ADMIN')]
         private UserRepository $userRepository;
+        private StoryRepository $storyRepository;
+
         private ChartBuilderInterface $chartBuilder;
 
-    public function __construct(UserRepository $userRepository, ChartBuilderInterface $chartBuilder)
+    public function __construct(UserRepository $userRepository, StoryRepository $storyRepository,ChartBuilderInterface $chartBuilder)
     {
         $this->chartBuilder = $chartBuilder;
         $this->userRepository = $userRepository;
+        $this->storyRepository = $storyRepository;
+
     }
 
     #[Route('/admin', name: 'app_admin')]
     public function index(): Response
     {
+        $queryBuilder = $this->userRepository->createQueryBuilder('u');
+        $queryBuilder
+            ->select('COUNT(u.id) ');
+        $nbUsers = ($queryBuilder->getQuery()->getSingleScalarResult());
+        $queryBuilder2 = $this->storyRepository->createQueryBuilder('s');
+        $queryBuilder2
+            ->select('COUNT(s.id) ');
+        $nbStories=($queryBuilder2->getQuery()->getSingleScalarResult());
+        $queryBuilder3= $this->storyRepository->createQueryBuilder('s');
+        $queryBuilder3
+            ->select('SUM(s.likes) ');
+        $interactions=($queryBuilder3->getQuery()->getSingleScalarResult());
 
 
-        return $this->render('admin/admin.html.twig');
+
+        return $this->render('admin/admin.html.twig',[
+            'story'=>$nbStories,
+            'users'=>$nbUsers,
+            'interaction'=>$interactions
+        ]);
 
 
     }

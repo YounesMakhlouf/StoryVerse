@@ -78,3 +78,10 @@ a {
     width:400px;
     height: 400px;
 }
+.row {
+    margin-bottom: 10%;
+    margin-top: var(--bs-gutter-y);
+    max-width: 100%;
+    padding-left: calc(var(--bs-gutter-x)*.5);
+    padding-right: calc(var(--bs-gutter-x)*.5);
+}
