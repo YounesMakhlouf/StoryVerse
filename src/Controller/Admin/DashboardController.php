@@ -3,7 +3,6 @@
 namespace App\Controller\Admin;
 
 use App\Repository\StoryRepository;
-use Symfony\UX\Chartjs\Builder\ChartBuilderInterface;
 use App\Entity\Story;
 use App\Repository\UserRepository;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
@@ -18,7 +17,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\User;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\UX\Chartjs\Model\Chart;
 
 class DashboardController extends AbstractDashboardController
 {
@@ -26,11 +24,9 @@ class DashboardController extends AbstractDashboardController
         private UserRepository $userRepository;
         private StoryRepository $storyRepository;
 
-        private ChartBuilderInterface $chartBuilder;
 
-    public function __construct(UserRepository $userRepository, StoryRepository $storyRepository,ChartBuilderInterface $chartBuilder)
+    public function __construct(UserRepository $userRepository, StoryRepository $storyRepository)
     {
-        $this->chartBuilder = $chartBuilder;
         $this->userRepository = $userRepository;
         $this->storyRepository = $storyRepository;
 
@@ -39,21 +35,9 @@ class DashboardController extends AbstractDashboardController
     #[Route('/admin', name: 'app_admin')]
     public function index(): Response
     {
-        $queryBuilder = $this->userRepository->createQueryBuilder('u');
-        $queryBuilder
-            ->select('COUNT(u.id) ');
-        $nbUsers = ($queryBuilder->getQuery()->getSingleScalarResult());
-        $queryBuilder2 = $this->storyRepository->createQueryBuilder('s');
-        $queryBuilder2
-            ->select('COUNT(s.id) ');
-        $nbStories=($queryBuilder2->getQuery()->getSingleScalarResult());
-        $queryBuilder3= $this->storyRepository->createQueryBuilder('s');
-        $queryBuilder3
-            ->select('SUM(s.likes) ');
-        $interactions=($queryBuilder3->getQuery()->getSingleScalarResult());
-
-
-
+        $nbUsers = $this->getInfo('u', $this->userRepository ,'COUNT(u.id) ');
+        $nbStories=$this->getInfo('s',$this->storyRepository,'COUNT(s.id) ');
+        $interactions=$this->getInfo('s',$this->storyRepository,'SUM(s.likes)');
         return $this->render('admin/admin.html.twig',[
             'story'=>$nbStories,
             'users'=>$nbUsers,
@@ -101,6 +85,14 @@ class DashboardController extends AbstractDashboardController
     {
         return parent::configureActions()
         ->add(Crud::PAGE_INDEX, Action::DETAIL);
+    }
+    public function getInfo($alias,$repository,$select){
+        $queryBuilder = $repository->createQueryBuilder($alias);
+        $queryBuilder
+            ->select($select);
+        $result = ($queryBuilder->getQuery()->getSingleScalarResult());
+        return($result);
+
     }
 
 
