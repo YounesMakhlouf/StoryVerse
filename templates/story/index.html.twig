@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+      <div id="book-title">
+    <h1 >Story Title</h1>
+  </div>
+
+    <div id="suggestion-list">
+      <!-- Liste des suggestions d'autres utilisateurs -->
+    </div>
+{% endblock %}
+
+ {% block javascripts %}
+     {{ parent() }}
+     {{ encore_entry_script_tags('story') }}
+ {% endblock %}
+
+ {% block stylesheets %}
+     {{ parent() }}
+     {{ encore_entry_link_tags('story') }}
+ {% endblock %}

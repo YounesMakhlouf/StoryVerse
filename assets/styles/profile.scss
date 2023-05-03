@@ -1,0 +1,167 @@
+@import "helper/variables";
+
+@import '~bootstrap';
+
+@import "./layout/header";
+@import "./layout/footer";
+
+.profile-container {
+  margin: 0 auto;
+  max-width: 800px;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  color: #ffffff;
+  /*background: linear-gradient(to bottom right, #11c0e3, #0a4e5e);*/
+  background: linear-gradient(to bottom right, #BBC6C8, #c08ad9);
+}
+
+.profile-cover {
+  height: 150px;
+  background-color: antiquewhite;
+  border-radius: 40%;
+}
+
+.profile-picture-container {
+  position: relative;
+  top: -50px;
+}
+
+.profile-picture {
+  width: 200px;
+  height: 200px;
+  border: 5px solid #ffffff;
+  border-radius: 50%;
+}
+
+.profile-name {
+  margin-top: 10px;
+  font-size: 24px;
+  font-weight: bold;
+  font-family: Nagasaki;
+  color: #8943c3;;
+}
+
+.profile-stats {
+  margin-top: 10px;
+}
+
+.profile-followers,
+.profile-following {
+  display: inline-block;
+  font-weight: bold;
+  margin-right: 10px;
+  font-size: 20px;
+  color: #2b5a89;
+  margin-top: 5%;
+}
+
+.profile-stories-title {
+  margin-top: 20px;
+  font-size: 20px;
+  font-weight: bold;
+  color: #2b5a89;
+}
+
+.profile-stories-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 10px;
+  align-items: center;
+}
+
+
+h5, .profile-bio {
+  margin-top: 10px;
+  font-size: 20px;
+  color: #53186a;
+}
+
+/* CSS pour l'effet de zoom */
+.zoom-image {
+  transition: transform 0.3s ease-in-out;
+}
+
+.zoom-image:hover {
+  transform: scale(1.05);
+}
+
+/* CSS pour la taille initiale de l'image */
+.zoom-image {
+  transform: scale(1);
+}
+
+.header, .sidebar {
+  position: fixed;
+  top: 0px;
+  background-color: #cda1ed;
+  color: #fff;
+  padding: 10px;
+  width: 250px;
+  transition: width 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+
+}
+
+.header {
+  right: 0;
+  background-image: url("https://img.freepik.com/vecteurs-premium/femme-lisant-livre-couverture-bleue_850602-5.jpg?w=2000");
+  background-size: 300px 300px;
+  background-repeat: no-repeat;
+  background-position: bottom;
+}
+
+.sidebar {
+  left: 0;
+  background-image: url("https://img.freepik.com/vecteurs-premium/homme-tient-livre-main_165429-170.jpg?w=360");
+  background-size: 300px 300px;
+  background-repeat: no-repeat;
+  background-position: top;
+
+
+}
+
+.header a, .sidebar a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.header a:hover, .sidebar a:hover {
+  text-decoration: underline;
+}
+
+.logo {
+  margin-bottom: 10px;
+}
+
+.search {
+  margin-bottom: 10px;
+}
+
+.profile {
+  margin-bottom: 20px;
+}
+
+
+.sidebar a {
+  margin-bottom: 10px;
+}
+
+.content {
+  margin-left: 170px;
+  padding: 20px;
+}
+
+/* Exemple d'icônes avec Font Awesome */
+.fa-bell, .fa-lock, .fa-sign-out-alt, .fa-search, .fa-home, .fa-profile, .fa-solid, .fa-user {
+  margin-right: 5px;
+}
+
+.description {
+  color: #2b5a89;
+  font-style: italic;
+}

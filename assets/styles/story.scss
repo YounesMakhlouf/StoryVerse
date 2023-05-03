@@ -1,0 +1,60 @@
+body {
+    background-color: #70b8cd; 
+    font-family: 'Arial', sans-serif;
+  }
+  
+  
+  #book-title {
+    font-size: 36px;
+    text-align: center;
+    color: #13203a; 
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  }
+    
+  .suggestion-item {
+    margin-bottom: 10px;
+    padding: 10px;
+    background-color: #cfe0ff;
+  }
+  
+  
+    /* Styles pour les icônes de cœur */
+.like-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .fa-heart {
+    font-size: 12px;
+  }
+  
+  .fa-heart:before {
+    content: "\f004";
+  }
+  
+  .fa-heart-empty:before {
+    content: "\f08a";
+  }
+  
+  .fa-heart:hover {
+    color: red;
+  }
+
+   #suggestion-list {
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns:  5fr 1fr 1fr;
+    gap: 10px;
+    overflow:auto;
+    word-wrap: break-word;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-style: italic;
+    font-size: 18px;
+  
+  
+   }
+
+
+
+  

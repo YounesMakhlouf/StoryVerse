@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Login{% endblock %}
+
+{% block body %}
+<body class="gradient">
+    <div class="container">
+   {{parent()}} 
+
+<form method="post" id="login">
+ {# checks if there is an error in the login form submission #}
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+    {% if app.user %}
+        <div class="alert alert-success">
+            You are logged in as {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
+        </div>
+        {% else %}
+
+  <div class="title">
+            <img src="{{ asset('build/images/logo.webp') }}" class="img-fluid" alt="Example Image">
+            Please sign in
+        </div>
+ <div class="content">
+            <div class="user-details">
+            <div class="input-box">
+    <label class="details" for="inputEmail">Email</label>
+    <input type="email" value="{{ last_username }}" name="email" placeholder="Enter your email" id="inputEmail"  autocomplete="email" required autofocus>
+                </div>
+                  <div class="input-box">
+    <label class="details" for="inputPassword">Password</label>
+    <input type="password" name="password" id="inputPassword" placeholder="Enter your password" autocomplete="current-password" required>
+</div>
+    <input type="hidden" name="_csrf_token"
+           value="{{ csrf_token('authenticate') }}">
+</div>
+
+        <div class="checkbox mb-3">
+            <label>
+                <input type="checkbox" name="_remember_me" checked/> Keep me logged in
+            </label>
+        </div>
+
+
+    <div class="button">
+                <a href="{{ path('app_home') }}">
+                <input type="submit" value="LogIn">
+                </a>
+            </div>
+</form>
+</div>
+<footer>not a member ?
+             <a href="{{ path('app_register') }}">SignUp here</a>
+        </footer>
+</div>
+  {% endif %}
+{% endblock %}
+{% block javascripts %}
+     {{ parent() }}
+     {{ encore_entry_script_tags('login') }}
+ {% endblock %}
+
+
+ {% block stylesheets %}
+     {{ parent() }}
+     {{ encore_entry_link_tags('login') }}
+ {% endblock %}
+  {% block footer %}
+{% endblock %}
+{% block header %}
+{% endblock %}
