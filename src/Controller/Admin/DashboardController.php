@@ -104,38 +104,4 @@ class DashboardController extends AbstractDashboardController
     }
 
 
-    private function createChart(): Chart
-    {
-        $queryBuilder = $this->userRepository->createQueryBuilder('u');
-        $queryBuilder
-            ->select('COUNT(u.id) as count')
-            ->addSelect('u.gender')
-            ->groupBy('u.gender');
-
-        $results = $queryBuilder->getQuery()->getResult();
-
-        $chart = $this->chartBuilder->createChart(Chart::TYPE_PIE);
-
-        $chart->setData([
-            'labels' => ["Male", "Female"],
-            'datasets' => [
-                [
-                    'data' => [$results[0]['count']],
-                    'backgroundColor' => ["#36A2EB"]
-                ],
-                [
-                    'data' => [$results[1]['count']],
-                    'backgroundColor' => ["#FF6384"]
-                ]
-            ]
-        ]);
-
-        $chart->setOptions([
-        'display'=> true
-      ]);
-
-        return $chart;
-
-    }
-
 }
