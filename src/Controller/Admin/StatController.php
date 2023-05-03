@@ -36,10 +36,8 @@ class StatController extends AbstractController
         $results = $queryBuilder->getQuery()->getResult();
  $data =[
     'labels'=>["Male", "Female"],
-    'datasets'=>
-        [
-            'data'=> [$results[0]['count'] , $results[1]['count'] ],
-            'backgroundColor'=> ["#89CFF0", "#f4c2c2"]  ]   ];
+
+     'data'=> [$results[0]['count'] , $results[1]['count'] ]];
 
         return new JsonResponse($data);
     }
@@ -64,8 +62,8 @@ class StatController extends AbstractController
         }
 
         $data = array(
-            'count' => $countTable,
-            'language' => $languageTable
+            'data' => $countTable,
+            'labels' => $languageTable
         );
 
         return new JsonResponse($data);
