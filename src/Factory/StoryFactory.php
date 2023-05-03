@@ -47,12 +47,10 @@ final class StoryFactory extends ModelFactory
     protected function getDefaults(): array
     {
         return [
-            'createdAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
+            'createdAt' => self::faker()->dateTime(),
             'language' => self::faker()->randomElement(['french', 'english', 'arabic']),
-            'lastModifiedAt' => \DateTimeImmutable::createFromMutable(self::faker()->dateTime()),
             'likes' => self::faker()->numberBetween(0, 1000),
             'title' => self::faker()->sentence(5),
-            'description'=>self::faker()->paragraph(3),
             'status'=>'pending',
         ];
     }
