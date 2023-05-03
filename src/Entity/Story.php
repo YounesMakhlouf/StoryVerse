@@ -39,12 +39,13 @@ class Story
     #[ORM\OneToMany(mappedBy: 'story', targetEntity: Contribution::class)]
     private Collection $contribution;
 
-    #[ORM\ManyToOne(inversedBy: 'author')]
-    private ?User $author = null;
+    #[ORM\ManyToMany(targetEntity: Genre::class, inversedBy: 'stories')]
+    private Collection $genre;
 
     public function __construct()
     {
         $this->contribution = new ArrayCollection();
+        $this->genre = new ArrayCollection();
     }
 
     public function getTitle(): ?string
@@ -151,14 +152,26 @@ class Story
         return $this;
     }
 
-    public function getAuthor(): ?user
+    /**
+     * @return Collection<int, Genre>
+     */
+    public function getGenre(): Collection
     {
-        return $this->author;
+        return $this->genre;
     }
 
-    public function setAuthor(?user $author): self
+    public function addGenre(Genre $genre): self
     {
-        $this->author = $author;
+        if (!$this->genre->contains($genre)) {
+            $this->genre->add($genre);
+        }
+
+        return $this;
+    }
+
+    public function removeGenre(Genre $genre): self
+    {
+        $this->genre->removeElement($genre);
 
         return $this;
     }
