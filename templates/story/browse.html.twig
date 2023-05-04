@@ -45,7 +45,10 @@
                             </a>
                         </div>
                     {% endfor %}
+                    {% if pager.haveToPaginate %}
+
                     {{ pagerfanta(pager) }}
+                    {% endif %}
                 </article>
             </div>
         </div>
