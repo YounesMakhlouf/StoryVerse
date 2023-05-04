@@ -38,6 +38,7 @@ class RegistrationController extends AbstractController
                     $form->get('plainPassword')->getData()
                 )
             );
+            $user->setLastLoginDate(new DateTime());
             $entityManager->persist($user);
             $entityManager->flush();
             return $this->redirectToRoute('app_send_verification_email', [

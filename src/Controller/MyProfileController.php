@@ -1,0 +1,58 @@
+<?php
+namespace App\Controller;
+
+use App\Entity\User;
+use App\Form\ProfileType;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Core\Security;
+
+class MyProfileController extends AbstractController
+{
+    #[Route('/myprofile', name: 'app_myprofile')]
+    public function showMyProfile(Security $security): Response
+    {
+        $user = $security->getUser();
+        return $this->render('profile/myprofile.html.twig', [
+            'user' => $user,
+        ]);
+    }
+
+    #[Route('/modify-profile', name: 'app_modify_profile')]
+    public function modifyProfile(Request $request, Security $security, EntityManagerInterface $entityManager): Response
+    {
+        $user = $security->getUser();
+
+        // Check if user is authenticated
+        if (!$user) {
+            return $this->redirectToRoute('app_login');
+        }
+
+        $form = $this->createForm(ProfileType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $avatar = $form->get('avatar')->getData();
+            if ($avatar) {
+                $user->setAvatar($avatar);
+            }
+
+            // Persist changes to database
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Your profile has been updated successfully!');
+
+            return $this->redirectToRoute('app_myprofile');
+        }
+
+        return $this->render('profile/modifyprofile.html.twig', [
+            'form' => $form->createView(),
+            'errors' => $form->getErrors(true),
+            'user' => $user
+        ]);
+    }
+}
