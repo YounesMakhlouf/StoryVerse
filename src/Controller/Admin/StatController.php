@@ -44,7 +44,7 @@ public function getResult($repository,$alias,$select1,$select2,$groupBy){
     $queryBuilder = $repository->createQueryBuilder($alias);
     $queryBuilder
         ->select($select1)
-        ->addSelect($select2)
+        ->addSelect($select2.' as data')
         ->groupBy($groupBy);
 
     return $queryBuilder->getQuery()->getResult();
@@ -57,7 +57,7 @@ public function PrepareChartData($results): JsonResponse
 
     foreach ($results as $result) {
         $countTable[] = $result['count'];
-        $dataTable[] = $result['language'];
+        $dataTable[] = $result['data'];
     }
 
     $data = array(
