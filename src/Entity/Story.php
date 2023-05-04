@@ -5,7 +5,6 @@ namespace App\Entity;
 use App\Repository\StoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation\Slug;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
@@ -39,8 +38,8 @@ class Story
     #[ORM\OneToMany(mappedBy: 'story', targetEntity: Contribution::class)]
     private Collection $contribution;
 
-    #[ORM\ManyToMany(targetEntity: Genre::class, inversedBy: 'stories')]
-    private Collection $genre;
+    #[ORM\Column(length: 25, nullable: true)]
+    private ?string $Genre = null;
 
     public function __construct()
     {
@@ -152,26 +151,14 @@ class Story
         return $this;
     }
 
-    /**
-     * @return Collection<int, Genre>
-     */
-    public function getGenre(): Collection
+    public function getGenre(): ?string
     {
-        return $this->genre;
+        return $this->Genre;
     }
 
-    public function addGenre(Genre $genre): self
+    public function setGenre(?string $Genre): self
     {
-        if (!$this->genre->contains($genre)) {
-            $this->genre->add($genre);
-        }
-
-        return $this;
-    }
-
-    public function removeGenre(Genre $genre): self
-    {
-        $this->genre->removeElement($genre);
+        $this->Genre = $Genre;
 
         return $this;
     }
