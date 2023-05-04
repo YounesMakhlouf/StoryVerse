@@ -2,8 +2,8 @@
 
 namespace App\Entity;
 
-use DateTimeInterface;
 use App\Repository\UserRepository;
+use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -18,6 +18,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     use TimestampableEntity;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -52,14 +53,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $Last_login_date = null;
+    private ?DateTimeInterface $Last_login_date = null;
 
     #[ORM\Column(length: 150, nullable: true)]
     private ?string $bio;
 
-    #[ORM\Column (nullable:true)]
+    #[ORM\Column (nullable: true)]
     private ?string $avatar;
-
 
 
     public function getAvatar(): ?string
@@ -79,17 +79,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\ManyToMany(targetEntity: self::class, inversedBy: 'following')]
     private Collection $follower;
-    #[ORM\Column]
-    private ?string $csrf_token='';
-    public function __construct()
-    {
-        $this->csrf_token = '';
-    }
-
-    public function getCsrfToken(): ?string
-    {
-        return $this->csrf_token;
-    }
 
     #[ORM\ManyToMany(targetEntity: self::class, mappedBy: 'follower')]
     private Collection $following;
@@ -104,12 +93,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->following = new ArrayCollection();
     }
 
-    public function setCsrfToken(string $csrf_token): self
-    {
-        $this->csrf_token = $csrf_token;
-
-        return $this;
-    }
     public function getBio(): ?string
     {
         return $this->bio;
@@ -253,20 +236,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
 
-    public function getLastLoginDate(): ?\DateTimeInterface
+    public function getLastLoginDate(): ?DateTimeInterface
     {
         return $this->Last_login_date;
     }
 
-    public function setLastLoginDate(\DateTimeInterface $Last_login_date): self
+    public function setLastLoginDate(DateTimeInterface $Last_login_date): self
     {
         $this->Last_login_date = $Last_login_date;
 
         return $this;
     }
 
-    public function getFullName(): ?string{
-        return $this->getFirstName().' '.$this->getLastName();
+    public function getFullName(): ?string
+    {
+        return $this->getFirstName() . ' ' . $this->getLastName();
     }
 
     /**
