@@ -56,7 +56,7 @@ final class UserFactory extends ModelFactory
             'password' => '$2y$13$k1v3SKo/t3grS5Oo3/yYieiO2pMg1gMWugsV7X.hbZMkmsgpfVxN6',
             'roles' =>self::faker()->randomElement([['ROLE_USER'], ['ROLE_ADMIN']]),
             'username' => self::faker()->userName(),
-            'biography'=>self::faker()->paragraph(),
+            'bio'=>self::faker()->paragraph(),
             'Last_login_date'=>new \DateTime()
         ];
     }

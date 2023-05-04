@@ -46,6 +46,16 @@ let languageColors= [
     'rgb(54, 162, 235)',
     'rgb(153, 102, 255)',
     'rgb(201, 203, 207)']
+let genresColors=[
+    '#D864A9',
+    '#EBB02D',
+    '#146C94',
+    '#FFBF9B',
+    '#54B435',
+    '#B2A4FF'
+]
 
 CreateChart('/chart-data','gender_chart',genderColors,'pie',true);
 CreateChart('/language','language_chart',languageColors,'bar',false);
+CreateChart('/genre','genre_chart',languageColors,'bar',false);
+

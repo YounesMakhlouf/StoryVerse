@@ -51,7 +51,7 @@ class StoryController extends AbstractController
             9
         );
         return $this->render('story/browse.html.twig', [
-//            'genre' => $genre,
+            'genre' => $genre,
             'pager' => $pagerfanta,
             'genres' => $genres,
         ]);
