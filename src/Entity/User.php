@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -53,7 +54,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $bio;
 
     #[ORM\Column (nullable:true)]
-    private $avatar;
+    private ?string $avatar;
+
+
 
     public function getAvatar(): ?string
     {

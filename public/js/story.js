@@ -1,4 +1,4 @@
-import '../styles/story.scss';
+import '../../assets/styles/story.scss';
 
 // Code pour récupérer les suggestions des autres utilisateurs (supposons que les suggestions sont stockées dans un tableau appelé 'suggestions')
 const suggestions = [

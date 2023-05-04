@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20230429100238 extends AbstractMigration
+final class Version20230430182434 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -26,6 +26,8 @@ final class Version20230429100238 extends AbstractMigration
         $this->addSql('CREATE TABLE genre (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(255) NOT NULL, description LONGTEXT DEFAULT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE story (id INT AUTO_INCREMENT NOT NULL, title VARCHAR(255) NOT NULL, description LONGTEXT DEFAULT NULL, language VARCHAR(255) NOT NULL, created_at DATETIME NOT NULL COMMENT \'(DC2Type:datetime_immutable)\', last_modified_at DATETIME NOT NULL COMMENT \'(DC2Type:datetime_immutable)\', likes INT NOT NULL, status VARCHAR(255) DEFAULT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('ALTER TABLE contribution CHANGE likes likes INT NOT NULL');
+        $this->addSql('ALTER TABLE user DROP registration_date');
+        $this->addSql('CREATE UNIQUE INDEX UNIQ_8D93D649F85E0677 ON user (username)');
     }
 
     public function down(Schema $schema): void
@@ -37,5 +39,7 @@ final class Version20230429100238 extends AbstractMigration
         $this->addSql('DROP TABLE genre');
         $this->addSql('DROP TABLE story');
         $this->addSql('ALTER TABLE contribution CHANGE likes likes INT DEFAULT NULL');
+        $this->addSql('DROP INDEX UNIQ_8D93D649F85E0677 ON user');
+        $this->addSql('ALTER TABLE user ADD registration_date DATETIME NOT NULL COMMENT \'(DC2Type:datetime_immutable)\'');
     }
 }

@@ -15,6 +15,20 @@
 
 
         </div>
+        <div>
+            {% for message in app.flashes('warning') %}
+
+                <div class="alert alert-warning">{{ message }}</div>
+            {% endfor %}
+
+            {% for message in app.flashes('success') %}
+
+                <div class="alert alert-success">{{ message }}</div>
+            {% endfor %}
+
+
+
+        </div>
 
         <a href="{{ path('app_modify_profile') }}">
             <button type="button" class="btn btn-secondary">Modify your profile?</button>
