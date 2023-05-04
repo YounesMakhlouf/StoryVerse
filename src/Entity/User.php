@@ -66,6 +66,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: self::class, mappedBy: 'follower')]
     private Collection $following;
 
+    #[ORM\ManyToOne(inversedBy: 'Author')]
+    private ?Contribution $contribution = null;
+
     public function __construct()
     {
         $this->compete = new ArrayCollection();
@@ -301,6 +304,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         if ($this->following->removeElement($following)) {
             $following->removeFollower($this);
         }
+
+        return $this;
+    }
+
+    public function getContribution(): ?Contribution
+    {
+        return $this->contribution;
+    }
+
+    public function setContribution(?Contribution $contribution): self
+    {
+        $this->contribution = $contribution;
 
         return $this;
     }
