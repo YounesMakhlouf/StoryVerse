@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Story;
+use App\Repository\GenreRepository;
 use App\Repository\StoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Pagerfanta\Doctrine\ORM\QueryAdapter;
@@ -39,7 +40,7 @@ class StoryController extends AbstractController
     }
 
     #[Route('/story/browse/{genre}', name: 'app_browse_stories')]
-    public function browse(StoryRepository $storyRepository, Request $request ,string $genre = null): Response
+    public function browse(StoryRepository $storyRepository, Request $request, GenreRepository $genreRepository, string $genre = null): Response
     {
         $queryBuilder = $storyRepository->createOrderedByLikesQueryBuilder($genre);
         $adapter = new QueryAdapter($queryBuilder);
@@ -48,10 +49,12 @@ class StoryController extends AbstractController
             $request->query->get('page', 1),
             9
         );
+        $genres = $genreRepository->findAll();
 
         return $this->render('story/browse.html.twig', [
             'genre' => $genre,
             'pager' => $pagerfanta,
+            'genres' => $genres
         ]);
     }
 

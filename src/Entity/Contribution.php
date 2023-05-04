@@ -39,9 +39,13 @@ class Contribution
     #[ORM\OneToMany(mappedBy: 'parent', targetEntity: Contribution::class)]
     private Collection $children;
 
+    #[ORM\OneToMany(mappedBy: 'contribution', targetEntity: User::class)]
+    private Collection $Author;
+
     public function __construct()
     {
         $this->children = new ArrayCollection();
+        $this->Author = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -133,6 +137,36 @@ class Contribution
             // set the owning side to null (unless already changed)
             if ($children->getParent() === $this) {
                 $children->setParent(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getAuthor(): Collection
+    {
+        return $this->Author;
+    }
+
+    public function addAuthor(User $author): self
+    {
+        if (!$this->Author->contains($author)) {
+            $this->Author->add($author);
+            $author->setContribution($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAuthor(User $author): self
+    {
+        if ($this->Author->removeElement($author)) {
+            // set the owning side to null (unless already changed)
+            if ($author->getContribution() === $this) {
+                $author->setContribution(null);
             }
         }
 
