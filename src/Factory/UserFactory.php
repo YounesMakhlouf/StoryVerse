@@ -49,14 +49,14 @@ final class UserFactory extends ModelFactory
     {
         return [
             'email' => self::faker()->email(),
-            'first_name' => self::faker()->text(25),
+            'first_name' => self::faker()->firstName(),
             'gender' => self::faker()->randomElement(['male', 'female']),
             'isVerified' => true,
-            'last_name' => self::faker()->text(25),
-            'password' => '123456',
-            'roles' => [],
-            'username' => self::faker()->text(25),
-            'bio'=>self::faker()->paragraph(),
+            'last_name' => self::faker()->lastName(),
+            'password' => '$2y$13$k1v3SKo/t3grS5Oo3/yYieiO2pMg1gMWugsV7X.hbZMkmsgpfVxN6',
+            'roles' =>self::faker()->randomElement([['ROLE_USER'], ['ROLE_ADMIN']]),
+            'username' => self::faker()->userName(),
+            'biography'=>self::faker()->paragraph(),
             'Last_login_date'=>new \DateTime()
         ];
     }

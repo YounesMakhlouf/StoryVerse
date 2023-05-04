@@ -1,4 +1,7 @@
 {
+    "babdev/pagerfanta-bundle": {
+        "version": "v4.0.0"
+    },
     "doctrine/annotations": {
         "version": "2.0",
         "recipe": {
@@ -46,6 +49,15 @@
             "./config/packages/doctrine_migrations.yaml",
             "./migrations/.gitignore"
         ]
+    },
+    "easycorp/easyadmin-bundle": {
+        "version": "4.6",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "3.0",
+            "ref": "b131e6cbfe1b898a508987851963fff485986285"
+        }
     },
     "knplabs/knp-time-bundle": {
         "version": "v1.20.0"
@@ -253,6 +265,21 @@
             "./config/packages/twig.yaml",
             "./templates/base.html.twig"
         ]
+    },
+    "symfony/uid": {
+        "version": "6.2",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "6.2",
+            "ref": "d294ad4add3e15d7eb1bae0221588ca89b38e558"
+        },
+        "files": [
+            "./config/packages/uid.yaml"
+        ]
+    },
+    "symfony/ux-chartjs": {
+        "version": "v2.7.1"
     },
     "symfony/validator": {
         "version": "6.2",

@@ -7,10 +7,16 @@
 @import "./layout/header";
 @import "./layout/footer";
 
-@import "./components/hero";
-@import "./components/team";
 @import "./components/trending";
-@import "./components/contact";
+
+/*--------------------------------------------------------------
+# Disable AOS delay on mobile
+--------------------------------------------------------------*/
+@media screen and (max-width: 768px) {
+  [data-aos-delay] {
+    transition-delay: 0 !important;
+  }
+}
 
 /*General*/
 body {
@@ -78,4 +84,9 @@ section {
     text-transform: uppercase;
     font-family: "Poppins", sans-serif;
     color: $DarkTurquoise;
+}
+
+//feed
+.pagination{
+    margin: 50px auto auto auto;
 }

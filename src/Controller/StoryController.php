@@ -5,7 +5,10 @@ namespace App\Controller;
 use App\Entity\Story;
 use App\Repository\StoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Pagerfanta\Doctrine\ORM\QueryAdapter;
+use Pagerfanta\Pagerfanta;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -24,7 +27,6 @@ class StoryController extends AbstractController
     {
         $story = new Story();
         $story->setTitle("yalla habibi");
-        $story->setDescription("yalla habibiyalla habibiyalla habibiyalla habibiyalla habibiyalla habibiyalla habibiyalla habibi");
         $story->setLanguage("english");
         $story->setLikes(rand(0, 100));
         $story->setStatus("pending");
@@ -32,29 +34,33 @@ class StoryController extends AbstractController
         $entityManager->flush();
 
         return new response (sprintf(
-            "%s%s", $story->getTitle(), $story->getDescription()
+            "%s", $story->getTitle()
         ));
     }
 
     #[Route('/story/browse/{genre}', name: 'app_browse_stories')]
-    public function browse(StoryRepository $storyRepository, string $genre = null): Response
+    public function browse(StoryRepository $storyRepository, Request $request ,string $genre = null): Response
     {
-        $stories = $storyRepository->findAllOrderedByLikes();
+        $queryBuilder = $storyRepository->createOrderedByLikesQueryBuilder($genre);
+        $adapter = new QueryAdapter($queryBuilder);
+        $pagerfanta = Pagerfanta::createForCurrentPageWithMaxPerPage(
+            $adapter,
+            $request->query->get('page', 1),
+            9
+        );
 
         return $this->render('story/browse.html.twig', [
             'genre' => $genre,
-            'trendingStories' => $stories,
+            'pager' => $pagerfanta,
         ]);
     }
 
-    #[Route('/story/{id}', name: 'app_story_id')]
-    public function show($id, StoryRepository $storyRepository): Response
+    #[Route('/story/{slug}', name: 'app_story_id')]
+    public function show(Story $story): Response
     {
-        $story = $storyRepository->find($id);
         return $this->render('story/index.html.twig', [
-            'story' => $story
+            'story' => $story,
+            'slug' => $story->getSlug(),
         ]);
     }
-
-
 }

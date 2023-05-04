@@ -6,14 +6,18 @@ use App\Repository\StoryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class HomeController extends AbstractController
 {
     #[Route('/', name: 'app_home')]
     public function index(StoryRepository $storyRepository): Response
-    {
-        $trendingStories = $storyRepository->findAllOrderedByLikes();
-        $teamMembers = $this->getTeamMembers();
+    { if ($this->isGranted('ROLE_USER')){
+        return $this->redirectToRoute('app_browse_stories');
+    }
+    $trendingStories = $storyRepository->createOrderedByLikesQueryBuilder()-> setMaxResults(3)  ->getQuery()
+    ->getResult();
+            $teamMembers = $this->getTeamMembers();
 
         return $this->render('/index.html.twig', [
             'teamMembers' => $teamMembers,
@@ -51,7 +55,6 @@ class HomeController extends AbstractController
                 'social' => [
                     'facebook' => 'https://www.facebook.com/profile.php?id=100069807314531',
                     'instagram' => 'https://www.instagram.com/wided_ouesletyy/',
-                    'linkedin' => ''
                 ]
             ],
             [
@@ -61,7 +64,6 @@ class HomeController extends AbstractController
                 'social' => [
                     'facebook' => 'https://www.facebook.com/skander.benachour.1',
                     'instagram' => 'https://www.instagram.com/skander_ben_achour/',
-                    'linkedin' => ''
                 ]
             ],
             [
@@ -70,7 +72,6 @@ class HomeController extends AbstractController
                 'position' => 'Vibe Manager',
                 'social' => [
                     'facebook' => 'https://www.facebook.com/windy.jasmin.12072001',
-                    'instagram' => '',
                     'linkedin' => 'https://www.linkedin.com/in/yassmine-riahi-4685bb250/'
                 ]
             ]

@@ -5,10 +5,13 @@ namespace App\Entity;
 use App\Repository\CommentRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
 
 #[ORM\Entity(repositoryClass: CommentRepository::class)]
 class Comment
 {
+    use TimestampableEntity;
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -16,19 +19,14 @@ class Comment
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $content = null;
-
-    #[ORM\Column]
-    private \DateTimeImmutable $createdAt;
-
     #[ORM\Column]
     private int $likes = 0;
 
-    #[ORM\Column(nullable: true)]
-    private ?bool $reported = null;
+    #[ORM\Column]
+    private bool $reported = false;
 
-     public function __construct(){
-        $this->createdAt = new \DateTimeImmutable();
-    }
+    #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'reply')]
+    private ?self $reply = null;
 
     public function getId(): ?int
     {
@@ -43,18 +41,6 @@ class Comment
     public function setContent(string $content): self
     {
         $this->content = $content;
-
-        return $this;
-    }
-
-    public function getCreatedAt(): ?\DateTimeImmutable
-    {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(\DateTimeImmutable $createdAt): self
-    {
-        $this->createdAt = $createdAt;
 
         return $this;
     }
@@ -79,6 +65,18 @@ class Comment
     public function setReported(?bool $reported): self
     {
         $this->reported = $reported;
+
+        return $this;
+    }
+
+    public function getReply(): ?self
+    {
+        return $this->reply;
+    }
+
+    public function setReply(?self $reply): self
+    {
+        $this->reply = $reply;
 
         return $this;
     }
