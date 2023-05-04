@@ -24,12 +24,12 @@
     {% include "layout/header.html.twig" %}
 {% endblock %}
 {% block body %}
-{% for flash in app.flashes('success') %}
+    {% for flash in app.flashes('success') %}
         <div class="alert alert-success">{{ flash }}</div>
-{% endfor %}
-{% for flash in app.flashes('error') %}
+    {% endfor %}
+    {% for flash in app.flashes('error') %}
         <div class="alert alert-success">{{ flash }}</div>
-{% endfor %}
+    {% endfor %}
 {% endblock %}
 {% block footer %}
     {% include "layout/footer.html.twig" %}

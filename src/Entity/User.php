@@ -2,10 +2,13 @@
 
 namespace App\Entity;
 
+use DateTimeInterface;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Timestampable\Traits\TimestampableEntity;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -14,6 +17,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
+    use TimestampableEntity;
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -70,6 +74,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    #[ORM\ManyToMany(targetEntity: Competition::class, inversedBy: 'users')]
+    private Collection $compete;
+
+    #[ORM\ManyToMany(targetEntity: self::class, inversedBy: 'following')]
+    private Collection $follower;
     #[ORM\Column]
     private ?string $csrf_token='';
     public function __construct()
@@ -80,6 +89,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getCsrfToken(): ?string
     {
         return $this->csrf_token;
+    }
+
+    #[ORM\ManyToMany(targetEntity: self::class, mappedBy: 'follower')]
+    private Collection $following;
+
+    public function __construct()
+    {
+        $this->compete = new ArrayCollection();
+        $this->follower = new ArrayCollection();
+        $this->following = new ArrayCollection();
     }
 
     public function setCsrfToken(string $csrf_token): self
@@ -124,7 +143,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getUserIdentifier(): string
     {
-        return (string) $this->email;
+        return (string)$this->email;
     }
 
     /**
@@ -239,6 +258,85 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setLastLoginDate(\DateTimeInterface $Last_login_date): self
     {
         $this->Last_login_date = $Last_login_date;
+
+        return $this;
+    }
+
+    public function getFullName(): ?string{
+        return $this->getFirstName().' '.$this->getLastName();
+    }
+
+    /**
+     * @return Collection<int, Competition>
+     */
+    public function getCompete(): Collection
+    {
+        return $this->compete;
+    }
+
+    public function addCompete(Competition $compete): self
+    {
+        if (!$this->compete->contains($compete)) {
+            $this->compete->add($compete);
+        }
+
+        return $this;
+    }
+
+    public function removeCompete(Competition $compete): self
+    {
+        $this->compete->removeElement($compete);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, self>
+     */
+    public function getFollower(): Collection
+    {
+        return $this->follower;
+    }
+
+    public function addFollower(self $follower): self
+    {
+        if (!$this->follower->contains($follower)) {
+            $this->follower->add($follower);
+        }
+
+        return $this;
+    }
+
+    public function removeFollower(self $follower): self
+    {
+        $this->follower->removeElement($follower);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, self>
+     */
+    public function getFollowing(): Collection
+    {
+        return $this->following;
+    }
+
+    public function addFollowing(self $following): self
+    {
+        if (!$this->following->contains($following)) {
+            $this->following->add($following);
+            $following->addFollower($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFollowing(self $following): self
+    {
+        if ($this->following->removeElement($following)) {
+            $following->removeFollower($this);
+        }
 
         return $this;
     }
