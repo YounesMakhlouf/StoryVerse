@@ -45,10 +45,6 @@ public function verifyUserEmail(Request $request, TranslatorInterface $translato
 
 
 
-
-
-
-
     #[Route('/sendEmail/{id}/{resend}', name: 'app_send_verification_email', requirements: [
         'id' => '^[1-9]\d*$',
         'resend' => '[01]'

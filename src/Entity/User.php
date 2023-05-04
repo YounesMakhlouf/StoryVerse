@@ -2,8 +2,8 @@
 
 namespace App\Entity;
 
-use DateTimeInterface;
 use App\Repository\UserRepository;
+use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -51,11 +51,28 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?bool $isVerified = false;
 
+
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?DateTimeInterface $Last_login_date = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $Biography = null;
+    #[ORM\Column(length: 150, nullable: true)]
+    private ?string $bio;
+
+    #[ORM\Column (nullable: true)]
+    private ?string $avatar;
+
+
+    public function getAvatar(): ?string
+    {
+        return $this->avatar;
+    }
+
+    public function setAvatar(?string $avatar): self
+    {
+        $this->avatar = $avatar;
+
+        return $this;
+    }
 
     #[ORM\ManyToMany(targetEntity: Competition::class, inversedBy: 'users')]
     private Collection $compete;
@@ -74,6 +91,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->compete = new ArrayCollection();
         $this->follower = new ArrayCollection();
         $this->following = new ArrayCollection();
+    }
+
+    public function getBio(): ?string
+    {
+        return $this->bio;
+    }
+
+    public function setBio(?string $bio): self
+    {
+        $this->bio = $bio;
+
+        return $this;
     }
 
     public function getId(): ?int
@@ -206,6 +235,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+
     public function getLastLoginDate(): ?DateTimeInterface
     {
         return $this->Last_login_date;
@@ -218,19 +248,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getBiography(): ?string
+    public function getFullName(): ?string
     {
-        return $this->Biography;
-    }
-
-    public function setBiography(?string $Biography): self
-    {
-        $this->Biography = $Biography;
-
-        return $this;
-    }
-    public function getFullName(): ?string{
-        return $this->getFirstName().' '.$this->getLastName();
+        return $this->getFirstName() . ' ' . $this->getLastName();
     }
 
     /**

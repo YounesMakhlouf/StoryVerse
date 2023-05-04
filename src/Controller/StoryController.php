@@ -39,23 +39,21 @@ class StoryController extends AbstractController
         ));
     }
 
-    #[Route('/story/browse'/*/{genre}'*/, name: 'app_browse_stories')]
-    public function browse(StoryRepository $storyRepository, Request $request/*, GenreRepository $genreRepository*/
-        , string $genre = null): Response
+    #[Route('/story/browse/{genre}', name: 'app_browse_stories')]
+    public function browse(StoryRepository $storyRepository, Request $request, string $genre = null): Response
     {
         $queryBuilder = $storyRepository->createOrderedByLikesQueryBuilder($genre);
+        $genres = ['Horror', 'Fiction', 'Mystery', 'Comedy', 'Drama', 'Romance'];
         $adapter = new QueryAdapter($queryBuilder);
         $pagerfanta = Pagerfanta::createForCurrentPageWithMaxPerPage(
             $adapter,
             $request->query->get('page', 1),
             9
         );
-//        $genres = $genreRepository->findAll();
-
         return $this->render('story/browse.html.twig', [
 //            'genre' => $genre,
             'pager' => $pagerfanta,
-//            'genres' => $genres
+            'genres' => $genres,
         ]);
     }
 

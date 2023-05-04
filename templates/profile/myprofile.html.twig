@@ -1,28 +1,28 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-
-
     <div class="profile-container text-center">
         <div class="profile-cover">
-            {% if user %}
-                <h1 class="profile-name"><br> welcome to &nbsp&nbsp {{ user.username|upper }} &nbsp&nbsp's profile </h1>
-            {% endif %}
+                <h1 class="profile-name"><br> Hello &nbsp&nbsp {{ user.username|upper }} &nbsp&nbsp!  </h1>
         </div>
         <div class="profile-picture-container">
             {% if user.avatar %}
-                <img src="{{user.avatar}}" alt="Profile picture" class="profile-picture rounded-circle">
+                <img src="{{ user.avatar}}" alt="Profile picture" class="profile-picture rounded-circle">
             {% else %}
                 <img src="{{ asset('https://us.123rf.com/450wm/yummytime/yummytime1608/yummytime160800630/61903988-anonyme-m%C3%A2le-photo-de-profil-avatar-de-l-%C3%A9motion-cr%C3%A9%C3%A9e-pour-mobile-web-d%C3%A9coration-produits-d.jpg"
                  ') }}" alt="Default profile picture" class="profile-picture rounded-circle">
             {% endif %}
+
+
         </div>
         <div>
             {% for message in app.flashes('warning') %}
+
                 <div class="alert alert-warning">{{ message }}</div>
             {% endfor %}
 
             {% for message in app.flashes('success') %}
+
                 <div class="alert alert-success">{{ message }}</div>
             {% endfor %}
 
@@ -30,37 +30,25 @@
 
         </div>
 
+        <a href="{{ path('app_modify_profile') }}">
+            <button type="button" class="btn btn-secondary">Modify your profile?</button>
+        </a>
+        <br>
+        <br><br>
         {% if user.bio %}
             <div class="profile-bio">"{{ user.bio}}"</div>
         {% else %}
             <div class="profile-bio">" A writer like no other ..! "</div>
         {% endif %}
-
         <div class="profile-stats">
-            <span class="profile-followers"><i class="fa-solid fa-user"></i>{{ user.getFollowers.count() ?? 0  }} Followers</span>
+            <span class="profile-followers"><i class="fa-solid fa-user"></i>1000 Followers</span>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <span class="profile-following"><i class="fa-solid fa-user"></i>{{ user.getFollowing.count() ?? 0  }} Following</span>
+            <span class="profile-following"><i class="fa-solid fa-user"></i>500 Following</span>
         </div>
         <br>
         <br>
 
-        {% if app.user %}
-                {% if is_following %}
-                    <button class="btn btn-primary follow-button"
-                    data-user-id="{{ user.id }}"
-                    data-following="{{ path('is_following', {'id': user.id}) }}">
-                    Unfollow
-                {% else %}
-                        <button class="btn btn-warning follow-button"
-                                data-user-id="{{ user.id }}"
-                                data-following="{{ path('is_following', {'id': user.id}) }}">
-                    Follow
-                {% endif %}
-            </button>
-        {% else %}
-            <a href="{{ path('app_login') }}" class="btn btn-primary">Log in to follow</a>
-        {% endif %}
-
+        <button class="btn btn-warning">Follow</button>
         <button class="btn btn-warning">Message</button>
         <button class="btn btn-warning">Report</button>
 
@@ -84,20 +72,20 @@
         <br><br>
         <a href="page_destination.html" class="btn btn-warning">Continuez la lecture</a>
         </span>
-<!-- 2eme exemple -->
-<div class="text-center">
-    <img src="https://www.daily-movies.ch/wp-content/uploads/2023/02/Un-homme-heureux_4.jpg"
-         class="img-fluid rounded start, zoom-image ">
-    <h5>Romance </h5>
-</div>
-<span class="description">Il était une fois, dans un petit café au coin de la rue, que leurs regards se sont croisés pour la première fois...
+                <!-- 2eme exemple -->
+                <div class="text-center">
+                    <img src="https://www.daily-movies.ch/wp-content/uploads/2023/02/Un-homme-heureux_4.jpg"
+                         class="img-fluid rounded start, zoom-image ">
+                    <h5>Romance </h5>
+                </div>
+                <span class="description">Il était une fois, dans un petit café au coin de la rue, que leurs regards se sont croisés pour la première fois...
 <br><br>
 <a href="page_destination.html" class="btn btn-warning">Continuez la lecture</a>
 </span>
-
-</div>
-</div>
-</div>
+            </div>
+        </div>
+    </div>
+    </div>
 
 {% endblock %}
 
@@ -106,11 +94,10 @@
  {% block javascripts %}
      {{ parent() }}
      {{ encore_entry_script_tags('profile') }}
-     <script src="{{ asset('js/profile.js') }}"></script>
  {% endblock %}
 
 
  {% block stylesheets %}
-    {{ parent() }}
-    {{ encore_entry_link_tags('profile') }}
-  {% endblock %}
+     {{ parent() }}
+     {{ encore_entry_link_tags('profile') }}
+ {% endblock %}
