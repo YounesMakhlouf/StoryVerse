@@ -1,6 +1,8 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+
+
     <div class="profile-container text-center">
         <div class="profile-cover">
             {% if user %}
@@ -9,11 +11,23 @@
         </div>
         <div class="profile-picture-container">
             {% if user.avatar %}
-                <img src="{{ user.avatar}}" alt="Profile picture" class="profile-picture rounded-circle">
+                <img src="{{user.avatar}}" alt="Profile picture" class="profile-picture rounded-circle">
             {% else %}
                 <img src="{{ asset('https://us.123rf.com/450wm/yummytime/yummytime1608/yummytime160800630/61903988-anonyme-m%C3%A2le-photo-de-profil-avatar-de-l-%C3%A9motion-cr%C3%A9%C3%A9e-pour-mobile-web-d%C3%A9coration-produits-d.jpg"
                  ') }}" alt="Default profile picture" class="profile-picture rounded-circle">
             {% endif %}
+        </div>
+        <div>
+            {% for message in app.flashes('warning') %}
+                <div class="alert alert-warning">{{ message }}</div>
+            {% endfor %}
+
+            {% for message in app.flashes('success') %}
+                <div class="alert alert-success">{{ message }}</div>
+            {% endfor %}
+
+
+
         </div>
 
         {% if user.bio %}
@@ -23,14 +37,30 @@
         {% endif %}
 
         <div class="profile-stats">
-            <span class="profile-followers"><i class="fa-solid fa-user"></i>1000 Followers</span>
+            <span class="profile-followers"><i class="fa-solid fa-user"></i>{{ user.getFollowers.count() ?? 0  }} Followers</span>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <span class="profile-following"><i class="fa-solid fa-user"></i>500 Following</span>
+            <span class="profile-following"><i class="fa-solid fa-user"></i>{{ user.getFollowing.count() ?? 0  }} Following</span>
         </div>
         <br>
         <br>
 
-        <button class="btn btn-warning">Follow</button>
+        {% if app.user %}
+                {% if is_following %}
+                    <button class="btn btn-primary follow-button"
+                    data-user-id="{{ user.id }}"
+                    data-following="{{ path('is_following', {'id': user.id}) }}">
+                    Unfollow
+                {% else %}
+                        <button class="btn btn-warning follow-button"
+                                data-user-id="{{ user.id }}"
+                                data-following="{{ path('is_following', {'id': user.id}) }}">
+                    Follow
+                {% endif %}
+            </button>
+        {% else %}
+            <a href="{{ path('app_login') }}" class="btn btn-primary">Log in to follow</a>
+        {% endif %}
+
         <button class="btn btn-warning">Message</button>
         <button class="btn btn-warning">Report</button>
 
@@ -64,7 +94,7 @@
 <br><br>
 <a href="page_destination.html" class="btn btn-warning">Continuez la lecture</a>
 </span>
-</div>
+
 </div>
 </div>
 </div>
@@ -76,6 +106,7 @@
  {% block javascripts %}
      {{ parent() }}
      {{ encore_entry_script_tags('profile') }}
+     <script src="{{ asset('js/profile.js') }}"></script>
  {% endblock %}
 
 
