@@ -43,6 +43,7 @@ class StoryController extends AbstractController
     public function browse(StoryRepository $storyRepository, Request $request, string $genre = null): Response
     {
         $queryBuilder = $storyRepository->createOrderedByLikesQueryBuilder($genre);
+        $genres = ['Horror', 'Fiction', 'Mystery', 'Comedy', 'Drama', 'Romance'];
         $adapter = new QueryAdapter($queryBuilder);
         $pagerfanta = Pagerfanta::createForCurrentPageWithMaxPerPage(
             $adapter,
@@ -52,6 +53,7 @@ class StoryController extends AbstractController
         return $this->render('story/browse.html.twig', [
             'genre' => $genre,
             'pager' => $pagerfanta,
+            'genres' => $genres,
         ]);
     }
 
