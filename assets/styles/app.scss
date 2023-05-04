@@ -20,17 +20,17 @@
 
 /*General*/
 body {
-    font-family: "Open Sans", sans-serif;
-    color: #444444;
+  font-family: "Open Sans", sans-serif;
+  color: #444444;
 }
 
 a {
-    color: $DarkTurquoise;
-    text-decoration: none;
+  color: $DarkTurquoise;
+  text-decoration: none;
 }
 
 a:hover {
-    color: $Turquoise;
+  color: $Turquoise;
 }
 
 h1,
@@ -39,54 +39,54 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: "Montserrat", sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
 
 /* Sections */
 section {
-    padding: 60px 0;
-    overflow: hidden;
+  padding: 60px 0;
+  overflow: hidden;
 }
 
 .section-bg {
-    background-color: $LightGray;
+  background-color: $LightGray;
 }
 
 .section-title {
-    padding-bottom: 40px;
+  padding-bottom: 40px;
 }
 
 .section-title h2 {
-    font-size: 14px;
-    font-weight: 500;
-    padding: 0;
-    line-height: 1px;
-    margin: 0 0 5px 0;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: $Silver;
-    font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 0;
+  line-height: 1px;
+  margin: 0 0 5px 0;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: $Silver;
+  font-family: "Poppins", sans-serif;
 }
 
 .section-title h2::after {
-    content: "";
-    width: 120px;
-    height: 1px;
-    display: inline-block;
-    background: $Turquoise;
-    margin: 4px 10px;
+  content: "";
+  width: 120px;
+  height: 1px;
+  display: inline-block;
+  background: $Turquoise;
+  margin: 4px 10px;
 }
 
 .section-title p {
-    margin: 0;
-    font-size: 36px;
-    font-weight: 700;
-    text-transform: uppercase;
-    font-family: "Poppins", sans-serif;
-    color: $DarkTurquoise;
+  margin: 0;
+  font-size: 36px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-family: "Poppins", sans-serif;
+  color: $DarkTurquoise;
 }
 
 //feed
-.pagination{
-    margin: 50px auto auto auto;
+.pagination {
+  margin: 50px auto auto auto;
 }
