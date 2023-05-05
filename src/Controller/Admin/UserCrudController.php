@@ -22,17 +22,17 @@ class UserCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
-        $roles = [ 'ROLE_ADMIN', 'ROLE_USER'];
+        $roles = ['ROLE_ADMIN', 'ROLE_USER'];
 
         return [
-        IdField::new('id')
+            IdField::new('id')
                 ->hideOnForm(),
             TextField::new('username')
                 ->setSortable(false),
             EmailField::new('email')
-            ->hideOnIndex(),
+                ->hideOnIndex(),
             TextField::new('FullName')
-            ->hideOnForm(),
+                ->hideOnForm(),
             TextField::new('firstName')
                 ->onlyOnForms(),
             TextField::new('lastName')
@@ -41,9 +41,9 @@ class UserCrudController extends AbstractCrudController
                 ->setSortable(false),
             BooleanField::new('IsVerified')
                 ->renderAsSwitch(false),
-             DateField::new('createdAt')
+            DateField::new('createdAt')
                 ->hideOnForm()
-            ->setLabel('Registration date'),
+                ->setLabel('Registration date'),
             ChoiceField::new('roles')
                 ->setChoices(array_combine($roles, $roles))
                 ->allowMultipleChoices()

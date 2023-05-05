@@ -79,6 +79,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\ManyToMany(targetEntity: self::class, inversedBy: 'following')]
     private Collection $follower;
+    #[ORM\Column]
+    private ?string $csrf_token='';
+
+    public function getCsrfToken(): ?string
+    {
+        return $this->csrf_token;
+    }
 
     #[ORM\ManyToMany(targetEntity: self::class, mappedBy: 'follower')]
     private Collection $following;
@@ -88,6 +95,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function __construct()
     {
+        $this->csrf_token = '';
         $this->compete = new ArrayCollection();
         $this->follower = new ArrayCollection();
         $this->following = new ArrayCollection();

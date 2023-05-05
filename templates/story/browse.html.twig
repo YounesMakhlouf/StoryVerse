@@ -7,7 +7,7 @@
             <header class="section-title" data-aos="fade-up">
                 <h2>Trending Stories</h2>
                 <p>Discover Our Hottest Stories 🔥🔥</p>
-                <p>Browse {{ genre ? genre : 'All genres' }}</p>
+                <p>Browse {{ genre ?? 'All genres' }}</p>
             </header>
             <div class="container">
                 <h3 class="mt-5 mb-4">Filter by Genre</h3>
@@ -46,8 +46,7 @@
                         </div>
                     {% endfor %}
                     {% if pager.haveToPaginate %}
-
-                    {{ pagerfanta(pager) }}
+                        {{ pagerfanta(pager) }}
                     {% endif %}
                 </article>
             </div>
@@ -55,6 +54,7 @@
     </section>
     <!-- End Trending Section -->
 {% endblock %}
+
  {% block javascripts %}
      {{ parent() }}
      {{ encore_entry_script_tags('feed') }}
