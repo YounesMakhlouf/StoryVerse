@@ -27,6 +27,8 @@ Encore
     .addEntry('feed', './assets/js/feed.js')
     .addEntry('home', './assets/js/home.js')
     .addEntry('admin', './assets/js/admin.js')
+    .addEntry('completed', './assets/js/CompletedStory.js')
+
 
 
     // enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
