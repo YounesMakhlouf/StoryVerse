@@ -2,22 +2,29 @@
 
 namespace App\Controller;
 
-use App\Entity\Story;
 use App\Repository\StoryRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class StorypageController extends AbstractController
-{
-    #[Route('/storypage/{storyID}', name: 'app_storypage')]
-    public function index(int $storyID, EntityManagerInterface $entityManager): Response
+{   #[IsGranted('ROLE_USER')]
+    #[Route('/storypage/{id}', name: 'app_storypage')]
+    public function index($id,StoryRepository $storyRepository): Response
     {
-        $story = $entityManager ->getRepository(Story::class)->find($storyID);
-       
+        $story=$storyRepository->find($id);
+        $title=$story->getTitle();
+        $contributions=$story->getContribution();
+        $genre=$story->getGenre();
+
         return $this->render('storypage/index.html.twig', [
-            'story' => $story
+            'controller_name' => 'CompletedStoryController',
+            'contributions'=>$contributions,
+            'title'=>$title,
+            'genre'=>$genre
+
         ]);
     }
+    
 }
