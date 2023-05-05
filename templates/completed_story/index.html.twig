@@ -25,7 +25,7 @@
                 <h5>Contributors</h5>
                 {% for contribution in contributions %}
                     {% for author in contribution.author %}
-                        <a href="#">
+                        <a href='{{ path('app_profile',{id:author.id}) }}'>
                     {{ author.username }}
                     </a>
                         <hr>
