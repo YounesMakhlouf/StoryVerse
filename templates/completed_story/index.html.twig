@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CompletedStory!{% endblock %}
+
+{% block body %}
+    <body  >
+            <div class="theme ">
+
+            </div>
+            <div class="page-content">
+
+                <div class="row">
+                <div  class="text col-8" >
+                    <div class="title">
+                        <h1>{{ title }}</h1>
+                    </div>
+                    {% for contribution in contributions %}
+                        {% for author in contribution.author %}
+                            <p id="{{ author.id }}">{{ contribution.content }}</p>
+                    {% endfor%}
+                    {% endfor%}
+
+                    <div class="line"></div>
+
+                </div>
+
+            <span  class="authors ">
+                <h5>Contributors</h5>
+                {% for contribution in contributions %}
+                    {% for author in contribution.author %}
+                        <a href='{{ path('app_profile',{id:author.id}) }}'>
+                    {{ author.username }}
+                    </a>
+                        <hr>
+                {% endfor %}
+                {% endfor %}
+
+        </span>
+    </div>
+    </div>
+
+        <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+    </body>
+    {% endblock %}
+
+ {% block stylesheets %}
+     {{ parent() }}
+     {{ encore_entry_link_tags('completed') }}
+     <link href="node_modules/bootstrap/dist/css/bootstrap.css"
+ {% endblock %}
+ {% block javascripts %}
+     {{ parent() }}
+     {{ encore_entry_script_tags('completed') }}
+
+ {% endblock %}
+

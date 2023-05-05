@@ -17,46 +17,54 @@ class StatController extends AbstractController
 {
     #[Route("/chart-data", name:"chart_data")]
 
-    public function chartData(UserRepository $userRepository): JsonResponse
+    public function GenderChart(UserRepository $userRepository): JsonResponse
     {
-        $results = $this->getResult($userRepository,'u','COUNT(u.id) as count','u.gender','u.gender');
- $data =[
-    'labels'=>["Male", "Female"],
-
-     'data'=> [$results[0]['count'] , $results[1]['count'] ]];
-
-        return new JsonResponse($data);
+        $results = $this->getResult($userRepository, 'u', 'COUNT(u.id) as count', 'u.gender', 'u.gender');
+        return $this->PrepareChartData($results);
     }
-
 
     #[Route("/language", name:"app_language")]
 
     public function LangChart(StoryRepository $storyRepository): Response{
 
         $results = $this->getResult($storyRepository,'s','COUNT(s.id) as count','s.language','s.language');
-        $countTable = array();
-        $languageTable = array();
-
-        foreach ($results as $result) {
-            $countTable[] = $result['count'];
-            $languageTable[] = $result['language'];
-        }
-
-        $data = array(
-            'data' => $countTable,
-            'labels' => $languageTable
-        );
-
-        return new JsonResponse($data);
+        return $this->PrepareChartData($results);
 
     }
+    #[Route("/genre", name:"app_genre")]
+
+    public function genreChart(StoryRepository $storyRepository): Response{
+
+        $results = $this
+            ->getResult($storyRepository,'s','COUNT(s.id) as count','s.genre','s.genre');
+        return $this->PrepareChartData($results);
+    }
+
 public function getResult($repository,$alias,$select1,$select2,$groupBy){
     $queryBuilder = $repository->createQueryBuilder($alias);
     $queryBuilder
         ->select($select1)
-        ->addSelect($select2)
+        ->addSelect($select2.' as data')
         ->groupBy($groupBy);
 
     return $queryBuilder->getQuery()->getResult();
+}
+
+public function PrepareChartData($results): JsonResponse
+{
+    $countTable = array();
+    $dataTable = array();
+
+    foreach ($results as $result) {
+        $countTable[] = $result['count'];
+        $dataTable[] = $result['data'];
+    }
+
+    $data = array(
+        'data' => $countTable,
+        'labels' => $dataTable
+    );
+
+    return new JsonResponse($data);
 }
 }

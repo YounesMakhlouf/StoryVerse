@@ -9,6 +9,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class ProfileController extends AbstractController
 {
@@ -20,7 +21,7 @@ class ProfileController extends AbstractController
         ]);
     }*/
 
-    
+        #[IsGranted('ROLE_USER')]
         #[Route('/profile/{id}', name: 'app_profile')]
         public function showProfile($id, EntityManagerInterface $entityManager): Response
         {

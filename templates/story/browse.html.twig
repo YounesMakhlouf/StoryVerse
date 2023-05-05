@@ -7,52 +7,61 @@
             <header class="section-title" data-aos="fade-up">
                 <h2>Trending Stories</h2>
                 <p>Discover Our Hottest Stories 🔥🔥</p>
+                <p>Browse {{ genre ?? 'All genres' }}</p>
             </header>
-
-
             <div class="container">
-                <h1>Browse {{ genre ? genre : 'All Genres' }}</h1>
-                <h2 class="mt-5 mb-4">Filter by Genre</h2>
-
+                <h3 class="mt-5 mb-4">Filter by Genre</h3>
                 <ul class="genre-list ps-0 mt-2 mb-3">
                     <li class="d-inline">
-                        <a class="btn btn-primary btn-sm" href="{{ path('app_browse_stories') }}">All</a>
+                        <a class="btn btn-primary genre"
+                           href='{{ path('app_browse_stories') }}'>All genres</a>
                     </li>
-                    {% for genre in genres %}
-                    <li class="d-inline">
-                        <a class="btn btn-primary btn-sm" href="{{ path('app_browse_stories', {
-                            genre:genre.name
-                        }) }}">{{ genre.name }}</a>
-                    </li>
+                    {% for g in genres %}
+                        <li class="d-inline">
+                            <a class="btn btn-primary genre"
+                               href='{{ path('app_browse_stories', {
+                                   'genre' : g
+                               }) }}'>{{ g }}</a>
+                        </li>
                     {% endfor %}
                 </ul>
-            </div>
-            <article class="row row-cols-1 row-cols-md-3 g-4" data-aos="fade-left">
-                {% for story in pager %}
-                    <div class="col">
-                        <a href=" {{ path('app_story_id', {slug:story.slug}) }}" rel="bookmark">
-                            <div class="card h-100" data-aos="zoom-in" data-aos-delay="400">
-                                <img alt="{{ story.title }}" class="card-img-top" src="{{ story.ImageUrl(300) }}">
-                                <div class="card-body">
-                                    <h5 class="card-title">{{ story.title }}</h5>
-                                    <p class="card-text">{# awel joumal #}</p>
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <small class="text-muted">{{ story.updatedAt | ago }}</small>
-                                        <small class="text-muted">{{ story.likes }} ❤️</small>
-                                    </div>
-                                    <div class="d-flex justify-content-end">
-                                        {% for genre in story.genre %}
-                                            <span class="badge rounded-pill text-bg-primary">{{ genre.name }}</span>
-                                        {% endfor %}
+                <article class="row row-cols-1 row-cols-md-3 g-4" data-aos="fade-left">
+                    {% for story in pager %}
+                        <div class="col">
+                            <a href=" {{ path('app_story_id', {slug:story.slug}) }}" rel="bookmark">
+                                <div class="card h-100" data-aos="zoom-in" data-aos-delay="400">
+                                    <img alt="{{ story.title }}" class="card-img-top"
+                                         src="{{ story.ImageUrl(300) }}">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ story.title }}</h5>
+                                        <p class="card-text">{# awel joumal #}</p>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <small class="text-muted">{{ story.updatedAt | ago }}</small>
+                                            <small class="text-muted">{{ story.likes }} ❤️</small>
+                                        </div>
+                                        <span class="badge rounded-pill text-bg-primary">{{ story.genre }}</span>
                                     </div>
                                 </div>
-                            </div>
-                        </a>
-                    </div>
-                {% endfor %}
-                {{ pagerfanta(pager) }}
-            </article>
+                            </a>
+                        </div>
+                    {% endfor %}
+                    {% if pager.haveToPaginate %}
+                        {{ pagerfanta(pager) }}
+                    {% endif %}
+                </article>
+            </div>
         </div>
     </section>
     <!-- End Trending Section -->
 {% endblock %}
+
+ {% block javascripts %}
+     {{ parent() }}
+     {{ encore_entry_script_tags('feed') }}
+ {% endblock %}
+
+
+ {% block stylesheets %}
+     {{ parent() }}
+     {{ encore_entry_link_tags('feed') }}
+ {% endblock %}
