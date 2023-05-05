@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="profile-container text-center">
+    <div class="profile-container text-center" style="margin-top: 80px">
         <div class="profile-cover">
                 <h1 class="profile-name"><br> Hello &nbsp&nbsp {{ user.username|upper }} &nbsp&nbsp!  </h1>
         </div>
@@ -46,12 +46,6 @@
             <span class="profile-following"><i class="fa-solid fa-user"></i>500 Following</span>
         </div>
         <br>
-        <br>
-
-        <button class="btn btn-warning">Follow</button>
-        <button class="btn btn-warning">Message</button>
-        <button class="btn btn-warning">Report</button>
-
         <br>
         <br>
         <br>
