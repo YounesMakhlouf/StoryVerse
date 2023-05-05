@@ -15,8 +15,11 @@
                         <h1>{{ title }}</h1>
                     </div>
                     {% for contribution in contributions %}
-                        <p>{{ contribution.content }}</p>
+                        {% for author in contribution.author %}
+                            <p id="{{ author.id }}">{{ contribution.content }}</p>
                     {% endfor%}
+                    {% endfor%}
+
                     <div class="line"></div>
 
                 </div>

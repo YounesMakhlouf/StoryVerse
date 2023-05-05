@@ -17,11 +17,14 @@ class CompletedStoryController extends AbstractController
         $story=$storyRepository->find($id);
         $title=$story->getTitle();
         $contributions=$story->getContribution();
+        $genre=$story->getGenre();
 
         return $this->render('completed_story/index.html.twig', [
             'controller_name' => 'CompletedStoryController',
             'contributions'=>$contributions,
-            'title'=>$title
+            'title'=>$title,
+            'genre'=>$genre
+
         ]);
     }
 }
