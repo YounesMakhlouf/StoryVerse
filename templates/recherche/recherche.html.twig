@@ -11,10 +11,12 @@
             {% for user in users %}
             <div class="col-md-3 mb-4">
                 <div class="card">
+                    <a href="{{ path('app_profile', {'id': user.id }) }}">
                     <img src="{{ user.avatar}}" class="card-img-top" alt="Profile Picture">
                     <div class="card-body">
                         <h5 class="card-title text-center">{{ user.username }}</h5>
                     </div>
+                    </a>
                 </div>
             </div>
             {% endfor %}
@@ -31,6 +33,7 @@
             {% for story in stories %}
                 <div class="col-md-3 mb-4">
                     <div class="card">
+                        <a href="{{ path('app_story_id', {'slug': story.slug }) }}">
                         <img src="{{ story.imageUrl() }}" class="card-img-top" alt="Story Image">
                         <div class="card-body">
                             <h5 class="card-title">{{ story.title }}</h5>
@@ -39,6 +42,7 @@
                                 <strong>Genre:</strong> {{ story.genre }}
                             </p>
                         </div>
+                        </a>
                     </div>
                 </div>
             {% endfor %}
