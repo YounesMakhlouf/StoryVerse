@@ -4,7 +4,6 @@ namespace App\DataFixtures;
 use App\Factory\ContributionFactory;
 use App\Factory\StoryFactory;
 use App\Factory\UserFactory;
-use App\Factory\UserFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 

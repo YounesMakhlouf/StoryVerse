@@ -18,7 +18,6 @@ class CompletedStoryController extends AbstractController
         $title=$story->getTitle();
         $contributions=$story->getContribution();
         $genre=$story->getGenre();
-
         return $this->render('completed_story/index.html.twig', [
             'controller_name' => 'CompletedStoryController',
             'contributions'=>$contributions,
