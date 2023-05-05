@@ -81,10 +81,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private Collection $follower;
     #[ORM\Column]
     private ?string $csrf_token='';
-    public function __construct()
-    {
-        $this->csrf_token = '';
-    }
 
     public function getCsrfToken(): ?string
     {
@@ -99,6 +95,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function __construct()
     {
+        $this->csrf_token = '';
         $this->compete = new ArrayCollection();
         $this->follower = new ArrayCollection();
         $this->following = new ArrayCollection();
