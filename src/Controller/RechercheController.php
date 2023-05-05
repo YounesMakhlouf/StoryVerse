@@ -17,6 +17,7 @@ public function search(Request $request, UserRepository $userRepository, StoryRe
 {
 $searchQuery = $request->query->get('searchQuery');
 
+
 // Recherche des utilisateurs dont le nom d'utilisateur contient la chaîne de recherche
 $users = $entityManager->createQueryBuilder()
 ->select('u')

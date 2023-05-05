@@ -94,7 +94,7 @@ class Story
         return $this;
     }
 
-    public function getImageUrl(int $width): string
+    public function getImageUrl(int $width=300): string
     {
         return sprintf(
             'https://picsum.photos/id/%d/%d',
