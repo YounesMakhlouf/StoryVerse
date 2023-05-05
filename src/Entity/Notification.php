@@ -23,6 +23,10 @@ class Notification
     #[ORM\Column(length: 100)]
     private ?string $content = null;
 
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?user $sender = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -50,6 +54,18 @@ class Notification
     public function setContent(string $content): self
     {
         $this->content = $content;
+
+        return $this;
+    }
+
+    public function getSender(): ?user
+    {
+        return $this->sender;
+    }
+
+    public function setSender(?user $sender): self
+    {
+        $this->sender = $sender;
 
         return $this;
     }
