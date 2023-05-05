@@ -60,7 +60,12 @@ class StoryRepository extends ServiceEntityRepository
 
     public function findAllOrderedByLikes(string $genre = null): array
     {
-        return $this->addOrderByLikesQueryBuilder()
+        $queryBuilder = $this->addOrderByLikesQueryBuilder();
+        if ($genre){
+            $queryBuilder -> andWhere("mix.genre = :genre")
+                ->setParameter('genre', $genre);
+        }
+        return $queryBuilder
             ->getQuery()
             ->getResult();
     }

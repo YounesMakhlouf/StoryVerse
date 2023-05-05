@@ -6,10 +6,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class AdminCotrollerController extends AbstractController
+class UserController extends AbstractController
 {
-    #[Route('/admin', name: 'app_add_admin')]
-    public function index(): Response
-    {return $this->render(':profile:index.html.twig');
+    #[Route("/user/{id}", name: 'app_user', methods: ['GET'])]
+    public function User($id): Response
+    {
+        return new Response('' . $id);
     }
 }

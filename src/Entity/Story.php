@@ -39,12 +39,11 @@ class Story
     private Collection $contribution;
 
     #[ORM\Column(length: 25, nullable: true)]
-    private ?string $Genre = null;
+    private ?string $genre = null;
 
     public function __construct()
     {
         $this->contribution = new ArrayCollection();
-        $this->genre = new ArrayCollection();
     }
 
     public function getTitle(): ?string
@@ -153,12 +152,12 @@ class Story
 
     public function getGenre(): ?string
     {
-        return $this->Genre;
+        return $this->genre;
     }
 
-    public function setGenre(?string $Genre): self
+    public function setGenre(?string $genre): self
     {
-        $this->Genre = $Genre;
+        $this->genre = $genre;
 
         return $this;
     }
