@@ -93,12 +93,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToOne(inversedBy: 'Author')]
     private ?Contribution $contribution = null;
 
+    
+    #[ORM\OneToMany(mappedBy: 'receiver', targetEntity: Notification::class)]
+    private Collection $notifications;
+
     public function __construct()
     {
         $this->csrf_token = '';
         $this->compete = new ArrayCollection();
         $this->follower = new ArrayCollection();
         $this->following = new ArrayCollection();
+        
+        $this->notifications = new ArrayCollection();
     }
 
     public function getBio(): ?string
@@ -350,5 +356,39 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function __toString(): string
     {
         return $this->getUsername();
+    }
+
+    
+
+   
+
+    /**
+     * @return Collection<int, Notification>
+     */
+    public function getNotifications(): Collection
+    {
+        return $this->notifications;
+    }
+
+    public function addNotification(Notification $notification): self
+    {
+        if (!$this->notifications->contains($notification)) {
+            $this->notifications->add($notification);
+            $notification->setReceiver($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNotification(Notification $notification): self
+    {
+        if ($this->notifications->removeElement($notification)) {
+            // set the owning side to null (unless already changed)
+            if ($notification->getReceiver() === $this) {
+                $notification->setReceiver(null);
+            }
+        }
+
+        return $this;
     }
 }

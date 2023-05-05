@@ -42,6 +42,8 @@ class Contribution
     #[ORM\OneToMany(mappedBy: 'contribution', targetEntity: User::class)]
     private Collection $Author;
 
+    
+
     public function __construct()
     {
         $this->children = new ArrayCollection();
@@ -173,3 +175,4 @@ class Contribution
         return $this;
     }
 }
+    
