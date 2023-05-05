@@ -1,6 +1,7 @@
 <?php
 
 namespace App\DataFixtures;
+
 use App\Factory\ContributionFactory;
 use App\Factory\StoryFactory;
 use App\Factory\UserFactory;
@@ -13,8 +14,12 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         StoryFactory::createMany(25);
-        ContributionFactory::createMany(100);
-        UserFactory::createMany(20);
+        UserFactory::createMany(50);
+        ContributionFactory::createMany(100, function () {
+            return [
+                'story' => StoryFactory::random()
+            ];
+        });
         $manager->flush();
     }
 }
