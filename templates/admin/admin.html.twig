@@ -6,7 +6,7 @@
 {% block content_header_wrapper %}
 {% endblock  content_header_wrapper %}
 
-{#remove search and replace it with title in the dashboard#}
+{# remove search and replace it with title in the dashboard #}
 
  {% block content_top_header %}
 <div class="content-search">
@@ -21,14 +21,14 @@
         "{% endblock %}
 
 
-{% block header %}
-    <span class="logo"><img alt="StoryVerse logo" class="img-fluid" src="{{ asset('build/images/logo.webp') }}">StoryVerse</span>
-     {% endblock %}
-{% block main %}
+    {% block header %}
+        <span class="logo"><img alt="StoryVerse logo" class="img-fluid" src="{{ asset('build/images/logo.webp') }}">StoryVerse</span>
+    {% endblock %}
+    {% block main %}
     {{ parent() }}
     <div class="row">
 
-{#Users card #}
+        {# Users card #}
 
         <div class="col-lg-3 col-md-6 col-sm-6">
             <div class="card card-stats">
@@ -38,32 +38,32 @@
                             <i class="fa-solid fa-users fa-2xl" style="color:#ff7e67; "></i>
                         </div>
                         <div class="col-7 col-md-8">
-                                <h5 class="card-category">Members</h5>
-                                <p class="card-title">{{ users }}</p>
+                            <h5 class="card-category">Members</h5>
+                            <p class="card-title">{{ users }}</p>
                         </div>
                     </div>
                 </div>
                 <div class="card-footer ">
                     <hr>
                     <div class="stats">
-                        <a href="{{ path('app_admin') }}" ><i class="fa fa-refresh"></i>
+                        <a href="{{ path('app_admin') }}"><i class="fa fa-refresh"></i>
                             Update Now</a>
                     </div>
                 </div>
             </div>
         </div>
-{#        Stories Card#}
+        {#        Stories Card #}
 
         <div class="col-lg-3 col-md-6 col-sm-6">
             <div class="card card-stats">
                 <div class="card-body ">
                     <div class="row">
                         <div class="col-5 col-md-4">
-                            <i class="fa-solid fa-book-open fa-2xl"  style="color:#ff7e67; "></i>
+                            <i class="fa-solid fa-book-open fa-2xl" style="color:#ff7e67; "></i>
                         </div>
                         <div class="col-7 col-md-8">
-                                <h5 class="card-category">Stories</h5>
-                                <p class="card-title"> {{ story }}</p>
+                            <h5 class="card-category">Stories</h5>
+                            <p class="card-title"> {{ story }}</p>
 
                         </div>
                     </div>
@@ -71,14 +71,14 @@
                 <div class="card-footer ">
                     <hr>
                     <div class="stats">
-                        <a href="{{ path('app_admin') }}" ><i class="fa fa-refresh"></i>
+                        <a href="{{ path('app_admin') }}"><i class="fa fa-refresh"></i>
                             Update Now</a>
                     </div>
                 </div>
             </div>
         </div>
 
-{#        Interactions card #}
+        {#        Interactions card #}
 
         <div class="col-lg-3 col-md-6 col-sm-6">
             <div class="card card-stats">
@@ -86,25 +86,25 @@
                     <div class="row">
                         <div class="col-5 col-md-4">
                             <div class="icon-big text-center icon-warning">
-                                <i class="fa-solid fa-heart fa-2xl" style="color:#ff7e67; "></i>                            </div>
+                                <i class="fa-solid fa-heart fa-2xl" style="color:#ff7e67; "></i></div>
                         </div>
                         <div class="col-7 col-md-8">
 
-                                <h5 class="card-category">Interactions</h5>
-                                <p class="card-title">{{ interaction }}</p>
+                            <h5 class="card-category">Interactions</h5>
+                            <p class="card-title">{{ interaction }}</p>
 
                         </div>
                     </div>
                 </div>
                 <div class="card-footer ">
                     <hr>
-                    <a href="{{ path('app_admin') }}" ><i class="fa fa-refresh"></i>
+                    <a href="{{ path('app_admin') }}"><i class="fa fa-refresh"></i>
                         Update Now</a>
                 </div>
             </div>
         </div>
 
-{#        challenges card#}
+        {#        challenges card #}
 
         <div class="col-lg-3 col-md-6 col-sm-6">
             <div class="card card-stats">
@@ -116,8 +116,8 @@
                             </div>
                         </div>
                         <div class="col-7 col-md-8">
-                                <h5 class="card-category">Challenges</h5>
-                                <p class="card-title">450</p>
+                            <h5 class="card-category">Challenges</h5>
+                            <p class="card-title">450</p>
 
                         </div>
                     </div>
@@ -125,8 +125,8 @@
                 <div class="card-footer ">
                     <hr>
                     <div class="stats">
-                       <a href="{{ path('app_admin') }}" ><i class="fa fa-refresh"></i>
-                           Update Now</a>
+                        <a href="{{ path('app_admin') }}"><i class="fa fa-refresh"></i>
+                            Update Now</a>
                     </div>
                 </div>
             </div>
@@ -134,11 +134,11 @@
     </div>
 
 
-{#    Statistics section #}
+    {#    Statistics section #}
     <div class="row">
         <h1>Statistics</h1>
         <hr>
-{#        Story genre Statistics#}
+        {#        Story genre Statistics #}
         <div class="row">
             <div class="col-md-12">
                 <div class="card ">
@@ -158,48 +158,49 @@
             </div>
         </div>
 
-{#        Gender statistics #}
+        {#        Gender statistics #}
 
         <div class="col-md-4">
 
             <div class="card ">
-            <div class="card-header ">
-                <h5 class="card-title">Gender Statistics</h5>
-            </div>
-            <div class="card-body ">
-                <canvas id="gender_chart"  style="max-width: 200px;max-height: 200px"></canvas>
-            </div>
-            <div class="card-footer ">
+                <div class="card-header ">
+                    <h5 class="card-title">Gender Statistics</h5>
+                </div>
+                <div class="card-body ">
+                    <canvas id="gender_chart" style="max-width: 200px;max-height: 200px"></canvas>
+                </div>
+                <div class="card-footer ">
 
+                </div>
+            </div>
+        </div>
+        {#        language statistics #}
+
+        <div class="col-md-8">
+            <div class="card card-chart">
+                <div class="card-header">
+                    <h5 class="card-title">Story Language Analysis</h5>
+                </div>
+                <div class="card-body">
+                    <canvas id="language_chart" style="max-width: 400px;max-height: 200px"></canvas>
+                </div>
+                <div class="card-footer">
+
+                </div>
             </div>
         </div>
     </div>
-{#        language statistics #}
-
-    <div class="col-md-8">
-        <div class="card card-chart">
-            <div class="card-header">
-                <h5 class="card-title">Story Language Analysis</h5>
-            </div>
-            <div class="card-body">
-                <canvas id="language_chart" style="max-width: 400px;max-height: 200px"></canvas>
-            </div>
-            <div class="card-footer">
-
-            </div>
-        </div>
-    </div>
-    </div>
+</div>
 
 
 {% endblock %}
 
 
-    {% block body_javascript %}
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/0.2.0/Chart.min.js" type="text/javascript"></script>
+{% block body_javascript %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/0.2.0/Chart.min.js"
+            type="text/javascript"></script>
 
-    {% endblock body_javascript %}
-
+{% endblock body_javascript %}
 
 
 

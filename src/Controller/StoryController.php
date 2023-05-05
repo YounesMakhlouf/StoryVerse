@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Story;
-//use App\Repository\GenreRepository;
 use App\Repository\StoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Pagerfanta\Doctrine\ORM\QueryAdapter;
@@ -15,14 +14,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class StoryController extends AbstractController
 {
-    #[Route('/story', name: 'app_story')]
-    public function index(): Response
-    {
-        return $this->render('story/index.html.twig', [
-            'controller_name' => 'StoryController'
-        ]);
-    }
-
     #[Route('/story/new', name: 'app_add_story')]
     public function new(EntityManagerInterface $entityManager): Response
     {
@@ -42,13 +33,14 @@ class StoryController extends AbstractController
     #[Route('/story/browse/{genre}', name: 'app_browse_stories')]
     public function browse(StoryRepository $storyRepository, Request $request, string $genre = null): Response
     {
+        $maxPerPage = $this->getParameter('max_stories_per_page');
+        $genres = $this->getParameter('story_genres');
         $queryBuilder = $storyRepository->createOrderedByLikesQueryBuilder($genre);
-        $genres = ['Horror', 'Fiction', 'Mystery', 'Comedy', 'Drama', 'Romance'];
         $adapter = new QueryAdapter($queryBuilder);
         $pagerfanta = Pagerfanta::createForCurrentPageWithMaxPerPage(
             $adapter,
             $request->query->get('page', 1),
-            9
+            $maxPerPage
         );
         return $this->render('story/browse.html.twig', [
             'genre' => $genre,
