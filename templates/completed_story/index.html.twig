@@ -16,12 +16,11 @@
                     </div>
                     {% for contribution in contributions %}
                         {% for author in contribution.author %}
-                            <p id="{{ author.id }}">{{ contribution.content }}</p>
+                            <p id="{{ author.id }}">
                     {% endfor%}
+                        {{ contribution.content }}</p>
                     {% endfor%}
-
                     <div class="line"></div>
-
                 </div>
 
             <span  class="authors ">
@@ -36,7 +35,8 @@
                         <button type="button" class="btn btn-outline-secondary">Follow</button>
                         </a>
                         <hr>
-                {% endfor %}
+
+                    {% endfor %}
                 {% endfor %}
 
         </span>
