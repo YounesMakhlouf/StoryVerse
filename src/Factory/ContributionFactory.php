@@ -53,7 +53,6 @@ final class ContributionFactory extends ModelFactory
             'position' => self::faker()->numberBetween(1, 20),
             'reported' => self::faker()->boolean(),
             'updatedAt' => self::faker()->dateTime(),
-            'story' => StoryFactory::random()
         ];
     }
 
