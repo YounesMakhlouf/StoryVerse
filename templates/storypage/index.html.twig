@@ -3,6 +3,21 @@ endblock %} {% block body %}
 <body>
   <main style="margin-top: 20px">
     <div class="parts">
+      {% for contribution in contributions %}
+      <div class="part">
+        <div class="contributions">
+          <div class="contribution row">
+            <div class="col-2 name">
+              <h3>{# contribution.author #} example</h3>
+            </div>
+            <div class="text col-9">
+              <p>{{ contribution.content }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+
       <div class="part">
         <div class="contributions">
           <div class="contribution row">
