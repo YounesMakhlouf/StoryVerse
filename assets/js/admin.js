@@ -2,7 +2,6 @@ import '../styles/admin.scss';
 import '../bootstrap';
 import'../img/logo.webp';
 import {Chart} from "chart.js";
-import {drawPointLegend} from "chart.js/helpers";
 
 function CreateChart(url,id,colors,type,lengendVisibility){
     fetch(url).then(response => response.json())
