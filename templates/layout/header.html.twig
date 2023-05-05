@@ -6,11 +6,17 @@
                      class="d-inline-block align-text-top">
                 StoryVerse
             </a>
-            <form class="d-flex form" role="search">
-                <i class="fa fa-magnifying-glass"></i>
-                <input class="form-control form-input me-2" type="search" placeholder="Search anything..."
-                       aria-label="Search">
+            <form method="get" action="{{ path('app_search') }}">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search" name="searchQuery">
+                    <div class="input-group-append">
+                        <button class="btn btn-secondary" type="submit">
+                            <i class="fa fa-magnifying-glass"></i>
+                        </button>
+                    </div>
+                </div>
             </form>
+
 
             <nav class="navbar" id="navbar">
                 <ul>
