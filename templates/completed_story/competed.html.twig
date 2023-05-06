@@ -4,46 +4,79 @@
 
 {% block body %}
     <body>
-            <div class="theme ">
+    <div class="theme ">
 
-            </div>
+        </div>
             <div class="page-content">
 
                 <div class="row">
-                <div  class="text col-8" >
-                    <div class="title">
+                    <div  class="text col-8" >
+                        <div class="title">
                         <h1>{{ title }}</h1>
+                        </div>
+                        {% for contribution in contributions %}
+                                <p id="{{ contribution.author.id }}">
+                            {{ contribution.content }}</p>
+                        {% endfor%}
                     </div>
-                    {% for contribution in contributions %}
-                        {% for author in contribution.author %}
-                            <p id="{{ author.id }}">
-                    {% endfor%}
-                        {{ contribution.content }}</p>
-                    {% endfor%}
-                    <div class="line"></div>
+
+                    <span  class="authors ">
+                        <h5></h5>
+                        {% for contribution in contributions %}
+                                <a href='{{ path('follow_user',{id:contribution.author.id}) }}'>
+
+                            {{ contribution.author.username}}
+                            </a>
+                                    <a href="{{ path('app_profile',{id:contribution.author.id})}}">
+                                <button type="button" class="btn btn-outline-secondary">Follow</button>
+                                </a>
+                                <hr>
+
+                        {% endfor %}
+
+                     </span>
                 </div>
 
-            <span  class="authors ">
-                <h5>Contributors</h5>
-                {% for contribution in contributions %}
-                    {% for author in contribution.author %}
-                        <a href='{{ path('follow_user',{id:author.id}) }}'>
+{#            comment section  #}
 
-                    {{ author.username }}
-                    </a>
-                            <a href="{{ path('app_profile',{id:author.id})}}">
-                        <button type="button" class="btn btn-outline-secondary">Follow</button>
-                        </a>
-                        <hr>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="post-content">
+                        <div class="post-container">
+                            <div class="post-detail">
+                                <div class="user-info">
+                                    <h5><a href="" class="profile-link">Alexis Clark</a> <span class="following">following</span></h5>
+                                    <p class="text-muted">Published a photo about 3 mins ago</p>
+                                </div>
+                                <div class="reaction">
+                                    <a class="btn text-green"><i class="fa fa-thumbs-up"></i> 13</a>
+                                    <a class="btn text-red"><i class="fa fa-thumbs-down"></i> 0</a>
+                                </div>
+                                <div class="line-divider"></div>
+                                <div class="post-text">
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. <i class="em em-anguished"></i> <i class="em em-anguished"></i> <i class="em em-anguished"></i></p>
+                                </div>
+                                <div class="line-divider"></div>
+                                <div class="post-comment">
+                                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="" class="profile-photo-sm">
+                                    <p><a href="" class="profile-link">Diana </a><i class="em em-laughing"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
+                                </div>
+                                <div class="post-comment">
+                                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" class="profile-photo-sm">
+                                    <p><a href="" class="profile-link">John</a> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
+                                </div>
+                                <div class="post-comment">
+                                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="" class="profile-photo-sm">
+                                    <input type="text" class="form-control" placeholder="Post a comment">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
 
-                    {% endfor %}
-                {% endfor %}
-
-        </span>
-    </div>
-    </div>
-
-        <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
     </body>
     {% endblock %}
 

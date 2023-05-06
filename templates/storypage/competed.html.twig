@@ -3,18 +3,18 @@
 {% block title %}CompletedStory!{% endblock %}
 
 {% block body %}
-    <body  >
+    <body>
             <div class="theme ">
 
             </div>
             <div class="page-content">
 
                 <div class="row">
-<div class="col-1" id="fixed">
-        <i class="fa-regular fa-heart fa-2xl" style="color: #d31717;"></i>
-    <div>5000</div>
+                    <div class="col-1" id="fixed">
+                            <i class="fa-regular fa-heart fa-2xl" style="color: #d31717;"></i>
+                        <div>5000</div>
 
-</div>
+                    </div>
                 <div  class="text col-8" >
                     <div class="title">
                         <h1>{{ title }}</h1>
@@ -39,7 +39,53 @@
 
         </span>
     </div>
-    </div>
+            </div>
+
+
+
+{#            comment section #}
+
+
+            <div class="col-8">
+                <div class="be-comment-block">
+                    <h1 class="comments-title">Comments (3)</h1>
+                    <div class="be-comment">
+                        <div class="be-img-comment">
+                            <a href="">
+                                <img src="https://cdn.icon-icons.com/icons2/1736/PNG/512/4043251-avatar-female-girl-woman_113291.png" alt="" class="be-ava-comment">
+                            </a>
+                        </div>
+                        <div class="be-comment-content">
+
+				<span class="be-comment-name">
+					<a href="">Ravi Sah</a>
+					</span>
+                            <span class="be-comment-time">
+					<i class="fa fa-clock-o"></i>
+					May 27, 2015 at 3:14am
+				</span>
+
+                            <p class="be-comment-text">
+                                Pellentesque gravida tristique ultrices.
+                                Sed blandit varius mauris, vel volutpat urna hendrerit id.
+                                Curabitur rutrum dolor gravida turpis tristique efficitur.
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <form class="form-block">
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="form-group">
+                                    <input class="form-input" required="" placeholder="Your text"></input>
+                                </div>
+                            </div>
+                            <a class=" col-2 btn btn-info pull-right">submit</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
 
         <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
     </body>
