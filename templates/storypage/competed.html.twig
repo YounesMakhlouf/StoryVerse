@@ -17,10 +17,10 @@
                     </div>
                 <div  class="text col-8" >
                     <div class="title">
-                        <h1>{{ title }}</h1>
+                        <h1>{{ story.title }}</h1>
                     </div>
 
-                    {% for contribution in contributions %}
+                    {% for contribution in story.contributions %}
                             <p id="{{ contribution.author.id }}">{{ contribution.content }}</p>
                     {% endfor%}
 
@@ -30,7 +30,7 @@
 
             <span  class="authors ">
                 <h5>Contributors</h5>
-                {% for contribution in contributions %}
+                {% for contribution in story.contributions %}
                         <a href='{{ path('app_profile',{id:contribution.author.id}) }}'>
                     {{ contribution.author.username }}
                     </a>
@@ -48,8 +48,8 @@
 
             <div class="col-8">
                 <div class="be-comment-block">
-                    <h1 class="comments-title">Comments ({{ comments|length }})</h1>
-                    {% for comment in comments %}
+                    <h1 class="comments-title">Comments ({{ story.comments|length }})</h1>
+                    {% for comment in story.comments %}
                     <div class="be-comment">
                         <div class="be-img-comment">
                             <a href="">
@@ -108,14 +108,14 @@
 
                         {% endif %}
                     {% endfor %}
-                    <form class="form-block">
+                    <form method="get" action="{{ path('app_add_comment',{id:story.id}) }}">
                         <div class="row">
                             <div class="col-8">
                                 <div class="form-group">
-                                    <input class="form-input" required="" placeholder="Your text"></input>
+                                        <input  name="content" class="form-input" required="" placeholder="add your comment"/>
                                 </div>
                             </div>
-                            <a class=" col-2 btn btn-info pull-right">submit</a>
+                            <button type="submit" class=" col-2 btn btn-info pull-right">submit</button>
                         </div>
                     </form>
                 </div>
