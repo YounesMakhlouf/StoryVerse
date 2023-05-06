@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use DateTimeImmutable;
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -64,25 +65,26 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: Competition::class, inversedBy: 'users')]
     private Collection $compete;
 
-    #[ORM\ManyToMany(targetEntity: self::class, inversedBy: 'following')]
+    #[ORM\ManyToMany(targetEntity: self::class, inversedBy: 'following', fetch: 'EXTRA_LAZY')]
     private Collection $follower;
     #[ORM\Column]
     private ?string $csrf_token;
 
-    #[ORM\ManyToMany(targetEntity: self::class, mappedBy: 'follower')]
+    #[ORM\ManyToMany(targetEntity: self::class, mappedBy: 'follower', fetch: 'EXTRA_LAZY')]
     private Collection $following;
 
     #[ORM\OneToMany(mappedBy: 'author', targetEntity: Contribution::class)]
     private Collection $contributions;
 
     #[ORM\Column(type: Types::DATE_IMMUTABLE, nullable: true)]
-    private ?\DateTimeImmutable $dateOfBirth = null;
+    private ?DateTimeImmutable $dateOfBirth = null;
 
     #[ORM\Column(length: 30, nullable: true)]
     private ?string $country = null;
 
     #[ORM\OneToMany(mappedBy: 'author', targetEntity: Comment::class, orphanRemoval: true)]
     private Collection $comments;
+    #[ORM\OneToMany(mappedBy: 'receiver', targetEntity: Notification::class)]
 
     public function __construct()
     {
@@ -90,6 +92,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->compete = new ArrayCollection();
         $this->follower = new ArrayCollection();
         $this->following = new ArrayCollection();
+        
+        $this->notifications = new ArrayCollection();
+
         $this->contributions = new ArrayCollection();
         $this->comments = new ArrayCollection();
     }
@@ -346,6 +351,27 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->getUsername();
     }
 
+
+    
+
+   
+
+    /**
+     * @return Collection<int, Notification>
+     */
+    public function getNotifications(): Collection
+    {
+        return $this->notifications;
+    }
+
+    public function addNotification(Notification $notification): self
+    {
+        if (!$this->notifications->contains($notification)) {
+            $this->notifications->add($notification);
+            $notification->setReceiver($this);
+        }
+    }
+
     /**
      * @return Collection<int, Contribution>
      */
@@ -359,10 +385,23 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         if (!$this->contributions->contains($contribution)) {
             $this->contributions->add($contribution);
             $contribution->setAuthor($this);
+
         }
 
         return $this;
     }
+
+
+    public function removeNotification(Notification $notification): self
+    {
+        if ($this->notifications->removeElement($notification)) {
+            // set the owning side to null (unless already changed)
+            if ($notification->getReceiver() === $this) {
+                $notification->setReceiver(null);
+            }
+        }
+    }
+        
 
     public function removeContribution(Contribution $contribution): self
     {
@@ -370,6 +409,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($contribution->getAuthor() === $this) {
                 $contribution->setAuthor(null);
+
             }
         }
 
@@ -381,12 +421,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->csrf_token;
     }
 
-    public function getDateOfBirth(): ?\DateTimeImmutable
+    public function getDateOfBirth(): ?DateTimeImmutable
     {
         return $this->dateOfBirth;
     }
 
-    public function setDateOfBirth(?\DateTimeImmutable $dateOfBirth): self
+    public function setDateOfBirth(?DateTimeImmutable $dateOfBirth): self
     {
         $this->dateOfBirth = $dateOfBirth;
 

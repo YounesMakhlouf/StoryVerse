@@ -3,6 +3,21 @@ endblock %} {% block body %}
 <body>
   <main style="margin-top: 20px">
     <div class="parts">
+      {% for contribution in contributions %}
+      <div class="part">
+        <div class="contributions">
+          <div class="contribution row">
+            <div class="col-2 name">
+              <h3>{# contribution.author #} example</h3>
+            </div>
+            <div class="text col-9">
+              <p>{{ contribution.content }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+
       <div class="part">
         <div class="contributions">
           <div class="contribution row">
@@ -88,7 +103,31 @@ endblock %} {% block body %}
         </div>
       </div>
     </div>
+
+    <i id="like-icon" class="fas fa-thumbs-up"></i>
   </main>
+  <script>
+    // add an event listener to the icon
+    document.getElementById("like-icon").addEventListener("click", function () {
+      // create a new XMLHttpRequest object
+      var xhr = new XMLHttpRequest();
+      xhr.open("POST", '{{ path("app_notification_create") }}');
+
+      xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+      // set the data to be sent in the request body
+      var data = new FormData();
+      data.append("content", "you got a like");
+      data.append("sender_id", "1");
+      data.append("receiver_id", "2");
+
+      // send the request
+      xhr.send(data);
+
+      // display a confirmation message to the user
+      alert("You liked this!");
+    });
+  </script>
 </body>
 {% endblock %} {% block stylesheets %}
 {{ parent() }}
