@@ -49,7 +49,6 @@ final class StoryFactory extends ModelFactory
         return [
             'createdAt' => self::faker()->dateTime(),
             'language' => self::faker()->randomElement(['french', 'english', 'arabic','italian','spanish']),
-            'likes' => self::faker()->numberBetween(0, 1000),
             'title' => self::faker()->sentence(5),
             'status'=>'pending',
             'genre'=>self::faker()->randomElement(['Horror', 'Fiction', 'Mystery','Comedy','Drama','Romance']),

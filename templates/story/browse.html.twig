@@ -37,7 +37,7 @@
                                         <p class="card-text">{# awel joumal #}</p>
                                         <div class="d-flex justify-content-between align-items-center">
                                             <small class="text-muted">{{ story.updatedAt | ago }}</small>
-                                            <small class="text-muted">{{ story.likes }} ❤️</small>
+                                            <small class="text-muted">{{ story.likes|length }} ❤️</small>
                                         </div>
                                         <span class="badge rounded-pill text-bg-primary">{{ story.genre }}</span>
                                     </div>
