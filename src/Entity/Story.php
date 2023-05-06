@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\StoryRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation\Slug;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
@@ -35,6 +37,14 @@ class Story
 
     #[ORM\Column(length: 25, nullable: true)]
     private ?string $genre = null;
+
+    #[ORM\OneToMany(mappedBy: 'story', targetEntity: contribution::class)]
+    private Collection $contributions;
+
+    public function __construct()
+    {
+        $this->contributions = new ArrayCollection();
+    }
 
 
     public function getTitle(): ?string
@@ -119,6 +129,36 @@ class Story
     public function setGenre(?string $genre): self
     {
         $this->genre = $genre;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, contribution>
+     */
+    public function getContributions(): Collection
+    {
+        return $this->contributions;
+    }
+
+    public function addContribution(contribution $contribution): self
+    {
+        if (!$this->contributions->contains($contribution)) {
+            $this->contributions->add($contribution);
+            $contribution->setStory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeContribution(contribution $contribution): self
+    {
+        if ($this->contributions->removeElement($contribution)) {
+            // set the owning side to null (unless already changed)
+            if ($contribution->getStory() === $this) {
+                $contribution->setStory(null);
+            }
+        }
 
         return $this;
     }

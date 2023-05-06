@@ -31,13 +31,12 @@ class Contribution
     #[ORM\Column]
     private int $likes = 0;
 
-    #[ORM\ManyToOne(inversedBy: 'contribution')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Story $story = null;
-
     #[ORM\ManyToOne(inversedBy: 'contributions')]
     #[ORM\JoinColumn(nullable: false)]
     private ?user $author = null;
+
+    #[ORM\ManyToOne(inversedBy: 'contributions')]
+    private ?Story $story = null;
 
     public function getId(): ?int
     {
@@ -92,18 +91,6 @@ class Contribution
         return $this;
     }
 
-    public function getStory(): ?Story
-    {
-        return $this->story;
-    }
-
-    public function setStory(?Story $story): self
-    {
-        $this->story = $story;
-
-        return $this;
-    }
-
     public function getAuthor(): ?user
     {
         return $this->author;
@@ -112,6 +99,18 @@ class Contribution
     public function setAuthor(?user $author): self
     {
         $this->author = $author;
+
+        return $this;
+    }
+
+    public function getStory(): ?Story
+    {
+        return $this->story;
+    }
+
+    public function setStory(?Story $story): self
+    {
+        $this->story = $story;
 
         return $this;
     }
