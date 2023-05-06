@@ -10,10 +10,16 @@
             <div class="page-content">
 
                 <div class="row">
+<div class="col-1" id="fixed">
+        <i class="fa-regular fa-heart fa-2xl" style="color: #d31717;"></i>
+    <div>5000</div>
+
+</div>
                 <div  class="text col-8" >
                     <div class="title">
                         <h1>{{ title }}</h1>
                     </div>
+
                     {% for contribution in contributions %}
                         {% for author in contribution.author %}
                             <p id="{{ author.id }}">{{ contribution.content }}</p>
