@@ -11,3 +11,7 @@ app_modify_profile:
   path: /modify-profile
   controller: App\Controller\MyProfileController::modifyProfile
   methods: [GET, POST]
+
+app_notification_create:
+  path: /notification/create
+  controller: App\Controller\NotificationController::create
