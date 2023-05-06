@@ -14,19 +14,9 @@ body{
 .theme{
 
   height:50%;
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 200px;
-  left: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 50px;
+
   background-image: url(https://images.unsplash.com/photo-1442606383395-175ee96ed967?q=80&fm=jpg&s=5c8c74be9bc91b47c79a1aaf92264be5);
-  background-size: cover;
-  background-position: center;
-  overflow: hidden;
+
   .title{
     z-index: 1;
   }
