@@ -21,4 +21,9 @@ var imageThemeEffect = function() {
 
 imageThemeEffect();
 
+ $("#arrow").click(function() {
+     $(".reply").show();
+     $(".icon").hide();
+     $(".reply").css("margin-left","10%");
+ });
 
