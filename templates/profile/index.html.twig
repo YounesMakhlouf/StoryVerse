@@ -36,9 +36,9 @@
         {% endif %}
 
         <div class="profile-stats">
-            <span class="profile-followers"><i class="fa-solid fa-user"></i>{{ user.getFollowers.count() ?? 0 }} Followers</span>
+            <span class="profile-followers"><i class="fa-solid fa-user"></i>{{ user.follower|length }} Followers</span>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <span class="profile-following"><i class="fa-solid fa-user"></i>{{ user.getFollowing.count() ?? 0 }} Following</span>
+            <span class="profile-following"><i class="fa-solid fa-user"></i>{{ user.following|length }} Following</span>
         </div>
         <br>
         <br>

@@ -41,8 +41,6 @@ class ProfileController extends AbstractController
         return $this->render('profile/index.html.twig', [
             'user' => $user,
             'is_following' => $isFollowing,
-            'phoneNumber' => '+216 55 216 719',
-            'email' => 'storyverse19@gmail.com'
         ]);
     }
 }
