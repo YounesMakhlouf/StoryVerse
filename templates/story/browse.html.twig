@@ -29,7 +29,7 @@
                     {% for story in pager %}
                         <div class="col">
                             <a href=" {{ path('app_story_id', {slug:story.slug}) }}" rel="bookmark">
-                                <div class="card h-100" data-aos="zoom-in" data-aos-delay="400">
+                                <div class="card h-100" data-aos="zoom-in" data-aos-delay="0">
                                     <img alt="{{ story.title }}" class="card-img-top"
                                          src="{{ story.ImageUrl(300) }}">
                                     <div class="card-body">
