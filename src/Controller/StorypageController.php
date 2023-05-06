@@ -17,12 +17,13 @@ class StorypageController extends AbstractController
         $title=$story->getTitle();
         $contributions=$story->getContributions();
         $genre=$story->getGenre();
-
+        $comments=$story->getComments();
         return $this->render('storypage/competed.html.twig', [
             'controller_name' => 'CompletedStoryController',
             'contributions'=>$contributions,
             'title'=>$title,
-            'genre'=>$genre
+            'genre'=>$genre,
+            'comments'=>$comments
 
         ]);
     }
