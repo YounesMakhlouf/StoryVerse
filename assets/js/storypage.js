@@ -1,5 +1,5 @@
 import "../styles/Storypage.scss";
-console.log("hehe");
+console.log("hehe2");
 
 /* adding highlight functions*/
 function addHighlightByClassName(className) {

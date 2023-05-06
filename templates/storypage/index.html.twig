@@ -3,7 +3,7 @@ endblock %} {% block body %}
 <body>
   <main style="margin-top: 20px">
     <div class="parts">
-      {% for contribution in contributions %}
+      {% for contribution in story.contributions %}
       <div class="part">
         <div class="contributions">
           <div class="contribution row">
@@ -109,23 +109,29 @@ endblock %} {% block body %}
   <script>
     // add an event listener to the icon
     document.getElementById("like-icon").addEventListener("click", function () {
-      // create a new XMLHttpRequest object
-      var xhr = new XMLHttpRequest();
-      xhr.open("POST", '{{ path("app_notification_create") }}');
+      // create a new FormData object to store the data
+      var formData = new FormData();
+      formData.append("content", "you got a like");
+      formData.append("sender_id", "151");
+      formData.append("receiver_id", "152");
 
-      xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-
-      // set the data to be sent in the request body
-      var data = new FormData();
-      data.append("content", "you got a like");
-      data.append("sender_id", "1");
-      data.append("receiver_id", "2");
-
-      // send the request
-      xhr.send(data);
-
-      // display a confirmation message to the user
-      alert("You liked this!");
+      // send a POST request using fetch
+      fetch("../notification/create", {
+        method: "POST",
+        body: formData,
+      })
+        .then((response) => {
+          if (response.ok) {
+            // display a confirmation message to the user
+            alert("You liked this!");
+          } else {
+            throw new Error("Something went wrong");
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          alert("An error occurred");
+        });
     });
   </script>
 </body>

@@ -35,7 +35,10 @@ class StorypageController extends AbstractController
             ]);
         }
 
-        return $this->render('storypage/competed.html.twig', [
+
+
+        return $this->render('storypage/index.html.twig', [
+
             'controller_name' => 'CompletedStoryController',
            'story'=>$story,
             'form' => $form->createView(),
