@@ -2,7 +2,7 @@
 
 namespace App\Service ;
 
-class RandomNumberGenerator
+class NotificationService
 {
     public function generate(int $min, int $max): int
     {

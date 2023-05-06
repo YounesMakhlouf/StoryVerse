@@ -1,4 +1,5 @@
 import "../styles/Storypage.scss";
+console.log("hehe");
 
 /* adding highlight functions*/
 function addHighlightByClassName(className) {
@@ -90,6 +91,7 @@ function removeChildrenByClassName(parentNode, className) {
     }
   }
 }
+console.log("hehe");
 
 //mouse scrolling functions
 function wheelHorizontalScrollingToContributions() {
@@ -111,61 +113,61 @@ addHighlightByClassName("contribution");
 addVotesHider();
 scrollingTransformer();
 
-const addbuttons = document.querySelectorAll(".fas"); // takes all the active + addbuttons
+// const addbuttons = document.querySelectorAll(".fas"); // takes all the active + addbuttons
 
-addbuttons.forEach((addbutton) => {
-  addbutton.addEventListener("click", addEmptyContribution); // makes the button add empty cars
-});
+// addbuttons.forEach((addbutton) => {
+//   addbutton.addEventListener("click", addEmptyContribution); // makes the button add empty cars
+// });
 
-function addEmptyContribution(e) {
-  const button = e.target;
-  const buttondiv = button.parentNode;
+// function addEmptyContribution(e) {
+//   const button = e.target;
+//   const buttondiv = button.parentNode;
 
-  const Contributions = button.parentNode.parentNode; // selectionne l'ul qui a tout les div
-  emptyContribution = document.createElement("div");
-  emptyContribution.classList.add("empty-contribution");
-  emptyContribution.innerHTML = emptyContributionhtml();
-  Contributions.insertBefore(emptyContribution, buttondiv);
-  let inputArea = emptyContribution.querySelector(".input-area");
-  inputArea.addEventListener("input", function () {
-    resizetextarea(inputArea);
-  });
+//   const Contributions = button.parentNode.parentNode; // selectionne l'ul qui a tout les div
+//   emptyContribution = document.createElement("div");
+//   emptyContribution.classList.add("empty-contribution");
+//   emptyContribution.innerHTML = emptyContributionhtml();
+//   Contributions.insertBefore(emptyContribution, buttondiv);
+//   let inputArea = emptyContribution.querySelector(".input-area");
+//   inputArea.addEventListener("input", function () {
+//     resizetextarea(inputArea);
+//   });
 
-  const saveButton = emptyContribution.querySelector(".save-btn");
-  saveButton.addEventListener("click", function () {
-    addContribution(Contributions, emptyContribution);
-  });
-  buttondiv.remove();
-}
+//   const saveButton = emptyContribution.querySelector(".save-btn");
+//   saveButton.addEventListener("click", function () {
+//     addContribution(Contributions, emptyContribution);
+//   });
+//   buttondiv.remove();
+// }
 
-function addContribution(Contributions, emptyContribution) {
-  const newContribution = document.createElement("div");
-  newContribution.classList.add("contribution");
-  addHighlight(newContribution);
-  let input = emptyContribution.querySelector(".input-area").value.trim(); //takes the story someone added
-  newContribution.innerHTML = getContributionTemplate(input);
-  Contributions.append(newContribution);
-  emptyContribution.remove();
-}
+// function addContribution(Contributions, emptyContribution) {
+//   const newContribution = document.createElement("div");
+//   newContribution.classList.add("contribution");
+//   addHighlight(newContribution);
+//   let input = emptyContribution.querySelector(".input-area").value.trim(); //takes the story someone added
+//   newContribution.innerHTML = getContributionTemplate(input);
+//   Contributions.append(newContribution);
+//   emptyContribution.remove();
+// }
 
 // reset the height to auto to allow the textarea to resize
 function resizetextarea(tr) {
   tr.style.height = tr.scrollHeight + "px";
 }
 
-function emptyContributionhtml() {
-  return `
-      
-        <textarea class="input-area"
-          
-          placeholder="Enter your newContribution here"
-        ></textarea>
-      
-      <div class="card-footer">
-        <button class="btn btn-primary save-btn">Save</button>
-      </div>
-    `;
-}
+// function emptyContributionhtml() {
+//   return `
+
+//         <textarea class="input-area"
+
+//           placeholder="Enter your newContribution here"
+//         ></textarea>
+
+//       <div class="card-footer">
+//         <button class="btn btn-primary save-btn">Save</button>
+//       </div>
+//     `;
+// }
 
 function getContributionTemplate(inputValue) {
   return `<div class="contribution">${inputValue}</div>`;

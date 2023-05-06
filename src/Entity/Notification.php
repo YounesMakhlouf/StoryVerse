@@ -32,6 +32,12 @@ class Notification
         return $this->id;
     }
 
+    public function __construct(User $receiver, string $content, User $sender)
+    {
+        $this->receiver = $receiver;
+        $this->content = $content;
+        $this->sender = $sender;
+    }
    
    
     public function getReceiver(): ?user
