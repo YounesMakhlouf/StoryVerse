@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\ContributionRepository;
-use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -32,21 +31,12 @@ class Contribution
     #[ORM\Column]
     private int $likes = 0;
 
-    #[ORM\ManyToOne(inversedBy: 'contribution')]
+    #[ORM\ManyToOne(inversedBy: 'contributions')]
     #[ORM\JoinColumn(nullable: false)]
+    private ?user $author = null;
+
+    #[ORM\ManyToOne(inversedBy: 'contributions')]
     private ?Story $story = null;
-
-    #[ORM\OneToMany(mappedBy: 'parent', targetEntity: Contribution::class)]
-    private Collection $children;
-
-    #[ORM\OneToMany(mappedBy: 'contribution', targetEntity: User::class)]
-    private Collection $Author;
-
-    public function __construct()
-    {
-        $this->children = new ArrayCollection();
-        $this->Author = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -101,6 +91,18 @@ class Contribution
         return $this;
     }
 
+    public function getAuthor(): ?user
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?user $author): self
+    {
+        $this->author = $author;
+
+        return $this;
+    }
+
     public function getStory(): ?Story
     {
         return $this->story;
@@ -109,66 +111,6 @@ class Contribution
     public function setStory(?Story $story): self
     {
         $this->story = $story;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Contribution>
-     */
-    public function getchildren(): Collection
-    {
-        return $this->children;
-    }
-
-    public function addchildren(Contribution $children): self
-    {
-        if (!$this->children->contains($children)) {
-            $this->children->add($children);
-            $children->setParent($this);
-        }
-
-        return $this;
-    }
-
-    public function removechildren(Contribution $children): self
-    {
-        if ($this->children->removeElement($children)) {
-            // set the owning side to null (unless already changed)
-            if ($children->getParent() === $this) {
-                $children->setParent(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, User>
-     */
-    public function getAuthor(): Collection
-    {
-        return $this->Author;
-    }
-
-    public function addAuthor(User $author): self
-    {
-        if (!$this->Author->contains($author)) {
-            $this->Author->add($author);
-            $author->setContribution($this);
-        }
-
-        return $this;
-    }
-
-    public function removeAuthor(User $author): self
-    {
-        if ($this->Author->removeElement($author)) {
-            // set the owning side to null (unless already changed)
-            if ($author->getContribution() === $this) {
-                $author->setContribution(null);
-            }
-        }
 
         return $this;
     }

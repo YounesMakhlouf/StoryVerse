@@ -35,16 +35,17 @@ class Story
     #[Slug(fields: ['title'])]
     private ?string $slug = null;
 
-    #[ORM\OneToMany(mappedBy: 'story', targetEntity: Contribution::class)]
-    private Collection $contribution;
-
     #[ORM\Column(length: 25, nullable: true)]
     private ?string $genre = null;
 
+    #[ORM\OneToMany(mappedBy: 'story', targetEntity: contribution::class)]
+    private Collection $contributions;
+
     public function __construct()
     {
-        $this->contribution = new ArrayCollection();
+        $this->contributions = new ArrayCollection();
     }
+
 
     public function getTitle(): ?string
     {
@@ -120,36 +121,6 @@ class Story
         return $this;
     }
 
-    /**
-     * @return Collection<int, contribution>
-     */
-    public function getContribution(): Collection
-    {
-        return $this->contribution;
-    }
-
-    public function addContribution(contribution $contribution): self
-    {
-        if (!$this->contribution->contains($contribution)) {
-            $this->contribution->add($contribution);
-            $contribution->setStory($this);
-        }
-
-        return $this;
-    }
-
-    public function removeContribution(contribution $contribution): self
-    {
-        if ($this->contribution->removeElement($contribution)) {
-            // set the owning side to null (unless already changed)
-            if ($contribution->getStory() === $this) {
-                $contribution->setStory(null);
-            }
-        }
-
-        return $this;
-    }
-
     public function getGenre(): ?string
     {
         return $this->genre;
@@ -158,6 +129,36 @@ class Story
     public function setGenre(?string $genre): self
     {
         $this->genre = $genre;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, contribution>
+     */
+    public function getContributions(): Collection
+    {
+        return $this->contributions;
+    }
+
+    public function addContribution(contribution $contribution): self
+    {
+        if (!$this->contributions->contains($contribution)) {
+            $this->contributions->add($contribution);
+            $contribution->setStory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeContribution(contribution $contribution): self
+    {
+        if ($this->contributions->removeElement($contribution)) {
+            // set the owning side to null (unless already changed)
+            if ($contribution->getStory() === $this) {
+                $contribution->setStory(null);
+            }
+        }
 
         return $this;
     }
