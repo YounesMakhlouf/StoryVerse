@@ -21,9 +21,7 @@
                     </div>
 
                     {% for contribution in contributions %}
-                        {% for author in contribution.author %}
-                            <p id="{{ author.id }}">{{ contribution.content }}</p>
-                    {% endfor%}
+                            <p id="{{ contribution.author.id }}">{{ contribution.content }}</p>
                     {% endfor%}
 
                     <div class="line"></div>
@@ -33,12 +31,10 @@
             <span  class="authors ">
                 <h5>Contributors</h5>
                 {% for contribution in contributions %}
-                    {% for author in contribution.author %}
-                        <a href='{{ path('app_profile',{id:author.id}) }}'>
-                    {{ author.username }}
+                        <a href='{{ path('app_profile',{id:contribution.author.id}) }}'>
+                    {{ contribution.author.username }}
                     </a>
                         <hr>
-                {% endfor %}
                 {% endfor %}
 
         </span>

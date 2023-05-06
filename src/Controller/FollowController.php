@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class FollowController extends AbstractController
 {
@@ -17,6 +18,7 @@ class FollowController extends AbstractController
     {
         $this->entityManager = $entityManager;
     }
+    #[IsGranted('ROLE_USER')]
 
     #[Route('/profile/{id}/follow', name: 'follow_user')]
     public function followUser(User $user): Response
@@ -39,6 +41,7 @@ class FollowController extends AbstractController
         // Redirect back to the target user's profile page
         return $this->redirectToRoute('app_profile', ['id' => $user->getId()]);
     }
+    #[IsGranted('ROLE_USER')]
 
     #[Route('/profile/{id}/is_following', name: 'is_following')]
     public function isFollowing(User $user): JsonResponse
