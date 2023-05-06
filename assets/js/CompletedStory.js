@@ -21,9 +21,19 @@ var imageThemeEffect = function() {
 
 imageThemeEffect();
 
+
+//show replies on click
  $("#arrow").click(function() {
      $(".reply").show();
      $(".icon").hide();
      $(".reply").css("margin-left","10%");
  });
+
+
+ //color like icon on click
+
+$("#fixed").click(function() {
+    $("#fixed").removeClass("fa-regular");
+    $("#color").addClass("fa-solid");
+});
 
