@@ -31,14 +31,12 @@ class Contribution
     #[ORM\Column]
     private int $likes = 0;
 
-    #[ORM\ManyToOne(inversedBy: 'contribution')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Story $story = null;
+    
 
     #[ORM\ManyToOne(inversedBy: 'contributions')]
     #[ORM\JoinColumn(nullable: false)]
     private ?user $author = null;
->>>>>>> 188b3df1c66f44e041cc91efd6cefd943c7f4f0d
+
 
     #[ORM\ManyToOne(inversedBy: 'contributions')]
     private ?Story $story = null;
@@ -108,4 +106,4 @@ class Contribution
         return $this;
     }
 }
->>>>>>> 188b3df1c66f44e041cc91efd6cefd943c7f4f0d
+

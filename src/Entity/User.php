@@ -91,12 +91,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->compete = new ArrayCollection();
         $this->follower = new ArrayCollection();
         $this->following = new ArrayCollection();
-<<<<<<< HEAD
         
         $this->notifications = new ArrayCollection();
-=======
+
         $this->contributions = new ArrayCollection();
->>>>>>> 188b3df1c66f44e041cc91efd6cefd943c7f4f0d
+
     }
 
     public function getBio(): ?string
@@ -351,7 +350,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->getUsername();
     }
 
-<<<<<<< HEAD
+
     
 
    
@@ -369,7 +368,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         if (!$this->notifications->contains($notification)) {
             $this->notifications->add($notification);
             $notification->setReceiver($this);
-=======
+        }
+    }
+
     /**
      * @return Collection<int, Contribution>
      */
@@ -383,34 +384,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         if (!$this->contributions->contains($contribution)) {
             $this->contributions->add($contribution);
             $contribution->setAuthor($this);
->>>>>>> 188b3df1c66f44e041cc91efd6cefd943c7f4f0d
+
         }
 
         return $this;
     }
 
-<<<<<<< HEAD
+
     public function removeNotification(Notification $notification): self
     {
         if ($this->notifications->removeElement($notification)) {
             // set the owning side to null (unless already changed)
             if ($notification->getReceiver() === $this) {
                 $notification->setReceiver(null);
-=======
+            }
+        }
+    }
+        
+
     public function removeContribution(Contribution $contribution): self
     {
         if ($this->contributions->removeElement($contribution)) {
             // set the owning side to null (unless already changed)
             if ($contribution->getAuthor() === $this) {
                 $contribution->setAuthor(null);
->>>>>>> 188b3df1c66f44e041cc91efd6cefd943c7f4f0d
+
             }
         }
 
         return $this;
     }
-<<<<<<< HEAD
-=======
 
     public function getCsrfToken(): ?string
     {
@@ -440,5 +443,5 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
->>>>>>> 188b3df1c66f44e041cc91efd6cefd943c7f4f0d
+
 }
