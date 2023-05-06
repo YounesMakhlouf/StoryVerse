@@ -30,9 +30,10 @@ class StorypageController extends AbstractController
             $entityManager->flush();
 
 //            // Return a JSON response with the new comment data
-//            return $this->json([
-//                'content' => $comment->getContent(),
-//            ]);
+           return $this->json([
+               'content' => $comment->getContent(),
+               'author'=> $comment->getAuthor()->getUsername()
+            ]);
         }
 
         return $this->render('storypage/competed.html.twig', [

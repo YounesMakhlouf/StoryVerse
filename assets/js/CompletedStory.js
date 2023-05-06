@@ -39,7 +39,6 @@ $("#fixed").click(function() {
 
 $(document).ready(function() {
     $('form[name="comment"]').submit(function(event) {
-        console.log("hellooooo");
         // Prevent the form from submitting normally
         event.preventDefault();
 
@@ -52,8 +51,13 @@ $(document).ready(function() {
             method: 'POST',
             data: formData,
             success: function(response) {
+                let start='<div className="be-comment"> <div className="be-img-comment"> <a href=""> <img src="https://www.bootdey.com/image/400x150/FFB6C1/000000" alt=""className="be-ava-comment"> </a></div> <div className="be-comment-content"> <span className="be-comment-name"> <a href="">';
+                let wost='</a> </span> <span className="be-comment-time"> <i className="fa fa-clock-o"></i> </span> <div id="comments_section"> <p className="be-comment-text">';
+                let end="</p> </div> </div> </div>";
                 // Add the new comment to the comments section
-                $('#comments-section').append('<p class="be-comment-text">' + response.content + '</p>');
+                $('#comment-form').before(start + response.author + wost+response.content+end);
+                console.log(response);
+                console.log("hellooooo");
 
                 // Clear the form fields
                 $('form[name="comment"]')[0].reset();
