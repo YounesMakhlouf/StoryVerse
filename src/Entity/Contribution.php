@@ -35,25 +35,13 @@ class Contribution
     #[ORM\JoinColumn(nullable: false)]
     private ?Story $story = null;
 
-<<<<<<< HEAD
-    #[ORM\OneToMany(mappedBy: 'parent', targetEntity: Contribution::class)]
-    private Collection $children;
-
-    #[ORM\OneToMany(mappedBy: 'contribution', targetEntity: User::class)]
-    private Collection $Author;
-
-    
-
-    public function __construct()
-    {
-        $this->children = new ArrayCollection();
-        $this->Author = new ArrayCollection();
-    }
-=======
     #[ORM\ManyToOne(inversedBy: 'contributions')]
     #[ORM\JoinColumn(nullable: false)]
     private ?user $author = null;
 >>>>>>> 188b3df1c66f44e041cc91efd6cefd943c7f4f0d
+
+    #[ORM\ManyToOne(inversedBy: 'contributions')]
+    private ?Story $story = null;
 
     public function getId(): ?int
     {
@@ -108,18 +96,6 @@ class Contribution
         return $this;
     }
 
-    public function getStory(): ?Story
-    {
-        return $this->story;
-    }
-
-    public function setStory(?Story $story): self
-    {
-        $this->story = $story;
-
-        return $this;
-    }
-
     public function getAuthor(): ?user
     {
         return $this->author;
@@ -131,51 +107,5 @@ class Contribution
 
         return $this;
     }
-<<<<<<< HEAD
-
-    public function removechildren(Contribution $children): self
-    {
-        if ($this->children->removeElement($children)) {
-            // set the owning side to null (unless already changed)
-            if ($children->getParent() === $this) {
-                $children->setParent(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, User>
-     */
-    public function getAuthor(): Collection
-    {
-        return $this->Author;
-    }
-
-    public function addAuthor(User $author): self
-    {
-        if (!$this->Author->contains($author)) {
-            $this->Author->add($author);
-            $author->setContribution($this);
-        }
-
-        return $this;
-    }
-
-    public function removeAuthor(User $author): self
-    {
-        if ($this->Author->removeElement($author)) {
-            // set the owning side to null (unless already changed)
-            if ($author->getContribution() === $this) {
-                $author->setContribution(null);
-            }
-        }
-
-        return $this;
-    }
-}
-    
-=======
 }
 >>>>>>> 188b3df1c66f44e041cc91efd6cefd943c7f4f0d

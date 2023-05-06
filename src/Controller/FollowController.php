@@ -3,16 +3,15 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Doctrine\ORM\EntityManagerInterface;
 
 class FollowController extends AbstractController
 {
-    private $entityManager;
+    private EntityManagerInterface $entityManager;
 
     public function __construct(EntityManagerInterface $entityManager)
     {
@@ -20,29 +19,23 @@ class FollowController extends AbstractController
     }
 
     #[Route('/profile/{id}/follow', name: 'follow_user')]
-    public function followUser(Request $request, User $user): Response
+    public function followUser(User $user): Response
     {
         if (!$this->isGranted('IS_AUTHENTICATED_FULLY')) {
             $this->addFlash('warning', 'You must be logged in to follow users');
         } else {
+            $currentUser = $this->getUser();
             // Check if the current user is already following the target user
-            $existingFollow = $this->entityManager->getRepository(Follow::class)->findOneBy(['user' => $this->getUser(), 'following' => $user]);
-
-            if ($existingFollow) {
+            if ($currentUser->getFollowing()->contains($user)) {
                 $this->addFlash('warning', 'You are already following this user');
             } else {
-                // Create a new Follow entity to represent the relationship between the users
-                $follow = new Follow();
-                $follow->setUser($this->getUser());
-                $follow->setFollowing($user);
-
-                $this->entityManager->persist($follow);
+                // Add the target user to the current user's following collection
+                $currentUser->addFollowing($user);
                 $this->entityManager->flush();
 
                 $this->addFlash('success', 'You are now following this user');
             }
         }
-
         // Redirect back to the target user's profile page
         return $this->redirectToRoute('app_profile', ['id' => $user->getId()]);
     }
@@ -52,7 +45,7 @@ class FollowController extends AbstractController
     {
         if ($this->isGranted('IS_AUTHENTICATED_FULLY')) {
             $currentUser = $this->getUser();
-            $isFollowing = $this->entityManager->getRepository(Follow::class)->findOneBy(['user' => $currentUser, 'following' => $user]) !== null;
+            $isFollowing = $currentUser->getFollowing()->contains($user);
         } else {
             $isFollowing = false;
         }
@@ -66,11 +59,12 @@ class FollowController extends AbstractController
         if (!$this->isGranted('IS_AUTHENTICATED_FULLY')) {
             $this->addFlash('warning', 'You must be logged in to unfollow users');
         } else {
-            // Check if the current user is already following the target user
-            $existingFollow = $this->entityManager->getRepository(Follow::class)->findOneBy(['user' => $this->getUser(), 'following' => $user]);
+            $currentUser = $this->getUser();
 
-            if ($existingFollow) {
-                $this->entityManager->remove($existingFollow);
+            // Check if the current user is already following the target user
+            if ($currentUser->getFollowing()->contains($user)) {
+                // Remove the target user from the current user's following collection
+                $currentUser->removeFollowing($user);
                 $this->entityManager->flush();
 
                 $this->addFlash('success', 'You have unfollowed this user');
@@ -82,6 +76,4 @@ class FollowController extends AbstractController
         // Redirect back to the target user's profile page
         return $this->redirectToRoute('app_profile', ['id' => $user->getId()]);
     }
-
-
 }
