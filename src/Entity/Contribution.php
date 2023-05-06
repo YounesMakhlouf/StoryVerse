@@ -103,5 +103,17 @@ class Contribution
 
         return $this;
     }
-}
 
+
+public function getStory(): ?Story
+    {
+        return $this->story;
+    }
+
+    public function setStory(?Story $story): self
+    {
+        $this->story = $story;
+
+        return $this;
+    }
+}

@@ -18,7 +18,7 @@ class StorypageController extends AbstractController
         $contributions=$story->getContributions();
         $genre=$story->getGenre();
         $comments=$story->getComments();
-        return $this->render('storypage/competed.html.twig', [
+        return $this->render('storypage/index.html.twig', [
             'controller_name' => 'CompletedStoryController',
             'contributions'=>$contributions,
             'title'=>$title,
