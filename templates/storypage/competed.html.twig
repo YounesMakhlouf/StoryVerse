@@ -71,7 +71,36 @@
                             </p>
                         </div>
                     </div>
+{#                        reply#}
 
+                        {% if comment.reply is not null %}
+                        <div class="row">
+                            <div class="col-1">
+                                <i class="fa-solid fa-reply fa-rotate-180 fa-2xl"></i>
+                            </div>
+                        <div class="be-comment col-8">
+                            <div class="be-img-comment">
+                                <a href="">
+                                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="" class="be-ava-comment">
+                                </a>
+                            </div>
+                            <div class="be-comment-content">
+				<span class="be-comment-name">
+					<a href="">{{ comment.reply.author.username }}</a>
+					</span>
+                                <span class="be-comment-time">
+					            <i class="fa fa-clock-o"></i>
+                                {{ comment.reply.createdat|date('d-m-Y') }}
+                            </span>
+
+                                <p class="be-comment-text">
+                                    {{ comment.reply.content }}
+                                </p>
+                            </div>
+                        </div>
+                        </div>
+
+                        {% endif %}
                     {% endfor %}
                     <form class="form-block">
                         <div class="row">
