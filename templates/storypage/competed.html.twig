@@ -46,7 +46,7 @@
 {#            comment section #}
 
 
-            <div class="col-8">
+            <div id="comment_section" class="col-8">
                 <div class="be-comment-block">
                     <h1 class="comments-title">Comments ({{ story.comments|length }})</h1>
                     {% for comment in story.comments %}
@@ -75,7 +75,7 @@
 {#                        reply#}
 
                         {% if comment.reply is not null %}
-                            <div class="row">
+                            <div id="reply" class="row">
                             <div class="icon col-12">
                                 <i id="arrow" class="fa-solid fa-arrow-right" style="color: #5c5e60;"></i>
                                 <a> Show replies</a>
@@ -109,7 +109,8 @@
 
                         {% endif %}
                     {% endfor %}
-                    {{ form_start(form,{'action': path('app_storypage', { 'id':story.id})}) }}
+                    {{ form_start(form,{'action': path('app_storypage', {'id':story.id}),
+                        'attr': {'id': 'comment-form'}}) }}
                     {{ form_widget(form) }}
                     <button type="submit">Submit</button>
                     {{ form_end(form) }}
