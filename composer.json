@@ -16,8 +16,6 @@
         "doctrine/orm": "^2.14",
         "easycorp/easyadmin-bundle": "^4.6",
         "knplabs/knp-time-bundle": "^1.20",
-        "knpuniversity/oauth2-client-bundle": "^2.15",
-        "league/oauth2-github": "^3.1",
         "pagerfanta/doctrine-orm-adapter": "^4.1",
         "pagerfanta/twig": "^4.1",
         "phpdocumentor/reflection-docblock": "^5.3",

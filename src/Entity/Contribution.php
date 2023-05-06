@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\ContributionRepository;
-use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -36,6 +35,7 @@ class Contribution
     #[ORM\JoinColumn(nullable: false)]
     private ?Story $story = null;
 
+<<<<<<< HEAD
     #[ORM\OneToMany(mappedBy: 'parent', targetEntity: Contribution::class)]
     private Collection $children;
 
@@ -49,6 +49,11 @@ class Contribution
         $this->children = new ArrayCollection();
         $this->Author = new ArrayCollection();
     }
+=======
+    #[ORM\ManyToOne(inversedBy: 'contributions')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?user $author = null;
+>>>>>>> 188b3df1c66f44e041cc91efd6cefd943c7f4f0d
 
     public function getId(): ?int
     {
@@ -115,23 +120,18 @@ class Contribution
         return $this;
     }
 
-    /**
-     * @return Collection<int, Contribution>
-     */
-    public function getchildren(): Collection
+    public function getAuthor(): ?user
     {
-        return $this->children;
+        return $this->author;
     }
 
-    public function addchildren(Contribution $children): self
+    public function setAuthor(?user $author): self
     {
-        if (!$this->children->contains($children)) {
-            $this->children->add($children);
-            $children->setParent($this);
-        }
+        $this->author = $author;
 
         return $this;
     }
+<<<<<<< HEAD
 
     public function removechildren(Contribution $children): self
     {
@@ -176,3 +176,6 @@ class Contribution
     }
 }
     
+=======
+}
+>>>>>>> 188b3df1c66f44e041cc91efd6cefd943c7f4f0d
