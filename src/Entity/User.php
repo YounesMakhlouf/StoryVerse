@@ -61,37 +61,25 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column (nullable: true)]
     private ?string $avatar;
 
-
-    public function getAvatar(): ?string
-    {
-        return $this->avatar;
-    }
-
-    public function setAvatar(?string $avatar): self
-    {
-        $this->avatar = $avatar;
-
-        return $this;
-    }
-
     #[ORM\ManyToMany(targetEntity: Competition::class, inversedBy: 'users')]
     private Collection $compete;
 
     #[ORM\ManyToMany(targetEntity: self::class, inversedBy: 'following')]
     private Collection $follower;
     #[ORM\Column]
-    private ?string $csrf_token='';
-
-    public function getCsrfToken(): ?string
-    {
-        return $this->csrf_token;
-    }
+    private ?string $csrf_token;
 
     #[ORM\ManyToMany(targetEntity: self::class, mappedBy: 'follower')]
     private Collection $following;
 
-    #[ORM\ManyToOne(inversedBy: 'Author')]
-    private ?Contribution $contribution = null;
+    #[ORM\OneToMany(mappedBy: 'author', targetEntity: Contribution::class)]
+    private Collection $contributions;
+
+    #[ORM\Column(type: Types::DATE_IMMUTABLE, nullable: true)]
+    private ?\DateTimeImmutable $dateOfBirth = null;
+
+    #[ORM\Column(length: 30, nullable: true)]
+    private ?string $country = null;
 
     
     #[ORM\OneToMany(mappedBy: 'receiver', targetEntity: Notification::class)]
@@ -103,8 +91,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->compete = new ArrayCollection();
         $this->follower = new ArrayCollection();
         $this->following = new ArrayCollection();
+<<<<<<< HEAD
         
         $this->notifications = new ArrayCollection();
+=======
+        $this->contributions = new ArrayCollection();
+>>>>>>> 188b3df1c66f44e041cc91efd6cefd943c7f4f0d
     }
 
     public function getBio(): ?string
@@ -267,6 +259,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->getFirstName() . ' ' . $this->getLastName();
     }
 
+    public function getAvatar(): ?string
+    {
+        return $this->avatar;
+    }
+
+    public function setAvatar(?string $avatar): self
+    {
+        $this->avatar = $avatar;
+
+        return $this;
+    }
+
     /**
      * @return Collection<int, Competition>
      */
@@ -342,22 +346,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getContribution(): ?Contribution
-    {
-        return $this->contribution;
-    }
-
-    public function setContribution(?Contribution $contribution): self
-    {
-        $this->contribution = $contribution;
-
-        return $this;
-    }
     public function __toString(): string
     {
         return $this->getUsername();
     }
 
+<<<<<<< HEAD
     
 
    
@@ -375,20 +369,76 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         if (!$this->notifications->contains($notification)) {
             $this->notifications->add($notification);
             $notification->setReceiver($this);
+=======
+    /**
+     * @return Collection<int, Contribution>
+     */
+    public function getContributions(): Collection
+    {
+        return $this->contributions;
+    }
+
+    public function addContribution(Contribution $contribution): self
+    {
+        if (!$this->contributions->contains($contribution)) {
+            $this->contributions->add($contribution);
+            $contribution->setAuthor($this);
+>>>>>>> 188b3df1c66f44e041cc91efd6cefd943c7f4f0d
         }
 
         return $this;
     }
 
+<<<<<<< HEAD
     public function removeNotification(Notification $notification): self
     {
         if ($this->notifications->removeElement($notification)) {
             // set the owning side to null (unless already changed)
             if ($notification->getReceiver() === $this) {
                 $notification->setReceiver(null);
+=======
+    public function removeContribution(Contribution $contribution): self
+    {
+        if ($this->contributions->removeElement($contribution)) {
+            // set the owning side to null (unless already changed)
+            if ($contribution->getAuthor() === $this) {
+                $contribution->setAuthor(null);
+>>>>>>> 188b3df1c66f44e041cc91efd6cefd943c7f4f0d
             }
         }
 
         return $this;
     }
+<<<<<<< HEAD
+=======
+
+    public function getCsrfToken(): ?string
+    {
+        return $this->csrf_token;
+    }
+
+    public function getDateOfBirth(): ?\DateTimeImmutable
+    {
+        return $this->dateOfBirth;
+    }
+
+    public function setDateOfBirth(?\DateTimeImmutable $dateOfBirth): self
+    {
+        $this->dateOfBirth = $dateOfBirth;
+
+        return $this;
+    }
+
+    public function getCountry(): ?string
+    {
+        return $this->country;
+    }
+
+    public function setCountry(?string $country): self
+    {
+        $this->country = $country;
+
+        return $this;
+    }
+>>>>>>> 188b3df1c66f44e041cc91efd6cefd943c7f4f0d
 }
