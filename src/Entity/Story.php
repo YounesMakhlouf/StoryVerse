@@ -41,9 +41,13 @@ class Story
     #[ORM\OneToMany(mappedBy: 'story', targetEntity: Contribution::class)]
     private Collection $contributions;
 
+    #[ORM\OneToMany(mappedBy: 'Story', targetEntity: Comment::class)]
+    private Collection $comments;
+
     public function __construct()
     {
         $this->contributions = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
 
@@ -157,6 +161,36 @@ class Story
             // set the owning side to null (unless already changed)
             if ($contribution->getStory() === $this) {
                 $contribution->setStory(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Comment>
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comment $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments->add($comment);
+            $comment->setStory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): self
+    {
+        if ($this->comments->removeElement($comment)) {
+            // set the owning side to null (unless already changed)
+            if ($comment->getStory() === $this) {
+                $comment->setStory(null);
             }
         }
 

@@ -28,6 +28,13 @@ class Comment
     #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'reply')]
     private ?self $reply = null;
 
+    #[ORM\ManyToOne(inversedBy: 'comments')]
+    private ?Story $Story = null;
+
+    #[ORM\ManyToOne(inversedBy: 'comments')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $author = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -77,6 +84,30 @@ class Comment
     public function setReply(?self $reply): self
     {
         $this->reply = $reply;
+
+        return $this;
+    }
+
+    public function getStory(): ?Story
+    {
+        return $this->Story;
+    }
+
+    public function setStory(?Story $Story): self
+    {
+        $this->Story = $Story;
+
+        return $this;
+    }
+
+    public function getAuthor(): ?User
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?User $author): self
+    {
+        $this->author = $author;
 
         return $this;
     }
