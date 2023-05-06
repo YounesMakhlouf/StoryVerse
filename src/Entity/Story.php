@@ -38,7 +38,7 @@ class Story
     #[ORM\Column(length: 25, nullable: true)]
     private ?string $genre = null;
 
-    #[ORM\OneToMany(mappedBy: 'story', targetEntity: contribution::class)]
+    #[ORM\OneToMany(mappedBy: 'story', targetEntity: Contribution::class)]
     private Collection $contributions;
 
     public function __construct()
