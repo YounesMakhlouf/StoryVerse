@@ -8,7 +8,9 @@
             </a>
             <form method="get" action="{{ path('app_search') }}">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search" name="searchQuery">
+                    <label>
+                        <input type="search" class="form-control" placeholder="Search" name="searchQuery">
+                    </label>
                     <div class="input-group-append">
                         <button class="btn btn-secondary" type="submit">
                             <i class="fa fa-magnifying-glass"></i>
@@ -16,7 +18,6 @@
                     </div>
                 </div>
             </form>
-
 
             <nav class="navbar" id="navbar">
                 <ul>
