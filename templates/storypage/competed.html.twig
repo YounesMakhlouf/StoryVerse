@@ -65,10 +65,11 @@
 					            <i class="fa fa-clock-o"></i>
                                 {{ comment.createdat|date('d-m-Y') }}
                             </span>
-
+                            <div id="comments_section">
                             <p class="be-comment-text">
                                 {{ comment.content }}
                             </p>
+                            </div>
                         </div>
                     </div>
 {#                        reply#}
@@ -108,16 +109,10 @@
 
                         {% endif %}
                     {% endfor %}
-                    <form method="get" action="{{ path('app_add_comment',{id:story.id}) }}">
-                        <div class="row">
-                            <div class="col-8">
-                                <div class="form-group">
-                                        <input  name="content" class="form-input" required="" placeholder="add your comment"/>
-                                </div>
-                            </div>
-                            <button type="submit" class=" col-2 btn btn-info pull-right">submit</button>
-                        </div>
-                    </form>
+                    {{ form_start(form,{'action': path('app_storypage', { 'id':story.id})}) }}
+                    {{ form_widget(form) }}
+                    <button type="submit">Submit</button>
+                    {{ form_end(form) }}
                 </div>
             </div>
 

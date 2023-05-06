@@ -37,3 +37,31 @@ $("#fixed").click(function() {
     $("#color").addClass("fa-solid");
 });
 
+$(document).ready(function() {
+    $('form[name="comment"]').submit(function(event) {
+        console.log("hellooooo");
+        // Prevent the form from submitting normally
+        event.preventDefault();
+
+        // Get the form data
+        var formData = $(this).serialize();
+
+        // Submit the form using AJAX
+        $.ajax({
+            url: window.location.href,
+            method: 'POST',
+            data: formData,
+            success: function(response) {
+                // Add the new comment to the comments section
+                $('#comments-section').append('<p class="be-comment-text">' + response.content + '</p>');
+
+                // Clear the form fields
+                $('form[name="comment"]')[0].reset();
+            },
+            error: function() {
+                console.log($(this).attr('action'));
+                alert('An error occurred while submitting the comment.');
+            }
+        });
+    });
+});
