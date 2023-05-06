@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use DateTimeImmutable;
 use DateTimeInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -64,19 +65,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: Competition::class, inversedBy: 'users')]
     private Collection $compete;
 
-    #[ORM\ManyToMany(targetEntity: self::class, inversedBy: 'following')]
+    #[ORM\ManyToMany(targetEntity: self::class, inversedBy: 'following', fetch: 'EXTRA_LAZY')]
     private Collection $follower;
     #[ORM\Column]
     private ?string $csrf_token;
 
-    #[ORM\ManyToMany(targetEntity: self::class, mappedBy: 'follower')]
+    #[ORM\ManyToMany(targetEntity: self::class, mappedBy: 'follower', fetch: 'EXTRA_LAZY')]
     private Collection $following;
 
     #[ORM\OneToMany(mappedBy: 'author', targetEntity: Contribution::class)]
     private Collection $contributions;
 
     #[ORM\Column(type: Types::DATE_IMMUTABLE, nullable: true)]
-    private ?\DateTimeImmutable $dateOfBirth = null;
+    private ?DateTimeImmutable $dateOfBirth = null;
 
     #[ORM\Column(length: 30, nullable: true)]
     private ?string $country = null;
@@ -420,12 +421,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->csrf_token;
     }
 
-    public function getDateOfBirth(): ?\DateTimeImmutable
+    public function getDateOfBirth(): ?DateTimeImmutable
     {
         return $this->dateOfBirth;
     }
 
-    public function setDateOfBirth(?\DateTimeImmutable $dateOfBirth): self
+    public function setDateOfBirth(?DateTimeImmutable $dateOfBirth): self
     {
         $this->dateOfBirth = $dateOfBirth;
 

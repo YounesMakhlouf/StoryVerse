@@ -3,7 +3,7 @@
 {% block title %}CompletedStory!{% endblock %}
 
 {% block body %}
-    <body  >
+    <body>
             <div class="theme ">
 
             </div>
@@ -16,23 +16,27 @@
                     </div>
                     {% for contribution in contributions %}
                         {% for author in contribution.author %}
-                            <p id="{{ author.id }}">{{ contribution.content }}</p>
+                            <p id="{{ author.id }}">
                     {% endfor%}
+                        {{ contribution.content }}</p>
                     {% endfor%}
-
                     <div class="line"></div>
-
                 </div>
 
             <span  class="authors ">
                 <h5>Contributors</h5>
                 {% for contribution in contributions %}
                     {% for author in contribution.author %}
-                        <a href='{{ path('app_profile',{id:author.id}) }}'>
+                        <a href='{{ path('follow_user',{id:author.id}) }}'>
+
                     {{ author.username }}
                     </a>
+                            <a href="{{ path('app_profile',{id:author.id})}}">
+                        <button type="button" class="btn btn-outline-secondary">Follow</button>
+                        </a>
                         <hr>
-                {% endfor %}
+
+                    {% endfor %}
                 {% endfor %}
 
         </span>
@@ -46,7 +50,8 @@
  {% block stylesheets %}
      {{ parent() }}
      {{ encore_entry_link_tags('completed') }}
-     <link href="node_modules/bootstrap/dist/css/bootstrap.css"
+     <link href="node_modules/bootstrap/dist/css/bootstrap.css"/>
+
  {% endblock %}
  {% block javascripts %}
      {{ parent() }}

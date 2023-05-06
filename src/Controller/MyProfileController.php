@@ -9,9 +9,11 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Security;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class MyProfileController extends AbstractController
 {
+    #[IsGranted('ROLE_USER')]
     #[Route('/myprofile', name: 'app_myprofile')]
     public function showMyProfile(Security $security): Response
     {
