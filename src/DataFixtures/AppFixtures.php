@@ -8,7 +8,6 @@ use App\Factory\UserFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
-
 class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
@@ -17,7 +16,8 @@ class AppFixtures extends Fixture
         UserFactory::createMany(50);
         ContributionFactory::createMany(100, function () {
             return [
-                'story' => StoryFactory::random()
+                'story' => StoryFactory::random(),
+                'author' => UserFactory::random()
             ];
         });
         $manager->flush();
