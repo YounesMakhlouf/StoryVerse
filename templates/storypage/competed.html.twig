@@ -57,9 +57,9 @@
             <div class="row" id="contribute-form">
                 {{ form_start(contributionForm,{'action': path('app_contribution', {'id':story.id}),
                     'attr': {'id': 'contribution-form'}}) }}
-                    {{ form_widget(contributionForm.content,{'attr':{'class':'form-input col-8', 'placeholder':'add your contribution'}}) }}
+                    {{ form_widget(contributionForm.content,{'attr':{'class':'form-input col-7', 'placeholder':'add your contribution'}}) }}
                 {{ form_end(contributionForm) }}
-
+                    <button id="sub"></button>
             </div>
 
 
