@@ -29,7 +29,6 @@ class Contribution
     #[ORM\Column]
     private int $likes = 0;
 
-    
 
     #[ORM\ManyToOne(inversedBy: 'contributions')]
     #[ORM\JoinColumn(nullable: false)]
@@ -104,8 +103,7 @@ class Contribution
         return $this;
     }
 
-
-public function getStory(): ?Story
+    public function getStory(): Story
     {
         return $this->story;
     }
@@ -117,3 +115,4 @@ public function getStory(): ?Story
         return $this;
     }
 }
+

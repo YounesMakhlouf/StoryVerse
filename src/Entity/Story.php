@@ -25,9 +25,6 @@ class Story
     #[ORM\Column(length: 25)]
     private string $language = 'english';
 
-    #[ORM\Column]
-    private int $likes = 0;
-
     #[ORM\Column(length: 25)]
     private string $status = 'pending';
 
@@ -44,12 +41,15 @@ class Story
     #[ORM\OneToMany(mappedBy: 'Story', targetEntity: Comment::class)]
     private Collection $comments;
 
+    #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'likedStories', fetch: 'EXTRA_LAZY')]
+    private Collection $likes;
+
     public function __construct()
     {
         $this->contributions = new ArrayCollection();
         $this->comments = new ArrayCollection();
+        $this->likes = new ArrayCollection();
     }
-
 
     public function getTitle(): ?string
     {
@@ -71,18 +71,6 @@ class Story
     public function setLanguage(string $language): self
     {
         $this->language = $language;
-
-        return $this;
-    }
-
-    public function getLikes(): ?int
-    {
-        return $this->likes;
-    }
-
-    public function setLikes(?int $likes): self
-    {
-        $this->likes = $likes;
 
         return $this;
     }
@@ -163,6 +151,30 @@ class Story
                 $contribution->setStory(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getLikes(): Collection
+    {
+        return $this->likes;
+    }
+
+    public function addLike(User $like): self
+    {
+        if (!$this->likes->contains($like)) {
+            $this->likes->add($like);
+        }
+
+        return $this;
+    }
+
+    public function removeLike(User $like): self
+    {
+        $this->likes->removeElement($like);
 
         return $this;
     }

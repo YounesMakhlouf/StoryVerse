@@ -55,14 +55,18 @@ class StoryRepository extends ServiceEntityRepository
     private function addOrderByLikesQueryBuilder(QueryBuilder $queryBuilder = null): QueryBuilder
     {
         $queryBuilder = $queryBuilder ?? $this->createQueryBuilder('story');
-        return $queryBuilder->orderBy('story.likes', 'DESC');
+        return $queryBuilder
+            ->select('story, COUNT(l.id) AS HIDDEN like_count')
+            ->leftJoin('story.likes', 'l')
+            ->groupBy('story.id')
+            ->orderBy('like_count', 'DESC');
     }
 
     public function findAllOrderedByLikes(string $genre = null): array
     {
         $queryBuilder = $this->addOrderByLikesQueryBuilder();
-        if ($genre){
-            $queryBuilder -> andWhere("mix.genre = :genre")
+        if ($genre) {
+            $queryBuilder->andWhere("mix.genre = :genre")
                 ->setParameter('genre', $genre);
         }
         return $queryBuilder

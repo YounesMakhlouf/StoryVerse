@@ -85,6 +85,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'author', targetEntity: Comment::class, orphanRemoval: true)]
     private Collection $comments;
     #[ORM\OneToMany(mappedBy: 'receiver', targetEntity: Notification::class)]
+    private Collection $notifications;
+
+    #[ORM\ManyToMany(targetEntity: Story::class, mappedBy: 'likes', fetch: 'EXTRA_LAZY')]
+    private Collection $likedStories;
 
     public function __construct()
     {
@@ -92,10 +96,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->compete = new ArrayCollection();
         $this->follower = new ArrayCollection();
         $this->following = new ArrayCollection();
-        
         $this->notifications = new ArrayCollection();
-
         $this->contributions = new ArrayCollection();
+        $this->likedStories = new ArrayCollection();
         $this->comments = new ArrayCollection();
     }
 
@@ -441,6 +444,33 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setCountry(?string $country): self
     {
         $this->country = $country;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Story>
+     */
+    public function getLikedStories(): Collection
+    {
+        return $this->likedStories;
+    }
+
+    public function addLikedStory(Story $likedStory): self
+    {
+        if (!$this->likedStories->contains($likedStory)) {
+            $this->likedStories->add($likedStory);
+            $likedStory->addLike($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLikedStory(Story $likedStory): self
+    {
+        if ($this->likedStories->removeElement($likedStory)) {
+            $likedStory->removeLike($this);
+        }
 
         return $this;
     }
