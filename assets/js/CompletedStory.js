@@ -34,7 +34,7 @@ imageThemeEffect();
 
 $("#fixed").click(function() {
     $("#fixed").removeClass("fa-regular");
-    $("#color").addClass("fa-solid");
+    $("#color").toggleClass("fa-solid");
 });
 
 $(document).ready(function() {
@@ -68,5 +68,22 @@ $(document).ready(function() {
                 alert('An error occurred while submitting the comment.');
             }
         });
+    });
+});
+
+
+$('i.fa-heart').click(function() {
+    let storyId = $(this).data('story-id');
+
+    event.preventDefault();
+
+    let likeCountElement = $('#likes');
+    $.ajax({
+        type: 'POST',
+        url: storyId,
+        success: function(data) {
+            console.log("helloooo");
+            likeCountElement.text(data.count);
+        }
     });
 });
