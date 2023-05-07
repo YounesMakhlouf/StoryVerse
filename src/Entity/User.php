@@ -85,6 +85,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'author', targetEntity: Comment::class, orphanRemoval: true)]
     private Collection $comments;
     #[ORM\OneToMany(mappedBy: 'receiver', targetEntity: Notification::class)]
+    private Collection $notifications;
+
+    #[ORM\ManyToMany(targetEntity: Story::class, mappedBy: 'likes', fetch: 'EXTRA_LAZY')]
+    private Collection $likedStories;
 
     public function __construct()
     {
@@ -92,10 +96,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->compete = new ArrayCollection();
         $this->follower = new ArrayCollection();
         $this->following = new ArrayCollection();
-        
         $this->notifications = new ArrayCollection();
-
         $this->contributions = new ArrayCollection();
+        $this->likedStories = new ArrayCollection();
         $this->comments = new ArrayCollection();
     }
 
@@ -181,42 +184,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // $this->plainPassword = null;
     }
 
-    public function getFirstName(): ?string
-    {
-        return $this->first_name;
-    }
-
-    public function setFirstName(string $first_name): self
-    {
-        $this->first_name = $first_name;
-
-        return $this;
-    }
-
-    public function getLastName(): ?string
-    {
-        return $this->last_name;
-    }
-
-    public function setLastName(string $last_name): self
-    {
-        $this->last_name = $last_name;
-
-        return $this;
-    }
-
-    public function getUsername(): ?string
-    {
-        return $this->username;
-    }
-
-    public function setUsername(string $username): self
-    {
-        $this->username = $username;
-
-        return $this;
-    }
-
     public function getGender(): ?string
     {
         return $this->gender;
@@ -241,7 +208,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-
     public function getLastLoginDate(): ?DateTimeInterface
     {
         return $this->Last_login_date;
@@ -257,6 +223,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getFullName(): ?string
     {
         return $this->getFirstName() . ' ' . $this->getLastName();
+    }
+
+    public function getFirstName(): ?string
+    {
+        return $this->first_name;
+    }
+
+    public function setFirstName(string $first_name): self
+    {
+        $this->first_name = $first_name;
+
+        return $this;
+    }
+
+    public function getLastName(): ?string
+    {
+        return $this->last_name;
+    }
+
+    public function setLastName(string $last_name): self
+    {
+        $this->last_name = $last_name;
+
+        return $this;
     }
 
     public function getAvatar(): ?string
@@ -303,22 +293,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->follower;
     }
 
-    public function addFollower(self $follower): self
-    {
-        if (!$this->follower->contains($follower)) {
-            $this->follower->add($follower);
-        }
-
-        return $this;
-    }
-
-    public function removeFollower(self $follower): self
-    {
-        $this->follower->removeElement($follower);
-
-        return $this;
-    }
-
     /**
      * @return Collection<int, self>
      */
@@ -337,6 +311,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function addFollower(self $follower): self
+    {
+        if (!$this->follower->contains($follower)) {
+            $this->follower->add($follower);
+        }
+
+        return $this;
+    }
+
     public function removeFollowing(self $following): self
     {
         if ($this->following->removeElement($following)) {
@@ -346,15 +329,29 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function removeFollower(self $follower): self
+    {
+        $this->follower->removeElement($follower);
+
+        return $this;
+    }
+
     public function __toString(): string
     {
         return $this->getUsername();
     }
 
+    public function getUsername(): ?string
+    {
+        return $this->username;
+    }
 
-    
+    public function setUsername(string $username): self
+    {
+        $this->username = $username;
 
-   
+        return $this;
+    }
 
     /**
      * @return Collection<int, Notification>
@@ -372,14 +369,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         }
     }
 
-    /**
-     * @return Collection<int, Contribution>
-     */
-    public function getContributions(): Collection
-    {
-        return $this->contributions;
-    }
-
     public function addContribution(Contribution $contribution): self
     {
         if (!$this->contributions->contains($contribution)) {
@@ -391,7 +380,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-
     public function removeNotification(Notification $notification): self
     {
         if ($this->notifications->removeElement($notification)) {
@@ -401,7 +389,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             }
         }
     }
-        
 
     public function removeContribution(Contribution $contribution): self
     {
@@ -446,6 +433,33 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
     /**
+     * @return Collection<int, Story>
+     */
+    public function getLikedStories(): Collection
+    {
+        return $this->likedStories;
+    }
+
+    public function addLikedStory(Story $likedStory): self
+    {
+        if (!$this->likedStories->contains($likedStory)) {
+            $this->likedStories->add($likedStory);
+            $likedStory->addLike($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLikedStory(Story $likedStory): self
+    {
+        if ($this->likedStories->removeElement($likedStory)) {
+            $likedStory->removeLike($this);
+        }
+
+        return $this;
+    }
+
+    /**
      * @return Collection<int, Comment>
      */
     public function getComments(): Collection
@@ -473,5 +487,25 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         }
 
         return $this;
+    }
+
+    public function getContributedStories()
+    {
+        $contributions = $this->getContributions();
+        $contributedStories = [];
+
+        foreach ($contributions as $contribution) {
+            $story = $contribution->getStory();
+            $contributedStories[] = $story;
+        }
+        return $contributedStories;
+    }
+
+    /**
+     * @return Collection<int, Contribution>
+     */
+    public function getContributions(): Collection
+    {
+        return $this->contributions;
     }
 }

@@ -1,28 +1,61 @@
 .trending h5 {
-    font-weight: 700;
-    margin: 0;
-    padding: 0;
-    line-height: 1;
-    font-size: 1em;
+  font-weight: 700;
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+  font-size: 1em;
 }
 
 .trending a {
-    color: $DarkTurquoise;
-    transition: ease-in-out 0.3s;
+  color: $DarkTurquoise;
+  transition: ease-in-out 0.3s;
 }
 
 .trending a:hover {
-    color: $Turquoise;
+  color: $Turquoise;
 }
 
 .trending .card:hover {
-    background: $LightGray;
+  background: $LightGray;
 }
 
 .card-img-top {
-    aspect-ratio: 1;
-    object-fit: cover; /* ensure the images fill the card without distortion */
-    width: 100%;
-    height: auto;
-    max-height: 100%;
+  aspect-ratio: 1;
+  object-fit: cover; /* ensure the images fill the card without distortion */
+  width: 100%;
+  height: auto;
+  max-height: 100%;
 }
+
+.Horror {
+  background: black !important;
+}
+
+.Romance {
+  background: pink !important;
+}
+
+.Fiction {
+  background: silver !important;
+}
+
+.Comedy {
+  background: yellow !important;
+}
+
+.Mystery {
+  background: purple !important;
+}
+
+.Drama {
+  background: #850101 !important;
+}
+
+#genre-description {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+
+
