@@ -48,6 +48,7 @@
 
         </span>
     </div>
+                {% if not hasContibuted %}
                 <div class="text-box">
                     <a href="#" id="contribute-btn" class="btn btn-white btn-animate">Be part of the story - Contribute now!</a>
                 </div>
@@ -61,6 +62,7 @@
                 {{ form_end(contributionForm) }}
 
             </div>
+            {% endif %}
 
 
 

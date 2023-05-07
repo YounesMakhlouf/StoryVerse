@@ -37,13 +37,14 @@ class StorypageController extends AbstractController
         if ($ContributionForm->isSubmitted()) {
             return $this->addContribution($story,$entityManager,$contribution);
         }
-
+        $hasContributed=$this->hasContributed($entityManager,$story);
         $hasLiked=$story->getLikes()->contains($this->getUser());
         return $this->render('storypage/competed.html.twig', [
 
             'controller_name' => 'CompletedStoryController',
            'story'=>$story,
             'hasLiked'=>$hasLiked,
+            'hasContibuted'=>$hasContributed,
             'form' => $form->createView(),
             'contributionForm'=>$ContributionForm->createView()
         ]);
@@ -98,6 +99,21 @@ class StorypageController extends AbstractController
             'count' =>$story->getComments()->count()
 
         ]);
+    }
+
+    public function hasContributed(EntityManagerInterface $entityManager,Story $story){
+        $user = $this->getUser();
+        $contributions = $entityManager->getRepository(Contribution::class)->findBy([
+            'author' => $user,
+            'story' => $story,
+        ]);
+
+        if (count($contributions) > 0) {
+            return true;
+        }
+         else {
+             return false;
+         }
     }
 
 
