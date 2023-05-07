@@ -134,6 +134,7 @@ $(document).ready(function() {
                 $("#contribution-form").hide();
                 let content = response.content;
                 $(".text").append('<p>'+content+'</p>');
+                $('#comment_section').before('<div class="alert alert-success"> Your contribution has helped our story come alive. Thank you for sharing your creativity with us! </div>')
 
             },
             error: function() {
