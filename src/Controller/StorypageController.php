@@ -33,15 +33,17 @@ class StorypageController extends AbstractController
            return $this->json([
                'content' => $comment->getContent(),
                'author'=> $comment->getAuthor()->getUsername(),
-               'createdAt' => $comment->getCreatedAt()->format('Y-m-d H:i:s')
+               'createdAt' => $comment->getCreatedAt()->format('Y-m-d H:i:s'),
+               'count' =>$story->getComments()->count()
 
            ]);
         }
-
+        $hasLiked=$story->getLikes()->contains($this->getUser());
         return $this->render('storypage/competed.html.twig', [
 
             'controller_name' => 'CompletedStoryController',
            'story'=>$story,
+            'hasLiked'=>$hasLiked,
             'form' => $form->createView(),
         ]);
     }

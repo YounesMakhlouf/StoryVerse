@@ -58,8 +58,7 @@ $(document).ready(function() {
                 let end="</p> </div> </div> </div>";
                 // Add the new comment to the comments section
                 $('#comment-form').before(start + response.author + wost+response.createdAt+wost2+response.content+end);
-                console.log(response);
-
+                $('#comment-count').text('Comments'+'('+response.count+')');
                 // Clear the form fields
                 $('form[name="comment"]')[0].reset();
             },
@@ -73,6 +72,7 @@ $(document).ready(function() {
 
 
 $('i.fa-heart').click(function() {
+
     let storyId = $(this).data('story-id');
 
     event.preventDefault();
@@ -82,7 +82,7 @@ $('i.fa-heart').click(function() {
         type: 'POST',
         url: storyId,
         success: function(data) {
-            console.log("helloooo");
+
             likeCountElement.text(data.count);
         }
     });
