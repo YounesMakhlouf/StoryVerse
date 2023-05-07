@@ -50,8 +50,16 @@
         </span>
     </div>
                 <div class="text-box">
-                    <a href="#" class="btn btn-white btn-animate">Be part of the story - Contribute now!</a>
+                    <a href="#" id="contribute-btn" class="btn btn-white btn-animate">Be part of the story - Contribute now!</a>
                 </div>
+            </div>
+
+            <div class="row" id="contribute-form">
+                {{ form_start(contributionForm,{'action': path('app_contribution', {'id':story.id}),
+                    'attr': {'id': 'contribution-form'}}) }}
+                    {{ form_widget(contributionForm.content,{'attr':{'class':'form-input col-8', 'placeholder':'add your contribution'}}) }}
+                {{ form_end(contributionForm) }}
+
             </div>
 
 
@@ -146,5 +154,6 @@
      {{ parent() }}
      {{ encore_entry_script_tags('completed') }}
 
+     <script>
  {% endblock %}
 
