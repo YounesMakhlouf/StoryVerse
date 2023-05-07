@@ -49,9 +49,7 @@ final class ContributionFactory extends ModelFactory
         return [
             'content' => self::faker()->text(),
             'createdAt' => self::faker()->dateTime(),
-            'likes' => self::faker()->numberBetween(0, 1000),
             'position' => self::faker()->numberBetween(1, 20),
-            'reported' => self::faker()->boolean(),
             'updatedAt' => self::faker()->dateTime(),
         ];
     }
