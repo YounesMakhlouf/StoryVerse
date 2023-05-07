@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Comment;
+use App\Entity\Contribution;
 use App\Form\CommentType;
+use App\Form\ContributionType;
 use App\Repository\StoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -50,7 +52,7 @@ class StorypageController extends AbstractController
 
     #[Route('/storypage/like/{id}', name: 'app_like')]
 
-    public function like($id,Request $request, EntityManagerInterface $entityManager,StoryRepository $storyRepository)
+    public function addLike($id,Request $request, EntityManagerInterface $entityManager,StoryRepository $storyRepository)
     {
         $story=$storyRepository->find($id);
         $user=$this->getUser();
@@ -69,6 +71,31 @@ class StorypageController extends AbstractController
 
     }
 
+#[Route('/storypage/contribution/{id}', name: 'app_contribution')]
+    public function addContribution($id,Request $request, EntityManagerInterface $entityManager,
+                        StoryRepository $storyRepository)
+{
+    $story=$storyRepository->find($id);
+    $user=$this->getUser();
+    $contribution=new Contribution();
+    $form = $this->createForm(ContributionType::class, $contribution);
+    $form->handleRequest($request);
+
+    if ($form->isSubmitted() && $form->isValid()) {
+        $contribution->setAuthor($this->getUser());
+        $contribution->setStory($story);
+        $entityManager->persist($contribution);
+        $entityManager->flush();
+        return $this->json([
+            'content' => $contribution->getContent(),
+            'author'=> $contribution->getAuthor()->getUsername(),
+
+        ]);
+    }
+
+
+
+    }
 
 
 
