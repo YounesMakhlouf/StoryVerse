@@ -6,12 +6,18 @@
 parameters:
   uploads_directory: '%kernel.project_dir%/public/uploads'
   story_genres:
-    'Horror': 'text-bg-danger'
-    'Fiction': 'text-bg-primary'
-    'Mystery': 'text-bg-info'
-    'Comedy': 'text-bg-warning'
-    'Drama': 'text-bg-secondary'
-    'Romance': 'text-bg-success'
+    'Horror': >
+      A story designed to scare the pants off of the reader. Whether it's a haunted house or a creepy clown, make sure to give plenty of descriptive details to create an eerie atmosphere
+    'Fiction': >
+      A world where anything is possible, from flying cars to intergalactic space travel. Just make sure to include lots of futuristic technology and some kind of evil villain threatening to destroy the universe
+    'Mystery': >
+      Who killed the wealthy business tycoon? Was it the suspicious butler or the jilted lover with a motive? The reader will be on the edge of their seat trying to figure it out
+    'Comedy': >
+      The goal here is to make the reader laugh out loud. Think witty one-liners and absurd situations that will have them rolling on the floor
+    'Drama': >
+      This genre is all about intense emotions and complex relationships. Whether it's a family feud or a tragic love triangle, the reader will be invested in the characters' lives and rooting for a happy ending
+    'Romance': >
+      When two people love each other very much and want to spend the rest of their lives together, but they keep getting interrupted by ridiculous obstacles like a jealous ex or a family feud
   max_stories_per_page: 9
 
 services:
