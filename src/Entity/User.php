@@ -367,6 +367,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             $this->notifications->add($notification);
             $notification->setReceiver($this);
         }
+        return $this;
     }
 
     public function addContribution(Contribution $contribution): self
@@ -374,9 +375,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         if (!$this->contributions->contains($contribution)) {
             $this->contributions->add($contribution);
             $contribution->setAuthor($this);
-
         }
-
         return $this;
     }
 
@@ -388,6 +387,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $notification->setReceiver(null);
             }
         }
+        return $this;
     }
 
     public function removeContribution(Contribution $contribution): self
@@ -399,7 +399,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
             }
         }
-
         return $this;
     }
 
@@ -485,7 +484,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $comment->setAuthor(null);
             }
         }
-
         return $this;
     }
 
