@@ -48,13 +48,4 @@ class StoryController extends AbstractController
             'genres' => $genres,
         ]);
     }
-
-    #[Route('/story/{slug}', name: 'app_story_id')]
-    public function show(Story $story): Response
-    {
-        return $this->render('story/index.html.twig', [
-            'story' => $story,
-            'slug' => $story->getSlug(),
-        ]);
-    }
 }
