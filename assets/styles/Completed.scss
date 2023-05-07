@@ -4,6 +4,7 @@ body {
 }
 
 #fixed {
+  text-align: center;
   position: sticky;
   bottom: 1rem;
   align-self: flex-end;
@@ -71,9 +72,7 @@ h1 {
 
 .be-comment-block {
   margin-bottom: 50px !important;
-  border: 1px solid #edeff2;
-  border-radius: 2px;
-  padding: 50px 70px;
+  padding: 70px 80px;
 }
 
 .comments-title {
@@ -184,12 +183,13 @@ h1 {
   margin-bottom:5%;
 }
 
-
-
-
-
-
-
+#comment-form{
+  margin-left: 13%;
+}
+button{
+  border:0;
+  background:none;
+}
 
 
 

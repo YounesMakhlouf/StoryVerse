@@ -46,6 +46,27 @@ class StorypageController extends AbstractController
         ]);
     }
 
+    #[Route('/storypage/like/{id}', name: 'app_like')]
+
+    public function like($id,Request $request, EntityManagerInterface $entityManager,StoryRepository $storyRepository)
+    {
+        $story=$storyRepository->find($id);
+        $user=$this->getUser();
+        if($story->getLikes()->contains($user)){
+            $story->getLikes()->removeElement($user);
+
+        }
+        else{
+            $story->addLike($user);
+        }
+        $entityManager->persist($story);
+        $entityManager->flush();
+        return $this->json([
+            'count' => $story->getlikes()->count()
+        ]);
+
+    }
+
 
 
 
