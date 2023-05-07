@@ -111,8 +111,10 @@
                     {% endfor %}
                     {{ form_start(form,{'action': path('app_storypage', {'id':story.id}),
                         'attr': {'id': 'comment-form'}}) }}
-                    {{ form_widget(form) }}
-                    <button type="submit">Submit</button>
+                     <div class="row">
+                    {{ form_widget(form.content,{'attr':{'class':'form-input col-8'}}) }}
+                    <button class="btn btn-info col-2" type="submit">Submit</button>
+                     </div>
                     {{ form_end(form) }}
                 </div>
             </div>
