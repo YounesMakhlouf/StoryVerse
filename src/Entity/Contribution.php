@@ -23,13 +23,6 @@ class Contribution
     #[ORM\Column]
     private int $position = 1;
 
-    #[ORM\Column]
-    private bool $reported = false;
-
-    #[ORM\Column]
-    private int $likes = 0;
-
-
     #[ORM\ManyToOne(inversedBy: 'contributions')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $author = null;
@@ -67,30 +60,6 @@ class Contribution
         return $this;
     }
 
-    public function isReported(): ?bool
-    {
-        return $this->reported;
-    }
-
-    public function setReported(?bool $reported): self
-    {
-        $this->reported = $reported;
-
-        return $this;
-    }
-
-    public function getLikes(): ?int
-    {
-        return $this->likes;
-    }
-
-    public function setLikes(?int $likes): self
-    {
-        $this->likes = $likes;
-
-        return $this;
-    }
-
     public function getAuthor(): ?User
     {
         return $this->author;
@@ -115,4 +84,3 @@ class Contribution
         return $this;
     }
 }
-
