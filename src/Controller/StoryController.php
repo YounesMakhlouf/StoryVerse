@@ -20,7 +20,6 @@ class StoryController extends AbstractController
         $story = new Story();
         $story->setTitle("yalla habibi");
         $story->setLanguage("english");
-        $story->setLikes(rand(0, 100));
         $story->setStatus("pending");
         $entityManager->persist($story);
         $entityManager->flush();
@@ -42,6 +41,7 @@ class StoryController extends AbstractController
             $request->query->get('page', 1),
             $maxPerPage
         );
+
         return $this->render('story/browse.html.twig', [
             'genre' => $genre,
             'pager' => $pagerfanta,

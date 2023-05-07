@@ -29,6 +29,7 @@ class ProfileController extends AbstractController
 
         // Get the user with the given ID
         $user = $userRepository->find($id);
+        $contributedStories = $user->getContributedStories();
 
         // Check if the current user is following the target user
         $isFollowing = false;
@@ -41,6 +42,7 @@ class ProfileController extends AbstractController
         return $this->render('profile/index.html.twig', [
             'user' => $user,
             'is_following' => $isFollowing,
+            'stories' => $contributedStories
         ]);
     }
 }
