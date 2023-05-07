@@ -12,7 +12,7 @@
                 <div class="row">
                     <div class="col-1" id="fixed">
                             <i id="color" class="fa-regular fa-heart fa-2xl" style="color: #d31717;"></i>
-                        <div id="likes">{{ story.likes }}]</div>
+                        <div id="likes">{{ story.likes|length }}</div>
 
                     </div>
                 <div  class="text col-8" >
@@ -99,7 +99,6 @@
 					            <i class="fa fa-clock-o"></i>
                                 {{ reply.createdat|date('d-m-Y') }}
                             </span>
-
                                 <p class="be-comment-text">
                                     {{ reply.content }}
                                 </p>
