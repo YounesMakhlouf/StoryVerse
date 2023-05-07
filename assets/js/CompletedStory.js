@@ -133,6 +133,8 @@ $(document).ready(function() {
                 console.log(response);
                 let content = response.content;
                 $(".text").append('<p>'+content+'</p>');
+                $('form[name="contribution"]')[0].reset();
+
             },
             error: function() {
                 console.log($("#contribution-form").attr('action'));
