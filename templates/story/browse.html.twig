@@ -7,22 +7,29 @@
             <header class="section-title" data-aos="fade-up">
                 <h2>Trending Stories</h2>
                 <p>Discover Our Hottest Stories 🔥🔥</p>
-                <p>Browse {{ genre ?? 'All genres' }}</p>
             </header>
-            <div class="container">
-                <h3 class="mt-5 mb-4">Filter by Genre</h3>
-                <ul class="genre-list ps-0 mt-2 mb-3">
+            <ul class="genre-list ps-0 mt-2 mb-3">
+                <li class="d-inline">
+                    <a class="btn btn-primary genre"
+                       href="{{ path('app_browse_stories') }}">All genres</a>
+                </li>
+                {% for genre, description in genres %}
                     <li class="d-inline">
                         <a class="btn btn-primary genre"
-                           href="{{ path('app_browse_stories') }}">All genres</a>
+                           href="{{ path('app_browse_stories', { 'genre': genre }) }}">{{ genre }}</a>
                     </li>
-                    {% for genre, color in genres %}
-                        <li class="d-inline">
-                            <a class="btn btn-primary genre {{ color }}"
-                               href="{{ path('app_browse_stories', { 'genre': genre }) }}">{{ genre }}</a>
-                        </li>
-                    {% endfor %}
-                </ul>
+                {% endfor %}
+            </ul>
+
+
+            <div>
+                <h3 id="genre-description">Browse {{ genre ?? 'All genres' }}</h3>
+                {% if genre %}
+                    <p>{{ genres[genre] }}</p>
+                {% endif %}
+            </div>
+            <div class="container">
+
                 <article class="row row-cols-1 row-cols-md-3 g-4" data-aos="fade-left">
                     {% for story in pager %}
                         <div class="col">
@@ -37,7 +44,7 @@
                                             <small class="text-muted">{{ story.updatedAt | ago }}</small>
                                             <small class="text-muted">{{ story.likes | length }} ❤️</small>
                                         </div>
-                                        <span class="badge rounded-pill {{ genres[story.genre] }}"> {{ story.genre }} </span>
+                                        <span class="badge rounded-pill {{ story.genre }}"> {{ story.genre }} </span>
                                     </div>
                                 </div>
                             </a>
