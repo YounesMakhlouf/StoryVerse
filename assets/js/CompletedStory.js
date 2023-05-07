@@ -51,11 +51,15 @@ $(document).ready(function() {
             method: 'POST',
             data: formData,
             success: function(response) {
-                let start='<div className="be-comment"> <div className="be-img-comment"> <a href=""> <img src="https://www.bootdey.com/image/400x150/FFB6C1/000000" alt=""className="be-ava-comment"> </a></div> <div className="be-comment-content"> <span className="be-comment-name"> <a href="">';
-                let wost='</a> </span> <span className="be-comment-time"> <i className="fa fa-clock-o"></i> </span> <div id="comments_section"> <p className="be-comment-text">';
+                let start='<div class="be-comment"> <div class="be-img-comment"> <a href=""> <img src="https://www.bootdey.com/image/400x150/FFB6C1/000000" alt=""class="be-ava-comment"> </a></div> <div class="be-comment-content"> <span class="be-comment-name"> <a href="">';
+                let wost='</a> </span> <span class="be-comment-time"> ';
+                let wost2='<i class="fa fa-clock-o"></i> </span> <div id="comments_section"> <p class="be-comment-text">';
                 let end="</p> </div> </div> </div>";
                 // Add the new comment to the comments section
-                $('#comment-form').before(start + response.author + wost+response.content+end);
+                $('#comment-form').before(start + response.author + wost+response.createdAt+wost2+response.content+end);
+                setTimeout(function() {
+                    console.log(response);
+                }, 100);
                 console.log(response);
                 console.log("hellooooo");
 

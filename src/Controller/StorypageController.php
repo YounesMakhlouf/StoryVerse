@@ -32,8 +32,10 @@ class StorypageController extends AbstractController
 //            // Return a JSON response with the new comment data
            return $this->json([
                'content' => $comment->getContent(),
-               'author'=> $comment->getAuthor()->getUsername()
-            ]);
+               'author'=> $comment->getAuthor()->getUsername(),
+               'createdAt' => $comment->getCreatedAt()->format('Y-m-d H:i:s')
+
+           ]);
         }
 
         return $this->render('storypage/competed.html.twig', [
