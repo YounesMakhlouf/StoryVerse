@@ -1,115 +1,88 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-
-
-    <div class="profile-container text-center" style="margin-top: 80px">
-        <div class="profile-cover">
-            {% if user %}
-                <h1 class="profile-name"><br> welcome to &nbsp&nbsp {{ user.username|upper }} &nbsp&nbsp's profile </h1>
-            {% endif %}
-        </div>
-        <div class="profile-picture-container">
-            {% if user.avatar %}
-                <img src="{{ user.avatar }}" alt="Profile picture" class="profile-picture rounded-circle">
-            {% else %}
-                <img src="{{ asset('https://us.123rf.com/450wm/yummytime/yummytime1608/yummytime160800630/61903988-anonyme-m%C3%A2le-photo-de-profil-avatar-de-l-%C3%A9motion-cr%C3%A9%C3%A9e-pour-mobile-web-d%C3%A9coration-produits-d.jpg"
-                 ') }}" alt="Default profile picture" class="profile-picture rounded-circle">
-            {% endif %}
-        </div>
-        <div>
-            {% for message in app.flashes('warning') %}
-                <div class="alert alert-warning">{{ message }}</div>
-            {% endfor %}
-
-            {% for message in app.flashes('success') %}
-                <div class="alert alert-success">{{ message }}</div>
-            {% endfor %}
-
-
-        </div>
-
-        {% if user.bio %}
-            <div class="profile-bio">"{{ user.bio }}"</div>
-        {% else %}
-            <div class="profile-bio">" A writer like no other ..! "</div>
+<div class="profile-container text-center">
+    <div class="profile-cover">
+        {% if user %}
+            <h1 class="profile-name">
+                welcome to {{ user.username|upper }}'s profile
+            </h1>
         {% endif %}
+    </div>
+    <div class="profile-picture-container">
+        {% if user.avatar %}
+            <img src="{{ user.avatar }}" alt="Profile picture" class="profile-picture rounded-circle">
+        {% else %}
+            <img src="{{ asset('https://us.123rf.com/450wm/yummytime/yummytime1608/yummytime160800630/61903988-anonyme-m%C3%A2le-photo-de-profil-avatar-de-l-%C3%A9motion-cr%C3%A9%C3%A9e-pour-mobile-web-d%C3%A9coration-produits-d.jpg') }}"
+                 alt="Default profile picture" class="profile-picture rounded-circle">
+        {% endif %}
+    </div>
+    <div>
+        {% for type, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="alert alert-{{ type }}">{{ message }}</div>
+            {% endfor %}
+        {% endfor %}
+    </div>
 
-        <div class="profile-stats">
-            <span class="profile-followers"><i class="fa-solid fa-user"></i>{{ user.follower|length }} Followers</span>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <span class="profile-following"><i class="fa-solid fa-user"></i>{{ user.following|length }} Following</span>
-        </div>
-        <br>
-        <br>
+    {% set bio = user.bio ?: 'A writer like no other ..!' %}
+    <div class="profile-bio">{{ bio }}</div>
+    <div class="profile-stats">
+            <span class="profile-followers">
+                <i class="fa-solid fa-user"></i>{{ user.follower|length }} Followers
+            </span>
+        <span class="profile-following">
+                <i class="fa-solid fa-user"></i>{{ user.following|length }} Following
+            </span>
+    </div>
 
+    <div class="d-grid gap-2 d-md-block buttons">
         {% if app.user %}
-            {% if is_following %}
-                <button class="btn btn-primary follow-button"
-                        data-user-id="{{ user.id }}"
-                        data-following="{{ path('is_following', {'id': user.id}) }}">
-                    Unfollow
-                </button>
-            {% else %}
-                <button class="btn btn-warning follow-button"
-                        data-user-id="{{ user.id }}"
-                        data-following="{{ path('is_following', {'id': user.id}) }}">
-                    Follow
-                </button>
-            {% endif %}
+            {% set followButtonLabel = is_following ? 'Unfollow' : 'Follow' %}
+            <button class="btn {{ is_following ? 'btn-primary' : 'btn-warning' }} follow-button"
+                    data-user-id="{{ user.id }}"
+                    data-following="{{ path('is_following', {'id': user.id}) }}">
+                {{ followButtonLabel }}
+            </button>
         {% else %}
             <a href="{{ path('app_login') }}" class="btn btn-primary">Log in to follow</a>
         {% endif %}
-
         <button class="btn btn-warning">Message</button>
         <button class="btn btn-warning">Report</button>
-
-        <br>
-        <br>
-        <br>
-        <br>
-        <div class="profile-stories-container">
-            <h2 class="profile-stories-title">Stories auxquelles cette personne a participé:</h2>
-            <br>
-            <br>
-            <div class="profile-stories-grid">
-                <!-- Stories ici -->
-                <!-- 1er exemple -->
-                <div class="text-center">
-                    <img src="https://thumbs.dreamstime.com/b/loup-17334773.jpg"
-                         class="img-fluid rounded start, zoom-image">
-                    <h5>Horreur, Science-Fiction </h5>
-                </div>
-                <span class="description">Est-ce toujours le loup ? Elle non plus n'était pas aussi innocente qu'elle en avait l'air.<br><br><a
-                            href="page_destination.html" class="btn btn-warning">Continuez la lecture</a>
-        </span>
-                <!-- 2eme exemple -->
-                <div class="text-center">
-                    <img src="https://www.daily-movies.ch/wp-content/uploads/2023/02/Un-homme-heureux_4.jpg"
-                         class="img-fluid rounded start, zoom-image ">
-                    <h5>Romance </h5>
-                </div>
-                <span class="description">Il était une fois, dans un petit café au coin de la rue, que leurs regards se sont croisés pour la première fois...
-<br><br>
-<a href="page_destination.html" class="btn btn-warning">Continuez la lecture</a>
-</span>
-
-            </div>
-        </div>
     </div>
 
+    <div class="profile-stories-container">
+        <h2 class="profile-stories-title">Stories auxquelles cette personne a participé:</h2>
+        <div class="grid text-center">
+            {% for story in stories %}
+                <div class="row">
+                    <div class="text-center col">
+                        <img alt="{{ story.title }}" src="{{ story.ImageUrl(300) }}">
+                        <h5>{{ story.genre }}</h5>
+                    </div>
+
+                    <div class="col-6 ">
+                        <div class="text-truncate description">
+                            {% for contribution in story.contributions %}
+                                <p>{{ contribution.content }}</p>
+                            {% endfor %}
+                        </div>
+                        <a href="{{ path('app_storypage', { 'id': story.id }) }}" class="btn btn-warning">Continuez la
+                            lecture</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endblock %}
+
+    {% block javascripts %}
+        {{ parent() }}
+        {{ encore_entry_script_tags('profile') }}
+    {% endblock %}
+
+    {% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('profile') }}
+
 {% endblock %}
-
-
-
- {% block javascripts %}
-     {{ parent() }}
-     {{ encore_entry_script_tags('profile') }}
-     <script src="{{ asset('js/profile.js') }}"></script>
- {% endblock %}
-
-
- {% block stylesheets %}
-     {{ parent() }}
-     {{ encore_entry_link_tags('profile') }}
- {% endblock %}
