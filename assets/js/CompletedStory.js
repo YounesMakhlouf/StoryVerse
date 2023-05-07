@@ -131,9 +131,9 @@ $(document).ready(function() {
             data: formData,
             success: function(response) {
                 console.log(response);
+                $("#contribution-form").hide();
                 let content = response.content;
                 $(".text").append('<p>'+content+'</p>');
-                $('form[name="contribution"]')[0].reset();
 
             },
             error: function() {
