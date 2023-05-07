@@ -1,142 +1,141 @@
-{% extends 'base.html.twig' %} {% block title %}Hello StorypageController!{%
-endblock %} {% block body %}
-<body>
-  <main style="margin-top: 20px">
-    <div class="parts">
-      {% for contribution in story.contributions %}
-      <div class="part">
-        <div class="contributions">
-          <div class="contribution row">
-            <div class="col-2 name">
-              <h3>{# contribution.author #} example</h3>
+{% extends 'base.html.twig' %} {% block title %}Hello StorypageController!{% endblock %} {% block body %}
+    <body>
+    <main style="margin-top: 20px">
+        <div class="parts">
+            {% for contribution in story.contributions %}
+                <div class="part">
+                    <div class="contributions">
+                        <div class="contribution row">
+                            <div class="col-2 name">
+                                <h3>{# contribution.author #} example</h3>
+                            </div>
+                            <div class="text col-9">
+                                <p>{{ contribution.content }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+            <div class="part">
+                <div class="contributions">
+                    <div class="contribution row">
+                        <div class="col-2 name">
+                            <h3>Skander</h3>
+                        </div>
+                        <div class="text col-9">
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
+                                eget nunc aliquam, bibendum ante eget, ultrices enim. Fusce
+                                vitae turpis ipsum. Aliquam erat volutpat. Proin ultricies
+                                dapibus ipsum vitae venenatis. Sed sit amet enim vel sapien
+                                sagittis dictum. Vestibulum lacinia fermentum nibh, nec posuere
+                                tortor porttitor vel. Duis pellentesque purus a lorem
+                                ullamcorper, in aliquam urna dictum.
+                            </p>
+                        </div>
+                        <div class="votes col-1 hidden">
+                            <button class="upvote" style="margin-left: -20%">Upvote</button>
+                            <p class="number-votes">69</p>
+                            <button class="downvote">Downvote</button>
+                        </div>
+                    </div>
+
+                    <div class="adder hidden">
+                        <i class="fas fa-plus"></i>
+                    </div>
+                </div>
             </div>
-            <div class="text col-9">
-              <p>{{ contribution.content }}</p>
+
+            <div class="part">
+                <div class="contributions">
+                    <div class="contribution row">
+                        <div class="col-2 name">
+                            <h3>Skander</h3>
+                        </div>
+                        <div class="text col-9">
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
+                                eget nunc aliquam, bibendum ante eget, ultrices enim. Fusce
+                                vitae turpis ipsum. Aliquam erat volutpat. Proin ultricies
+                                dapibus ipsum vitae venenatis. Sed sit amet enim vel sapien
+                                sagittis dictum. Vestibulum lacinia fermentum nibh, nec posuere
+                                tortor porttitor vel. Duis pellentesque purus a lorem
+                                ullamcorper, in aliquam urna dictum.
+                            </p>
+                        </div>
+                        <div class="votes col-1 hidden">
+                            <button class="upvote">Upvote</button>
+                            <p class="number-votes">69</p>
+                            <button class="downvote">Downvote</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
+            <div class="part">
+                <div class="contributions">
+                    <div class="contribution row">
+                        <div class="col-2 name">
+                            <h3>Skander</h3>
+                        </div>
+                        <div class="text col-9">
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
+                                eget nunc aliquam, bibendum ante eget, ultrices enim. Fusce
+                                vitae turpis ipsum. Aliquam erat volutpat. Proin ultricies
+                                dapibus ipsum vitae venenatis. Sed sit amet enim vel sapien
+                                sagittis dictum. Vestibulum lacinia fermentum nibh, nec posuere
+                                tortor porttitor vel. Duis pellentesque purus a lorem
+                                ullamcorper, in aliquam urna dictum.
+                            </p>
+                        </div>
+                        <div class="votes col-1">
+                            <button class="upvote">Upvote</button>
+                            <p class="number-votes">69</p>
+                            <button class="downvote">Downvote</button>
+                        </div>
+                    </div>
+
+                    <div>
+                        <i class="fas fa-plus"></i>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-      {% endfor %}
 
-      <div class="part">
-        <div class="contributions">
-          <div class="contribution row">
-            <div class="col-2 name">
-              <h3>Skander</h3>
-            </div>
-            <div class="text col-9">
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
-                eget nunc aliquam, bibendum ante eget, ultrices enim. Fusce
-                vitae turpis ipsum. Aliquam erat volutpat. Proin ultricies
-                dapibus ipsum vitae venenatis. Sed sit amet enim vel sapien
-                sagittis dictum. Vestibulum lacinia fermentum nibh, nec posuere
-                tortor porttitor vel. Duis pellentesque purus a lorem
-                ullamcorper, in aliquam urna dictum.
-              </p>
-            </div>
-            <div class="votes col-1 hidden">
-              <button class="upvote" style="margin-left: -20%">Upvote</button>
-              <p class="number-votes">69</p>
-              <button class="downvote">Downvote</button>
-            </div>
-          </div>
+        <i id="like-icon" class="fas fa-thumbs-up"></i>
+    </main>
+    <script>
+        // add an event listener to the icon
+        document.getElementById("like-icon").addEventListener("click", function () {
+            // create a new FormData object to store the data
+            var formData = new FormData();
+            formData.append("content", "you got a like");
+            formData.append("sender_id", "151");
+            formData.append("receiver_id", "152");
 
-          <div class="adder hidden">
-            <i class="fas fa-plus"></i>
-          </div>
-        </div>
-      </div>
-
-      <div class="part">
-        <div class="contributions">
-          <div class="contribution row">
-            <div class="col-2 name">
-              <h3>Skander</h3>
-            </div>
-            <div class="text col-9">
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
-                eget nunc aliquam, bibendum ante eget, ultrices enim. Fusce
-                vitae turpis ipsum. Aliquam erat volutpat. Proin ultricies
-                dapibus ipsum vitae venenatis. Sed sit amet enim vel sapien
-                sagittis dictum. Vestibulum lacinia fermentum nibh, nec posuere
-                tortor porttitor vel. Duis pellentesque purus a lorem
-                ullamcorper, in aliquam urna dictum.
-              </p>
-            </div>
-            <div class="votes col-1 hidden">
-              <button class="upvote">Upvote</button>
-              <p class="number-votes">69</p>
-              <button class="downvote">Downvote</button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="part">
-        <div class="contributions">
-          <div class="contribution row">
-            <div class="col-2 name">
-              <h3>Skander</h3>
-            </div>
-            <div class="text col-9">
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
-                eget nunc aliquam, bibendum ante eget, ultrices enim. Fusce
-                vitae turpis ipsum. Aliquam erat volutpat. Proin ultricies
-                dapibus ipsum vitae venenatis. Sed sit amet enim vel sapien
-                sagittis dictum. Vestibulum lacinia fermentum nibh, nec posuere
-                tortor porttitor vel. Duis pellentesque purus a lorem
-                ullamcorper, in aliquam urna dictum.
-              </p>
-            </div>
-            <div class="votes col-1">
-              <button class="upvote">Upvote</button>
-              <p class="number-votes">69</p>
-              <button class="downvote">Downvote</button>
-            </div>
-          </div>
-
-          <div>
-            <i class="fas fa-plus"></i>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <i id="like-icon" class="fas fa-thumbs-up"></i>
-  </main>
-  <script>
-    // add an event listener to the icon
-    document.getElementById("like-icon").addEventListener("click", function () {
-      // create a new FormData object to store the data
-      var formData = new FormData();
-      formData.append("content", "you got a like");
-      formData.append("sender_id", "151");
-      formData.append("receiver_id", "152");
-
-      // send a POST request using fetch
-      fetch("../notification/create", {
-        method: "POST",
-        body: formData,
-      })
-        .then((response) => {
-          if (response.ok) {
-            // display a confirmation message to the user
-            alert("You liked this!");
-          } else {
-            throw new Error("Something went wrong");
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-          alert("An error occurred");
+            // send a POST request using fetch
+            fetch("../notification/create", {
+                method: "POST",
+                body: formData,
+            })
+                .then((response) => {
+                    if (response.ok) {
+                        // display a confirmation message to the user
+                        alert("You liked this!");
+                    } else {
+                        throw new Error("Something went wrong");
+                    }
+                })
+                .catch((error) => {
+                    console.log(error);
+                    alert("An error occurred");
+                });
         });
-    });
-  </script>
-</body>
+    </script>
+    </body>
 {% endblock %} {% block stylesheets %}
-{{ parent() }}
-{{ encore_entry_link_tags("storypage") }}{% endblock %} {% block javascripts %}
-{{ parent() }}
-{{ encore_entry_script_tags("storypage") }}{% endblock %}
+    {{ parent() }}
+    {{ encore_entry_link_tags("storypage") }}{% endblock %} {% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags("storypage") }}{% endblock %}
