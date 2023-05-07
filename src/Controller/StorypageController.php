@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Comment;
 use App\Entity\Contribution;
+use App\Entity\Story;
 use App\Form\CommentType;
 use App\Form\ContributionType;
 use App\Repository\StoryRepository;
@@ -28,20 +29,15 @@ class StorypageController extends AbstractController
         $ContributionForm = $this->createForm(ContributionType::class, $contribution);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $comment->setAuthor($this->getUser());
-            $comment->setStory($story);
-            $entityManager->persist($comment);
-            $entityManager->flush();
+          return $this->addComment($comment,$story,$entityManager);
 
-//            // Return a JSON response with the new comment data
-           return $this->json([
-               'content' => $comment->getContent(),
-               'author'=> $comment->getAuthor()->getUsername(),
-               'createdAt' => $comment->getCreatedAt()->format('Y-m-d H:i:s'),
-               'count' =>$story->getComments()->count()
-
-           ]);
         }
+        $ContributionForm->handleRequest($request);
+
+        if ($ContributionForm->isSubmitted()) {
+            return $this->addContribution($story,$entityManager,$contribution);
+        }
+
         $hasLiked=$story->getLikes()->contains($this->getUser());
         return $this->render('storypage/competed.html.twig', [
 
@@ -55,7 +51,7 @@ class StorypageController extends AbstractController
 
     #[Route('/storypage/like/{id}', name: 'app_like')]
 
-    public function addLike($id,Request $request, EntityManagerInterface $entityManager,StoryRepository $storyRepository)
+    public function addLike($id,Request $request, EntityManagerInterface $entityManager,StoryRepository $storyRepository): JsonResponse
     {
         $story=$storyRepository->find($id);
         $user=$this->getUser();
@@ -74,30 +70,35 @@ class StorypageController extends AbstractController
 
     }
 
-#[Route('/storypage/contribution/{id}', name: 'app_contribution')]
-    public function addContribution($id,Request $request, EntityManagerInterface $entityManager,
-                        StoryRepository $storyRepository)
-{
-    $story=$storyRepository->find($id);
-    $user=$this->getUser();
-
-    $form->handleRequest($request);
-    if ($form->isSubmitted() && $form->isValid()) {
-        $contribution->setAuthor($this->getUser());
+    public function addContribution(Story $story, EntityManagerInterface $entityManager, Contribution $contribution): JsonResponse
+    {
         $contribution->setStory($story);
+        $contribution->setAuthor($this->getUser());
+        $contribution->setPosition(20);
         $entityManager->persist($contribution);
         $entityManager->flush();
-        return $this->json([
-            'content' => $contribution->getContent(),
-            'author'=> $contribution->getAuthor()->getUsername(),
 
+        return $this->json([
+            'content' => $contribution->getContent()
         ]);
     }
 
+    public function addComment(Comment $comment,Story $story,EntityManagerInterface $entityManager): JsonResponse
+    {
+        $comment->setAuthor($this->getUser());
+        $comment->setStory($story);
+        $entityManager->persist($comment);
+        $entityManager->flush();
 
+//            // Return a JSON response with the new comment data
+        return $this->json([
+            'content' => $comment->getContent(),
+            'author'=> $comment->getAuthor()->getUsername(),
+            'createdAt' => $comment->getCreatedAt()->format('Y-m-d H:i:s'),
+            'count' =>$story->getComments()->count()
 
+        ]);
     }
-
 
 
 

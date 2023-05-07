@@ -30,7 +30,6 @@
                     <div class="title">
                         <h1>{{ story.title }}</h1>
                     </div>
-
                     {% for contribution in story.contributions %}
                             <p id="{{ contribution.author.id }}">{{ contribution.content }}</p>
                     {% endfor%}
@@ -55,11 +54,12 @@
             </div>
 
             <div class="row" id="contribute-form">
-                {{ form_start(contributionForm,{'action': path('app_contribution', {'id':story.id}),
+                {{ form_start(contributionForm,{'action': path('app_storypage', {'id':story.id}),
                     'attr': {'id': 'contribution-form'}}) }}
                     {{ form_widget(contributionForm.content,{'attr':{'class':'form-input col-7', 'placeholder':'add your contribution'}}) }}
+                    <button id="sub" type="submit" ></button>
                 {{ form_end(contributionForm) }}
-                    <button id="sub"></button>
+
             </div>
 
 
