@@ -33,7 +33,7 @@
             {% for story in stories %}
                 <div class="col-md-3 mb-4">
                     <div class="card">
-                        <a href="{{ path('app_story_id', {'slug': story.slug }) }}">
+                        <a href="{{ path('app_storypage', {'id': story.id }) }}">
                         <img src="{{ story.imageUrl() }}" class="card-img-top" alt="Story Image">
                         <div class="card-body">
                             <h5 class="card-title">{{ story.title }}</h5>
