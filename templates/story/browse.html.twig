@@ -14,21 +14,19 @@
                 <ul class="genre-list ps-0 mt-2 mb-3">
                     <li class="d-inline">
                         <a class="btn btn-primary genre"
-                           href='{{ path('app_browse_stories') }}'>All genres</a>
+                           href="{{ path('app_browse_stories') }}">All genres</a>
                     </li>
-                    {% for g in genres %}
+                    {% for genre, color in genres %}
                         <li class="d-inline">
-                            <a class="btn btn-primary genre"
-                               href='{{ path('app_browse_stories', {
-                                   'genre' : g
-                               }) }}'>{{ g }}</a>
+                            <a class="btn btn-primary genre {{ color }}"
+                               href="{{ path('app_browse_stories', { 'genre': genre }) }}">{{ genre }}</a>
                         </li>
                     {% endfor %}
                 </ul>
                 <article class="row row-cols-1 row-cols-md-3 g-4" data-aos="fade-left">
                     {% for story in pager %}
                         <div class="col">
-                            <a href=" {{ path('app_storypage', {id:story.id}) }}" rel="bookmark">
+                            <a href="{{ path('app_storypage', { 'id': story.id }) }}" rel="bookmark">
                                 <div class="card h-100" data-aos="zoom-in" data-aos-delay="0">
                                     <img alt="{{ story.title }}" class="card-img-top"
                                          src="{{ story.ImageUrl(300) }}">
@@ -37,9 +35,9 @@
                                         <p class="card-text">{# awel joumal #}</p>
                                         <div class="d-flex justify-content-between align-items-center">
                                             <small class="text-muted">{{ story.updatedAt | ago }}</small>
-                                            <small class="text-muted">{{ story.likes }} ❤️</small>
+                                            <small class="text-muted">{{ story.likes | length }} ❤️</small>
                                         </div>
-                                        <span class="badge rounded-pill text-bg-primary">{{ story.genre }}</span>
+                                        <span class="badge rounded-pill {{ genres[story.genre] }}"> {{ story.genre }} </span>
                                     </div>
                                 </div>
                             </a>
@@ -55,13 +53,12 @@
     <!-- End Trending Section -->
 {% endblock %}
 
- {% block javascripts %}
-     {{ parent() }}
-     {{ encore_entry_script_tags('feed') }}
- {% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('feed') }}
+{% endblock %}
 
-
- {% block stylesheets %}
-     {{ parent() }}
-     {{ encore_entry_link_tags('feed') }}
- {% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('feed') }}
+{% endblock %}
