@@ -9,12 +9,23 @@
             </div>
             <div class="page-content">
 
+            {#likes#}
+
                 <div class="row">
                     <div class="col-1" id="fixed">
-                            <i id="color" class="fa-regular fa-heart fa-2xl" data-story-id="{{ path('app_like', {'id': story.id}) }}" style="color: #d31717;"></i>
+                            <i id="color" class="
+                            {% if hasLiked %}fa-solid
+                            {% else%}
+                            fa-regular
+                            {% endif%}
+                                fa-heart fa-2xl"
+                                data-story-id="{{ path('app_like', {'id': story.id}) }}" style="color: #d31717;"></i>
                         <div id="likes">{{ story.likes|length }}</div>
 
                     </div>
+
+{#            title        #}
+
                 <div  class="text col-8" >
                     <div class="title">
                         <h1>{{ story.title }}</h1>
@@ -48,7 +59,7 @@
 
             <div id="comment_section" class="col-8">
                 <div class="be-comment-block">
-                    <h1 class="comments-title">Comments ({{ story.comments|length }})</h1>
+                    <h1 class="comments-title" id="comment-count">Comments ({{ story.comments|length }})</h1>
                     {% for comment in story.comments %}
                         {% if comment.comment is null %}
                     <div class="be-comment">
