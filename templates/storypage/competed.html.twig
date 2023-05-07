@@ -62,6 +62,10 @@
                 {{ form_end(contributionForm) }}
 
             </div>
+            {% else %}
+
+            <div class="alert alert-info">
+                Looks like you've already contributed to this story! How about exploring some other stories?</div>
             {% endif %}
 
 
