@@ -113,3 +113,31 @@ $(function() {
         }, 1250 );
     }
 });
+
+
+///// add contribution to the page without refreshing
+$(document).ready(function() {
+    $('form[name="contribution"]').submit(function(event) {
+        // Prevent the form from submitting normally
+        event.preventDefault();
+
+        // Get the form data
+        var formData = $(this).serialize();
+
+        // Submit the form using AJAX
+        $.ajax({
+            url: $("#contribution-form").attr('action'),
+            method: 'POST',
+            data: formData,
+            success: function(response) {
+                console.log(response);
+                let content = response.content;
+                $(".text").append('<p>'+content+'</p>');
+            },
+            error: function() {
+                console.log($("#contribution-form").attr('action'));
+                alert('An error occurred while submitting the contribution.');
+            }
+        });
+    });
+});
