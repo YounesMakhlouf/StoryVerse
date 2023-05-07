@@ -24,6 +24,8 @@ class StorypageController extends AbstractController
         $form = $this->createForm(CommentType::class, $comment);
         $story=$storyRepository->find($id);
         $form->handleRequest($request);
+        $contribution=new Contribution();
+        $ContributionForm = $this->createForm(ContributionType::class, $contribution);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $comment->setAuthor($this->getUser());
@@ -47,6 +49,7 @@ class StorypageController extends AbstractController
            'story'=>$story,
             'hasLiked'=>$hasLiked,
             'form' => $form->createView(),
+            'contributionForm'=>$ContributionForm->createView()
         ]);
     }
 
@@ -77,10 +80,8 @@ class StorypageController extends AbstractController
 {
     $story=$storyRepository->find($id);
     $user=$this->getUser();
-    $contribution=new Contribution();
-    $form = $this->createForm(ContributionType::class, $contribution);
-    $form->handleRequest($request);
 
+    $form->handleRequest($request);
     if ($form->isSubmitted() && $form->isValid()) {
         $contribution->setAuthor($this->getUser());
         $contribution->setStory($story);

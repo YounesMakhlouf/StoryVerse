@@ -87,3 +87,10 @@ $('i.fa-heart').click(function() {
         }
     });
 });
+
+///// show contribute form
+$('#contribute-btn').click(function (){
+    $('#contribute-btn').hide();
+    $('#contribute-form').show();
+
+})
