@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CommentRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Timestampable\Traits\TimestampableEntity;
@@ -25,8 +27,6 @@ class Comment
     #[ORM\Column]
     private bool $reported = false;
 
-    #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'reply')]
-    private ?self $reply = null;
 
     #[ORM\ManyToOne(inversedBy: 'comments')]
     private ?Story $Story = null;
@@ -34,6 +34,17 @@ class Comment
     #[ORM\ManyToOne(inversedBy: 'comments')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $author = null;
+
+    #[ORM\ManyToOne(targetEntity: self::class, inversedBy: 'replies')]
+    private ?self $comment = null;
+
+    #[ORM\OneToMany(mappedBy: 'comment', targetEntity: self::class)]
+    private Collection $replies;
+
+    public function __construct()
+    {
+        $this->replies = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -76,17 +87,6 @@ class Comment
         return $this;
     }
 
-    public function getReply(): ?self
-    {
-        return $this->reply;
-    }
-
-    public function setReply(?self $reply): self
-    {
-        $this->reply = $reply;
-
-        return $this;
-    }
 
     public function getStory(): ?Story
     {
@@ -108,6 +108,48 @@ class Comment
     public function setAuthor(?User $author): self
     {
         $this->author = $author;
+
+        return $this;
+    }
+
+    public function getComment(): ?self
+    {
+        return $this->comment;
+    }
+
+    public function setComment(?self $comment): self
+    {
+        $this->comment = $comment;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, self>
+     */
+    public function getReplies(): Collection
+    {
+        return $this->replies;
+    }
+
+    public function addReply(self $reply): self
+    {
+        if (!$this->replies->contains($reply)) {
+            $this->replies->add($reply);
+            $reply->setComment($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReply(self $reply): self
+    {
+        if ($this->replies->removeElement($reply)) {
+            // set the owning side to null (unless already changed)
+            if ($reply->getComment() === $this) {
+                $reply->setComment(null);
+            }
+        }
 
         return $this;
     }
