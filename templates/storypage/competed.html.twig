@@ -12,7 +12,7 @@
                 <div class="row">
                     <div class="col-1" id="fixed">
                             <i id="color" class="fa-regular fa-heart fa-2xl" style="color: #d31717;"></i>
-                        <div>5000</div>
+                        <div id="likes">{{ story.likes }}]</div>
 
                     </div>
                 <div  class="text col-8" >
@@ -74,7 +74,7 @@
                     </div>
 {#                        reply#}
 
-                        {% if comment.reply is not null %}
+                        {% for reply in comment.replies%}
                             <div id="reply" class="row">
                             <div class="icon col-12">
                                 <i id="arrow" class="fa-solid fa-arrow-right" style="color: #5c5e60;"></i>
@@ -93,21 +93,21 @@
                             </div>
                             <div class="be-comment-content">
 				<span class="be-comment-name">
-					<a href="">{{ comment.reply.author.username }}</a>
+					<a href="">{{ reply.author.username }}</a>
 					</span>
                                 <span class="be-comment-time">
 					            <i class="fa fa-clock-o"></i>
-                                {{ comment.reply.createdat|date('d-m-Y') }}
+                                {{ reply.createdat|date('d-m-Y') }}
                             </span>
 
                                 <p class="be-comment-text">
-                                    {{ comment.reply.content }}
+                                    {{ reply.content }}
                                 </p>
                             </div>
                         </div>
                         </div>
 
-                        {% endif %}
+                        {% endfor %}
                     {% endfor %}
                     {{ form_start(form,{'action': path('app_storypage', {'id':story.id}),
                         'attr': {'id': 'comment-form'}}) }}
