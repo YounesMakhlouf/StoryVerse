@@ -495,7 +495,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getContributedStories()
+    public function getContributedStories(): array
     {
         $contributions = $this->getContributions();
         $contributedStories = [];
@@ -513,6 +513,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getContributions(): Collection
     {
         return $this->contributions;
+    }
+
+    public function getStartedStories(): array
+    {
+        $contributions = $this->getContributions();
+        $startedStories = [];
+        foreach ($contributions as $contribution) {
+            if ($contribution->getPosition() === 1) {
+                $story = $contribution->getStory();
+                $startedStories[] = $story;
+            }
+        }
+        return $startedStories;
     }
 
     /**
