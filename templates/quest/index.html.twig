@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Quests{% endblock %}
+
+
+{% block body %}
+    <div class="container">
+        <h1 class="mt-4">All Quests</h1>
+
+        {% if quests is empty %}
+            <p>No quests available.</p>
+        {% else %}
+            <div class="row">
+                {% for quest in quests %}
+                    <div class="col-md-6">
+                        <div class="card quest-card">
+                            <div class="card-body">
+                                <h3 class="card-title quest-title">{{ quest.name }}</h3>
+                                <p class="card-text quest-description">{{ quest.description }}</p>
+                                <p class="card-text quest-type"><em>{{ quest.type }}</em></p>
+                                <p class="card-text quest-points">Points: <strong>{{ quest.points }}</strong></p>
+                                <p class="card-text quest-completion">{{ quest.users|length }} people completed this quest</p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('quests') }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('quests') }}
+{% endblock %}

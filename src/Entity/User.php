@@ -90,6 +90,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: Story::class, mappedBy: 'likes', fetch: 'EXTRA_LAZY')]
     private Collection $likedStories;
 
+    #[ORM\ManyToMany(targetEntity: Quest::class, inversedBy: 'users')]
+    private Collection $completedQuests;
+
+    #[ORM\ManyToMany(targetEntity: Badge::class, inversedBy: 'users')]
+    private Collection $badges;
+
     public function __construct()
     {
         $this->csrf_token = '';
@@ -100,6 +106,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->contributions = new ArrayCollection();
         $this->likedStories = new ArrayCollection();
         $this->comments = new ArrayCollection();
+        $this->completedQuests = new ArrayCollection();
+        $this->badges = new ArrayCollection();
     }
 
     public function getBio(): ?string
@@ -505,5 +513,53 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getContributions(): Collection
     {
         return $this->contributions;
+    }
+
+    /**
+     * @return Collection<int, Quest>
+     */
+    public function getCompletedQuests(): Collection
+    {
+        return $this->completedQuests;
+    }
+
+    public function addCompletedQuest(Quest $completedQuest): self
+    {
+        if (!$this->completedQuests->contains($completedQuest)) {
+            $this->completedQuests->add($completedQuest);
+        }
+
+        return $this;
+    }
+
+    public function removeCompletedQuest(Quest $completedQuest): self
+    {
+        $this->completedQuests->removeElement($completedQuest);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Badge>
+     */
+    public function getBadges(): Collection
+    {
+        return $this->badges;
+    }
+
+    public function addBadge(Badge $badge): self
+    {
+        if (!$this->badges->contains($badge)) {
+            $this->badges->add($badge);
+        }
+
+        return $this;
+    }
+
+    public function removeBadge(Badge $badge): self
+    {
+        $this->badges->removeElement($badge);
+
+        return $this;
     }
 }
