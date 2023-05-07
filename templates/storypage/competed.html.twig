@@ -64,8 +64,10 @@
             </div>
             {% else %}
 
-            <div class="alert alert-info">
-                Looks like you've already contributed to this story! How about exploring some other stories?</div>
+            <div id="message" class="alert alert-light col-8">
+                Looks like you've already contributed to this story! How about exploring some other stories?
+            </div>
+                <a href="{{ path('app_browse_stories') }}" class="btn btn-white btn-animate col-2" style="margin-left:8%">Explore</a>
             {% endif %}
 
 
