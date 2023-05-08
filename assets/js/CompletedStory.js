@@ -157,6 +157,5 @@ $('.contr').hover(function (){
         $('#'+id).css('font-size', '16px');
         $(this).css('background-color','white')
 
-
     }
 )
