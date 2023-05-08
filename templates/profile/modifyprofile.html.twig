@@ -32,8 +32,13 @@
                         </div>
 
                         <div class="form-group">
-                            {{ form_row(form.avatar, { 'attr': {'class': 'form-control'} }) }}
-                        </div>
+                           
+                           <label for="{{ form.avatar.vars.id }}" class="btn btn-primary">
+                               {{ form.avatar.vars.label }}
+                                  {{ form_widget(form.avatar) }}
+                                     </label>
+                           
+                                          </div>
 
                         {{ form_end(form) }}
                     </div>
