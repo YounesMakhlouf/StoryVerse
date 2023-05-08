@@ -208,4 +208,8 @@ class Story
 
         return $this;
     }
+    public function getTotalLikes(): int
+    {
+        return $this->getLikes()->count();
+    }
 }

@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Story;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
@@ -26,9 +27,8 @@ class StoryCrudController extends AbstractCrudController
                 ->setSortable(false),
             TextField::new('title')
             ->setSortable(false),
-
-//            IntegerField::new('likes')
-//                ->setTemplatePath('admin/field/votes.html.twig'),
+            IntegerField::new('Total likes')
+                ->setTemplatePath('admin/field/votes.html.twig'),
             DateField::new('createdAt'),
         ];
     }

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Form\LoginFormType;
 use LogicException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,13 +18,17 @@ class SecurityController extends AbstractController
         // if ($this->getUser()) {
         //     return $this->redirectToRoute('target_path');
         // }
+        $form = $this->createForm(LoginFormType::class);
 
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        return $this->render('security/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
+        return $this->render('security/login.html.twig', ['last_username' => $lastUsername,
+            'error' => $error,
+            'loginForm' => $form->createView(),
+        ]);
     }
 
     #[Route(path: '/logout', name: 'app_logout')]

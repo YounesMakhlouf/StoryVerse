@@ -38,11 +38,11 @@ class DashboardController extends AbstractDashboardController
     {
         $nbUsers = $this->getInfo('u', $this->userRepository ,'COUNT(u.id) ');
         $nbStories=$this->getInfo('s',$this->storyRepository,'COUNT(s.id) ');
-        $interactions=$this->getInfo('s',$this->storyRepository,'SUM(s.likes)');
+//        $interactions=$this->getInfo('s',$this->storyRepository,'SUM(s.likes)');
         return $this->render('admin/admin.html.twig',[
             'story'=>$nbStories,
             'users'=>$nbUsers,
-            'interaction'=>$interactions
+            'interaction'=>'3'
         ]);
 
 
