@@ -519,6 +519,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @return Collection<int, Quest>
+     * @return Collection<int, Quest>
      */
     public function getCompletedQuests(): Collection
     {
