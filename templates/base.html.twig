@@ -30,6 +30,9 @@
     {% for flash in app.flashes('error') %}
         <div class="alert alert-success">{{ flash }}</div>
     {% endfor %}
+    {% for flashMessage in app.session.flashbag.get('sweetalert2') %}
+        {{ flashMessage|raw }}
+    {% endfor %}
 {% endblock %}
 {% block footer %}
     {% include "layout/footer.html.twig" %}
