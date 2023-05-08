@@ -54,4 +54,6 @@ class CompetitionController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+  #route[]
+
 }
