@@ -3,12 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Comment;
-use App\Event\QuestCompletionEvent;
 use App\Form\CommentType;
 use App\Repository\StoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,10 +15,6 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class StorypageController extends AbstractController
 {
-    public function __construct(private EventDispatcherInterface $eventDispatcher)
-    {
-    }
-
     #[IsGranted('ROLE_USER')]
     #[Route('/storypage/{id}', name: 'app_storypage')]
     public function index(Request $request, $id, StoryRepository $storyRepository, EntityManagerInterface $entityManager): Response
@@ -67,8 +61,6 @@ class StorypageController extends AbstractController
         } else {
             $story->addLike($user);
         }
-        $event = new QuestCompletionEvent($user);
-        $this->eventDispatcher->dispatch($event, QuestCompletionEvent::QUEST_COMPLETION_EVENT);
         $entityManager->persist($story);
         $entityManager->flush();
 

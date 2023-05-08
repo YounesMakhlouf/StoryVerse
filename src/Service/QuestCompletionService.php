@@ -6,6 +6,7 @@ use App\Entity\Quest;
 use App\Entity\User;
 use DateTime;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Exception\NotSupported;
 use Doctrine\ORM\Exception\ORMException;
@@ -19,7 +20,7 @@ class QuestCompletionService
     /**
      * @throws NotSupported
      */
-    public function __construct(private readonly EntityManager $entityManager)
+    public function __construct(private readonly EntityManagerInterface $entityManager)
     {
         $this->questRepository = $entityManager->getRepository(Quest::class);
     }

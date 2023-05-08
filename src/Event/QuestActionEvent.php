@@ -5,10 +5,10 @@ namespace App\Event;
 use App\Entity\User;
 use Symfony\Contracts\EventDispatcher\Event;
 
-class QuestCompletionEvent extends Event
+class QuestActionEvent extends Event
 {
-    const QUEST_COMPLETION_EVENT = 'completion.quest';
     private User $user;
+    const QUEST_ACTION_EVENT = 'action.quest';
 
     public function __construct(User $user)
     {
