@@ -32,8 +32,7 @@ imageThemeEffect();
 
  //color like icon on click
 
-$("#fixed").click(function() {
-    $("#fixed").removeClass("fa-regular");
+$("#color").click(function() {
     $("#color").toggleClass("fa-solid");
 });
 
