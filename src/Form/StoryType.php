@@ -14,7 +14,6 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 
-
 class StoryType extends AbstractType
 {
 public function buildForm(FormBuilderInterface $builder, array $options)
@@ -28,20 +27,17 @@ $builder
     'label' => 'Genre',
     'required' => true,
     'choices' => [
-        'Action' => 'Action',
-        'Adventure' => 'Adventure',
         'Comedy' => 'Comedy',
         'Drama' => 'Drama',
         'Horror' => 'Horror',
         'Romance' => 'Romance',
-        'Science Fiction' => 'Science Fiction',
-        'Thriller' => 'Thriller',
-    ],
+        'Mystery' => 'Mystery',
+        ' Fiction' => ' Fiction']
 ])
 
-
 ->add('firstContribution', TextareaType::class, [
-    'label' => 'Votre première contribution'
+    'label' => 'Votre première contribution', 
+    'mapped' => false,
   ])
 
     ->add('storyImage', FileType::class, [
@@ -79,13 +75,12 @@ $builder
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Story::class,
-            'csrf_token_id' => 'modify-profile',
-            'allow_extra_fields' => true,
-            'extra_fields_message' => 'Unexpected field: {{ extra_fields }}',
-            'csrf_protection' => false,
-
-        ]);
+        'data_class' => Story::class,
+        'csrf_token_id' => 'modify-profile',
+        'allow_extra_fields' => true,
+        'extra_fields_message' => 'Unexpected field: {{ extra_fields }}',
+        'csrf_protection' => false,
+    ]);
 
 }
 }
