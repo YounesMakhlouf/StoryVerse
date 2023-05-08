@@ -27,8 +27,8 @@ class StoryCrudController extends AbstractCrudController
             TextField::new('title')
             ->setSortable(false),
 
-            IntegerField::new('likes')
-                ->setTemplatePath('admin/field/votes.html.twig'),
+//            IntegerField::new('likes')
+//                ->setTemplatePath('admin/field/votes.html.twig'),
             DateField::new('createdAt'),
         ];
     }
