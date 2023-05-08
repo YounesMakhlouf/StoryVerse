@@ -18,8 +18,10 @@ class MyProfileController extends AbstractController
     public function showMyProfile(Security $security): Response
     {
         $user = $security->getUser();
+        $contributedStories = $user->getContributedStories();
         return $this->render('profile/myprofile.html.twig', [
             'user' => $user,
+            'stories'=> $contributedStories,
         ]);
     }
 

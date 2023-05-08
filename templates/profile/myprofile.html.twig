@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="profile-container text-center" style="margin-top: 80px">
+    <div class="profile-container text-center" style="margin-top: 20px">
         <div class="profile-cover">
                 <h1 class="profile-name"><br> Hello &nbsp&nbsp {{ user.username|upper }} &nbsp&nbsp!  </h1>
         </div>
@@ -41,44 +41,67 @@
             <div class="profile-bio">" A writer like no other ..! "</div>
         {% endif %}
         <div class="profile-stats">
-            <span class="profile-followers"><i class="fa-solid fa-user"></i>1000 Followers</span>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <span class="profile-following"><i class="fa-solid fa-user"></i>500 Following</span>
-        </div>
-        <br>
-        <br>
-        <br>
-        <br>
-        <br>
-        <div class="profile-stories-container">
-            <h2 class="profile-stories-title">Stories auxquelles cette personne a participé:</h2>
-            <br>
-            <br>
-            <div class="profile-stories-grid">
-                <!-- Stories ici -->
-                <!-- 1er exemple -->
-                <div class="text-center">
-                    <img src="https://thumbs.dreamstime.com/b/loup-17334773.jpg"
-                         class="img-fluid rounded start, zoom-image">
-                    <h5>Horreur, Science-Fiction </h5>
+            <div class="row">
+                <div class="col">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa-solid fa-user"></i>
+                        <span class="profile-followers">{{ user.follower|length }} Followers</span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        {% for follower in user.follower %}
+                            <li>
+                                <a class="dropdown-item" href="{{ path('app_profile', {'id': follower.id}) }}">
+                                    <img id="avatar" src="{{ follower.avatar }}" alt="Avatar" width="40" height="40" class="d-inline-block align-text-top"> {{ follower.username }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
                 </div>
-                <span class="description">Est-ce toujours le loup ? Elle non plus n'était pas aussi innocente qu'elle en avait l'air.
-        <br><br>
-        <a href="page_destination.html" class="btn btn-warning">Continuez la lecture</a>
-        </span>
-                <!-- 2eme exemple -->
-                <div class="text-center">
-                    <img src="https://www.daily-movies.ch/wp-content/uploads/2023/02/Un-homme-heureux_4.jpg"
-                         class="img-fluid rounded start, zoom-image ">
-                    <h5>Romance </h5>
+                <div class="col">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fa-solid fa-user"></i>
+                        <span class="profile-followers">{{ user.following|length }} Following</span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        {% for following in user.following %}
+                            <li>
+                                <a class="dropdown-item" href="{{ path('app_profile', {'id': following.id}) }}">
+                                    <img id="avatar" src="{{ following.avatar }}" alt="Avatar" width="40" height="40" class="d-inline-block align-text-top"> {{ following.username }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
                 </div>
-                <span class="description">Il était une fois, dans un petit café au coin de la rue, que leurs regards se sont croisés pour la première fois...
-<br><br>
-<a href="page_destination.html" class="btn btn-warning">Continuez la lecture</a>
-</span>
             </div>
         </div>
-    </div>
+
+        <br><br><br><br><br>
+
+
+        <div class="profile-stories-container">
+            <h2 class="profile-stories-title">Stories auxquelles j'ai participé:</h2>
+            <br><br>
+            <div class="grid text-center">
+                {% for story in stories %}
+                    <div class="row">
+                        <div class="text-center col">
+                            <img alt="{{ story.title }}" src="{{ story.ImageUrl(300) }}">
+                            <h5>{{ story.genre }}</h5>
+                        </div>
+
+                        <div class="col-6 ">
+                            <div class="text-truncate description">
+                                {% for contribution in story.contributions %}
+                                    <p>{{ contribution.content }}</p>
+                                {% endfor %}
+                            </div>
+                            <a href="{{ path('app_storypage', { 'id': story.id }) }}" class="btn btn-warning">Continuez la
+                                lecture</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
     </div>
 
 {% endblock %}
@@ -88,6 +111,7 @@
  {% block javascripts %}
      {{ parent() }}
      {{ encore_entry_script_tags('profile') }}
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
  {% endblock %}
 
 

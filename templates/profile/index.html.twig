@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<div class="profile-container text-center">
+<div class="profile-container text-center" style="margin-top: 20px">
     <div class="profile-cover">
         {% if user %}
             <h1 class="profile-name">
@@ -10,12 +10,9 @@
         {% endif %}
     </div>
     <div class="profile-picture-container">
-        {% if user.avatar %}
-            <img src="{{ user.avatar }}" alt="Profile picture" class="profile-picture rounded-circle">
-        {% else %}
-            <img src="{{ asset('https://us.123rf.com/450wm/yummytime/yummytime1608/yummytime160800630/61903988-anonyme-m%C3%A2le-photo-de-profil-avatar-de-l-%C3%A9motion-cr%C3%A9%C3%A9e-pour-mobile-web-d%C3%A9coration-produits-d.jpg') }}"
-                 alt="Default profile picture" class="profile-picture rounded-circle">
-        {% endif %}
+        {% set avatar = user.avatar ?: 'https://us.123rf.com/450wm/yummytime/yummytime1608/yummytime160800630/61903988-anonyme-m%C3%A2le-photo-de-profil-avatar-de-l-%C3%A9motion-cr%C3%A9%C3%A9e-pour-mobile-web-d%C3%A9coration-produits-d.jpg' %}
+            <img src="{{ avatar }}" alt="Profile picture" class="profile-picture rounded-circle">
+
     </div>
     <div>
         {% for type, messages in app.flashes %}
@@ -27,32 +24,68 @@
 
     {% set bio = user.bio ?: 'A writer like no other ..!' %}
     <div class="profile-bio">{{ bio }}</div>
+
     <div class="profile-stats">
-            <span class="profile-followers">
-                <i class="fa-solid fa-user"></i>{{ user.follower|length }} Followers
-            </span>
-        <span class="profile-following">
-                <i class="fa-solid fa-user"></i>{{ user.following|length }} Following
-            </span>
+        <div class="row">
+            <div class="col">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fa-solid fa-user"></i>
+                    <span class="profile-followers">{{ user.follower|length }} Followers</span>
+                </a>
+                <ul class="dropdown-menu">
+                    {% for follower in user.follower %}
+                        <li>
+                            <a class="dropdown-item" href="{{ path('app_profile', {'id': follower.id}) }}">
+                                <img id="avatar" src="{{ follower.avatar }}" alt="Avatar" width="40" height="40" class="d-inline-block align-text-top"> {{ follower.username }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fa-solid fa-user"></i>
+                    <span class="profile-followers">{{ user.following|length }} Following</span>
+                </a>
+                <ul class="dropdown-menu">
+                    {% for following in user.following %}
+                        <li>
+                            <a class="dropdown-item" href="{{ path('app_profile', {'id': following.id}) }}">
+                                <img id="avatar" src="{{ following.avatar }}" alt="Avatar" width="40" height="40" class="d-inline-block align-text-top"> {{ following.username }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
     </div>
 
+
+    <br><br>
     <div class="d-grid gap-2 d-md-block buttons">
         {% if app.user %}
-            {% set followButtonLabel = is_following ? 'Unfollow' : 'Follow' %}
-            <button class="btn {{ is_following ? 'btn-primary' : 'btn-warning' }} follow-button"
-                    data-user-id="{{ user.id }}"
-                    data-following="{{ path('is_following', {'id': user.id}) }}">
-                {{ followButtonLabel }}
-            </button>
+            {% if is_following %}
+                {% set formAction = path('unfollow_user', {'id': user.id}) %}
+                {% set followButtonLabel = 'Unfollow' %}
+            {% else %}
+                {% set formAction = path('follow_user', {'id': user.id}) %}
+                {% set followButtonLabel = 'Follow' %}
+            {% endif %}
+            <form class="d-inline" action="{{ formAction }}" method="post">
+                <button class="btn {{ is_following ? 'btn-primary' : 'btn-warning' }} follow-button">
+                    {{ followButtonLabel }}
+                </button>
+            </form>
         {% else %}
             <a href="{{ path('app_login') }}" class="btn btn-primary">Log in to follow</a>
         {% endif %}
-        <button class="btn btn-warning">Message</button>
-        <button class="btn btn-warning">Report</button>
-    </div>
 
+
+    </div>
+    <br><br>
     <div class="profile-stories-container">
         <h2 class="profile-stories-title">Stories auxquelles cette personne a participé:</h2>
+        <br><br>
         <div class="grid text-center">
             {% for story in stories %}
                 <div class="row">
@@ -79,6 +112,8 @@
     {% block javascripts %}
         {{ parent() }}
         {{ encore_entry_script_tags('profile') }}
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+
     {% endblock %}
 
     {% block stylesheets %}
