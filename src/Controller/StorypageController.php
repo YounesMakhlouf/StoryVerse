@@ -39,7 +39,7 @@ class StorypageController extends AbstractController
         }
         $hasContributed=$this->hasContributed($entityManager,$story);
         $hasLiked=$story->getLikes()->contains($this->getUser());
-        return $this->render('storypage/competed.html.twig', [
+        return $this->render('storypage/completed.html.twig', [
 
             'controller_name' => 'CompletedStoryController',
            'story'=>$story,
