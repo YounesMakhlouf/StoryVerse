@@ -3,7 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Comment;
+use App\Entity\Contribution;
+use App\Entity\Story;
 use App\Form\CommentType;
+use App\Form\ContributionType;
 use App\Repository\StoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -21,36 +24,37 @@ class StorypageController extends AbstractController
         $comment = new Comment();
         $form = $this->createForm(CommentType::class, $comment);
         $story=$storyRepository->find($id);
+        $contribution=new Contribution();
+        $ContributionForm = $this->createForm(ContributionType::class, $contribution);
+
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
-            $comment->setAuthor($this->getUser());
-            $comment->setStory($story);
-            $entityManager->persist($comment);
-            $entityManager->flush();
+          return $this->addComment($comment,$story,$entityManager);
 
-//            // Return a JSON response with the new comment data
-           return $this->json([
-               'content' => $comment->getContent(),
-               'author'=> $comment->getAuthor()->getUsername(),
-               'createdAt' => $comment->getCreatedAt()->format('Y-m-d H:i:s'),
-               'count' =>$story->getComments()->count()
-
-           ]);
         }
+        $ContributionForm->handleRequest($request);
+
+        if ($ContributionForm->isSubmitted()) {
+            return $this->addContribution($story,$entityManager,$contribution);
+        }
+
+
+
+        $hasContributed=$this->hasContributed($entityManager,$story);
         $hasLiked=$story->getLikes()->contains($this->getUser());
         return $this->render('storypage/competed.html.twig', [
-
             'controller_name' => 'CompletedStoryController',
            'story'=>$story,
             'hasLiked'=>$hasLiked,
+            'hasContributed'=>$hasContributed,
             'form' => $form->createView(),
+            'contributionForm'=>$ContributionForm->createView()
         ]);
     }
 
     #[Route('/storypage/like/{id}', name: 'app_like')]
 
-    public function like($id,Request $request, EntityManagerInterface $entityManager,StoryRepository $storyRepository)
+    public function addLike($id,Request $request, EntityManagerInterface $entityManager,StoryRepository $storyRepository): JsonResponse
     {
         $story=$storyRepository->find($id);
         $user=$this->getUser();
@@ -69,7 +73,50 @@ class StorypageController extends AbstractController
 
     }
 
+    public function addContribution(Story $story, EntityManagerInterface $entityManager, Contribution $contribution): JsonResponse
+    {
+        $contribution->setStory($story);
+        $contribution->setAuthor($this->getUser());
+        $contribution->setPosition($story->getContributions()->count()+1);
+        $entityManager->persist($contribution);
+        $entityManager->flush();
+        return $this->json([
+            'content' => $contribution->getContent(),
+            'id'=> $contribution->getAuthor()->getId(),
+        ]);
+    }
 
+    public function addComment(Comment $comment,Story $story,EntityManagerInterface $entityManager): JsonResponse
+    {
+        $comment->setAuthor($this->getUser());
+        $comment->setStory($story);
+        $entityManager->persist($comment);
+        $entityManager->flush();
+
+//            // Return a JSON response with the new comment data
+        return $this->json([
+            'content' => $comment->getContent(),
+            'author'=> $comment->getAuthor()->getUsername(),
+            'createdAt' => $comment->getCreatedAt()->format('Y-m-d H:i:s'),
+            'count' =>$story->getComments()->count()
+
+        ]);
+    }
+
+    public function hasContributed(EntityManagerInterface $entityManager,Story $story){
+        $user = $this->getUser();
+        $contributions = $entityManager->getRepository(Contribution::class)->findBy([
+            'author' => $user,
+            'story' => $story,
+        ]);
+
+        if (count($contributions) > 0) {
+            return true;
+        }
+         else {
+             return false;
+         }
+    }
 
 
 

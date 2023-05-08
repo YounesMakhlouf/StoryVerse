@@ -32,7 +32,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private array $roles = [];
 
     /**
-     * @var string The hashed password
+     * @var string|null The hashed password
      */
     #[ORM\Column]
     private ?string $password = null;
@@ -51,7 +51,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column]
     private ?bool $isVerified = false;
-
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?DateTimeInterface $Last_login_date = null;
@@ -90,6 +89,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: Story::class, mappedBy: 'likes', fetch: 'EXTRA_LAZY')]
     private Collection $likedStories;
 
+    #[ORM\ManyToMany(targetEntity: Quest::class, inversedBy: 'users')]
+    private Collection $completedQuests;
+
+    #[ORM\ManyToMany(targetEntity: Badge::class, inversedBy: 'users')]
+    private Collection $badges;
+
     public function __construct()
     {
         $this->csrf_token = '';
@@ -100,6 +105,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->contributions = new ArrayCollection();
         $this->likedStories = new ArrayCollection();
         $this->comments = new ArrayCollection();
+        $this->completedQuests = new ArrayCollection();
+        $this->badges = new ArrayCollection();
     }
 
     public function getBio(): ?string
@@ -458,14 +465,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @return Collection<int, Comment>
-     */
-    public function getComments(): Collection
-    {
-        return $this->comments;
-    }
-
     public function addComment(Comment $comment): self
     {
         if (!$this->comments->contains($comment)) {
@@ -487,7 +486,95 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getContributedStories()
+    /**
+     * @return Collection<int, Quest>
+     */
+    public function getCompletedQuests(): Collection
+    {
+        return $this->completedQuests;
+    }
+
+    public function addCompletedQuest(Quest $completedQuest): self
+    {
+        if (!$this->completedQuests->contains($completedQuest)) {
+            $this->completedQuests->add($completedQuest);
+        }
+
+        return $this;
+    }
+
+    public function removeCompletedQuest(Quest $completedQuest): self
+    {
+        $this->completedQuests->removeElement($completedQuest);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Badge>
+     */
+    public function getBadges(): Collection
+    {
+        return $this->badges;
+    }
+
+    public function addBadge(Badge $badge): self
+    {
+        if (!$this->badges->contains($badge)) {
+            $this->badges->add($badge);
+        }
+
+        return $this;
+    }
+
+    public function removeBadge(Badge $badge): self
+    {
+        $this->badges->removeElement($badge);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Contribution>
+     */
+    public function getContributions(): Collection
+    {
+        return $this->contributions;
+    }
+
+    /**
+     * @return Collection<int, Comment>
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function getUserRequirement(string $questRequirement): int
+    {
+        return match ($questRequirement) {
+            'post_comments' => count($this->comments),
+            'receive_comments' => $this->getCommentsReceivedCount(),
+            'post_likes' => count($this->likedStories),
+            'receive_likes' => $this->getLikesReceivedCount(),
+            'post_stories' => count($this->getStartedStories()),
+            'post_contributions' => count($this->contributions),
+            default => -1,
+        };
+    }
+
+    public function getCommentsReceivedCount(): int
+    {
+        $contributedStories = $this->getContributedStories();
+        $commentCount = 0;
+        foreach ($contributedStories as $story) {
+            $comments = $story->getComments();
+            $commentCount += count($comments);
+        }
+        return $commentCount;
+    }
+
+    public function getContributedStories(): array
     {
         $contributions = $this->getContributions();
         $contributedStories = [];
@@ -499,11 +586,40 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $contributedStories;
     }
 
-    /**
-     * @return Collection<int, Contribution>
-     */
-    public function getContributions(): Collection
+    public function getLikesReceivedCount(): int
     {
-        return $this->contributions;
+        $contributedStories = $this->getContributedStories();
+        $likesCount = 0;
+        foreach ($contributedStories as $story) {
+            $likes = $story->getLikes();
+            $likesCount += count($likes);
+        }
+        return ($likesCount);
+    }
+
+    public function getStartedStories(): array
+    {
+        $contributions = $this->getContributions();
+        $startedStories = [];
+        foreach ($contributions as $contribution) {
+            if ($contribution->getPosition() === 1) {
+                $story = $contribution->getStory();
+                $startedStories[] = $story;
+            }
+        }
+        return $startedStories;
+    }
+
+    private int $xp = 0;
+     public function getXp(): ?string
+    {
+        return $this->xp;
+    }
+
+    public function addXp(?string $xp): self
+    {
+        $this->xp += $xp;
+
+        return $this;
     }
 }

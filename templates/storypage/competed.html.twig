@@ -1,8 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}CompletedStory!{% endblock %}
+{% block title %}{{story.title}}{% endblock %}
 
 {% block body %}
+    {% block like %}
     <body>
             <div class="theme ">
 
@@ -13,7 +14,18 @@
 
                 <div class="row">
                     <div class="col-1" id="fixed">
-                            <i id="color" class="
+                        <a href="{{ path('app_pdf',{'id':story.id}) }}">
+
+                        <div class="pdf">
+                            <div class="icn">
+
+                                <i class="fa-solid fa-file-pdf"></i>
+                            </div>
+
+                        </div>
+                        </a>
+
+                        <i id="color" class="
                             {% if hasLiked %}fa-solid
                             {% else%}
                             fa-regular
@@ -23,40 +35,65 @@
                         <div id="likes">{{ story.likes|length }}</div>
 
                     </div>
+        {% endblock %}
 
 {#            title        #}
+                    {% block story %}
 
                 <div  class="text col-8" >
                     <div class="title">
                         <h1>{{ story.title }}</h1>
                     </div>
-
                     {% for contribution in story.contributions %}
-                            <p id="{{ contribution.author.id }}">{{ contribution.content }}</p>
+                            <p class="contr" id="{{ contribution.author.id  }}">{{ contribution.content }}</p>
                     {% endfor%}
 
-                    <div class="line"></div>
 
                 </div>
 
             <span  class="authors ">
                 <h5>Contributors</h5>
                 {% for contribution in story.contributions %}
-                        <a href='{{ path('app_profile',{id:contribution.author.id}) }}'>
+                        <a id="{{contribution.author.id ~ "author"}}" href='{{ path('app_profile',{id:contribution.author.id}) }}'>
                     {{ contribution.author.username }}
                     </a>
                         <hr>
                 {% endfor %}
 
+
         </span>
     </div>
+                {% endblock %}
+
+                {% block contribute %}
+                {% if not hasContributed %}
+                <div class="text-box">
+                    <a id="contribute-btn" class="btn btn-white btn-animate">Be part of the story - Contribute now!</a>
+                </div>
+
             </div>
 
+            <div class="row" id="contribute-form">
+                {{ form_start(contributionForm,{'action': path('app_storypage', {'id':story.id}),
+                    'attr': {'id': 'contribution-form'}}) }}
+                    {{ form_widget(contributionForm.content,{'attr':{'class':'form-input col-7', 'placeholder':'add your contribution'}}) }}
+                    <button id="sub" type="submit" ></button>
+                {{ form_end(contributionForm) }}
+
+            </div>
+            {% else %}
+
+            <div id="message" class="alert alert-light col-8">
+                Looks like you've already contributed to this story! How about exploring some other stories?
+            </div>
+                <a href="{{ path('app_browse_stories') }}" class="btn btn-white btn-animate col-2" style="margin-left:8%">Explore</a>
+            {% endif %}
+{% endblock %}
 
 
 {#            comment section #}
 
-
+{% block comments %}
             <div id="comment_section" class="col-8">
                 <div class="be-comment-block">
                     <h1 class="comments-title" id="comment-count">Comments ({{ story.comments|length }})</h1>
@@ -95,9 +132,6 @@
                             </div>
                             </div>
                         <div class="reply row" style="display:none;">
-                            <div class="col-4 icon">
-                                <i class="fa-solid fa-reply fa-rotate-180 fa-2xl"></i>
-                            </div>
                         <div class="be-comment col-8 ">
                             <div class="be-img-comment">
                                 <a href="">
@@ -136,6 +170,7 @@
 
         <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
     </body>
+{% endblock %}
     {% endblock %}
 
  {% block stylesheets %}
@@ -147,5 +182,6 @@
      {{ parent() }}
      {{ encore_entry_script_tags('completed') }}
 
+     <script>
  {% endblock %}
 
