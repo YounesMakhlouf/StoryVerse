@@ -30,7 +30,7 @@ $builder
     ])
 
     ->add('avatar', FileType::class, [
-        'label' => 'Avatar Image (PDF file)',
+        'label' => 'Avatar Image (JPG or PNG file)',
 
         // unmapped means that this field is not associated to any entity property
         'mapped' => false,
@@ -45,10 +45,10 @@ $builder
             new File([
                 'maxSize' => '1024k',
                 'mimeTypes' => [
-                    'application/pdf',
-                    'application/x-pdf',
+                    'application/JPG',
+                    'application/PNG',
                 ],
-                'mimeTypesMessage' => 'Please upload a valid PDF document',
+                'mimeTypesMessage' => 'Please upload a valid PNG or JPG Image',
             ])
         ],
     ])
