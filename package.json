@@ -36,7 +36,8 @@
     "jquery": "^3.6.4",
     "sass": "^1.62.0",
     "sass-loader": "^13.2.2",
-    "stimulus": "^3.2.1"
+    "stimulus": "^3.2.1",
+    "sweetalert2": "^11.7.5"
   },
   "browserslist": [
     ">2.5%"

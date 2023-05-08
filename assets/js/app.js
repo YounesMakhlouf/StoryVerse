@@ -9,6 +9,14 @@ import '../styles/app.scss';
 
 import './components/AOSInit';
 import './components/navigation';
-
+import Swal from "sweetalert2";
 // start the Stimulus application
 import '../bootstrap';
+
+Swal.fire({
+    title: 'Error!',
+    text: 'Do you want to continue',
+    icon: 'error',
+    confirmButtonText: 'Cool'
+})
+
