@@ -24,8 +24,20 @@
             {% endfor %}
         {% endfor %}
     </div>
-
-    {% set bio = user.bio ?: 'A writer like no other ..!' %}
+    <span>{{ user.xp }} XP </span>
+    {% set epicMessages = [
+        "Master of the written word, slayer of writer's block!",
+        "Ink flows through my veins, tales unfurl with every stroke of the pen!",
+        "With quill in hand and imagination boundless, I craft stories that transcend time!",
+        "A bard of epic tales, weaving words into tapestries of wonder!",
+        "Behold, for I am the literary alchemist, turning words into gold!"
+    ] %}
+    {% set epicBio = epicMessages[random(0, epicMessages|length - 1)] %}
+    {% if user.bio %}
+        {% set bio = user.bio %}
+    {% else %}
+        {% set bio = epicBio %}
+    {% endif %}
     <div class="profile-bio">{{ bio }}</div>
     <div class="profile-stats">
             <span class="profile-followers">
@@ -52,7 +64,7 @@
     </div>
 
     <div class="profile-stories-container">
-        <h2 class="profile-stories-title">Stories auxquelles cette personne a participé:</h2>
+        <h2 class="profile-stories-title">Tales in which this person has embarked upon:</h2>
         <div class="grid text-center">
             {% for story in stories %}
                 <div class="row">

@@ -609,4 +609,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         }
         return $startedStories;
     }
+
+    private int $xp = 0;
+     public function getXp(): ?string
+    {
+        return $this->xp;
+    }
+
+    public function addXp(?string $xp): self
+    {
+        $this->xp += $xp;
+
+        return $this;
+    }
 }

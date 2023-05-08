@@ -12,14 +12,6 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class ProfileController extends AbstractController
 {
-    /* #[Route('/profile', name: 'app_profile')]
-     public function index(): Response
-     {
-         return $this->render('profile/index.html.twig', [
-             'controller_name' => 'ProfileController'
-         ]);
-     }*/
-
     #[IsGranted('ROLE_USER')]
     #[Route('/profile/{id}', name: 'app_profile')]
     public function showProfile($id, EntityManagerInterface $entityManager): Response
