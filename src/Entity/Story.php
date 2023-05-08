@@ -44,6 +44,9 @@ class Story
     #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'likedStories', fetch: 'EXTRA_LAZY')]
     private Collection $likes;
 
+    #[ORM\Column(nullable: true)]
+    private ?bool $IsReported = null;
+
     public function __construct()
     {
         $this->contributions = new ArrayCollection();
@@ -211,5 +214,17 @@ class Story
     public function getTotalLikes(): int
     {
         return $this->getLikes()->count();
+    }
+
+    public function isIsReported(): ?bool
+    {
+        return $this->IsReported;
+    }
+
+    public function setIsReported(?bool $IsReported): self
+    {
+        $this->IsReported = $IsReported;
+
+        return $this;
     }
 }

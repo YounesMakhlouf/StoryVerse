@@ -60,7 +60,9 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-dashboard');
         yield MenuItem::linkToCrud('Users', 'fas fa-users',User::class);
         yield MenuItem::linkToCrud('Stories', "fa-solid fa-book-open",Story::class);
-        yield MenuItem::linkToCrud('Reported Stories', "fa-solid fa-triangle-exclamation",Story::class);
+        yield MenuItem::linkToCrud('Reported Stories', "fa-solid fa-shield-exclamation",Story::class)
+            ->setController(ReportedStoryCrudController::class);
+        ;
 
 
     }
