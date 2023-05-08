@@ -5,19 +5,20 @@
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
   uploads_directory: '%kernel.project_dir%/public/uploads'
-story_genres:
-  'Horror': >
-    Prepare to have your pants scared off! This spine-chilling story will make you jump out of your seat and sleep with the lights on. Watch out for haunted houses, creepy clowns, and things that go bump in the night.
-  'Fiction': >
-    Buckle up for a wild ride through a world where anything is possible! Get ready for flying cars, intergalactic space travel, and epic battles against evil villains. Don't forget your laser sword and your sense of adventure!
-  'Mystery': >
-    Get your detective hat on and join the thrilling quest to solve the mystery of the wealthy business tycoon's murder. Suspects, secrets, and unexpected twists await you. Can you crack the case before the butler steals the show?
-  'Comedy': >
-    Get ready to laugh until your sides hurt! This hilarious story is filled with witty one-liners, absurd situations, and unforgettable characters. From banana peel mishaps to outrageous pranks, you won't be able to stop giggling.
-  'Drama': >
-    Grab a box of tissues and prepare for an emotional rollercoaster! This dramatic tale will take you on a journey of intense emotions, complex relationships, and unexpected plot twists. Will love conquer all or will the family feud take center stage?
-  'Romance': >
-    Love is in the air, but it's not going to be easy! Join our star-crossed lovers as they navigate through a sea of ridiculous obstacles. Jealous exes, feuding families, and hilarious misunderstandings will keep you rooting for a happily ever after. max_stories_per_page: 9
+  story_genres:
+    'Horror': >
+     Prepare to have your pants scared off! This spine-chilling story will make you jump out of your seat and sleep with the lights on. Watch out for haunted houses, creepy clowns, and things that go bump in the night.
+    'Fiction': >
+      Buckle up for a wild ride through a world where anything is possible! Get ready for flying cars, intergalactic space travel, and epic battles against evil villains. Don't forget your laser sword and your sense of adventure!
+    'Mystery': >
+      Get your detective hat on and join the thrilling quest to solve the mystery of the wealthy business tycoon's murder. Suspects, secrets, and unexpected twists await you. Can you crack the case before the butler steals the show?
+    'Comedy': >
+      Get ready to laugh until your sides hurt! This hilarious story is filled with witty one-liners, absurd situations, and unforgettable characters. From banana peel mishaps to outrageous pranks, you won't be able to stop giggling.
+    'Drama': >
+      Grab a box of tissues and prepare for an emotional rollercoaster! This dramatic tale will take you on a journey of intense emotions, complex relationships, and unexpected plot twists. Will love conquer all or will the family feud take center stage?
+    'Romance': >
+      Love is in the air, but it's not going to be easy! Join our star-crossed lovers as they navigate through a sea of ridiculous obstacles. Jealous exes, feuding families, and hilarious misunderstandings will keep you rooting for a happily ever after.
+  max_stories_per_page: 9
 
 services:
   Symfony\Bridge\Twig\Mime\TemplatedEmail:
