@@ -4,8 +4,10 @@ namespace App\Repository;
 
 use App\Entity\Story;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
+use Exception;
 
 /**
  * @extends ServiceEntityRepository<Story>
@@ -17,7 +19,7 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class StoryRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    public function __construct(ManagerRegistry $registry, private EntityManagerInterface $entityManager)
     {
         parent::__construct($registry, Story::class);
     }
@@ -25,15 +27,6 @@ class StoryRepository extends ServiceEntityRepository
     public function save(Story $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
-
-        if ($flush) {
-            $this->getEntityManager()->flush();
-        }
-    }
-
-    public function remove(Story $entity, bool $flush = false): void
-    {
-        $this->getEntityManager()->remove($entity);
 
         if ($flush) {
             $this->getEntityManager()->flush();
@@ -72,6 +65,39 @@ class StoryRepository extends ServiceEntityRepository
         return $queryBuilder
             ->getQuery()
             ->getResult();
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function deleteStoryWithContributionsAndComments(int $storyId): void
+    {
+        $story = $this->entityManager->getRepository(Story::class)->find($storyId);
+
+        if (!$story) {
+            throw new Exception('Story not found.');
+        }
+
+        foreach ($story->getContributions() as $contribution) {
+            $this->entityManager->remove($contribution);
+        }
+
+        foreach ($story->getComments() as $comment) {
+            $this->entityManager->remove($comment);
+        }
+
+        $this->entityManager->remove($story);
+
+        $this->entityManager->flush();
+    }
+
+    public function remove(Story $entity, bool $flush = false): void
+    {
+        $this->getEntityManager()->remove($entity);
+
+        if ($flush) {
+            $this->getEntityManager()->flush();
+        }
     }
 
 //    public function findOneBySomeField($value): ?Story

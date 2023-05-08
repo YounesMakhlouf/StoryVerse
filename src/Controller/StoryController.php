@@ -6,6 +6,7 @@ use App\Entity\Story;
 use App\Event\QuestActionEvent;
 use App\Repository\StoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Exception;
 use Pagerfanta\Doctrine\ORM\QueryAdapter;
 use Pagerfanta\Pagerfanta;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -58,5 +59,18 @@ class StoryController extends AbstractController
             'pager' => $pagerfanta,
             'genres' => $genres,
         ]);
+    }
+
+    /**
+     * @throws Exception
+     */
+    #[Route("/story/delete/{id}", name: "story_delete")]
+    public function deleteStory(int $id, StoryRepository $storyRepository): Response
+    {
+         $storyRepository->deleteStoryWithContributionsAndComments($id);
+
+        $this->addFlash('success', 'Story deleted successfully.');
+
+        return $this->redirectToRoute('app_home');
     }
 }
