@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Story;
-use App\Event\QuestCompletionEvent;
+use App\Event\QuestActionEvent;
 use App\Repository\StoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Pagerfanta\Doctrine\ORM\QueryAdapter;
@@ -16,6 +16,11 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class StoryController extends AbstractController
 {
+
+    public function __construct(private EventDispatcherInterface $eventDispatcher)
+    {
+    }
+
     #[Route('/story/new', name: 'app_add_story')]
     public function new(EntityManagerInterface $entityManager): Response
     {
@@ -32,12 +37,12 @@ class StoryController extends AbstractController
     }
 
     #[Route('/story/browse/{genre}', name: 'app_browse_stories')]
-    public function browse(StoryRepository $storyRepository, EventDispatcherInterface $eventDispatcher, Request $request, string $genre = null): Response
+    public function browse(StoryRepository $storyRepository, Request $request, string $genre = null): Response
     {
         $user = $this->getUser();
 
-        $event =   new QuestCompletionEvent($user);
-        $eventDispatcher->dispatch($event, QuestCompletionEvent::QUEST_COMPLETION_EVENT);
+        $event = new QuestActionEvent($user);
+        $this->eventDispatcher->dispatch($event, QuestActionEvent::QUEST_ACTION_EVENT);
         $maxPerPage = $this->getParameter('max_stories_per_page');
         $genres = $this->getParameter('story_genres');
         $queryBuilder = $storyRepository->createOrderedByLikesQueryBuilder($genre);
