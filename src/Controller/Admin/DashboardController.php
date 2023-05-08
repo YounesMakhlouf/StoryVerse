@@ -2,9 +2,12 @@
 
 namespace App\Controller\Admin;
 
+use App\Repository\CommentRepository;
 use App\Repository\StoryRepository;
 use App\Entity\Story;
 use App\Repository\UserRepository;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
@@ -23,12 +26,15 @@ class DashboardController extends AbstractDashboardController
 {
         private UserRepository $userRepository;
         private StoryRepository $storyRepository;
+        private CommentRepository $commentRepository;
 
 
-    public function __construct(UserRepository $userRepository, StoryRepository $storyRepository)
+
+    public function __construct(UserRepository $userRepository, StoryRepository $storyRepository, CommentRepository $commentRepository)
     {
         $this->userRepository = $userRepository;
         $this->storyRepository = $storyRepository;
+        $this->commentRepository=$commentRepository;
 
     }
     #[IsGranted('ROLE_ADMIN')]
@@ -38,11 +44,11 @@ class DashboardController extends AbstractDashboardController
     {
         $nbUsers = $this->getInfo('u', $this->userRepository ,'COUNT(u.id) ');
         $nbStories=$this->getInfo('s',$this->storyRepository,'COUNT(s.id) ');
-//        $interactions=$this->getInfo('s',$this->storyRepository,'SUM(s.likes)');
+        $interactions=$this->getInfo('c',$this->commentRepository,'COUNT(c.id)');
         return $this->render('admin/admin.html.twig',[
             'story'=>$nbStories,
             'users'=>$nbUsers,
-            'interaction'=>'3'
+            'interaction'=>$interactions,
         ]);
 
 
@@ -98,6 +104,7 @@ class DashboardController extends AbstractDashboardController
         return($result);
 
     }
+
 
 
 }
