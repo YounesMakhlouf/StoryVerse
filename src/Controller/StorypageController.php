@@ -37,6 +37,9 @@ class StorypageController extends AbstractController
         if ($ContributionForm->isSubmitted()) {
             return $this->addContribution($story,$entityManager,$contribution);
         }
+
+
+
         $hasContributed=$this->hasContributed($entityManager,$story);
         $hasLiked=$story->getLikes()->contains($this->getUser());
         return $this->render('storypage/competed.html.twig', [
