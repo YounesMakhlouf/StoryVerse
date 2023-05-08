@@ -23,6 +23,7 @@ final class Version20230503185206 extends AbstractMigration
         $this->addSql('ALTER TABLE story DROP FOREIGN KEY FK_EB560438F675F31B');
         $this->addSql('DROP INDEX IDX_EB560438F675F31B ON story');
         $this->addSql('ALTER TABLE story DROP author_id');
+        $this->addSql('ALTER TABLE competition ADD image VARCHAR(255) DEFAULT NULL');
     }
 
     public function down(Schema $schema): void
