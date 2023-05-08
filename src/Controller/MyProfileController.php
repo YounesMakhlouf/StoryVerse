@@ -10,6 +10,9 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\String\Slugger\SluggerInterface;
+
 
 class MyProfileController extends AbstractController
 {
@@ -36,11 +39,34 @@ class MyProfileController extends AbstractController
         $form = $this->createForm(ProfileType::class, $user);
         $form->handleRequest($request);
 
+
         if ($form->isSubmitted() && $form->isValid()) {
-            $avatar = $form->get('avatar')->getData();
-            if ($avatar) {
-                $user->setAvatar($avatar);
+            $File = $form->get('avatar')->getData();
+            
+            // this condition is needed because the 'avatar' field is not required
+            // so the PDF file must be processed only when a file is uploaded
+           
+          if ($File) {
+                $originalFilename = pathinfo($File->getClientOriginalName(), PATHINFO_FILENAME);
+                // this is needed to safely include the file name as part of the URL
+                $safeFilename = $slugger->slug($originalFilename);
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$File->guessExtension();
+
+                // Move the file to the directory where brochures are stored
+                try {
+                    $File->move(
+                        $this->getParameter('avatar_directory'),
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+
+                // updates the 'brochureFilename' property to store the PDF file name
+                // instead of its contents
+                $user->setAvatar($newFilename);
             }
+            
 
             // Persist changes to database
             $entityManager->persist($user);
