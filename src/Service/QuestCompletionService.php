@@ -70,22 +70,20 @@ class QuestCompletionService
         return true; // Daily login verified for the first time
     }
 
-    private
-    function markQuestAsCompleted(User $user, Quest $quest): void
+    private function markQuestAsCompleted(User $user, Quest $quest): void
     {
         $user->addCompletedQuest($quest);
+        $user->addXp($quest->getPoints());
         $this->entityManager->persist($user);
         $this->entityManager->flush();
     }
 
-    public
-    function calculateQuestProgress(Quest $quest, User $user): float
+    public function calculateQuestProgress(Quest $quest, User $user): float
     {
         $questRequirement = $quest->getRequirement();
         $userRequirement = $user->getUserRequirement($questRequirement);
 
-        if ($userRequirement === -1) {
-            // Unsupported or unknown quest requirement
+        if ($userRequirement === -1) { // Unsupported or unknown quest requirement
             return 0.0;
         }
 
