@@ -10,9 +10,13 @@
         {% endif %}
     </div>
     <div class="profile-picture-container">
-        {% set avatar = user.avatar ?: 'https://us.123rf.com/450wm/yummytime/yummytime1608/yummytime160800630/61903988-anonyme-m%C3%A2le-photo-de-profil-avatar-de-l-%C3%A9motion-cr%C3%A9%C3%A9e-pour-mobile-web-d%C3%A9coration-produits-d.jpg' %}
-            <img src="{{ avatar }}" alt="Profile picture" class="profile-picture rounded-circle">
 
+        {% if isset(user.avatar )%}
+        {{ user.avatar}}
+
+        <img src="{{ asset ('public/uploads/avatar_directory/avatar-01-64593f65a0ad0.jpg') }}" alt="Profile picture" class="profile-picture rounded-circle">
+
+   {{% endif  %}}
     </div>
     <div>
         {% for type, messages in app.flashes %}

@@ -37,8 +37,6 @@ class UserCrudController extends AbstractCrudController
                 ->onlyOnForms(),
             TextField::new('lastName')
                 ->onlyOnForms(),
-            TextEditorField::new('biography')
-                ->setSortable(false),
             BooleanField::new('IsVerified')
                 ->renderAsSwitch(false),
             DateField::new('createdAt')

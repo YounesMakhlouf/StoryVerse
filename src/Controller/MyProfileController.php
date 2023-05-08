@@ -46,13 +46,12 @@ class MyProfileController extends AbstractController
             $File = $form->get('avatar')->getData();
             
             // this condition is needed because the 'avatar' field is not required
-            // so the PDF file must be processed only when a file is uploaded
+            // so the image  must be processed only when a file is uploaded
            
           if ($File) {
                 $originalFilename = pathinfo($File->getClientOriginalName(), PATHINFO_FILENAME);
-                // this is needed to safely include the file name as part of the URL
-                $safeFilename = $slugger->slug($originalFilename);
-                $newFilename = $safeFilename.'-'.uniqid().'.'.$File->guessExtension();
+            
+                $newFilename = $originalFilename.'-'.uniqid().'.'.$File->guessExtension();
 
                 // Move the file to the directory where brochures are stored
                 try {

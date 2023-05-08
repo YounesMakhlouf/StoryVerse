@@ -4,20 +4,21 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
-  uploads_directory: '%kernel.project_dir%/public/uploads'
+  avatar_directory: '%kernel.project_dir%/public/uploads/avatar_directory'
+
   story_genres:
     'Horror': >
-     Prepare to have your pants scared off! This spine-chilling story will make you jump out of your seat and sleep with the lights on. Watch out for haunted houses, creepy clowns, and things that go bump in the night.
+      A story designed to scare the pants off of the reader. Whether it's a haunted house or a creepy clown, make sure to give plenty of descriptive details to create an eerie atmosphere
     'Fiction': >
-      Buckle up for a wild ride through a world where anything is possible! Get ready for flying cars, intergalactic space travel, and epic battles against evil villains. Don't forget your laser sword and your sense of adventure!
+      A world where anything is possible, from flying cars to intergalactic space travel. Just make sure to include lots of futuristic technology and some kind of evil villain threatening to destroy the universe
     'Mystery': >
-      Get your detective hat on and join the thrilling quest to solve the mystery of the wealthy business tycoon's murder. Suspects, secrets, and unexpected twists await you. Can you crack the case before the butler steals the show?
+      Who killed the wealthy business tycoon? Was it the suspicious butler or the jilted lover with a motive? The reader will be on the edge of their seat trying to figure it out
     'Comedy': >
-      Get ready to laugh until your sides hurt! This hilarious story is filled with witty one-liners, absurd situations, and unforgettable characters. From banana peel mishaps to outrageous pranks, you won't be able to stop giggling.
+      The goal here is to make the reader laugh out loud. Think witty one-liners and absurd situations that will have them rolling on the floor
     'Drama': >
-      Grab a box of tissues and prepare for an emotional rollercoaster! This dramatic tale will take you on a journey of intense emotions, complex relationships, and unexpected plot twists. Will love conquer all or will the family feud take center stage?
+      This genre is all about intense emotions and complex relationships. Whether it's a family feud or a tragic love triangle, the reader will be invested in the characters' lives and rooting for a happy ending
     'Romance': >
-      Love is in the air, but it's not going to be easy! Join our star-crossed lovers as they navigate through a sea of ridiculous obstacles. Jealous exes, feuding families, and hilarious misunderstandings will keep you rooting for a happily ever after.
+      When two people love each other very much and want to spend the rest of their lives together, but they keep getting interrupted by ridiculous obstacles like a jealous ex or a family feud
   max_stories_per_page: 9
 
 services:

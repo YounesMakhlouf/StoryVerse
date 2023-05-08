@@ -74,12 +74,12 @@
           >
             <img
               id="avatar"
-              src="{{ app.user.avatar }}"
+              src="{{ asset ('uploads/avatar_directory/'~ app.user.avatar)}}"
               alt="Avatar"
+              radius="50%" 
+              clip-path: circle()
               width="40"
-              height="40"
-              class="d-inline-block align-text-top"
-            />
+              height="40"/>
             {{ app.user.username }}
           </a>
           <ul class="dropdown-menu">
