@@ -6,19 +6,44 @@ use App\Entity\Quest;
 use App\Entity\User;
 use DateTime;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Exception\NotSupported;
 use Doctrine\ORM\Exception\ORMException;
 use Doctrine\ORM\OptimisticLockException;
+use Doctrine\Persistence\ObjectRepository;
 
 class QuestCompletionService
 {
+    private ObjectRepository|EntityRepository $questRepository;
+
+    /**
+     * @throws NotSupported
+     */
     public function __construct(private readonly EntityManager $entityManager)
     {
+        $this->questRepository = $entityManager->getRepository(Quest::class);
     }
 
     /**
      * @throws OptimisticLockException
      * @throws ORMException
      */
+    public function checkQuestsForCompletion(User $user): void
+    {
+        $quests = $this->questRepository->findAll();
+
+        foreach ($quests as $quest) {
+            if (!$user->getCompletedQuests()->contains($quest)) {
+                $this->completeQuest($user, $quest);
+            }
+        }
+    }
+
+    /**
+     * @throws OptimisticLockException
+     * @throws ORMException
+     */
+
     public function completeQuest(User $user, Quest $quest): void
     {
         // Check if the user has already completed the quest
