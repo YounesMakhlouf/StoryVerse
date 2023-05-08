@@ -23,7 +23,8 @@
                                     {% if app.user %}
                                     {% set progress = questCompletionService.calculateQuestProgress(quest, app.user) %}
                                 <div class="progress">
-                                    <div class="progress-bar" role="progressbar" aria-label="Example with label"
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated"
+                                         role="progressbar" aria-label="Quest progress"
                                          style="width: {{ progress }}%;" aria-valuenow="{{ progress }}"
                                          aria-valuemin="0" aria-valuemax="100">
                                         {{ progress }}%
