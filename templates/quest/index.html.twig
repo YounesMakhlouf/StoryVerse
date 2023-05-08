@@ -2,10 +2,24 @@
 
 {% block title %}Quests{% endblock %}
 
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('quests') }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('quests') }}
+{% endblock %}
+
 {% block body %}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.js"></script>
+    {% for flashMessage in app.session.flashbag.get('sweetalert2') %}
+        {{ flashMessage|raw }}
+    {% endfor %}
     <div class="container">
         <h1 class="mt-4">All Quests</h1>
-
         {% if quests is empty %}
             <p>No quests available.</p>
         {% else %}
@@ -53,14 +67,5 @@
             </div>
         {% endif %}
     </div>
-{% endblock %}
 
-{% block javascripts %}
-    {{ parent() }}
-    {{ encore_entry_script_tags('quests') }}
-{% endblock %}
-
-{% block stylesheets %}
-    {{ parent() }}
-    {{ encore_entry_link_tags('quests') }}
 {% endblock %}

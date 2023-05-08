@@ -8,12 +8,16 @@ use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\Persistence\ObjectRepository;
+use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class QuestCompletionService
 {
     private ObjectRepository|EntityRepository $questRepository;
 
-    public function __construct(private readonly EntityManagerInterface $entityManager)
+    public function __construct(private readonly EntityManagerInterface $entityManager,
+                                private readonly RequestStack           $requestStack,
+                                private readonly UrlGeneratorInterface  $urlGenerator)
     {
         $this->questRepository = $entityManager->getRepository(Quest::class);
     }
@@ -76,6 +80,30 @@ class QuestCompletionService
         $user->addXp($quest->getPoints());
         $this->entityManager->persist($user);
         $this->entityManager->flush();
+        // Show SweetAlert2 notification
+        $questName = $quest->getName();
+        $notificationMessage = "Congratulations brave adventurer! You have completed the quest: $questName";
+        $notificationUrl = $this->urlGenerator->generate('app_quest');
+
+        $script = <<<SCRIPT
+        <script>
+            Swal.fire({
+                title: 'Quest Completed!',
+                text: '$notificationMessage',
+                icon: 'success',
+                showCancelButton: false,
+                confirmButtonText: 'OK',
+                allowOutsideClick: false,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = '$notificationUrl';
+                }
+            });
+        </script>
+    SCRIPT;
+
+        $request = $this->requestStack->getCurrentRequest();
+        $request->getSession()->getFlashBag()->add('sweetalert2', $script);
     }
 
     public function calculateQuestProgress(Quest $quest, User $user): float
