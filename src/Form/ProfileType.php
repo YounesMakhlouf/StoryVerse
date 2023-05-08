@@ -1,7 +1,6 @@
 <?php
-
 namespace App\Form;
-
+use app\Form\File as AppFile ;
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -9,6 +8,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Validator\Constraints\File as FileConstraints; 
+
 
 
 class ProfileType extends AbstractType
@@ -34,6 +35,7 @@ $builder
             '(Female) Avatar 1' =>'https://cdn.icon-icons.com/icons2/1736/PNG/512/4043247-1-avatar-female-portrait-woman_113261.png',
             '(Female) Avatar 2' => 'https://cdn.icon-icons.com/icons2/1736/PNG/512/4043251-avatar-female-girl-woman_113291.png',
             '(Female) Avatar 3' => 'https://cdn.icon-icons.com/icons2/1879/PNG/512/iconfinder-4-avatar-2754580_120522.png',
+
         ],
         'placeholder' => 'No Avatar',
         'required' => false,
@@ -41,7 +43,7 @@ $builder
             'style' => 'margin-bottom: 50px;',
         ],
     ])
-
+    
 ->add('submit', SubmitType::class, [
 'label' => 'Save changes',
 'attr' => ['class' => 'btn btn-primary'],
