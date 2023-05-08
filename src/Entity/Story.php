@@ -47,6 +47,23 @@ class Story
     #[ORM\Column(nullable: true)]
     private ?bool $IsReported = null;
 
+    #[ORM\Column (nullable: true)]
+    private ?string $storyImage ;
+
+
+
+    public function getStoryImage(): ?string
+    {
+        return $this->storyImage;
+    }
+
+    public function setStoryImage(?string $storyImage): self
+    {
+        $this->storyImage = $storyImage;
+
+        return $this;
+    }
+
     public function __construct()
     {
         $this->contributions = new ArrayCollection();
