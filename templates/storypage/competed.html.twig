@@ -3,6 +3,7 @@
 {% block title %}CompletedStory!{% endblock %}
 
 {% block body %}
+    {% block like %}
     <body>
             <div class="theme ">
 
@@ -23,15 +24,17 @@
                         <div id="likes">{{ story.likes|length }}</div>
 
                     </div>
+        {% endblock %}
 
 {#            title        #}
+                    {% block story %}
 
                 <div  class="text col-8" >
                     <div class="title">
                         <h1>{{ story.title }}</h1>
                     </div>
                     {% for contribution in story.contributions %}
-                            <p id="{{ contribution.author.id }}">{{ contribution.content }}</p>
+                            <p class="contr" id="{{ contribution.author.id  }}">{{ contribution.content }}</p>
                     {% endfor%}
 
 
@@ -40,17 +43,21 @@
             <span  class="authors ">
                 <h5>Contributors</h5>
                 {% for contribution in story.contributions %}
-                        <a href='{{ path('app_profile',{id:contribution.author.id}) }}'>
+                        <a id="{{contribution.author.id ~ "author"}}" href='{{ path('app_profile',{id:contribution.author.id}) }}'>
                     {{ contribution.author.username }}
                     </a>
                         <hr>
                 {% endfor %}
 
+
         </span>
     </div>
-                {% if not hasContibuted %}
+                {% endblock %}
+
+                {% block contribute %}
+                {% if not hasContributed %}
                 <div class="text-box">
-                    <div id="contribute-btn" class="btn btn-white btn-animate">Be part of the story - Contribute now!</a>
+                    <a id="contribute-btn" class="btn btn-white btn-animate">Be part of the story - Contribute now!</a>
                 </div>
             </div>
 
@@ -69,12 +76,12 @@
             </div>
                 <a href="{{ path('app_browse_stories') }}" class="btn btn-white btn-animate col-2" style="margin-left:8%">Explore</a>
             {% endif %}
-
+{% endblock %}
 
 
 {#            comment section #}
 
-
+{% block comments %}
             <div id="comment_section" class="col-8">
                 <div class="be-comment-block">
                     <h1 class="comments-title" id="comment-count">Comments ({{ story.comments|length }})</h1>
@@ -151,6 +158,7 @@
 
         <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
     </body>
+{% endblock %}
     {% endblock %}
 
  {% block stylesheets %}
