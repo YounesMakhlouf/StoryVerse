@@ -16,7 +16,7 @@ class PdfGeneratorService
         $this->domPdf->loadHtml($html);
         $this->domPdf->render();
         $this->domPdf->stream("Story.pdf", [
-            'Attachment' => true
+            'Attachment' => false
         ]);
     }
 
