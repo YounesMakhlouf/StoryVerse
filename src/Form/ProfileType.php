@@ -10,8 +10,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\File; 
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-
-
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 
 class ProfileType extends AbstractType
@@ -45,10 +44,10 @@ $builder
             new File([
                 'maxSize' => '1024k',
                 'mimeTypes' => [
-                    'application/JPG',
-                    'application/PNG',
+                    'image/jpeg',
+                    'image/png',
                 ],
-                'mimeTypesMessage' => 'Please upload a valid PNG or JPG Image',
+                'mimeTypesMessage' => 'Please upload a valid JPG or PNG image',
             ])
         ],
     ])
