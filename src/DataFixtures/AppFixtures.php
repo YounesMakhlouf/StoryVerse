@@ -31,6 +31,7 @@ class AppFixtures extends Fixture
                 'author' => UserFactory::random()
             ];
         });
+
         $manager->flush();
     }
 }

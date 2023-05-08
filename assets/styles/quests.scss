@@ -1,0 +1,38 @@
+.quest-card {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s;
+}
+
+.quest-card:hover {
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.quest-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.quest-description {
+  margin-bottom: 20px;
+}
+
+.quest-type {
+  font-style: italic;
+  color: #888;
+  margin-bottom: 10px;
+}
+
+.quest-points {
+  font-weight: bold;
+  color: #009688;
+}
+
+.quest-completion {
+  color: #f44336;
+  font-size: 14px;
+}
