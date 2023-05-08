@@ -11,12 +11,12 @@
     </div>
     <div class="profile-picture-container">
 
-        {% if isset(user.avatar )%}
-        {{ user.avatar}}
+        {% if user.avatar %}
 
-        <img src="{{ asset ('public/uploads/avatar_directory/avatar-01-64593f65a0ad0.jpg') }}" alt="Profile picture" class="profile-picture rounded-circle">
-
-   {{% endif  %}}
+            <img id="avatar" src="{{ user.avatar }}" alt="Avatar" width="200" height="200" class="d-inline-block align-text-top">
+        {% else %}
+            <img id="avatar" src="https://www.gravatar.com/avatar/{{ user.emailHash }}?s=200" alt="Avatar"  width="200" height="200" class="d-inline-block align-text-top">
+   {% endif  %}
     </div>
     <div>
         {% for type, messages in app.flashes %}
@@ -66,7 +66,7 @@
                     {% for following in user.following %}
                         <li>
                             <a class="dropdown-item" href="{{ path('app_profile', {'id': following.id}) }}">
-                                <img id="avatar" src="{{ following.avatar }}" alt="Avatar" width="40" height="40" class="d-inline-block align-text-top"> {{ following.username }}
+                                <img id="avatar" src="{{ app.following.avatar }}" alt="Avatar" width="40" height="40" class="d-inline-block align-text-top"> {{ following.username }}
                             </a>
                         </li>
                     {% endfor %}
