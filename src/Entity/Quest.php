@@ -31,7 +31,7 @@ class Quest
     #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'completedQuests')]
     private Collection $users;
 
-    #[ORM\Column(length: 100)]
+    #[ORM\Column(length: 50)]
     private ?string $requirement = null;
 
     #[ORM\Column(nullable: true)]

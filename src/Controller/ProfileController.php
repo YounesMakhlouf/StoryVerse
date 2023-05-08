@@ -13,10 +13,17 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class ProfileController extends AbstractController
 {
+
     #[IsGranted('ROLE_USER')]
     #[Route('/profile/{id}', name: 'app_profile')]
     public function showProfile($id, EntityManagerInterface $entityManager): Response
     {
+        // Check if the current user is viewing their own profile
+        if ( ($this->getUser())->getId() == $id) {
+            return $this->redirectToRoute('app_myprofile');
+        }else
+            {
+
         /** @var UserRepository $userRepository */
         $userRepository = $entityManager->getRepository(User::class);
 
@@ -30,6 +37,7 @@ class ProfileController extends AbstractController
             /** @var User $currentUser */
             $currentUser = $this->getUser();
             $isFollowing = $currentUser->getFollowing()->contains($user);
+
         }
 
         return $this->render('profile/index.html.twig', [
@@ -38,4 +46,4 @@ class ProfileController extends AbstractController
             'stories' => $contributedStories
         ]);
     }
-}
+}}

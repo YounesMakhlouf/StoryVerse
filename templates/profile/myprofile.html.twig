@@ -43,12 +43,38 @@
     {% endif %}
     <div class="profile-bio">{{ bio }}</div>
     <div class="profile-stats">
-            <span class="profile-followers">
-                <i class="fa-solid fa-user"></i>{{ user.follower|length }} Followers
-            </span>
-        <span class="profile-following">
-                <i class="fa-solid fa-user"></i>{{ user.following|length }} Following
-            </span>
+        <div class="row">
+            <div class="col">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fa-solid fa-user"></i>
+                    <span class="profile-followers">{{ user.follower|length }} Followers</span>
+                </a>
+                <ul class="dropdown-menu">
+                    {% for follower in user.follower %}
+                        <li>
+                            <a class="dropdown-item" href="{{ path('app_profile', {'id': follower.id}) }}">
+                                <img id="avatar" src="{{ follower.avatar }}" alt="Avatar" width="40" height="40" class="d-inline-block align-text-top"> {{ follower.username }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="col">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <i class="fa-solid fa-user"></i>
+                    <span class="profile-followers">{{ user.following|length }} Following</span>
+                </a>
+                <ul class="dropdown-menu">
+                    {% for following in user.following %}
+                        <li>
+                            <a class="dropdown-item" href="{{ path('app_profile', {'id': following.id}) }}">
+                                <img id="avatar" src="{{ following.avatar }}" alt="Avatar" width="40" height="40" class="d-inline-block align-text-top"> {{ following.username }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
     </div>
 
     <div class="profile-stories-container">
@@ -76,10 +102,13 @@
     </div>
     {% endblock %}
 
-    {% block javascripts %}
-        {{ parent() }}
-        {{ encore_entry_script_tags('profile') }}
-    {% endblock %}
+
+
+ {% block javascripts %}
+     {{ parent() }}
+     {{ encore_entry_script_tags('profile') }}
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+ {% endblock %}
 
 
     {% block stylesheets %}

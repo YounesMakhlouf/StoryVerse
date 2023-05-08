@@ -47,16 +47,33 @@ final class UserFactory extends ModelFactory
      */
     protected function getDefaults(): array
     {
+        $maleAvatarUrls = [
+            'https://cdn.icon-icons.com/icons2/582/PNG/512/man-2_icon-icons.com_55041.png',
+            'https://cdn.icon-icons.com/icons2/1879/PNG/512/iconfinder-8-avatar-2754583_120515.png',
+            'https://cdn.icon-icons.com/icons2/1736/PNG/512/4043260-avatar-male-man-portrait_113269.png',
+        ];
+
+        $femaleAvatarUrls = [
+            'https://cdn.icon-icons.com/icons2/1736/PNG/512/4043247-1-avatar-female-portrait-woman_113261.png',
+            'https://cdn.icon-icons.com/icons2/1736/PNG/512/4043251-avatar-female-girl-woman_113291.png',
+            'https://cdn.icon-icons.com/icons2/1879/PNG/512/iconfinder-4-avatar-2754580_120522.png',
+        ];
+
+        $gender = self::faker()->randomElement(['male', 'female']);
+        $avatarUrls = $gender === 'male' ? $maleAvatarUrls : $femaleAvatarUrls;
+
         return [
             'email' => self::faker()->email(),
             'first_name' => self::faker()->firstName(),
-            'gender' => self::faker()->randomElement(['male', 'female']),
+            'gender' => $gender,
             'isVerified' => true,
             'last_name' => self::faker()->lastName(),
             'password' => '$2y$13$k1v3SKo/t3grS5Oo3/yYieiO2pMg1gMWugsV7X.hbZMkmsgpfVxN6',
             'roles' =>self::faker()->randomElement([['ROLE_USER'], ['ROLE_ADMIN']]),
             'username' =>  substr(self::faker()->firstName, 0, 10),
-            'Last_login_date'=>new \DateTime()
+            'bio'=>self::faker()->paragraph(),
+            'Last_login_date'=>new \DateTime(),
+            'avatar' => self::faker()->randomElement($avatarUrls),
         ];
     }
 
