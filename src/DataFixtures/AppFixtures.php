@@ -13,8 +13,6 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        $questFixture = new QuestFixture();
-        $questFixture->load($manager);
         StoryFactory::createMany(25);
         UserFactory::createMany(50, function () {
             return [
