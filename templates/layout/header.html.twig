@@ -21,6 +21,8 @@
 
             <nav class="navbar" id="navbar">
                 <ul>
+                    <li><a class="nav-link" href="{{ path('app_quest') }}" title="Quests"><i
+                                    class="fa-solid fa-trophy fa-lg"></i></a></li>
                     <li><a class="nav-link" href="{{ path('app_home') }}" title="Notifications"><i
                                     class="fa-solid fa-bell fa-lg"></i></a></li>
                     <li><a class="nav-link" href="{{ path('app_add_story') }}" title="Add a post"><i
@@ -43,7 +45,8 @@
                             <li><a class="dropdown-item" href="#"><i class="fa-solid fa-gear"></i>Settings</a></li>
                             <hr>
                             <li><a class="dropdown-item" href="#"><i class="fa-solid fa-coins"></i>Premium</a></li>
-                            <li><a class="dropdown-item" href="{{ path('app_logout') }}"><i class="fa-solid fa-arrow-right-from-bracket"></i>Log
+                            <li><a class="dropdown-item" href="{{ path('app_logout') }}"><i
+                                            class="fa-solid fa-arrow-right-from-bracket"></i>Log
                                     out</a></li>
                         </ul>
                     </li>
