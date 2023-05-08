@@ -15,3 +15,7 @@ app_modify_profile:
 app_notification_create:
   path: /notification/create
   controller: App\Controller\NotificationController::create
+
+app_notifications_user:
+  path: "/notifications/{userId}"
+  controller: 'App\Controller\NotificationController::getUserNotifications'
