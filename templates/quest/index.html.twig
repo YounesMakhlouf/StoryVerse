@@ -2,7 +2,6 @@
 
 {% block title %}Quests{% endblock %}
 
-
 {% block body %}
     <div class="container">
         <h1 class="mt-4">All Quests</h1>
@@ -19,7 +18,20 @@
                                 <p class="card-text quest-description">{{ quest.description }}</p>
                                 <p class="card-text quest-type"><em>{{ quest.type }}</em></p>
                                 <p class="card-text quest-points">Points: <strong>{{ quest.points }}</strong></p>
-                                <p class="card-text quest-completion">{{ quest.users|length }} people completed this quest</p>
+                                <p class="card-text quest-completion">
+                                    {{ quest.users|length }} people completed this quest
+                                    {% if app.user %}
+                                    {% set progress = questCompletionService.calculateQuestProgress(quest, app.user) %}
+                                <div class="progress">
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated"
+                                         role="progressbar" aria-label="Quest progress"
+                                         style="width: {{ progress }}%;" aria-valuenow="{{ progress }}"
+                                         aria-valuemin="0" aria-valuemax="100">
+                                        {{ progress }}%
+                                    </div>
+                                </div>
+                                {% endif %}
+                                </p>
                             </div>
                         </div>
                     </div>

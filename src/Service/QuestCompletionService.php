@@ -5,30 +5,19 @@ namespace App\Service;
 use App\Entity\Quest;
 use App\Entity\User;
 use DateTime;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\Exception\NotSupported;
-use Doctrine\ORM\Exception\ORMException;
-use Doctrine\ORM\OptimisticLockException;
 use Doctrine\Persistence\ObjectRepository;
 
 class QuestCompletionService
 {
     private ObjectRepository|EntityRepository $questRepository;
 
-    /**
-     * @throws NotSupported
-     */
     public function __construct(private readonly EntityManagerInterface $entityManager)
     {
         $this->questRepository = $entityManager->getRepository(Quest::class);
     }
 
-    /**
-     * @throws OptimisticLockException
-     * @throws ORMException
-     */
     public function checkQuestsForCompletion(User $user): void
     {
         $quests = $this->questRepository->findAll();
@@ -39,11 +28,6 @@ class QuestCompletionService
             }
         }
     }
-
-    /**
-     * @throws OptimisticLockException
-     * @throws ORMException
-     */
 
     public function completeQuest(User $user, Quest $quest): void
     {
@@ -106,10 +90,6 @@ class QuestCompletionService
         return ($commentCount >= $amount);
     }
 
-    /**
-     * @throws OptimisticLockException
-     * @throws ORMException
-     */
     private function markQuestAsCompleted(User $user, Quest $quest): void
     {
         $user->addCompletedQuest($quest);
@@ -119,12 +99,7 @@ class QuestCompletionService
 
     private function receiveCommentsCheck(User $user, int $amount): bool
     {
-        $contributedStories = $user->getContributedStories();
-        $commentCount = 0;
-        foreach ($contributedStories as $story) {
-            $comments = $story->getComments();
-            $commentCount += count($comments);
-        }
+        $commentCount = $user->getCommentsReceivedCount();
         return ($commentCount >= $amount);
     }
 
@@ -136,12 +111,7 @@ class QuestCompletionService
 
     private function receiveLikesCheck(User $user, int $amount): bool
     {
-        $contributedStories = $user->getContributedStories();
-        $likesCount = 0;
-        foreach ($contributedStories as $story) {
-            $likes = $story->getLikes();
-            $likesCount += count($likes);
-        }
+        $likesCount = $user->getLikesReceivedCount();
         return ($likesCount >= $amount);
     }
 
@@ -157,10 +127,6 @@ class QuestCompletionService
         return ($contributionsCount >= $amount);
     }
 
-    /**
-     * @throws OptimisticLockException
-     * @throws ORMException
-     */
     private function verifyDailyLogin(User $user): bool
     {
         $lastLoginDate = $user->getLastLoginDate();
@@ -176,5 +142,24 @@ class QuestCompletionService
         $this->entityManager->flush();
 
         return true; // Daily login verified for the first time
+    }
+
+    public function calculateQuestProgress(Quest $quest, User $user): float
+    {
+        $questRequirement = $quest->getRequirement();
+        $userRequirement = $user->getUserRequirement($questRequirement);
+
+        if ($userRequirement === -1) {
+            // Unsupported or unknown quest requirement
+            return 0.0;
+        }
+
+        // Calculate the progress as a percentage
+        $progress = ($userRequirement / $quest->getAmount()) * 100;
+
+        // Ensure the progress is within the range of 0 to 100
+        $progress = min(max($progress, 0), 100);
+
+        return $progress;
     }
 }

@@ -32,7 +32,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private array $roles = [];
 
     /**
-     * @var string The hashed password
+     * @var string|null The hashed password
      */
     #[ORM\Column]
     private ?string $password = null;
@@ -51,7 +51,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column]
     private ?bool $isVerified = false;
-
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?DateTimeInterface $Last_login_date = null;
@@ -466,14 +465,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @return Collection<int, Comment>
-     */
-    public function getComments(): Collection
-    {
-        return $this->comments;
-    }
-
     public function addComment(Comment $comment): self
     {
         if (!$this->comments->contains($comment)) {
@@ -493,39 +484,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             }
         }
         return $this;
-    }
-
-    public function getContributedStories(): array
-    {
-        $contributions = $this->getContributions();
-        $contributedStories = [];
-
-        foreach ($contributions as $contribution) {
-            $story = $contribution->getStory();
-            $contributedStories[] = $story;
-        }
-        return $contributedStories;
-    }
-
-    /**
-     * @return Collection<int, Contribution>
-     */
-    public function getContributions(): Collection
-    {
-        return $this->contributions;
-    }
-
-    public function getStartedStories(): array
-    {
-        $contributions = $this->getContributions();
-        $startedStories = [];
-        foreach ($contributions as $contribution) {
-            if ($contribution->getPosition() === 1) {
-                $story = $contribution->getStory();
-                $startedStories[] = $story;
-            }
-        }
-        return $startedStories;
     }
 
     /**
@@ -574,5 +532,81 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->badges->removeElement($badge);
 
         return $this;
+    }
+
+    public function getUserRequirement(string $questRequirement): int
+    {
+        return match ($questRequirement) {
+            'post_comments' => count($this->comments),
+            'receive_comments' => $this->getCommentsReceivedCount(),
+            'post_likes' => count($this->likedStories),
+            'receive_likes' => $this->getLikesReceivedCount(),
+            'post_stories' => count($this->getStartedStories()),
+            'post_contributions' => count($this->contributions),
+            default => -1,
+        };
+    }
+
+    public function getCommentsReceivedCount(): int
+    {
+        $contributedStories = $this->getContributedStories();
+        $commentCount = 0;
+        foreach ($contributedStories as $story) {
+            $comments = $story->getComments();
+            $commentCount += count($comments);
+        }
+        return $commentCount;
+    }
+
+    public function getContributedStories(): array
+    {
+        $contributions = $this->getContributions();
+        $contributedStories = [];
+
+        foreach ($contributions as $contribution) {
+            $story = $contribution->getStory();
+            $contributedStories[] = $story;
+        }
+        return $contributedStories;
+    }
+
+    /**
+     * @return Collection<int, Contribution>
+     */
+    public function getContributions(): Collection
+    {
+        return $this->contributions;
+    }
+
+    /**
+     * @return Collection<int, Comment>
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function getLikesReceivedCount(): int
+    {
+        $contributedStories = $this->getContributedStories();
+        $likesCount = 0;
+        foreach ($contributedStories as $story) {
+            $likes = $story->getLikes();
+            $likesCount += count($likes);
+        }
+        return ($likesCount);
+    }
+
+    public function getStartedStories(): array
+    {
+        $contributions = $this->getContributions();
+        $startedStories = [];
+        foreach ($contributions as $contribution) {
+            if ($contribution->getPosition() === 1) {
+                $story = $contribution->getStory();
+                $startedStories[] = $story;
+            }
+        }
+        return $startedStories;
     }
 }
