@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -40,4 +41,35 @@ class NotificationController extends AbstractController
         // Return a JSON response indicating success
         return $this->json(['success' => true]);
     }
+
+    #[Route('/notification/user/{userId}', name: 'app_notification_user', methods: ['GET'])]
+    public function getUserNotifications(EntityManagerInterface $entityManager, int $userId): JsonResponse
+    {
+        $user = $entityManager->getRepository(User::class)->find($userId);
+    
+        if (!$user) {
+            // Handle case where user does not exist
+            throw $this->createNotFoundException('User not found');
+        }
+    
+        $notifications = $entityManager->getRepository(Notification::class)->findBy([
+            'receiver' => $user,
+        ]);
+    
+        // Map the notifications to an array of data
+        $notificationData = array_map(function ($notification) {
+            return [
+                'id' => $notification->getId(),
+                'content' => $notification->getContent(),
+                'sender' => [
+                    'id' => $notification->getSender()->getId(),
+                    'name' => $notification->getSender()->getfirstName(),
+                ],
+            ];
+        }, $notifications);
+    
+        // Return the notification data as JSON in a JsonResponse object
+        return new JsonResponse($notificationData);
+    }
+    
 }

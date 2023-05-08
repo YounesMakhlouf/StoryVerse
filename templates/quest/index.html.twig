@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Quests{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1 class="mt-4">All Quests</h1>
+
+        {% if quests is empty %}
+            <p>No quests available.</p>
+        {% else %}
+            <div class="row">
+                {% for quest in quests %}
+                    <div class="col-md-6">
+                        <div class="card quest-card">
+                            <div class="card-body">
+                                <h3 class="card-title quest-title">{{ quest.name }}</h3>
+                                <p class="card-text quest-description">{{ quest.description }}</p>
+                                <p class="card-text quest-type"><em>{{ quest.type }}</em></p>
+                                <p class="card-text quest-points">Points: <strong>{{ quest.points }}</strong></p>
+                                {% if quest.users|length == 0 %}
+                                    <p class="card-text quest-completion">No one has completed this quest yet</p>
+                                {% else %}
+                                    <p class="card-text quest-completion">{{ quest.users|length }} people completed
+                                        this quest</p>
+                                {% endif %}
+                                {% set progress = questCompletionService.calculateQuestProgress(quest, app.user) %}
+                                {% if progress >= 100 %}
+                                    {% set epicMessages = [
+                                        "Congratulations, mighty warrior! You have conquered this epic quest!",
+                                        "Hail, noble adventurer! Your valor and skill have triumphed in this grand quest!",
+                                        "Well done, oh mighty hero! The realm rejoices in your victory!",
+                                        "By the power of the ancients! You have completed this quest with glorious success!",
+                                        "In the annals of legend, your name shall forever be inscribed! Quest completed!"
+                                    ] %}
+                                    {% set randomIndex = random(0, epicMessages|length - 1) %}
+                                    <p class="card-text epic-congratulation">{{ epicMessages[randomIndex] }}</p>
+                                {% else %}
+                                    <div class="progress">
+                                        <div class="progress-bar progress-bar-striped progress-bar-animated"
+                                             role="progressbar" aria-label="Quest progress"
+                                             style="width: {{ progress }}%;" aria-valuenow="{{ progress }}"
+                                             aria-valuemin="0" aria-valuemax="100">
+                                            {{ progress }}%
+                                        </div>
+                                    </div>
+                                {% endif %}
+
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('quests') }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('quests') }}
+{% endblock %}

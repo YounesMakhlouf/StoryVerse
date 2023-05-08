@@ -32,8 +32,7 @@ imageThemeEffect();
 
  //color like icon on click
 
-$("#fixed").click(function() {
-    $("#fixed").removeClass("fa-regular");
+$("#color").click(function() {
     $("#color").toggleClass("fa-solid");
 });
 
@@ -70,6 +69,7 @@ $(document).ready(function() {
     });
 });
 
+///// likes
 
 $('i.fa-heart').click(function() {
 
@@ -87,3 +87,74 @@ $('i.fa-heart').click(function() {
         }
     });
 });
+
+///// show contribute form
+$('#contribute-btn').click(function (){
+    $('#contribute-btn').hide();
+    $('#contribute-form').show();
+
+})
+
+///// contribute submit button animation
+$(function() {
+    $( "#button" ).click(function() {
+        $( "#button" ).addClass( "onclic", 250, validate);
+    });
+
+    function validate() {
+        setTimeout(function() {
+            $( "#sub" ).removeClass( "onclic" );
+            $( "#sub" ).addClass( "validate", 450, callback );
+        }, 2250 );
+    }
+    function callback() {
+        setTimeout(function() {
+            $( "#sub" ).removeClass( "validate" );
+        }, 1250 );
+    }
+});
+
+
+///// add contribution to the page without refreshing
+$(document).ready(function() {
+    $('form[name="contribution"]').submit(function(event) {
+        // Prevent the form from submitting normally
+        event.preventDefault();
+
+        // Get the form data
+        var formData = $(this).serialize();
+
+        // Submit the form using AJAX
+        $.ajax({
+            url: $("#contribution-form").attr('action'),
+            method: 'POST',
+            data: formData,
+            success: function(response) {
+                console.log(response);
+                $("#contribution-form").hide();
+                let content = response.content;
+                $(".text").append('<p id="'+response.id+'">'+content+'</p>');
+                $('#comment_section').before('<div class="alert alert-success"> Your contribution has helped our story come alive. Thank you for sharing your creativity with us! </div>');
+            },
+            error: function() {
+                console.log($("#contribution-form").attr('action'));
+                alert('An error occurred while submitting the contribution.');
+            }
+        });
+    });
+});
+
+
+///// show author name when hovering its contribution
+$('.contr').hover(function (){
+    let id = $(this).attr('id')+'author';
+    $('#'+id).css('font-size', '25px');
+    $(this).css('background-color','#F0F8FF')
+    console.log(id);},
+    function (){
+        let id = $(this).attr('id')+'author';
+        $('#'+id).css('font-size', '16px');
+        $(this).css('background-color','white')
+
+    }
+)

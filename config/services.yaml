@@ -7,17 +7,17 @@ parameters:
   uploads_directory: '%kernel.project_dir%/public/uploads'
   story_genres:
     'Horror': >
-      A story designed to scare the pants off of the reader. Whether it's a haunted house or a creepy clown, make sure to give plenty of descriptive details to create an eerie atmosphere
+     Prepare to have your pants scared off! This spine-chilling story will make you jump out of your seat and sleep with the lights on. Watch out for haunted houses, creepy clowns, and things that go bump in the night.
     'Fiction': >
-      A world where anything is possible, from flying cars to intergalactic space travel. Just make sure to include lots of futuristic technology and some kind of evil villain threatening to destroy the universe
+      Buckle up for a wild ride through a world where anything is possible! Get ready for flying cars, intergalactic space travel, and epic battles against evil villains. Don't forget your laser sword and your sense of adventure!
     'Mystery': >
-      Who killed the wealthy business tycoon? Was it the suspicious butler or the jilted lover with a motive? The reader will be on the edge of their seat trying to figure it out
+      Get your detective hat on and join the thrilling quest to solve the mystery of the wealthy business tycoon's murder. Suspects, secrets, and unexpected twists await you. Can you crack the case before the butler steals the show?
     'Comedy': >
-      The goal here is to make the reader laugh out loud. Think witty one-liners and absurd situations that will have them rolling on the floor
+      Get ready to laugh until your sides hurt! This hilarious story is filled with witty one-liners, absurd situations, and unforgettable characters. From banana peel mishaps to outrageous pranks, you won't be able to stop giggling.
     'Drama': >
-      This genre is all about intense emotions and complex relationships. Whether it's a family feud or a tragic love triangle, the reader will be invested in the characters' lives and rooting for a happy ending
+      Grab a box of tissues and prepare for an emotional rollercoaster! This dramatic tale will take you on a journey of intense emotions, complex relationships, and unexpected plot twists. Will love conquer all or will the family feud take center stage?
     'Romance': >
-      When two people love each other very much and want to spend the rest of their lives together, but they keep getting interrupted by ridiculous obstacles like a jealous ex or a family feud
+      Love is in the air, but it's not going to be easy! Join our star-crossed lovers as they navigate through a sea of ridiculous obstacles. Jealous exes, feuding families, and hilarious misunderstandings will keep you rooting for a happily ever after.
   max_stories_per_page: 9
 
 services:
@@ -27,6 +27,14 @@ services:
   _defaults:
     autowire: true      # Automatically injects dependencies in your services.
     autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+  App\Service\QuestManager:
+    arguments:
+      - '@doctrine.orm.entity_manager'
+
+  App\EventListener\QuestActionListener:
+    tags:
+      - { name: 'kernel.event_subscriber' }
 
   # makes classes in src/ available to be used as services
   # this creates a service per class whose id is the fully-qualified class name
@@ -39,7 +47,3 @@ services:
 
   # add more service definitions when explicit configuration is needed
   # please note that last definitions always *replace* previous ones
-
-
-
-
