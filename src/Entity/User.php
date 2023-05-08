@@ -489,6 +489,34 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+     /**
+     * @return Collection<int, Contribution>
+     */
+    public function getContributions(): Collection
+    {
+        return $this->contributions;
+    }
+
+    /**
+     * @return Collection<int, Comment>
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function getXp(): ?int
+    {
+        return $this->xp;
+    }
+
+    public function addXp(int $xp): self
+    {
+        $this->xp += $xp;
+
+        return $this;
+    }
+
     /**
      * @return Collection<int, Quest>
      */
@@ -573,22 +601,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $contributedStories;
     }
 
-    /**
-     * @return Collection<int, Contribution>
-     */
-    public function getContributions(): Collection
-    {
-        return $this->contributions;
-    }
-
-    /**
-     * @return Collection<int, Comment>
-     */
-    public function getComments(): Collection
-    {
-        return $this->comments;
-    }
-
     public function getLikesReceivedCount(): int
     {
         $contributedStories = $this->getContributedStories();
@@ -613,15 +625,4 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $startedStories;
     }
 
-    public function getXp(): ?int
-    {
-        return $this->xp;
-    }
-
-    public function addXp(int $xp): self
-    {
-        $this->xp += $xp;
-
-        return $this;
-    }
 }
