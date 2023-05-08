@@ -49,7 +49,10 @@ class UserCrudController extends AbstractCrudController
             });
         return parent::configureActions($actions)
             ->add(Crud::PAGE_INDEX, $addAdmin)
-            ->add(Crud::PAGE_INDEX, $removeAdmin);
+            ->add(Crud::PAGE_INDEX, $removeAdmin)
+            ->add(Crud::PAGE_DETAIL, $removeAdmin)
+            ->add(Crud::PAGE_DETAIL, $addAdmin);
+
 
     }
 
@@ -92,7 +95,7 @@ class UserCrudController extends AbstractCrudController
         $entityManager->flush();
         $targetUrl = $adminUrlGenerator
             ->setController(self::class)
-            ->setAction(Crud::PAGE_DETAIL)
+            ->setAction(Crud::PAGE_INDEX)
             ->setEntityId($user->getId())
             ->generateUrl();
         return $this->redirect($targetUrl);
@@ -105,7 +108,7 @@ class UserCrudController extends AbstractCrudController
         $entityManager->flush();
         $targetUrl = $adminUrlGenerator
             ->setController(self::class)
-            ->setAction(Crud::PAGE_DETAIL)
+            ->setAction(Crud::PAGE_INDEX)
             ->setEntityId($user->getId())
             ->generateUrl();
         return $this->redirect($targetUrl);
