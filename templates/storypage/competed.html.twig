@@ -31,7 +31,7 @@
                         <h1>{{ story.title }}</h1>
                     </div>
                     {% for contribution in story.contributions %}
-                            <p id="{{ contribution.author.id }}">{{ contribution.content }}</p>
+                            <p class="contr" id="{{ contribution.author.id  }}">{{ contribution.content }}</p>
                     {% endfor%}
 
 
@@ -40,7 +40,7 @@
             <span  class="authors ">
                 <h5>Contributors</h5>
                 {% for contribution in story.contributions %}
-                        <a href='{{ path('app_profile',{id:contribution.author.id}) }}'>
+                        <a id="{{contribution.author.id ~ "author"}}" href='{{ path('app_profile',{id:contribution.author.id}) }}'>
                     {{ contribution.author.username }}
                     </a>
                         <hr>
@@ -48,9 +48,9 @@
 
         </span>
     </div>
-                {% if not hasContibuted %}
+                {% if not hasContributed %}
                 <div class="text-box">
-                    <div id="contribute-btn" class="btn btn-white btn-animate">Be part of the story - Contribute now!</a>
+                    <a id="contribute-btn" class="btn btn-white btn-animate">Be part of the story - Contribute now!</a>
                 </div>
             </div>
 

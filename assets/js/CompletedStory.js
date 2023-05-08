@@ -70,6 +70,7 @@ $(document).ready(function() {
     });
 });
 
+///// likes
 
 $('i.fa-heart').click(function() {
 
@@ -133,9 +134,8 @@ $(document).ready(function() {
                 console.log(response);
                 $("#contribution-form").hide();
                 let content = response.content;
-                $(".text").append('<p>'+content+'</p>');
-                $('#comment_section').before('<div class="alert alert-success"> Your contribution has helped our story come alive. Thank you for sharing your creativity with us! </div>')
-
+                $(".text").append('<p id="'+response.id+'">'+content+'</p>');
+                $('#comment_section').before('<div class="alert alert-success"> Your contribution has helped our story come alive. Thank you for sharing your creativity with us! </div>');
             },
             error: function() {
                 console.log($("#contribution-form").attr('action'));
@@ -144,3 +144,19 @@ $(document).ready(function() {
         });
     });
 });
+
+
+///// show author name when hovering its contribution
+$('.contr').hover(function (){
+    let id = $(this).attr('id')+'author';
+    $('#'+id).css('font-size', '25px');
+    $(this).css('background-color','#F0F8FF')
+    console.log(id);},
+    function (){
+        let id = $(this).attr('id')+'author';
+        $('#'+id).css('font-size', '16px');
+        $(this).css('background-color','white')
+
+
+    }
+)
