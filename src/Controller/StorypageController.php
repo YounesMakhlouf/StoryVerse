@@ -24,10 +24,10 @@ class StorypageController extends AbstractController
         $comment = new Comment();
         $form = $this->createForm(CommentType::class, $comment);
         $story=$storyRepository->find($id);
-        $form->handleRequest($request);
         $contribution=new Contribution();
         $ContributionForm = $this->createForm(ContributionType::class, $contribution);
 
+        $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
           return $this->addComment($comment,$story,$entityManager);
 
@@ -37,14 +37,16 @@ class StorypageController extends AbstractController
         if ($ContributionForm->isSubmitted()) {
             return $this->addContribution($story,$entityManager,$contribution);
         }
+
+
+
         $hasContributed=$this->hasContributed($entityManager,$story);
         $hasLiked=$story->getLikes()->contains($this->getUser());
         return $this->render('storypage/competed.html.twig', [
-
             'controller_name' => 'CompletedStoryController',
            'story'=>$story,
             'hasLiked'=>$hasLiked,
-            'hasContibuted'=>$hasContributed,
+            'hasContributed'=>$hasContributed,
             'form' => $form->createView(),
             'contributionForm'=>$ContributionForm->createView()
         ]);
@@ -75,12 +77,12 @@ class StorypageController extends AbstractController
     {
         $contribution->setStory($story);
         $contribution->setAuthor($this->getUser());
-        $contribution->setPosition(20);
+        $contribution->setPosition($story->getContributions()->count()+1);
         $entityManager->persist($contribution);
         $entityManager->flush();
-
         return $this->json([
-            'content' => $contribution->getContent()
+            'content' => $contribution->getContent(),
+            'id'=> $contribution->getAuthor()->getId(),
         ]);
     }
 
