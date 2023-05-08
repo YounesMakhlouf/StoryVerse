@@ -77,7 +77,7 @@ class StorypageController extends AbstractController
     {
         $contribution->setStory($story);
         $contribution->setAuthor($this->getUser());
-        $contribution->setPosition(20);
+        $contribution->setPosition($story->getContributions()->count()+1);
         $entityManager->persist($contribution);
         $entityManager->flush();
         return $this->json([
