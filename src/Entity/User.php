@@ -534,6 +534,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    /**
+     * @return Collection<int, Contribution>
+     */
+    public function getContributions(): Collection
+    {
+        return $this->contributions;
+    }
+
+    /**
+     * @return Collection<int, Comment>
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
     public function getUserRequirement(string $questRequirement): int
     {
         return match ($questRequirement) {
@@ -568,22 +584,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             $contributedStories[] = $story;
         }
         return $contributedStories;
-    }
-
-    /**
-     * @return Collection<int, Contribution>
-     */
-    public function getContributions(): Collection
-    {
-        return $this->contributions;
-    }
-
-    /**
-     * @return Collection<int, Comment>
-     */
-    public function getComments(): Collection
-    {
-        return $this->comments;
     }
 
     public function getLikesReceivedCount(): int
