@@ -34,7 +34,7 @@ class Quest
     #[ORM\Column(length: 100)]
     private ?string $requirement = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?int $amount = null;
 
     public function __construct()

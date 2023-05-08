@@ -4,7 +4,6 @@ namespace App\DataFixtures;
 
 use App\Factory\CommentFactory;
 use App\Factory\ContributionFactory;
-use App\Factory\QuestFactory;
 use App\Factory\StoryFactory;
 use App\Factory\UserFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -14,6 +13,8 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
+        $questFixture = new QuestFixture();
+        $questFixture->load($manager);
         StoryFactory::createMany(25);
         UserFactory::createMany(50, function () {
             return [
@@ -32,11 +33,7 @@ class AppFixtures extends Fixture
                 'author' => UserFactory::random()
             ];
         });
-        QuestFactory::createMany(20, function () {
-            return [
-                'users' => UserFactory::randomRange(0, 10)
-            ];
-        });
+
         $manager->flush();
     }
 }
