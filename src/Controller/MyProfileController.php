@@ -1,14 +1,13 @@
 <?php
+
 namespace App\Controller;
 
-use App\Entity\User;
 use App\Form\ProfileType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\String\Slugger\SluggerInterface;
@@ -18,18 +17,22 @@ class MyProfileController extends AbstractController
 {
     #[IsGranted('ROLE_USER')]
     #[Route('/myprofile', name: 'app_myprofile')]
-    public function showMyProfile(Security $security): Response
+    public function showMyProfile(): Response
     {
-        $user = $security->getUser();
+        $user = $this->getUser();
+        $contributedStories = $user->getContributedStories();
+
         return $this->render('profile/myprofile.html.twig', [
             'user' => $user,
+            'stories' => $contributedStories
+
         ]);
     }
 
     #[Route('/modify-profile', name: 'app_modify_profile')]
-    public function modifyProfile(Request $request, Security $security, EntityManagerInterface $entityManager): Response
+    public function modifyProfile(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $user = $security->getUser();
+        $user = $this->getUser();
 
         // Check if user is authenticated
         if (!$user) {
