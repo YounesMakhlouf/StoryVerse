@@ -66,7 +66,7 @@
                     {% for following in user.following %}
                         <li>
                             <a class="dropdown-item" href="{{ path('app_profile', {'id': following.id}) }}">
-                                <img id="avatar" src="{{ app.following.avatar }}" alt="Avatar" width="40" height="40" class="d-inline-block align-text-top"> {{ following.username }}
+                                <img id="avatar" src="{{ following.avatar }}" alt="Avatar" width="40" height="40" class="d-inline-block align-text-top"> {{ following.username }}
                             </a>
                         </li>
                     {% endfor %}

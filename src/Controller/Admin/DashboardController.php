@@ -38,11 +38,11 @@ class DashboardController extends AbstractDashboardController
     {
         $nbUsers = $this->getInfo('u', $this->userRepository ,'COUNT(u.id) ');
         $nbStories=$this->getInfo('s',$this->storyRepository,'COUNT(s.id) ');
-        $interactions=$this->getInfo('s',$this->storyRepository,'SUM(s.likes)');
+//        $interactions=$this->getInfo('s',$this->storyRepository,'SUM(s.likes)');
         return $this->render('admin/admin.html.twig',[
             'story'=>$nbStories,
             'users'=>$nbUsers,
-            'interaction'=>$interactions
+            'interaction'=>'3'
         ]);
 
 
@@ -60,6 +60,10 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-dashboard');
         yield MenuItem::linkToCrud('Users', 'fas fa-users',User::class);
         yield MenuItem::linkToCrud('Stories', "fa-solid fa-book-open",Story::class);
+        yield MenuItem::linkToCrud('Reported Stories', "fa-solid fa-shield-exclamation",Story::class)
+            ->setController(ReportedStoryCrudController::class);
+        ;
+
 
     }
 

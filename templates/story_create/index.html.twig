@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+  <div class="container mt-5">
+    <h1 class="text-center mb-5">Create a new story</h1>
+    {{ form_start(form, {'attr': {'class': 'col-md-8 mx-auto'}}) }}
+      <div class="form-group">
+        {{ form_label(form.Title, 'Title') }}
+        {{ form_widget(form.Title, {'attr': {'class': 'form-control'}}) }}
+      </div>
+      <div class="form-group">
+        {{ form_label(form.genre, 'Genre') }}
+        {{ form_widget(form.genre, {'attr': {'class': 'form-control'}}) }}
+      </div>
+      <div class="form-group">
+        {{ form_label(form.firstContribution, 'Votre première contribution') }}
+        {{ form_widget(form.firstContribution, {'attr': {'class': 'form-control'}}) }}
+      </div>
+      <div class="form-group">
+        {{ form_label(form.storyImage, 'Story Image (JPG or PNG file)') }}
+        {{ form_widget(form.storyImage, {'attr': {'class': 'form-control-file'}}) }}
+      </div>
+      {{ form_widget(form.submit, {'attr': {'class': 'btn btn-primary'}}) }}
+    {{ form_end(form) }}
+  </div>
+{% endblock %}
+
