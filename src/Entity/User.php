@@ -52,7 +52,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?bool $isVerified = false;
 
-
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?DateTimeInterface $Last_login_date = null;
 
