@@ -10,65 +10,123 @@ class QuestFixture extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        // Account creation - 100 points
-        $quest1 = new Quest();
-        $quest1->setName('Account Creation');
-        $quest1->setType('Account Creator');
-        $quest1->setDescription('Create a new account on Storyverse');
-        $quest1->setRequirement('create_account');
-        $quest1->setPoints(100);
+        // Account creation
+        $quest1 = $this->createQuest(
+            'The Legendary Accountant',
+            'Account Creator',
+            'Master the ancient art of account creation on Storyverse. Create a new account and unlock the secrets of the digital realm!',
+            'create_account',
+            100
+        );
         $manager->persist($quest1);
 
-        // Story creation - 50 points
-        $quest2 = new Quest();
-        $quest2->setName('Story Creation');
-        $quest2->setType('Story Creator');
-        $quest2->setDescription('Create your first story on Storyverse! Hurrayyyy');
-        $quest2->setRequirement('post_stories');
-        $quest2->setAmount(1);
-        $quest2->setPoints(50);
+        // Story creation
+        $quest2 = $this->createQuest(
+            "The Storyteller's Genesis",
+            'Story Creator',
+            'Embark on a mythical journey as you breathe life into your first story on Storyverse. Let your imagination run wild and witness the birth of a new literary universe!',
+            'post_stories',
+            50,
+            1
+        );
         $manager->persist($quest2);
 
-        // Story creation - 200 points
-        $quest3 = new Quest();
-        $quest3->setName('Novice Author');
-        $quest3->setType('Story Creator');
-        $quest3->setDescription('Write and publish 5 stories on Storyverse');
-        $quest3->setRequirement('post_stories');
-        $quest3->setAmount(5);
-        $quest3->setPoints(200);
+        $quest3 = $this->createQuest(
+            "The Novice Author's Odyssey",
+            'Story Creator',
+            'Unleash your creative prowess and conquer the literary world by publishing not one, not two, but five epic stories on Storyverse. Prepare to become a legend among authors!',
+            'post_stories',
+            200,
+            5
+        );
         $manager->persist($quest3);
 
-        // Story creation - 500 points
-        $quest4 = new Quest();
-        $quest4->setName('Story Creation Master');
-        $quest4->setType('Story Creator');
-        $quest4->setDescription('Create 10 on Storyverse! You rock');
-        $quest4->setRequirement('post_stories');
-        $quest4->setAmount(10);
-        $quest4->setPoints(500);
+        $quest4 = $this->createQuest(
+            'The Storytelling Maestro',
+            'Story Creator',
+            'Channel your inner storytelling genius and grace the world with ten captivating stories on Storyverse. Claim your rightful place among the gods of imagination!',
+            'post_stories',
+            500,
+            10
+        );
         $manager->persist($quest4);
 
-        // Story completion - 100 points
-        $quest5 = new Quest();
-        $quest5->setName('Story Completion');
-        $quest5->setType('Story Reader');
-        $quest5->setDescription('Complete a story on Storyverse');
-        $quest5->setRequirement('post_contributions');
-        $quest5->setAmount(10);
-        $quest5->setPoints(100);
+        // Contribution
+        $quest5 = $this->createQuest(
+            'The Word Weaver',
+            'Contributor',
+            'Contribute to a story on Storyverse and witness the magic unfold. Your words shall weave the fabric of storytelling!',
+            'post_contributions',
+            100,
+            1
+        );
         $manager->persist($quest5);
 
-        // Story completion - 100 points
-        $quest6 = new Quest();
-        $quest6->setName('Bookworm');
-        $quest6->setType('Story Reader');
-        $quest6->setDescription('Complete a story on Storyverse');
-        $quest6->setRequirement('post_contributions');
-        $quest6->setAmount(10);
-        $quest6->setPoints(100);
+        $quest6 = $this->createQuest(
+            'The Storyvore',
+            'Contributor',
+            'Become a true Storyvore by contributing to 10 stories on Storyverse. Your insatiable appetite for storytelling shall be celebrated!',
+            'post_contributions',
+            200,
+            10
+        );
         $manager->persist($quest6);
 
+        // Community Quests
+        $quest7 = $this->createQuest(
+            'The Social Butterfly',
+            'Community Quest',
+            'Spread your wings and become the ultimate social butterfly! Engage with the Storyverse community by leaving 50 witty comments on stories and ignite conversations that will go down in history!',
+            'post_comments',
+            1000,
+            50
+        );
+        $manager->persist($quest7);
+
+        $quest8 = $this->createQuest(
+            'The Epic High-Fiver',
+            'Community Quest',
+            'Embrace the power of the high-five! Show your appreciation for fellow storytellers by giving 100 likes to their magnificent tales. Your mighty thumbs shall bring joy to the hearts of many!',
+            'post_likes',
+            1000,
+            100
+        );
+        $manager->persist($quest8);
+
+        // Achievement Quests
+        $quest9 = $this->createQuest(
+            'The Great Adventurer',
+            'Achievement Quest',
+            'Embark on an epic journey of exploration and discovery! Complete 50 quests of various kinds, showcasing your unwavering determination and insatiable curiosity. Only the bravest and most relentless adventurers can claim this legendary title!',
+            'complete_quests',
+            5555
+        );
+        $manager->persist($quest9);
+
+        $quest10 = $this->createQuest(
+            'The Time Traveler',
+            'Achievement Quest',
+            'Bend the fabric of time and rewrite history! Contribute to Storyverse for 365 consecutive days, transcending the boundaries of space and time. Your commitment to storytelling shall be forever enshrined in the annals of legend!',
+            'daily_login',
+            9999
+        );
+        $manager->persist($quest10);
+
         $manager->flush();
+    }
+
+
+    private function createQuest(string $name, string $type, string $description, string $requirement, int $points, int $amount = null): Quest
+    {
+        $quest = new Quest();
+        $quest->setName($name);
+        $quest->setType($type);
+        $quest->setDescription($description);
+        $quest->setRequirement($requirement);
+        if ($amount !== null) {
+            $quest->setAmount($amount);
+        }
+        $quest->setPoints($points);
+        return $quest;
     }
 }
