@@ -120,7 +120,7 @@
                         {% if comment.comment is null %}
                     <div class="be-comment">
                         <div class="be-img-comment">
-                            <a href="">
+                            <a href="{{ path('app_profile',{'id':comment.author.id})  }}">
                                 <img src="{{ asset ('uploads/avatar_directory/'~ comment.author.avatar)}}" alt="" class="be-ava-comment">
                             </a>
                         </div>

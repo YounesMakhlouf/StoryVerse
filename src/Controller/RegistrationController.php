@@ -30,6 +30,13 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if($user->getGender()=='female'){
+                $user->setAvatar('female.png');
+            }
+            else{
+                $user->setAvatar('male.png');
+
+            }
             $user->setPassword(
                 $userPasswordHasher->hashPassword(
                     $user,

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\Story;
+namespace App\Controller;
 
 use App\Repository\StoryRepository;
 use App\Service\PdfGeneratorService;
