@@ -44,6 +44,7 @@ document.querySelectorAll(".navbar .dropdown > a").forEach((el) => {
   );
 });
 
+//skander's magnificent notification shower
 const userId = document.querySelector(".userid").textContent.trim();
 console.log("dqpdnqsnd" + userId); // Replace with the user ID you want to fetch notifications for
 const notiflist = document.querySelector(".notiflist");
@@ -51,12 +52,12 @@ const notiflist = document.querySelector(".notiflist");
 fetch(`/notification/user/${userId}`)
   .then((response) => response.json())
   .then((data) => {
-    // Display the notifications data in the console
     if (Array.isArray(data)) {
-      // Display each notification in the console
       data.forEach((notification) => {
+        // Display the notifications data in the console au càs où
+        console.log("ZSLINQsn");
         console.log(notification);
-        notiflist.append(notification.content);
+        notiflist.append(createNotif(notification.content));
       });
     }
   })
@@ -64,6 +65,7 @@ fetch(`/notification/user/${userId}`)
     console.error(error);
   });
 
+//creates the notification list
 function createNotif(content) {
   const li = document.createElement("li");
   li.classList.add("dropdown-item");
