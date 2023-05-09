@@ -98,7 +98,8 @@ class StorypageController extends AbstractController
             'content' => $comment->getContent(),
             'author'=> $comment->getAuthor()->getUsername(),
             'createdAt' => $comment->getCreatedAt()->format('Y-m-d H:i:s'),
-            'count' =>$story->getComments()->count()
+            'count' =>$story->getComments()->count(),
+            'avatar'=>$comment->getAuthor()->getAvatar()
 
         ]);
     }

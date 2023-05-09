@@ -53,7 +53,7 @@ $(document).ready(function() {
             data: formData,
             success: function(response) {
 
-                let start='<div class="be-comment"> <div class="be-img-comment"> <a href=""> <img src="https://www.bootdey.com/image/400x150/FFB6C1/000000" alt="" class="be-ava-comment"> </a></div> <div class="be-comment-content"> <span class="be-comment-name"> <a href="">';
+                let start='<div class="be-comment"> <div class="be-img-comment"> <a href=""> <img src='+'/uploads/avatar_directory/'+ response.avatar +' alt="" class="be-ava-comment"> </a></div> <div class="be-comment-content"> <span class="be-comment-name"> <a href="">';
                 let wost='</a> </span> <span class="be-comment-time"> ';
                 let wost2='<i class="fa fa-clock-o"></i> </span> <div id="comments_section"> <p class="be-comment-text">';
                 let end="</p> </div> </div> </div>";
@@ -207,7 +207,5 @@ function Confirm(title, msg, $true, $false) {
 }
 
 $('#report').click(function () {
-    console.log('rani wallah t3ebt');
-
     Confirm('Report story', 'Are you sure you want to report this story', 'Yes', 'Cancel');
 });
