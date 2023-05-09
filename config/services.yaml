@@ -5,7 +5,7 @@
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
   avatar_directory: '%kernel.project_dir%/public/uploads/avatar_directory'
-
+  story_directory : '%kernel.project_dir%/public/uploads/story_directory'
   story_genres:
     'Horror': >
       A story designed to scare the pants off of the reader. Whether it's a haunted house or a creepy clown, make sure to give plenty of descriptive details to create an eerie atmosphere
@@ -22,6 +22,10 @@ parameters:
   max_stories_per_page: 9
 
 services:
+  doctrine:
+      class: Doctrine\ORM\EntityManagerInterface
+      factory: ['@Doctrine\ORM\EntityManager', 'create']
+
   Symfony\Bridge\Twig\Mime\TemplatedEmail:
     autowire: true
   # default configuration for services in *this* file
