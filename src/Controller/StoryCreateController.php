@@ -14,7 +14,7 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class StoryCreateController extends AbstractController
 {
-    #[Route('/story/newS', name: 'Story_newS')]
+    #[Route('/story/new', name: 'Story_new')]
  
     public function new(Request $request, EntityManagerInterface $entityManager)
     {  
