@@ -14,11 +14,11 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         StoryFactory::createMany(25);
-//        UserFactory::createMany(50, function () {
-//            return [
-//                'likedStories' => StoryFactory::randomRange(0, 10)
-//            ];
-//        });
+        UserFactory::createMany(50, function () {
+            return [
+                'likedStories' => StoryFactory::randomRange(0, 10)
+            ];
+        });
         ContributionFactory::createMany(100, function () {
             return [
                 'story' => StoryFactory::random(),
