@@ -22,10 +22,7 @@ parameters:
   max_stories_per_page: 9
 
 services:
-  doctrine:
-      class: Doctrine\ORM\EntityManagerInterface
-      factory: ['@Doctrine\ORM\EntityManager', 'create']
-
+  
   Symfony\Bridge\Twig\Mime\TemplatedEmail:
     autowire: true
   # default configuration for services in *this* file

@@ -1,32 +1,23 @@
 <?php
 namespace App\Controller;
+use App\Entity\Story;
+use App\Entity\Contribution;
+use App\Form\StoryType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Annotation\Route;
-use App\Entity\Story;
-use App\Form\StoryType;
-use App\Entity\Contribution;
-use App\Form\ContributionType;
-use App\Entity\Comment;
-use App\Form\CommentType;
-use App\Entity\User;
-use App\Form\UserType;
-use App\Repository\StoryRepository;
-use App\Repository\ContributionRepository;
-use App\Repository\CommentRepository;
-use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\File\File;
-
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Doctrine\ORM\EntityManagerInterface;
 
 class StoryCreateController extends AbstractController
 {
-   
-    # Route["/story/newS", name: "story_newS"]
-   
-    public function new(Request $request)
-    {   $entityManager = $this->getDoctrine()->getManager();
+    #[Route('/story/newS', name: 'Story_newS')]
+ 
+    public function new(Request $request, EntityManagerInterface $entityManager)
+    {  
         $story = new Story();
         $contribution = new Contribution();
         $form = $this->createForm(StoryType::class, $story);
@@ -61,16 +52,16 @@ class StoryCreateController extends AbstractController
             }
 
             // save the story to the database
-          
+            $entityManager->persist($contribution);
             $entityManager->persist($story);
             $entityManager->flush();
 
             $this->addFlash('success', 'The story has been created.');
-            return $this->redirectToRoute('story_show', ['id' => $story->getId()]);
+            return $this->redirectToRoute('app_storypage', ['id' => $story->getId()]);
         }
 
         return $this->render('story_create\index.html.twig', [
-            'story' => $story,
+            'Story' => $story,
             'form' => $form->createView(),
         ]);
     }
