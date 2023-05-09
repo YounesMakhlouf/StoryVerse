@@ -1,30 +1,33 @@
 <?php
+
 namespace App\Controller;
 
-use App\Entity\User;
 use App\Form\ProfileType;
+use App\Repository\TierRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
-use Symfony\Component\HttpFoundation\File\Exception\FileException;
-use Symfony\Component\String\Slugger\SluggerInterface;
 
 
 class MyProfileController extends AbstractController
 {
     #[IsGranted('ROLE_USER')]
     #[Route('/myprofile', name: 'app_myprofile')]
-    public function showMyProfile(): Response
+    public function showMyProfile(TierRepository $tierRepository): Response
     {
         $user = $this->getUser();
         $contributedStories = $user->getContributedStories();
 
+        $nextTier = $tierRepository->findNextTier($user->getXp());
+
         return $this->render('profile/myprofile.html.twig', [
             'user' => $user,
-            'stories'=> $contributedStories,
+            'stories' => $contributedStories,
+            'nextTier' => $nextTier
         ]);
     }
 
@@ -44,14 +47,14 @@ class MyProfileController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $File = $form->get('avatar')->getData();
-            
+
             // this condition is needed because the 'avatar' field is not required
             // so the image  must be processed only when a file is uploaded
-           
-          if ($File) {
+
+            if ($File) {
                 $originalFilename = pathinfo($File->getClientOriginalName(), PATHINFO_FILENAME);
-            
-                $newFilename = $originalFilename.'-'.uniqid().'.'.$File->guessExtension();
+
+                $newFilename = $originalFilename . '-' . uniqid() . '.' . $File->guessExtension();
 
                 // Move the file to the directory where brochures are stored
                 try {
@@ -67,7 +70,7 @@ class MyProfileController extends AbstractController
                 // instead of its contents
                 $user->setAvatar($newFilename);
             }
-            
+
 
             // Persist changes to database
             $entityManager->persist($user);

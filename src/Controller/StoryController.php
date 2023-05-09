@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Story;
 use App\Event\QuestActionEvent;
 use App\Repository\StoryRepository;
+use App\Repository\TierRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Pagerfanta\Doctrine\ORM\QueryAdapter;

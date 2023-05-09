@@ -3,22 +3,22 @@
 namespace App\Controller;
 
 use App\Repository\StoryRepository;
+use App\Repository\TierRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class HomeController extends AbstractController
 {
     #[Route('/', name: 'app_home')]
     public function index(StoryRepository $storyRepository): Response
-    { if ($this->isGranted('ROLE_USER')){
-        return $this->redirectToRoute('app_browse_stories');
-    }
-    $trendingStories = $storyRepository->createOrderedByLikesQueryBuilder()-> setMaxResults(3)  ->getQuery()
-    ->getResult();
-            $teamMembers = $this->getTeamMembers();
-
+    {
+        if ($this->isGranted('ROLE_USER')) {
+            return $this->redirectToRoute('app_browse_stories');
+        }
+        $trendingStories = $storyRepository->createOrderedByLikesQueryBuilder()->setMaxResults(3)->getQuery()
+            ->getResult();
+        $teamMembers = $this->getTeamMembers();
         return $this->render('/index.html.twig', [
             'teamMembers' => $teamMembers,
             'trendingStories' => $trendingStories,

@@ -37,7 +37,7 @@
     "sass": "^1.62.0",
     "sass-loader": "^13.2.2",
     "stimulus": "^3.2.1",
-    "sweetalert2": "^11.7.5"
+    "sweetalert2": "^11.4.8"
   },
   "browserslist": [
     ">2.5%"

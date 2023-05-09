@@ -2,14 +2,14 @@
 
 namespace App\Entity;
 
-use App\Repository\BadgeRepository;
+use App\Repository\TierRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: BadgeRepository::class)]
-class Badge
+#[ORM\Entity(repositoryClass: TierRepository::class)]
+class Tier
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -23,12 +23,12 @@ class Badge
     private ?string $description = null;
 
     #[ORM\Column]
-    private ?int $requiredXP = null;
+    private ?int $xpThreshold = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
-    private ?string $image = null;
+    private ?string $badge = null;
 
-    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'badges')]
+    #[ORM\OneToMany(mappedBy: 'tier', targetEntity: User::class)]
     private Collection $users;
 
     public function __construct()
@@ -65,26 +65,26 @@ class Badge
         return $this;
     }
 
-    public function getRequiredXP(): ?int
+    public function getXpThreshold(): ?int
     {
-        return $this->requiredXP;
+        return $this->xpThreshold;
     }
 
-    public function setRequiredXP(int $requiredXP): self
+    public function setXpThreshold(int $xpThreshold): self
     {
-        $this->requiredXP = $requiredXP;
+        $this->xpThreshold = $xpThreshold;
 
         return $this;
     }
 
-    public function getImage(): ?string
+    public function getBadge(): ?string
     {
-        return $this->image;
+        return $this->badge;
     }
 
-    public function setImage(?string $image): self
+    public function setBadge(?string $badge): self
     {
-        $this->image = $image;
+        $this->badge = $badge;
 
         return $this;
     }
@@ -101,7 +101,7 @@ class Badge
     {
         if (!$this->users->contains($user)) {
             $this->users->add($user);
-            $user->addBadge($this);
+            $user->setTier($this);
         }
 
         return $this;
@@ -110,7 +110,10 @@ class Badge
     public function removeUser(User $user): self
     {
         if ($this->users->removeElement($user)) {
-            $user->removeBadge($this);
+            // set the owning side to null (unless already changed)
+            if ($user->getTier() === $this) {
+                $user->setTier(null);
+            }
         }
 
         return $this;
