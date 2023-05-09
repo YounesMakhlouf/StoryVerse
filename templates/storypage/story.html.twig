@@ -5,6 +5,7 @@
 {% block body %}
     {% block like %}
     <body>
+        
             <div class="theme ">
 
             </div>
@@ -202,5 +203,9 @@
      {{ encore_entry_script_tags('completed') }}
 
      <script>
+        console.log("skander header");
+        const storyTitle={{story.title}};
+        const StoryContributions = {{story.contributions}};
+     </script>
  {% endblock %}
 
