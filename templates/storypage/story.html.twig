@@ -5,6 +5,7 @@
 {% block body %}
     {% block like %}
     <body>
+        
             <div class="theme ">
 
             </div>
@@ -201,9 +202,17 @@
      {{ parent() }}
      {{ encore_entry_script_tags('completed') }}
 
+<<<<<<< HEAD
      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.js"></script>
      {% for flash in app.session.flashbag.get('sweetalert2') %}
          {{ flash|raw }}
      {% endfor %}
+=======
+     <script>
+        console.log("skander header");
+        const storyTitle={{story.title}};
+        const StoryContributions = {{story.contributions}};
+     </script>
+>>>>>>> c795356d0ca21433e17d458550edb6054510aa50
  {% endblock %}
 

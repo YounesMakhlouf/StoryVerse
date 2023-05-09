@@ -56,7 +56,6 @@ class StoryCreateController extends AbstractController
             $entityManager->persist($story);
             $entityManager->flush();
 
-            $this->addFlash('success', 'The story has been created.');
             return $this->redirectToRoute('app_storypage', ['id' => $story->getId()]);
         }
 
