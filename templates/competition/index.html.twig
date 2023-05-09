@@ -5,15 +5,15 @@
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <h1>Create a competition</h1>
-
                 {{ form_start(form) }}
                 {{ form_row(form.title, {'attr': {'class': 'form-control'}}) }}
                 {{ form_row(form.description, {'attr': {'class': 'form-control'}}) }}
-                {{ form_row(form.startsAt, {'attr': {'class': 'form-control'}}) }}
-                {{ form_row(form.endsAt, {'attr': {'class': 'form-control'}}) }}
                 {{ form_row(form.status, {'attr': {'class': 'form-control'}}) }}
                 {{ form_row(form.paid, {'attr': {'class': 'form-control'}}) }}
-                {{ form_row(form.imageFile, {'attr': {'class': 'form-control'}}) }}
+                {{ form_row(form.startsAt, {'attr': {'class': 'form-control'}}) }}
+                {{ form_row(form.endsAt, {'attr': {'class': 'form-control'}}) }}
+                {{ form_row(form.imageFilename, {'attr': {'class': 'form-control'}}) }}
+
                 <button class="btn btn-primary mt-3" type="submit">Create</button>
                 {{ form_end(form) }}
             </div>

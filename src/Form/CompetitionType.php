@@ -14,6 +14,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\File;
 
+
 class CompetitionType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
@@ -23,26 +24,38 @@ class CompetitionType extends AbstractType
             ->add('description', TextareaType::class, [
                 'required' => false,
             ])
-            ->add('startsAt', DateTimeType::class, [
-                'widget' => 'single_text',
-            ])
-            ->add('endsAt', DateTimeType::class, [
-                'widget' => 'single_text',
-            ])
+            
             ->add('status', ChoiceType::class, [
+                
                 'choices' => [
                     'Open' => 'open',
                     'Closed' => 'closed',
                 ],
             ])
-            ->add('paid', CheckboxType::class, [
-                'required' => false,
+            ->add('paid', ChoiceType::class, [
+                'choices' => [
+                    'Paid' => 'Paid',
+                    'unpaid' => 'Unpaid'],
             ])
-            ->add('imageFile', FileType::class, [
+            ->add ('startsAt', DateTimeType::class, [
+                'data_class' => \DateTimeImmutable::class,
+                'widget' => 'single_text',
+                'input' => 'datetime_immutable',
+                'html5' => false,
+                'format' => 'yyyy-MM-dd HH:mm:ss',
+            ])
+            ->add ('endsAt', DateTimeType::class, [
+                'data_class' => \DateTimeImmutable::class,
+                'widget' => 'single_text',
+                'input' => 'datetime_immutable',
+                'html5' => false,
+                'format' => 'yyyy-MM-dd HH:mm:ss',
+            ])
+
+            ->add('imageFilename', FileType::class, [
                 'required' => false,
                 'constraints' => [
                     new File([
-                        'maxSize' => '1024k',
                         'mimeTypes' => [
                             'image/jpeg',
                             'image/png',

@@ -35,6 +35,9 @@ class Competition
     #[ORM\Column]
     private bool $paid = false;
 
+    #[ORM\Column(nullable: true)]
+    private ?string $imageFilename = null;
+
     #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'compete')]
     private Collection $users;
 
@@ -43,6 +46,15 @@ class Competition
         $this->users = new ArrayCollection();
     }
 
+    public function getImageFilename(): ?string
+    {
+        return $this->imageFilename;
+    }
+    public function setImageFilename(?string $imageFilename): self
+    {
+        $this->imageFilename = $imageFilename;
+        return $this;
+    }
     public function getId(): ?int
     {
         return $this->id;
