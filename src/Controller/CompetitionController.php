@@ -13,10 +13,24 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
+#[Route('/competition', name: 'competition')]
 class CompetitionController extends AbstractController
 {
-    #[Route('/competition/create', name: 'competition_create')]
+    #[Route('/', name: '_index')]
+    public function index(EntityManagerInterface $entityManager): Response
+    {
+        $competition1 = new Competition();
+        $competition1->setName('Conan');
+        $competition->setStartDate(new \DateTime());
+        $competition->setEndDate(new \DateTime('tomorrow'));
+        $cometition->setimageFilename('645a278a6bf66');
+        $entityManager->persist($competition);
+        $entityManager->flush();
+        return $this->render('competition/index_initial.html.twig', [
+            'controller_name' => 'CompetitionController',
+        ]);
+    }
+    #[Route('/create', name: 'competition_create')]
     public function createCompetition(Request $request , EntityManagerInterface $entityManager): Response
     {
         $competition = new Competition();
@@ -55,6 +69,7 @@ class CompetitionController extends AbstractController
             }
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($competition);
+            var_dump(); 
             $entityManager->flush();
 
             $this->addFlash('success', 'Competition created successfully!');

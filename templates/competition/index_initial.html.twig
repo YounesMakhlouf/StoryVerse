@@ -1,0 +1,130 @@
+
+{% extends base.html.twig %}
+{% block title %} Competitions-Games 
+{% endblock %}
+   
+
+
+   
+{% block body %}
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="page-content">
+          <div class="main-banner">
+            <div class="row">
+              <div class="col-lg-7">
+                <div class="header-text">
+                  <h6>Welcome To StoryVerse</h6>
+                  <h4><em>Browse</em> Our Popular Writing Competitions and Games  Here</h4>
+                  <div class="main-button">
+                    <a href="browse.html">Browse Now</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- ***** Banner End ***** -->
+
+          <!-- ***** Most Popular Start ***** -->
+          <div class="most-popular">
+            <div class="row">
+              <div class="col-lg-12">
+                <div class="heading-section">
+                  <h4><em>Most Popular Competions </em> Right Now</h4>
+                </div>
+                <div class="row">
+                  <div class="col-lg-3 col-sm-6">
+                  {% for competition in competitions %}
+                    <div class="item">
+                      <img src="" alt="">
+                      <h4> {{competition.title}}<br><span>{{competition.status}}</span></h4>
+                      <ul>
+                        <li><i class="fa fa-star"></i> 5.8 </li>
+                        <li><i class="fa fa-user-plus"></i>{{count(competition.getUsers()).'k'}}</li>
+                      </ul>
+                    </div>
+                  </div>
+                  {% endfor %}
+                 
+                  <div class="col-lg-12">
+                    <div class="main-button">
+                      <a href="browse.html">Discover Popular Games </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+  
+          <div class="gaming-library">
+            <div class="col-lg-12">
+              <div class="heading-section">
+                <h4><em>Your Gaming</em> Library</h4>
+              </div>
+              <div class="item">
+                <ul>
+                  <li><img src="assets/images/kk.jpg" alt="" class="templatemo-item"></li>
+                  <li><h4>DragonBall Story </h4><span>Mang's Story </span></li>
+                  <li><h4>Date Added</h4><span>24/08/2036</span></li>
+                  <li><h4>Hours Played</h4><span>634 H 22 Mins</span></li>
+                  <li><h4>Currently</h4><span>Downloaded</span></li>
+                  <li><div class="main-border-button border-no-active"><a href="#">Donwloaded</a></div></li>
+                </ul>
+              </div>
+              <div class="item">
+                <ul>
+                  <li><img src="assets/images/violetto.jpg" alt="" class="templatemo-item"></li>
+                  <li><h4>Violetto's Story </h4><span>Fan Fiction </span></li>
+                  <li><h4>Date Added</h4><span>22/06/2036</span></li>
+                  <li><h4>Hours Played</h4><span>740 H 52 Mins</span></li>
+                  <li><h4>Currently</h4><span>Downloaded</span></li>
+                  <li><div class="main-border-button"><a href="#">Donwload</a></div></li>
+                </ul>
+              </div>
+              <div class="item last-item">
+                <ul>
+                  <li><img src="assets/images/byu.jpg" alt="" class="templatemo-item"></li>
+                  <li><h4>PLAY TOKYO Game </h4><span>Action </span></li>
+                  <li><h4>Date Added</h4><span>21/04/2036</span></li>
+                  <li><h4>Hours Played</h4><span>892 H 14 Mins</span></li>
+                  <li><h4>Currently</h4><span>Downloaded</span></li>
+                  <li><div class="main-border-button "><a href="#">Donwload</a></div></li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-lg-12">
+              <div class="main-button">
+                <a href="profile.html">View Your Library</a>
+              </div>
+            </div>
+          </div>
+       
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+
+
+
+{% endblock %}
+{% bloc stylesheet %}
+<link rel="stylesheet" href="{{ asset('assets/css/fontawesome.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/css/templatemo-cyborg-gaming.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/css/owl.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/css/animate.css') }}">
+<link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+ <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+{% endblock %}
+{% bloc javascript %}
+<script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
+  <script src="{{ asset('vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+
+  <script src="{{ asset('assets/js/isotope.min.js') }}"></script>
+  <script src="{{ asset('assets/js/owl-carousel.js') }}"></script>
+  <script src="{{ asset('assets/js/tabs.js') }}"></script>
+  <script src="{{ asset('assets/js/popup.js') }}"></script>
+  <script src="{{ asset('assets/js/custom.js') }}"></script>
+{% endblock %}
