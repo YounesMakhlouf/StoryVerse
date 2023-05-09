@@ -10,13 +10,31 @@
             </div>
             <div class="page-content">
 
-            {#likes#}
+
+
 
                 <div class="row">
                     <div class="col-1" id="fixed">
+                        {#        report story#}
+
+
+
+                            <div class="pdf" style="border:2px solid  #b30000;" id="report" data-story-id="{{ path('app_report_story',{'id':story.id}) }}">
+                                <div class="icn">
+
+                                    <i class="fa-solid fa-circle-exclamation" style="color: #b30000;"></i>
+                                </div>
+
+                            </div>
+
+
+
+                        {#        generate pdf#}
+
+
                         <a href="{{ path('app_pdf',{'id':story.id}) }}">
 
-                        <div class="pdf">
+                        <div class="pdf" >
                             <div class="icn">
 
                                 <i class="fa-solid fa-file-pdf"></i>
@@ -24,6 +42,7 @@
 
                         </div>
                         </a>
+                        {#likes#}
 
                         <i id="color" class="
                             {% if hasLiked %}fa-solid

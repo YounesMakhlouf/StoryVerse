@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Story;
 
 use App\Entity\Comment;
 use App\Entity\Contribution;
@@ -11,10 +11,10 @@ use App\Repository\StoryRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
-use Symfony\Component\HttpFoundation\Request;
 
 class StorypageController extends AbstractController
 {   #[IsGranted('ROLE_USER')]
@@ -42,7 +42,7 @@ class StorypageController extends AbstractController
 
         $hasContributed=$this->hasContributed($entityManager,$story);
         $hasLiked=$story->getLikes()->contains($this->getUser());
-        return $this->render('storypage/competed.html.twig', [
+        return $this->render('storypage/story.html.twig', [
             'controller_name' => 'CompletedStoryController',
            'story'=>$story,
             'hasLiked'=>$hasLiked,

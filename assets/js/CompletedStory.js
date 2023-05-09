@@ -36,6 +36,8 @@ $("#color").click(function() {
     $("#color").toggleClass("fa-solid");
 });
 
+
+////// show comments directly after submitting without refreshing the page
 $(document).ready(function() {
     $('form[name="comment"]').submit(function(event) {
         // Prevent the form from submitting normally
@@ -82,7 +84,6 @@ $('i.fa-heart').click(function() {
         type: 'POST',
         url: storyId,
         success: function(data) {
-
             likeCountElement.text(data.count);
         }
     });
@@ -158,3 +159,55 @@ $('.contr').hover(function (){
 
     }
 )
+
+
+////////  show confirm box after reporting a story
+
+function Confirm(title, msg, $true, $false) {
+    console.log('rani wallah t3ebt');
+    const $content = "<div class='dialog-ovelay'>" +
+        "<div class='dialog'><header>" +
+        " <h3> " + title + " </h3> " +
+        "<i class='fa fa-close'></i>" +
+        "</header>" +
+        "<div class='dialog-msg'>" +
+        " <p> " + msg + " </p> " +
+        "</div>" +
+        "<footer>" +
+        "<div class='controls'>" +
+        " <button class='button button-danger doAction'>" + $true + "</button> " +
+        " <button class='button button-default cancelAction'>" + $false + "</button> " +
+        "</div>" +
+        "</footer>" +
+        "</div>" +
+        "</div>";
+    $('body').prepend($content);
+    $('.doAction').click(function (event) {
+
+        event.preventDefault();
+
+        $.ajax({
+            type: 'POST',
+            url: $('#report').data('story-id'),
+            success: function (response) {
+                console.log(response);
+                }});
+        $(this).parents('.dialog-ovelay').fadeOut(500, function () {
+            $(this).remove();
+            $('#report').hide();
+            })
+        });
+
+    $('.cancelAction, .fa-close').click(function () {
+        $(this).parents('.dialog-ovelay').fadeOut(500, function () {
+            $(this).remove();
+        });
+    });
+
+}
+
+$('#report').click(function () {
+    console.log('rani wallah t3ebt');
+
+    Confirm('Report story', 'Are you sure you want to report this story', 'Yes', 'Cancel');
+});
