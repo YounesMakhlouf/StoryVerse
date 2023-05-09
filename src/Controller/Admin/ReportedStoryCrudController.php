@@ -31,21 +31,11 @@ class ReportedStoryCrudController extends StoryCrudController
     }
         public function configureActions(Actions $actions): Actions
     {
-        $acceptReport= Action::new('Accept report')
-            ->addCssClass('btn btn-success')
-            ->setIcon('fa-solid fa-check')
-            ->displayAsButton()
-            ->linkToCrudAction('deleteStory')
-            ->setTemplatePath('admin/add_admin.html.twig');
-        $rejectReport= Action::new('reject report')
-            ->addCssClass('btn btn-danger')
-            ->setIcon('fa-solid fa-trash')
-            ->displayAsButton()
-            ->linkToCrudAction('rejectReport')
-            ->setTemplatePath('admin/add_admin.html.twig');
+        $acceptReport= $this->createAction('Accept report','fa-solid fa-check','deleteStory');
+        $rejectReport= $this->createAction('Reject report','fa-solid fa-trash','rejectReport');
         return $actions
-            ->add(Crud::PAGE_INDEX, $acceptReport)
             ->disable('DELETE')
+            ->add(Crud::PAGE_INDEX, $acceptReport)
             ->add(Crud::PAGE_INDEX,$rejectReport);
 
     }
@@ -78,6 +68,16 @@ class ReportedStoryCrudController extends StoryCrudController
             ->setEntityId($story->getId())
             ->generateUrl();
         return $this->redirect($targetUrl);
+    }
+
+
+    public function createAction($name,$icon,$action){
+        return  Action::new($name)
+            ->setIcon($icon)
+            ->displayAsButton()
+            ->linkToCrudAction($action)
+            ->setTemplatePath('admin/add_admin.html.twig');
+
     }
 
 }
