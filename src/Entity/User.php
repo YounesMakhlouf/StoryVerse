@@ -488,6 +488,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function getTier(): ?Tier
+    {
+        return $this->tier;
+    }
+
+    public function setTier(?Tier $tier): self
+    {
+        $this->tier = $tier;
+
+        return $this;
+    }
+
     public function getXp(): ?int
     {
         return $this->xp;
@@ -600,17 +612,4 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         }
         return $startedStories;
     }
-
-    public function getTier(): ?Tier
-    {
-        return $this->tier;
-    }
-
-    public function setTier(?Tier $tier): self
-    {
-        $this->tier = $tier;
-
-        return $this;
-    }
-
 }

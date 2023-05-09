@@ -4,6 +4,7 @@ namespace App\Service;
 
 use App\Entity\Quest;
 use App\Entity\User;
+use App\Repository\TierRepository;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
@@ -17,7 +18,8 @@ class QuestCompletionService
 
     public function __construct(private readonly EntityManagerInterface $entityManager,
                                 private readonly RequestStack           $requestStack,
-                                private readonly UrlGeneratorInterface  $urlGenerator)
+                                private readonly UrlGeneratorInterface  $urlGenerator,
+                                private readonly TierRepository         $tierRepository)
     {
         $this->questRepository = $entityManager->getRepository(Quest::class);
     }
@@ -35,10 +37,6 @@ class QuestCompletionService
 
     public function completeQuest(User $user, Quest $quest): void
     {
-        // Check if the user has already completed the quest
-        if ($user->getCompletedQuests()->contains($quest)) {
-            return;
-        }
         $requirement = $quest->getRequirement();
         $amount = $quest->getAmount();
 
@@ -78,8 +76,6 @@ class QuestCompletionService
     {
         $user->addCompletedQuest($quest);
         $user->addXp($quest->getPoints());
-        $this->entityManager->persist($user);
-        $this->entityManager->flush();
         // Show SweetAlert2 notification
         $questName = $quest->getName();
         $notificationMessage = "Congratulations brave adventurer! You have completed the quest: $questName";
@@ -104,6 +100,34 @@ class QuestCompletionService
 
         $request = $this->requestStack->getCurrentRequest();
         $request->getSession()->getFlashBag()->add('sweetalert2', $script);
+        $this->verifyTierUpdate($user);
+        $this->entityManager->persist($user);
+        $this->entityManager->flush();
+    }
+
+    private function verifyTierUpdate(User $user): void
+    {
+        $tiers = $this->tierRepository->findAllOrderedByXpThreshold();
+        $currentTier = $user->getTier();
+        if (!$currentTier) {
+            $user->setTier($tiers[0]);
+            $currentTier = $tiers[0];
+        }
+
+        $userXp = $user->getXp();
+        $nextTier = null;
+
+        foreach ($tiers as $tier) {
+            if ($tier->getXpThreshold() > $userXp) {
+                break;
+            }
+            $nextTier = $tier;
+        }
+
+        if ($nextTier && $nextTier !== $currentTier) {
+            $user->setTier($nextTier);
+            // Additional actions like granting rewards, displaying notifications, etc.
+        }
     }
 
     public function calculateQuestProgress(Quest $quest, User $user): float

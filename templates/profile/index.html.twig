@@ -11,7 +11,7 @@
     </div>
     <div class="profile-picture-container">
         {% set avatar = user.avatar ?: 'https://us.123rf.com/450wm/yummytime/yummytime1608/yummytime160800630/61903988-anonyme-m%C3%A2le-photo-de-profil-avatar-de-l-%C3%A9motion-cr%C3%A9%C3%A9e-pour-mobile-web-d%C3%A9coration-produits-d.jpg' %}
-            <img src="{{ avatar }}" alt="Profile picture" class="profile-picture rounded-circle">
+        <img src="{{ avatar }}" alt="Profile picture" class="profile-picture rounded-circle">
 
     </div>
     <div>
@@ -22,6 +22,18 @@
         {% endfor %}
     </div>
     <span>{{ user.xp }} XP </span>
+    {% if user.tier %}
+        <div class="profile-tier">
+            <span>Current Tier: {{ user.tier.name }}</span>
+            {% if user.tier.badge %}
+                <img height="50" width="50" alt="tier badge"
+                     src="{{ asset('build/images/tierBadges/' ~ user.tier.badge ~ '.png') }}">
+            {% endif %}
+            {% if nextTier %}
+                <span>Missing XP to Next Tier: {{ nextTier.getXpThreshold() - user.xp }}</span>
+            {% endif %}
+        </div>
+    {% endif %}
     {% set epicMessages = [
         "Master of the written word, slayer of writer's block!",
         "Ink flows through my veins, tales unfurl with every stroke of the pen!",
@@ -39,7 +51,8 @@
     <div class="profile-stats">
         <div class="row">
             <div class="col">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                   aria-expanded="false">
                     <i class="fa-solid fa-user"></i>
                     <span class="profile-followers">{{ user.follower|length }} Followers</span>
                 </a>
@@ -47,14 +60,16 @@
                     {% for follower in user.follower %}
                         <li>
                             <a class="dropdown-item" href="{{ path('app_profile', {'id': follower.id}) }}">
-                                <img id="avatar" src="{{ follower.avatar }}" alt="Avatar" width="40" height="40" class="d-inline-block align-text-top"> {{ follower.username }}
+                                <img id="avatar" src="{{ follower.avatar }}" alt="Avatar" width="40" height="40"
+                                     class="d-inline-block align-text-top"> {{ follower.username }}
                             </a>
                         </li>
                     {% endfor %}
                 </ul>
             </div>
             <div class="col">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                   aria-expanded="false">
                     <i class="fa-solid fa-user"></i>
                     <span class="profile-followers">{{ user.following|length }} Following</span>
                 </a>
@@ -62,7 +77,8 @@
                     {% for following in user.following %}
                         <li>
                             <a class="dropdown-item" href="{{ path('app_profile', {'id': following.id}) }}">
-                                <img id="avatar" src="{{ following.avatar }}" alt="Avatar" width="40" height="40" class="d-inline-block align-text-top"> {{ following.username }}
+                                <img id="avatar" src="{{ following.avatar }}" alt="Avatar" width="40" height="40"
+                                     class="d-inline-block align-text-top"> {{ following.username }}
                             </a>
                         </li>
                     {% endfor %}
@@ -122,8 +138,6 @@
     {% block javascripts %}
         {{ parent() }}
         {{ encore_entry_script_tags('profile') }}
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
-
     {% endblock %}
 
     {% block stylesheets %}

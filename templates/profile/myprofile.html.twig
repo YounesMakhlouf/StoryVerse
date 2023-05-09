@@ -25,6 +25,18 @@
         {% endfor %}
     </div>
     <span>{{ user.xp }} XP </span>
+     {% if user.tier %}
+        <div class="profile-tier">
+            <span>Current Tier: {{ user.tier.name }}</span>
+             {% if user.tier.badge %}
+                <img height="50" width="50" alt="tier badge"
+                     src="{{ asset('build/images/tierBadges/' ~ user.tier.badge) }}">
+            {% endif %}
+            {% if nextTier %}
+                <span>Missing XP to Next Tier: {{ nextTier.getXpThreshold() - user.xp }}</span>
+            {% endif %}
+        </div>
+    {% endif %}
     <a href="{{ path('app_modify_profile') }}">
         <button type="button" class="btn btn-secondary">Modify your profile?</button>
     </a>
@@ -107,7 +119,6 @@
  {% block javascripts %}
      {{ parent() }}
      {{ encore_entry_script_tags('profile') }}
-     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
  {% endblock %}
 
 
