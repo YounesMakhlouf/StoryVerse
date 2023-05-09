@@ -98,6 +98,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private int $xp = 0;
 
+    #[ORM\ManyToOne(inversedBy: 'users')]
+    private ?Tier $tier = null;
+
     public function __construct()
     {
         $this->csrf_token = '';
@@ -489,22 +492,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-     /**
-     * @return Collection<int, Contribution>
-     */
-    public function getContributions(): Collection
-    {
-        return $this->contributions;
-    }
-
-    /**
-     * @return Collection<int, Comment>
-     */
-    public function getComments(): Collection
-    {
-        return $this->comments;
-    }
-
     public function getXp(): ?int
     {
         return $this->xp;
@@ -602,6 +589,22 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $contributedStories;
     }
 
+    /**
+     * @return Collection<int, Contribution>
+     */
+    public function getContributions(): Collection
+    {
+        return $this->contributions;
+    }
+
+    /**
+     * @return Collection<int, Comment>
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
     public function getLikesReceivedCount(): int
     {
         $contributedStories = $this->getContributedStories();
@@ -624,6 +627,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             }
         }
         return $startedStories;
+    }
+
+    public function getTier(): ?Tier
+    {
+        return $this->tier;
+    }
+
+    public function setTier(?Tier $tier): self
+    {
+        $this->tier = $tier;
+
+        return $this;
     }
 
 }
