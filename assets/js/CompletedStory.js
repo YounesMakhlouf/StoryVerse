@@ -1,6 +1,7 @@
 import '../styles/Completed.scss';
 import '../bootstrap';
 import'../img/logo.webp';
+import Swal from "sweetalert2";
 var imageThemeEffect = function() {
     var image = $('.theme'),
         heroHeight = image.outerHeight(true);
@@ -135,7 +136,7 @@ $(document).ready(function() {
                 $("#contribution-form").hide();
                 let content = response.content;
                 $(".text").append('<p id="'+response.id+'">'+content+'</p>');
-                $('#comment_section').before('<div class="alert alert-success"> Your contribution has helped our story come alive. Thank you for sharing your creativity with us! </div>');
+
             },
             error: function() {
                 console.log($("#contribution-form").attr('action'));
@@ -160,52 +161,49 @@ $('.contr').hover(function (){
     }
 )
 
-
-////////  show confirm box after reporting a story
-
-function Confirm(title, msg, $true, $false) {
-    console.log('rani wallah t3ebt');
-    const $content = "<div class='dialog-ovelay'>" +
-        "<div class='dialog'><header>" +
-        " <h3> " + title + " </h3> " +
-        "<i class='fa fa-close'></i>" +
-        "</header>" +
-        "<div class='dialog-msg'>" +
-        " <p> " + msg + " </p> " +
-        "</div>" +
-        "<footer>" +
-        "<div class='controls'>" +
-        " <button class='button button-danger doAction'>" + $true + "</button> " +
-        " <button class='button button-default cancelAction'>" + $false + "</button> " +
-        "</div>" +
-        "</footer>" +
-        "</div>" +
-        "</div>";
-    $('body').prepend($content);
-    $('.doAction').click(function (event) {
-
-        event.preventDefault();
-
-        $.ajax({
-            type: 'POST',
-            url: $('#report').data('story-id'),
-            success: function (response) {
-                console.log(response);
-                }});
-        $(this).parents('.dialog-ovelay').fadeOut(500, function () {
-            $(this).remove();
-            $('#report').hide();
-            })
-        });
-
-    $('.cancelAction, .fa-close').click(function () {
-        $(this).parents('.dialog-ovelay').fadeOut(500, function () {
-            $(this).remove();
-        });
-    });
-
-}
+/////////// display alert after reporting
 
 $('#report').click(function () {
-    Confirm('Report story', 'Are you sure you want to report this story', 'Yes', 'Cancel');
-});
+
+    Swal.fire({
+        title: "Are you sure you want to report this story?",
+        icon: "warning",
+        buttonsStyling:true,
+        showCancelButton: true,
+        dangerMode: true,
+    })
+        .then((willDelete) => {
+            if (willDelete.isConfirmed) {
+                $.ajax({
+                    type: 'POST',
+                    url: $('#report').data('story-id'),
+                    success: function (response) {
+                        console.log(response);
+                    }});
+                $(this).parents('.dialog-ovelay').fadeOut(500, function () {
+                    $(this).remove();
+                    $('#report').hide();
+                })
+
+                Swal.fire(
+                    "Thank you for reporting the story", "We will investigate and take appropriate action.",
+                     "success"
+                );
+            } else if (willDelete.dismiss === Swal.DismissReason.cancel) {
+                // Code to execute if the user clicks on the cancel button
+                Swal.fire(
+                    "Reporting cancelled",
+                    "No action was taken.",
+                    "info"
+                );
+            }
+        })})
+
+
+
+
+
+
+
+
+

@@ -201,6 +201,9 @@
      {{ parent() }}
      {{ encore_entry_script_tags('completed') }}
 
-     <script>
+     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.js"></script>
+     {% for flash in app.session.flashbag.get('sweetalert2') %}
+         {{ flash|raw }}
+     {% endfor %}
  {% endblock %}
 
