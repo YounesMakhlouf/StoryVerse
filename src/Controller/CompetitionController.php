@@ -1,10 +1,7 @@
 <?php
 
 namespace App\Controller;
-
-
 namespace App\Controller;
-
 use App\Entity\Competition;
 use App\Form\CompetitionType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -19,15 +16,10 @@ class CompetitionController extends AbstractController
     #[Route('/', name: '_index')]
     public function index(EntityManagerInterface $entityManager): Response
     {
-        $competition1 = new Competition();
-        $competition1->setName('Conan');
-        $competition->setStartDate(new \DateTime());
-        $competition->setEndDate(new \DateTime('tomorrow'));
-        $cometition->setimageFilename('645a278a6bf66');
-        $entityManager->persist($competition);
-        $entityManager->flush();
+    
         return $this->render('competition/index_initial.html.twig', [
             'controller_name' => 'CompetitionController',
+             'competitions'=> $entityManager->getRepository(Competition::class)->findAll(),
         ]);
     }
     #[Route('/create', name: 'competition_create')]
