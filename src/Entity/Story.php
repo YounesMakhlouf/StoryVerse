@@ -244,4 +244,11 @@ class Story
 
         return $this;
     }
+    public function getStoryContent(){
+        $content='';
+        foreach ($this->getContributions() as $contribution){
+            $content=$content.$contribution->getContent()."\n";
+        }
+        return $content;
+    }
 }

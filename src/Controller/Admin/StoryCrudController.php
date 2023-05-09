@@ -13,6 +13,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\ChoiceFilter;
@@ -37,7 +38,9 @@ class StoryCrudController extends AbstractCrudController
             IntegerField::new('Total likes')
                 ->setTemplatePath('admin/field/votes.html.twig'),
             DateField::new('createdAt'),
-            TextField::new('Genre')
+            TextField::new('Genre'),
+            TextareaField::new('StoryContent')
+            ->onlyOnDetail()
         ];
     }
 

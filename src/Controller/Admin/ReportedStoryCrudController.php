@@ -21,7 +21,8 @@ class ReportedStoryCrudController extends StoryCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return parent::configureCrud($crud)
-            ->setPageTitle(Crud::PAGE_INDEX, 'Reported Stories');
+            ->setPageTitle(Crud::PAGE_INDEX, 'Reported Stories')
+            ->showEntityActionsInlined();
     }
     public function createIndexQueryBuilder(SearchDto $searchDto, EntityDto $entityDto, FieldCollection $fields, \EasyCorp\Bundle\EasyAdminBundle\Collection\FilterCollection $filters): QueryBuilder
     {
@@ -34,9 +35,11 @@ class ReportedStoryCrudController extends StoryCrudController
         $acceptReport= $this->createAction('Accept report','fa-solid fa-check','deleteStory');
         $rejectReport= $this->createAction('Reject report','fa-solid fa-trash','rejectReport');
         return $actions
-            ->disable('DELETE')
-            ->add(Crud::PAGE_INDEX, $acceptReport)
-            ->add(Crud::PAGE_INDEX,$rejectReport);
+            ->remove(Crud::PAGE_INDEX, Action::DELETE)
+            ->remove(Crud::PAGE_DETAIL, Action::DELETE)
+            ->remove(Crud::PAGE_INDEX,Action::EDIT)
+            ->add(Crud::PAGE_DETAIL, $acceptReport)
+            ->add(Crud::PAGE_DETAIL,$rejectReport);
 
     }
 
@@ -74,7 +77,6 @@ class ReportedStoryCrudController extends StoryCrudController
     public function createAction($name,$icon,$action){
         return  Action::new($name)
             ->setIcon($icon)
-            ->displayAsButton()
             ->linkToCrudAction($action)
             ->setTemplatePath('admin/add_admin.html.twig');
 
