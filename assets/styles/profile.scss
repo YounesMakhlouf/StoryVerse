@@ -7,44 +7,84 @@
 
 .profile-container {
   margin: 0 auto;
-  max-width: 800px;
+  max-width: 1000px;
   padding: 20px;
   font-family: Arial, sans-serif;
   color: #ffffff;
   background: linear-gradient(to bottom right, $Silver, $DarkTurquoise);
 }
 
-.profile-cover {
-  height: 150px;
-  background-color: $wheat;
-  border-radius: 40%;
+#profile-info {
+  width: 800px;
+  margin: auto;
 }
 
-.profile-picture-container {
-  position: relative;
-  top: -50px;
+.profile-cover {
+  border-radius: 4px 4px 0 0;
+  height: 94px;
+  left: 1px;
+  position: absolute;
+  top: 1px;
+  width: calc(100% - 2px);
+  background-color: $DarkTurquoise;
+}
+
+.infos {
+  border-radius: 5px 5px 4px 4px;
+}
+
+#bio {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 16px;
+  display: block;
+  text-align: center;
+  margin-top: 4px;
+  margin-bottom: 4px;
 }
 
 .profile-picture {
   width: 200px;
   height: 200px;
-  border: 5px solid #ffffff;
-  border-radius: 50%;
+  margin: auto;
+  z-index: 1;
+  position: relative;
 }
 
 .profile-name {
-  margin-top: 10px;
-  padding-top: 50px;
-  font-size: 24px;
-  font-weight: bold;
-  color: #8943c3;
+  margin: 4px 0;
+  color: #53186a;
+}
+
+.fa-user-pen {
+  margin-left: 20px;
+  color: #53186a;
+}
+
+.tier-container {
+  margin-bottom: 12px;
+}
+
+.tier-content {
+  margin-top: 2px;
+}
+
+.tier-info {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  margin-left: 4px;
+}
+
+#xp {
+  color: black;
 }
 
 .profile-stats {
   margin-top: 10px;
 }
 
-.fa-user{
+.fa-user {
   padding-right: 5px;
 }
 
