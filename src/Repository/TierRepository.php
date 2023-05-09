@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Tier;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -38,6 +39,29 @@ class TierRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+
+    public function findAllOrderedByXpThreshold()
+    {
+        return $this->createQueryBuilder('t')
+            ->orderBy('t.xpThreshold', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    /**
+     * @throws NonUniqueResultException
+     */
+    public function findNextTier($xp)
+    {
+        return $this->createQueryBuilder('t')
+            ->andWhere('t.xpThreshold > :xp')
+            ->setParameter('xp', $xp)
+            ->orderBy('t.xpThreshold', 'ASC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
 
 //    /**
 //     * @return Tier[] Returns an array of Tier objects

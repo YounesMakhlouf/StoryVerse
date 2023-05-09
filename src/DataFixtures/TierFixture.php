@@ -3,9 +3,10 @@
 namespace App\DataFixtures;
 
 use App\Entity\Tier;
+use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
-class TierFixture
+class TierFixture  extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
@@ -23,8 +24,7 @@ class TierFixture
 
         $manager->flush();
     }
-
-
+    
     private function createTier(string $name, int $xpThreshold, string $description = null, $imagePath = null): Tier
     {
         $tier = new Tier();
