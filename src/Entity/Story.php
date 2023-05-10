@@ -244,7 +244,8 @@ class Story
 
         return $this;
     }
-    public function getStoryContent(){
+    public function getStoryContent(): string
+    {
         $content='';
         foreach ($this->getContributions() as $contribution){
             $content=$content.$contribution->getContent()."\n";

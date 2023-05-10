@@ -27,7 +27,6 @@ Encore
     .addEntry("home", "./assets/js/home.js")
     .addEntry("admin", "./assets/js/admin.js")
     .addEntry("completed", "./assets/js/CompletedStory.js")
-    .addEntry("storypage", "./assets/js/storypage.js")
     .addEntry("quests", "./assets/js/quests.js")
     .addEntry("create", "./assets/js/create.js")
 

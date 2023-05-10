@@ -61,9 +61,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column (nullable: true)]
     private ?string $avatar;
 
-    #[ORM\ManyToMany(targetEntity: Competition::class, inversedBy: 'users')]
-    private Collection $compete;
-
     #[ORM\ManyToMany(targetEntity: self::class, inversedBy: 'following', fetch: 'EXTRA_LAZY')]
     private Collection $follower;
     #[ORM\Column]
@@ -101,7 +98,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function __construct()
     {
         $this->csrf_token = '';
-        $this->compete = new ArrayCollection();
         $this->follower = new ArrayCollection();
         $this->following = new ArrayCollection();
         $this->notifications = new ArrayCollection();
@@ -266,30 +262,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setAvatar(?string $avatar): self
     {
         $this->avatar = $avatar;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Competition>
-     */
-    public function getCompete(): Collection
-    {
-        return $this->compete;
-    }
-
-    public function addCompete(Competition $compete): self
-    {
-        if (!$this->compete->contains($compete)) {
-            $this->compete->add($compete);
-        }
-
-        return $this;
-    }
-
-    public function removeCompete(Competition $compete): self
-    {
-        $this->compete->removeElement($compete);
 
         return $this;
     }
