@@ -52,10 +52,14 @@ const notiflist = document.querySelector(".notiflist");
 fetch(`/notification/user/${userId}`)
   .then((response) => response.json())
   .then((data) => {
+    if (data.length == 0) {
+      console.log("nulle walah");
+      notiflist.append(createNotif("no notifications yet, don't lose hope !"));
+    }
     if (Array.isArray(data)) {
       data.forEach((notification) => {
         // Display the notifications data in the console au càs où
-        console.log("ZSLINQsn");
+
         console.log(notification);
         notiflist.append(createNotif(notification.content));
       });

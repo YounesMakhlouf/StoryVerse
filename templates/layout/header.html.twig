@@ -57,10 +57,7 @@
           </div>
         </li>
         <li>
-          <a
-            class="nav-link"
-            href="{{ path('Story_new') }}"
-            title="Add a post"
+          <a class="nav-link" href="{{ path('Story_new') }}" title="Add a post"
             ><i class="fa-solid fa-plus fa-lg"></i
           ></a>
         </li>
@@ -120,4 +117,11 @@
     </nav>
   </div>
 </header>
+<script>
+  const user = {
+    id: {{ app.user.id }},
+    name: '{{ app.user.username }}',
+    email: '{{ app.user.email }}'
+  };
+</script>
 {% endblock %}
