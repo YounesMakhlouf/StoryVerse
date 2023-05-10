@@ -40,10 +40,6 @@ class QuestCompletionService
         $requirement = $quest->getRequirement();
         $amount = $quest->getAmount();
 
-        if (($requirement === 'daily_login') && ($this->verifyDailyLogin($user))) {
-            $this->markQuestAsCompleted($user, $quest);
-            return;
-        }
         $userRequirement = $user->getUserRequirement($requirement);
 
         if ($userRequirement === -1) { // Unsupported or unknown quest requirement
@@ -53,23 +49,6 @@ class QuestCompletionService
         if ($userRequirement >= $amount) {
             $this->markQuestAsCompleted($user, $quest);
         }
-    }
-
-    private function verifyDailyLogin(User $user): bool
-    {
-        $lastLoginDate = $user->getLastLoginDate();
-        $currentDate = new DateTime();
-
-        // Check if the user has already logged in today
-        if ($lastLoginDate !== null && $lastLoginDate->format('Y-m-d') === $currentDate->format('Y-m-d')) {
-            return false; // User has already logged in today
-        }
-
-        $user->setLastLoginDate($currentDate);
-        $this->entityManager->persist($user);
-        $this->entityManager->flush();
-
-        return true; // Daily login verified for the first time
     }
 
     public function markQuestAsCompleted(User $user, Quest $quest): void
@@ -126,7 +105,6 @@ class QuestCompletionService
 
         if ($nextTier && $nextTier !== $currentTier) {
             $user->setTier($nextTier);
-            // Additional actions like granting rewards, displaying notifications, etc.
         }
     }
 

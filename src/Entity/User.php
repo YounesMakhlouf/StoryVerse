@@ -445,6 +445,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+      public function setXp(int $xp): self
+    {
+        $this->xp = $xp;
+
+        return $this;
+    }
+
     public function getXp(): ?int
     {
         return $this->xp;
@@ -491,6 +498,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             'receive_likes' => $this->getLikesReceivedCount(),
             'post_stories' => count($this->getStartedStories()),
             'post_contributions' => count($this->contributions),
+            'complete_quests' => count($this->completedQuests),
             default => -1,
         };
     }
