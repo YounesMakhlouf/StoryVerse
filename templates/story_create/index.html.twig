@@ -1,27 +1,43 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-  <div class="container mt-5">
-    <h1 class="text-center mb-5">Create a new story</h1>
-    {{ form_start(form, {'attr': {'class': 'col-md-8 mx-auto'}}) }}
-      <div class="form-group">
-        {{ form_label(form.Title, 'Title') }}
-        {{ form_widget(form.Title, {'attr': {'class': 'form-control'}}) }}
+  <h2>Create a story </h2>
+  <div class="formbold-main-wrapper">
+    <!-- Author: FormBold Team -->
+    <!-- Learn More: https://formbold.com -->
+    <div class="formbold-form-wrapper">
+      {{ form_start(form) }}
+      <div class="formbold-input-flex">
+        <div>
+          {{ form_widget(form.Title, {'attr': {'class': "formbold-form-input"}}) }}
+          {{ form_label(form.Title, 'Title',{'attr': {'class': "formbold-form-label"}}) }}
+        </div>
+        <div>
+          {{ form_widget(form.genre, {'attr': {'class': 'formbold-form-input'}}) }}
+          {{ form_label(form.genre, 'Genre') }}
+        </div>
       </div>
-      <div class="form-group">
-        {{ form_label(form.genre, 'Genre') }}
-        {{ form_widget(form.genre, {'attr': {'class': 'form-control'}}) }}
+
+      <div class="formbold-textarea">
+        {{ form_widget(form.firstContribution, {'attr': {'class': "formbold-form-input"}}) }}
+        {{ form_label(form.firstContribution, 'Your first contribution',{'attr': {'class': "formbold-form-label"}}) }}
       </div>
-      <div class="form-group">
-        {{ form_label(form.firstContribution, 'Votre première contribution') }}
-        {{ form_widget(form.firstContribution, {'attr': {'class': 'form-control'}}) }}
+
+      <div class="formbold-input-file">
+        <label for="upload" class="formbold-input-label">
+         <i class="fa-solid fa-paperclip fa-xl" style="color: #22877b;"></i>
+          {{ form_label(form.storyImage, 'Add story Image ') }}
+          {{ form_widget(form.storyImage, {'attr': {'class': 'form-control-file'}}) }}
+        </label>
       </div>
-      <div class="form-group">
-        {{ form_label(form.storyImage, 'Story Image (JPG or PNG file)') }}
-        {{ form_widget(form.storyImage, {'attr': {'class': 'form-control-file'}}) }}
-      </div>
-      {{ form_widget(form.submit, {'attr': {'class': 'btn btn-primary'}}) }}
-    {{ form_end(form) }}
+
+        {{ form_end(form) }}
+
+    </div>
   </div>
 {% endblock %}
 
+{% block stylesheets %}
+  {{ parent() }}
+    {{ encore_entry_link_tags('create') }}
+{% endblock %}
