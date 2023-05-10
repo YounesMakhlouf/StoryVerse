@@ -13,7 +13,6 @@
         <div class="profile-container text-center">
             <div id="profile-info">
                 <div class="infos">
-                    <div class="container profile-cover"></div>
                     <div class="profile-picture-container">
                         {% if user.avatar %}
                             <img src="{{ asset('uploads/avatar_directory/' ~ user.avatar) }}" alt="Profile picture"
@@ -23,7 +22,8 @@
                                  alt="Default profile picture" class="profile-picture rounded-circle">
                         {% endif %}
                     </div>
-                    <h1 class="profile-name">{{ user.username }}<a href="{{ path('app_modify_profile') }}"><i class="fa-solid fa-user-pen"></i></a></h1>
+                    <h1 class="profile-name">{{ user.username }}<a href="{{ path('app_modify_profile') }}"><i
+                                    class="fa-solid fa-user-pen"></i></a></h1>
                     <span id="bio">{{ bio }}</span>
                 </div>
 
@@ -35,7 +35,7 @@
                     {% endfor %}
                 </div>
 
-                <div class="profile-xp row">
+                <div class="profile-xp row align-items-center">
                     <div class="tier-container col">
                         <h5 class="tier">Current tier :</h5>
                         <div class="tier-content">
@@ -50,73 +50,78 @@
                     <div class="tier-container col">
                         {% if nextTier %}
                             <h5 class="tier">Missing XP to Next Tier: {{ nextTier.xpThreshold - user.xp }}</h5>
-                        {% endif %}
-                        <div class="tier-content row">
-                            {% if nextTier.badge %}
-                                <img class="col-3 rounded-circle" height="50" width="50" alt="Tier badge"
-                                     src="{{ asset('build/images/tierBadges/' ~ nextTier.badge) }}">
-                            {% endif %}
-                            {% set progress = (user.xp / nextTier.xpThreshold) * 100 %}
-                            <div class="col-9">
-                                <div class="progress">
-                                    <div class="progress-bar" role="progressbar" aria-label="Quest progress"
-                                         style="width: {{ progress }}%;" aria-valuenow="{{ progress }}"
-                                         aria-valuemin="0" aria-valuemax="100">
-                                        <span id="xp">{{ user.xp }} XP </span>
+                            <div class="tier-content row align-items-center">
+                                {% if nextTier.badge %}
+                                    <img class="col-3 rounded-circle" height="50" width="50" alt="Tier badge"
+                                         src="{{ asset('build/images/tierBadges/' ~ nextTier.badge) }}">
+                                {% endif %}
+                                {% set progress = (user.xp / nextTier.xpThreshold) * 100 %}
+                                <div class="col-9">
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" aria-label="Quest progress"
+                                             style="width: {{ progress }}%;" aria-valuenow="{{ progress }}"
+                                             aria-valuemin="0" aria-valuemax="100">
+                                            <span id="xp">{{ user.xp }} XP </span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        {% else %}
+                            <h5 class="tier">Congratulations!</h5>
+                            <div class="tier-content">
+                                <p>You have reached the highest tier available.</p>
+                                <p>It seems we were too lazy to add more tiers, and we never expected anyone to make it
+                                    this far!</p>
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
 
-                <div class="profile-achievements">
-                    <div class="profile-stats">
-                        <div class="row">
-                            <div class="col">
-                                <a class="nav-link dropdown-toggle" href="#" role="button"
-                                   data-bs-toggle="dropdown"
-                                   aria-expanded="false">
-                                    <i class="fa-solid fa-user"></i>
-                                    <span class="profile-followers">{{ user.follower|length }} Followers</span>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    {% for follower in user.follower %}
-                                        <li>
-                                            <a class="dropdown-item"
-                                               href="{{ path('app_profile', {'id': follower.id}) }}">
-                                                <img id="avatar" src="{{ follower.avatar }}" alt="Avatar"
-                                                     width="40"
-                                                     height="40"
-                                                     class="d-inline-block align-text-top"> {{ follower.username }}
-                                            </a>
-                                        </li>
-                                    {% endfor %}
-                                </ul>
-                            </div>
-                            <div class="col">
-                                <a class="nav-link dropdown-toggle" href="#" role="button"
-                                   data-bs-toggle="dropdown"
-                                   aria-expanded="false">
-                                    <i class="fa-solid fa-user"></i>
-                                    <span class="profile-followers">{{ user.following|length }} Following</span>
-                                </a>
-                                <ul class="dropdown-menu">
-                                    {% for following in user.following %}
-                                        <li>
-                                            <a class="dropdown-item"
-                                               href="{{ path('app_profile', {'id': following.id}) }}">
-                                                <img id="avatar" src="{{ following.avatar }}" alt="Avatar"
-                                                     width="40"
-                                                     height="40"
-                                                     class="d-inline-block align-text-top"> {{ following.username }}
-                                            </a>
-                                        </li>
-                                    {% endfor %}
-                                </ul>
-                            </div>
+                <div class="profile-stats">
+                    <div class="row">
+                        <div class="col">
+                            <a class="nav-link dropdown-toggle" href="#" role="button"
+                               data-bs-toggle="dropdown"
+                               aria-expanded="false">
+                                <i class="fa-solid fa-user"></i>
+                                <span class="profile-followers">{{ user.follower|length }} Followers</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                {% for follower in user.follower %}
+                                    <li>
+                                        <a class="dropdown-item"
+                                           href="{{ path('app_profile', {'id': follower.id}) }}">
+                                            <img id="avatar" src="{{ follower.avatar }}" alt="Avatar"
+                                                 width="40"
+                                                 height="40"
+                                                 class="d-inline-block align-text-top"> {{ follower.username }}
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
                         </div>
-                    </div>
+                        <div class="col">
+                            <a class="nav-link dropdown-toggle" href="#" role="button"
+                               data-bs-toggle="dropdown"
+                               aria-expanded="false">
+                                <i class="fa-solid fa-user"></i>
+                                <span class="profile-followers">{{ user.following|length }} Following</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                {% for following in user.following %}
+                                    <li>
+                                        <a class="dropdown-item"
+                                           href="{{ path('app_profile', {'id': following.id}) }}">
+                                            <img id="avatar" src="{{ following.avatar }}" alt="Avatar"
+                                                 width="40"
+                                                 height="40"
+                                                 class="d-inline-block align-text-top"> {{ following.username }}
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>l
                 </div>
             </div>
             <div class="profile-stories-container">
@@ -144,6 +149,7 @@
                     {% endfor %}
                 </div>
             </div>
+        </div>
     </main>
 {% endblock %}
 
