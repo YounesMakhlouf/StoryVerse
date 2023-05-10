@@ -200,11 +200,8 @@
 {% endblock body_javascript %}
 
 
+{% block flash_messages %}
+    {{ include(ea.templatePath('flash_messages')) }}
+{% endblock flash_messages %}
 
 
-
-{#{%block wrapper %}#}
-{#{% block content %}#}
-{#{{ parent() }}#}
-{#{% endblock %}#}
-{#{% endblock %}#}
