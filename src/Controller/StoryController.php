@@ -2,11 +2,8 @@
 
 namespace App\Controller;
 
-use App\Entity\Story;
 use App\Event\QuestActionEvent;
 use App\Repository\StoryRepository;
-use App\Repository\TierRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Pagerfanta\Doctrine\ORM\QueryAdapter;
 use Pagerfanta\Pagerfanta;
@@ -19,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class StoryController extends AbstractController
 {
 
-    public function __construct(private EventDispatcherInterface $eventDispatcher)
+    public function __construct(private readonly EventDispatcherInterface $eventDispatcher)
     {
     }
 
@@ -53,7 +50,7 @@ class StoryController extends AbstractController
     #[Route("/story/delete/{id}", name: "story_delete")]
     public function deleteStory(int $id, StoryRepository $storyRepository): Response
     {
-         $storyRepository->deleteStoryWithContributionsAndComments($id);
+        $storyRepository->deleteStoryWithContributionsAndComments($id);
 
         $this->addFlash('success', 'Story deleted successfully.');
 
