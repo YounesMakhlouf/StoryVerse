@@ -76,7 +76,6 @@ class MyProfileController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Your profile has been updated successfully!');
 
             return $this->redirectToRoute('app_myprofile');
         }

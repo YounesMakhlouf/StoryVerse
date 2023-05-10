@@ -33,7 +33,6 @@ class FollowController extends AbstractController
                 $currentUser->addFollowing($user);
                 $this->entityManager->flush();
 
-                $this->addFlash('success', 'You are now following this user');
             }
 
         // Redirect back to the target user's profile page
@@ -65,7 +64,7 @@ class FollowController extends AbstractController
                 $currentUser->removeFollowing($user);
                 $this->entityManager->flush();
 
-                $this->addFlash('success', 'You have unfollowed this user');
+
             } else {
                 $this->addFlash('warning', 'You are not following this user');
             }
