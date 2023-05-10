@@ -15,7 +15,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class StoryController extends AbstractController
 {
-
     public function __construct(private readonly EventDispatcherInterface $eventDispatcher)
     {
     }
