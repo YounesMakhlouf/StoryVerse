@@ -8,6 +8,7 @@
  ] %}
                     {% set epicBio = epicMessages[random(0, epicMessages|length - 1)] %}
                     {% set bio = user.bio ?: epicBio %}
+{% block title %} {{ app.user.username }} - StoryVerse {% endblock %}
 {% block body %}
     <div class="container">
         <div class="main-body">
@@ -43,6 +44,10 @@
                 <div class="col-lg-8">
                     <div class="card">
                         <div class="card-body">
+                            <div class="container level-up-message">
+                                <p class="text-center">Level up, brave adventurer, and unlock the secrets of the next
+                                    tier! Your destiny awaits, just a sprinkle of XP away!</p>
+                            </div>
                             <div class="profile-xp row align-items-center">
                                 <div class="tier-container col">
                                     <h5 class="tier">Current tier :</h5>

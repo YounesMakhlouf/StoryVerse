@@ -8,6 +8,8 @@
  ] %}
                     {% set epicBio = epicMessages[random(0, epicMessages|length - 1)] %}
                     {% set bio = user.bio ?: epicBio %}
+{% block title %} {{ user.username }} - StoryVerse {% endblock %}
+
 {% block body %}
     <div class="container">
         <div class="main-body">
