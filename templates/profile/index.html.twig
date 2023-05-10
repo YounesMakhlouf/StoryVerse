@@ -16,22 +16,24 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex flex-column align-items-center text-center">
-                                <img src="{{ asset ('uploads/avatar_directory/'~ app.user.avatar)}}" alt="Admin" width="200px">
+                                <img src="{{ asset ('uploads/avatar_directory/'~ app.user.avatar) }}" alt="Admin"
+                                     width="200px">
                                 <div class="mt-3">
-                                    <h4>{{ user.username }}<a href="{{ path('app_modify_profile') }}"><i class="fa-solid fa-user-pen"></i></a></h4>
+                                    <h4>{{ user.username }}<a href="{{ path('app_modify_profile') }}"><i
+                                                    class="fa-solid fa-user-pen"></i></a></h4>
                                     <p class="text-secondary mb-1">{{ bio }}</p>
 
                                 </div>
                             </div>
                             <hr class="my-4">
                             {% if app.user %}
-                            {% if is_following %}
-                                {% set formAction = path('unfollow_user', {'id': user.id}) %}
-                                {% set followButtonLabel = 'Unfollow' %}
-                            {% else %}
-                                {% set formAction = path('follow_user', {'id': user.id}) %}
-                                {% set followButtonLabel = 'Follow' %}
-                            {% endif %}
+                                {% if is_following %}
+                                    {% set formAction = path('unfollow_user', {'id': user.id}) %}
+                                    {% set followButtonLabel = 'Unfollow' %}
+                                {% else %}
+                                    {% set formAction = path('follow_user', {'id': user.id}) %}
+                                    {% set followButtonLabel = 'Follow' %}
+                                {% endif %}
                             {% endif %}
                             <form class="d-inline" action="{{ formAction }}" method="post">
                                 <button class="btn {{ is_following ? 'btn-primary' : 'btn-warning' }} follow-button">
@@ -39,12 +41,12 @@
                                 </button>
                             </form>
                             <hr class="my-4">
-                            <a href="{{ path('app_following',{'id':user.id}) }}" >
+                            <a href="{{ path('app_following',{'id':user.id}) }}">
                                 <i class="fa-solid fa-user"></i>
                                 <span class="profile-followers">{{ user.following|length }} Following</span>
                             </a>
                             <hr class="my-4">
-                            <a href="{{ path('app_followers',{'id':user.id}) }}" >
+                            <a href="{{ path('app_followers',{'id':user.id}) }}">
                                 <i class="fa-solid fa-user"></i>
                                 <span class="profile-followers">{{ user.follower|length }} Followers</span>
                             </a>
@@ -54,68 +56,87 @@
                     </div>
                 </div>
                 <div class="col-lg-8">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="profile-xp row align-items-center">
-                                <div class="tier-container col">
-                                    <h5 class="tier">Current tier :</h5>
-                                    <div class="tier-content">
-                                        {% if user.tier.badge %}
-                                            <img class="rounded-circle" height="50" width="50" alt="Tier badge"
-                                                 src="{{ asset('build/images/tierBadges/' ~ user.tier.badge) }}">
-                                        {% endif %}
-                                        <span class="tier-info">{{ user.tier.name }}</span>
-                                    </div>
-                                </div>
-                                <div class="tier-container col">
-                                    {% if nextTier %}
-                                        <h5 class="tier">Missing XP to Next Tier: {{ nextTier.xpThreshold - user.xp }}</h5>
-                                        <div class="tier-content row align-items-center">
-                                            {% if nextTier.badge %}
-                                                <img class="col-3 rounded-circle" height="50" width="50" alt="Tier badge"
-                                                     src="{{ asset('build/images/tierBadges/' ~ nextTier.badge) }}">
+                    {% if user.tier %}
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="profile-xp row align-items-center">
+                                    <div class="tier-container col">
+                                        <h5 class="tier">Current tier :</h5>
+                                        <div class="tier-content">
+                                            {% if user.tier.badge %}
+                                                <img class="rounded-circle" height="50" width="50" alt="Tier badge"
+                                                     src="{{ asset('build/images/tierBadges/' ~ user.tier.badge) }}">
                                             {% endif %}
-                                            {% set progress = (user.xp / nextTier.xpThreshold) * 100 %}
-                                            <div class="col-9">
-                                                <div class="progress">
-                                                    <div class="progress-bar" role="progressbar" aria-label="Quest progress"
-                                                         style="width: {{ progress }}%;" aria-valuenow="{{ progress }}"
-                                                         aria-valuemin="0" aria-valuemax="100">
-                                                        <span id="xp">{{ user.xp }} XP </span>
+                                            <span class="tier-info">{{ user.tier.name }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="tier-container col">
+                                        {% if nextTier %}
+                                            <h5 class="tier">Missing XP to Next
+                                                Tier: {{ nextTier.xpThreshold - user.xp }}</h5>
+                                            <div class="tier-content row align-items-center">
+                                                {% if nextTier.badge %}
+                                                    <img class="col-3 rounded-circle" height="50" width="50"
+                                                         alt="Tier badge"
+                                                         src="{{ asset('build/images/tierBadges/' ~ nextTier.badge) }}">
+                                                {% endif %}
+                                                {% set progress = (user.xp / nextTier.xpThreshold) * 100 %}
+                                                <div class="col-9">
+                                                    <div class="progress">
+                                                        <div class="progress-bar" role="progressbar"
+                                                             aria-label="Quest progress"
+                                                             style="width: {{ progress }}%;"
+                                                             aria-valuenow="{{ progress }}"
+                                                             aria-valuemin="0" aria-valuemax="100">
+                                                            <span id="xp">{{ user.xp }} XP </span>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    {% else %}
+                                        {% else %}
 
-                                        <h5 class="tier">Congratulations!</h5>
-                                        <div class="tier-content">
-                                            <p>You have reached the highest tier available.</p>
-                                            <p>It seems we were too lazy to add more tiers, and we never expected anyone to make it
-                                                this far!</p>
-                                        </div>
-                                    {% endif %}
+                                            <h5 class="tier">Congratulations!</h5>
+                                            <div class="tier-content">
+                                                <p>You have reached the highest tier available.</p>
+                                                <p>It seems we were too lazy to add more tiers, and we never expected
+                                                    anyone to make it
+                                                    this far!</p>
+                                            </div>
+                                        {% endif %}
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-
+                    {% endif %}
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="card">
                                 <div class="card-body">
-                                    {% for story in stories %}
-                                        <a href="{{ path('app_storypage', { 'id': story.id }) }}">
-                                            <h5>{{ story.title }}<span
-                                                        class="badge rounded-pill {{ story.genre }}"> {{ story.genre }} </span></h5>
-                                            <img alt="{{ story.title }}" src="{{ asset ('uploads/story_directory/'~ story.storyImage)}}" style="max-width: 50%;">
-                                            <div class="text-truncate description">
-                                                {% for contribution in story.contributions %}
-                                                    <p>{{ contribution.content }}</p>
-                                                {% endfor %}
-                                            </div>
-                                        </a>
-                                    {% endfor %}
+                                    {% if stories %}
+                                        {% for story in stories %}
+                                            <a href="{{ path('app_storypage', { 'id': story.id }) }}">
+                                                <h5>{{ story.title }}<span
+                                                            class="badge rounded-pill {{ story.genre }}"> {{ story.genre }} </span>
+                                                </h5>
+                                                <img alt="{{ story.title }}"
+                                                     src="{{ asset ('uploads/story_directory/'~ story.storyImage) }}"
+                                                     style="max-width: 50%;">
+                                                <div class="text-truncate description">
+                                                    {% for contribution in story.contributions %}
+                                                        <p>{{ contribution.content }}</p>
+                                                    {% endfor %}
+                                                </div>
+                                            </a>
+                                        {% endfor %}
+                                    {% else %}
+                                        <p>Warning! You're about to enter the profile of a self-proclaimed 'Master
+                                            Procrastinator' who has yet to make any contributions. Proceed with caution,
+                                            as you might catch a severe case of 'Procrastination Syndrome' if you spend
+                                            too much time here. Don't be like them! Embrace your inner productivity
+                                            ninja and start making waves in the world of awesomeness. Remember, the
+                                            clock is ticking, and greatness awaits you!</p>
+                                    {% endif %}
+
                                 </div>
                             </div>
                         </div>
