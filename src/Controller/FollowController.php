@@ -23,9 +23,7 @@ class FollowController extends AbstractController
     #[Route('/profile/{id}/follow', name: 'follow_user')]
     public function followUser(User $user): Response
     {
-        if (!$this->isGranted('IS_AUTHENTICATED_FULLY')) {
-            $this->addFlash('warning', 'You must be logged in to follow users');
-        } else {
+
             $currentUser = $this->getUser();
             // Check if the current user is already following the target user
             if ($currentUser->getFollowing()->contains($user)) {
@@ -37,7 +35,7 @@ class FollowController extends AbstractController
 
                 $this->addFlash('success', 'You are now following this user');
             }
-        }
+
         // Redirect back to the target user's profile page
         return $this->redirectToRoute('app_profile', ['id' => $user->getId()]);
     }
@@ -59,9 +57,6 @@ class FollowController extends AbstractController
     #[Route('/profile/{id}/unfollow', name: 'unfollow_user', methods: ['POST'])]
     public function unfollowUser(User $user): Response
     {
-        if (!$this->isGranted('IS_AUTHENTICATED_FULLY')) {
-            $this->addFlash('warning', 'You must be logged in to unfollow users');
-        } else {
             $currentUser = $this->getUser();
 
             // Check if the current user is already following the target user
@@ -74,7 +69,7 @@ class FollowController extends AbstractController
             } else {
                 $this->addFlash('warning', 'You are not following this user');
             }
-        }
+
 
         // Redirect back to the target user's profile page
         return $this->redirectToRoute('app_profile', ['id' => $user->getId()]);
