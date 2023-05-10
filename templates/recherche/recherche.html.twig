@@ -8,7 +8,8 @@
         <h2>Users Found:</h2>
         <br>
         <div class="row">
-            {% for user in users %}
+
+                {% for user in users %}
             <div class="col-md-3 mb-4">
                 <div class="card">
                     <a href="{{ path('app_profile', {'id': user.id }) }}">

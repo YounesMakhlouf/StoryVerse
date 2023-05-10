@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+           {% for follower in followers %}
+               <div class="col-md-3 mb-4">
+                   <div class="card">
+                       <a href="{{ path('app_profile', {'id': follower.id }) }}">
+                           <img src="{{ asset ('uploads/avatar_directory/'~ follower.avatar)}}" class="card-img-top" alt="Profile Picture">
+                           <div class="card-body">
+                               <h5 class="card-title text-center">{{ follower.username }}</h5>
+                           </div>
+                       </a>
+                   </div>
+               </div>
+           {% endfor %}
+{% endblock %}

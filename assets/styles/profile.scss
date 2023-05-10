@@ -7,8 +7,7 @@
 .profile-container {
   margin: 0 auto;
   max-width: 1000px;
-  padding: 20px;
-  font-family: Arial, sans-serif;
+  padding:20px 24px;
   color: #ffffff;
   background: linear-gradient(to bottom right, $Silver, $DarkTurquoise);
 }
@@ -17,16 +16,6 @@
   width: 800px;
   margin: auto;
 }
-
-//.profile-cover {
-//  border-radius: 4px 4px 0 0;
-//  height: 94px;
-//  left: 1px;
-//  position: absolute;
-//  top: 1px;
-//  width: calc(100% - 2px);
-//  background-color: $DarkTurquoise;
-//}
 
 .infos {
   border-radius: 5px 5px 4px 4px;
@@ -62,7 +51,7 @@
 }
 
 .tier-container {
-  margin-bottom: 12px;
+  margin: 12px;
 }
 
 .tier-content {
