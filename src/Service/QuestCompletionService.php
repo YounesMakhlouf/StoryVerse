@@ -72,7 +72,7 @@ class QuestCompletionService
         return true; // Daily login verified for the first time
     }
 
-    private function markQuestAsCompleted(User $user, Quest $quest): void
+    public function markQuestAsCompleted(User $user, Quest $quest): void
     {
         $user->addCompletedQuest($quest);
         $user->addXp($quest->getPoints());
@@ -133,6 +133,9 @@ class QuestCompletionService
     public function calculateQuestProgress(Quest $quest, User $user): float
     {
         $questRequirement = $quest->getRequirement();
+        if ($questRequirement == 'create_account') {
+            return 100;
+        }
         $userRequirement = $user->getUserRequirement($questRequirement);
 
         if ($userRequirement === -1) { // Unsupported or unknown quest requirement
