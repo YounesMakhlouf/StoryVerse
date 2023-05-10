@@ -46,14 +46,19 @@ final class StoryFactory extends ModelFactory
      */
     protected function getDefaults(): array
     {
+        $genre=self::faker()->randomElement(['Horror', 'Fiction', 'Mystery','Comedy','Drama','Romance']);
+        $storyImage=$genre.'.jpg';
+
         return [
             'createdAt' => self::faker()->dateTime(),
             'language' => self::faker()->randomElement(['french', 'english', 'arabic','italian','spanish']),
             'title' => self::faker()->sentence(5),
             'status'=>'pending',
-            'genre'=>self::faker()->randomElement(['Horror', 'Fiction', 'Mystery','Comedy','Drama','Romance']),
+            'genre'=>$genre,
+            'storyImage'=>$storyImage
         ];
     }
+
 
     /**
      * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#initialization
