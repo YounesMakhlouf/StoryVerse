@@ -1,9 +1,9 @@
 <?php
 
 namespace App\Factory;
-use DateTime;
 use App\Entity\User;
 use App\Repository\UserRepository;
+use DateTime;
 use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;
 use Zenstruck\Foundry\RepositoryProxy;
@@ -60,8 +60,9 @@ final class UserFactory extends ModelFactory
             'roles' =>self::faker()->randomElement([['ROLE_USER'], ['ROLE_ADMIN']]),
             'username' =>  substr(self::faker()->firstName, 0, 10),
             'bio'=>self::faker()->paragraph(),
-            'Last_login_date'=>new \DateTime(),
+            'Last_login_date'=>new DateTime(),
             'avatar' => $avatar,
+            'xp' => self::faker()->numberBetween(100, 99999),
         ];
     }
 

@@ -13,6 +13,7 @@
   line-height: 1;
   font-weight: 700;
 }
+
 .hidden {
   display: none;
 }
@@ -38,7 +39,8 @@
 }
 
 .navbar a,
-.navbar a:focus {
+.navbar a:focus,
+#notification-icon {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -276,4 +278,9 @@
 
 #avatar {
   margin-right: 10px;
+}
+
+.notifications-button {
+  background: $Turquoise;
+  border: 0;
 }
