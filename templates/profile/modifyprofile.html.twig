@@ -5,45 +5,38 @@
 {% endblock %}
 
 {% block body %}
-    <div class="container" style="margin-top: 100px">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">
-                        <h1 class="card-title">Modify Profile</h1>
-                    </div>
 
-                    <div class="card-body">
-                        {% if errors is not empty %}
-                            <div class="alert alert-danger">
-                                {% for error in errors %}
-                                    {{ error.message }}<br>
-                                {% endfor %}
-                            </div>
-                        {% endif %}
 
-                        {{ form_start(form) }}
-                        <div class="form-group">
-                            {{ form_row(form.username, { 'attr': {'class': 'form-control'} }) }}
-                        </div>
-
-                        <div class="form-group">
-                            {{ form_row(form.bio, { 'attr': {'class': 'form-control'} }) }}
-                        </div>
-
-                        <div class="form-group">
-                           
-                           <label for="{{ form.avatar.vars.id }}" class="btn btn-primary">
-                               {{ form.avatar.vars.label }}
-                                  {{ form_widget(form.avatar) }}
-                                     </label>
-                           
-                                          </div>
-
-                        {{ form_end(form) }}
-                    </div>
+    <h2>Modify Profile </h2>
+    <div class="formbold-main-wrapper">
+        <div class="formbold-form-wrapper">
+            {{ form_start(form) }}
+            <div class="formbold-input-flex">
+                <div>
+                    {{ form_widget(form.username, {'attr': {'class': "formbold-form-input"}}) }}
+                    {{ form_label(form.username, 'Username',{'attr': {'class': "formbold-form-label"}}) }}
                 </div>
             </div>
+
+            <div class="formbold-textarea">
+                {{ form_widget(form.bio, {'attr': {'class': "formbold-form-input"}}) }}
+                {{ form_label(form.bio, 'Bio',{'attr': {'class': "formbold-form-label"}}) }}
+            </div>
+
+            <div class="formbold-input-file">
+                <label for="upload" class="formbold-input-label">
+                    <i class="fa-solid fa-paperclip fa-xl" style="color: #22877b;"></i>
+                    {{ form_label(form.avatar, 'profile picture ') }}
+                    {{ form_widget(form.avatar, {'attr': {'class': 'form-control-file'}}) }}
+                </label>
+            </div>
+
+            {{ form_end(form) }}
+
         </div>
     </div>
+{% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('create') }}
 {% endblock %}
