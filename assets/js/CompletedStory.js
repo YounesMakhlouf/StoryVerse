@@ -202,6 +202,7 @@ $("#report").click(function () {
   });
 });
 
+console.log(user.id);
 //get the ids of the authors
 let AuthorId = [];
 const AllOfThem = document.querySelectorAll(".contr");
@@ -211,7 +212,7 @@ for (let contributionAuthorId of AllOfThem) {
 
 let alreadyliked = 0;
 // skander's incredible way of linking the like and notifications
-const userId = document.querySelector(".userid").textContent.trim();
+
 const hearticon = document.querySelector("#color");
 hearticon.addEventListener("click", () => {
   if (alreadyliked == 0) {
@@ -224,9 +225,14 @@ hearticon.addEventListener("click", () => {
 
 function sendLikeNotif(receiver) {
   let formData = new FormData();
-  let content = "got a like !";
+  let content =
+    " your contribution in " +
+    story.title +
+    " got a like from " +
+    user.name +
+    "!";
   formData.append("content", content);
-  formData.append("sender_id", userId);
+  formData.append("sender_id", user.id);
   formData.append("receiver_id", parseInt(receiver));
   fetch("../notification/create", {
     method: "POST",
