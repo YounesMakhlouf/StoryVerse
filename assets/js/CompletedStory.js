@@ -1,23 +1,23 @@
-import '../styles/Completed.scss';
-import '../bootstrap';
-import'../img/logo.webp';
+import "../styles/Completed.scss";
+import "../bootstrap";
+import "../img/logo.webp";
 import Swal from "sweetalert2";
-var imageThemeEffect = function() {
-    var image = $('.theme'),
-        heroHeight = image.outerHeight(true);
-    image.parent().css('padding-top', heroHeight);
-    $(window).scroll(function() {
-        var scrollOffset = $(window).scrollTop();
-        if (scrollOffset < heroHeight) {
-            image.css('height', (heroHeight - scrollOffset));
-        }
-        if (scrollOffset > (heroHeight - 215)) {
-            image.addClass('fixme');
-        } else {
-            image.removeClass('fixme');
-        };
-    });
-}
+var imageThemeEffect = function () {
+  var image = $(".theme"),
+    heroHeight = image.outerHeight(true);
+  image.parent().css("padding-top", heroHeight);
+  $(window).scroll(function () {
+    var scrollOffset = $(window).scrollTop();
+    if (scrollOffset < heroHeight) {
+      image.css("height", heroHeight - scrollOffset);
+    }
+    if (scrollOffset > heroHeight - 215) {
+      image.addClass("fixme");
+    } else {
+      image.removeClass("fixme");
+    }
+  });
+};
 imageThemeEffect();
 
 //show replies on click
@@ -130,23 +130,22 @@ $(document).ready(function () {
     // Get the form data
     var formData = $(this).serialize();
 
-        // Submit the form using AJAX
-        $.ajax({
-            url: $("#contribution-form").attr('action'),
-            method: 'POST',
-            data: formData,
-            success: function(response) {
-                console.log(response);
-                $("#contribution-form").hide();
-                let content = response.content;
-                $(".text").append('<p id="'+response.id+'">'+content+'</p>');
-
-            },
-            error: function() {
-                console.log($("#contribution-form").attr('action'));
-                alert('An error occurred while submitting the contribution.');
-            }
-        });
+    // Submit the form using AJAX
+    $.ajax({
+      url: $("#contribution-form").attr("action"),
+      method: "POST",
+      data: formData,
+      success: function (response) {
+        console.log(response);
+        $("#contribution-form").hide();
+        let content = response.content;
+        $(".text").append('<p id="' + response.id + '">' + content + "</p>");
+      },
+      error: function () {
+        console.log($("#contribution-form").attr("action"));
+        alert("An error occurred while submitting the contribution.");
+      },
+    });
     // Submit the form using AJAX
     $.ajax({
       url: $("#contribution-form").attr("action"),
@@ -170,61 +169,56 @@ $(document).ready(function () {
 });
 
 ///// show author name when hovering its contribution
-$('.contr').hover(function (){
-    let id = $(this).attr('id')+'author';
-    $('#'+id).css('font-size', '25px');
-    $(this).css('background-color','#F0F8FF')
-    console.log(id);},
-    function (){
-        let id = $(this).attr('id')+'author';
-        $('#'+id).css('font-size', '16px');
-        $(this).css('background-color','white')
-
-    }
-)
+$(".contr").hover(
+  function () {
+    let id = $(this).attr("id") + "author";
+    $("#" + id).css("font-size", "25px");
+    $(this).css("background-color", "#F0F8FF");
+    console.log(id);
+  },
+  function () {
+    let id = $(this).attr("id") + "author";
+    $("#" + id).css("font-size", "16px");
+    $(this).css("background-color", "white");
+  }
+);
 
 /////////// display alert after reporting
 
-$('#report').click(function () {
+$("#report").click(function () {
+  Swal.fire({
+    title: "Are you sure you want to report this story?",
+    icon: "warning",
+    buttonsStyling: true,
+    showCancelButton: true,
+    dangerMode: true,
+  }).then((willDelete) => {
+    if (willDelete.isConfirmed) {
+      $.ajax({
+        type: "POST",
+        url: $("#report").data("story-id"),
+        success: function (response) {
+          console.log(response);
+        },
+      });
+      $(this)
+        .parents(".dialog-ovelay")
+        .fadeOut(500, function () {
+          $(this).remove();
+          $("#report").hide();
+        });
 
-    Swal.fire({
-        title: "Are you sure you want to report this story?",
-        icon: "warning",
-        buttonsStyling:true,
-        showCancelButton: true,
-        dangerMode: true,
-    })
-        .then((willDelete) => {
-            if (willDelete.isConfirmed) {
-                $.ajax({
-                    type: 'POST',
-                    url: $('#report').data('story-id'),
-                    success: function (response) {
-                        console.log(response);
-                    }});
-                $(this).parents('.dialog-ovelay').fadeOut(500, function () {
-                    $(this).remove();
-                    $('#report').hide();
-                })
-
-                Swal.fire(
-                    "Thank you for reporting the story", "We will investigate and take appropriate action.",
-                     "success"
-                );
-            } else if (willDelete.dismiss === Swal.DismissReason.cancel) {
-                // Code to execute if the user clicks on the cancel button
-                Swal.fire(
-                    "Reporting cancelled",
-                    "No action was taken.",
-                    "info"
-                );
-            }
-        })})
-
-
-
-
-
+      Swal.fire(
+        "Thank you for reporting the story",
+        "We will investigate and take appropriate action.",
+        "success"
+      );
+    } else if (willDelete.dismiss === Swal.DismissReason.cancel) {
+      // Code to execute if the user clicks on the cancel button
+      Swal.fire("Reporting cancelled", "No action was taken.", "info");
+    }
+  });
+});
 
 $(".contr").hover(
   function () {
@@ -306,27 +300,40 @@ $("#report").click(function () {
   );
 });
 
-// skander's incredible way of linking the like and notifications
-// const userId = document.querySelector(".userid").textContent.trim();
-// const hearticon = document.querySelector("#color");
-// hearticon.addEventListener("click", () => {
-//   storyContributions.forEach((contribution) => {});
-// });
+//get the ids of the authors
+let AuthorId = [];
+const AllOfThem = document.querySelectorAll(".contr");
+for (let contributionAuthorId of AllOfThem) {
+  AuthorId.push(contributionAuthorId.getAttribute("id"));
+}
 
-// function sendLikeNotif(receiver) {
-//   let formData = new FormData(receiver);
-//   let content = storyTitle + "got a like";
-//   formData.append("content", content);
-//   formData.append("sender_id", userId);
-//   formData.append("receiver_id", receiver);
-//   fetch("../notification/create", {
-//     method: "POST",
-//     body: formData,
-//   }).then((response) => {
-//     if (response.ok) {
-//       console.log("skander did it as always");
-//     } else {
-//       console.log("I hate myself");
-//     }
-//   });
-// }
+let alreadyliked = 0;
+// skander's incredible way of linking the like and notifications
+const userId = document.querySelector(".userid").textContent.trim();
+const hearticon = document.querySelector("#color");
+hearticon.addEventListener("click", () => {
+  if (alreadyliked == 0) {
+    for (let receiver of AuthorId) {
+      sendLikeNotif(receiver);
+    }
+  }
+  alreadyliked = 1;
+});
+
+function sendLikeNotif(receiver) {
+  let formData = new FormData();
+  let content = "got a like";
+  formData.append("content", content);
+  formData.append("sender_id", userId);
+  formData.append("receiver_id", parseInt(receiver));
+  fetch("../notification/create", {
+    method: "POST",
+    body: formData,
+  }).then((response) => {
+    if (response.ok) {
+      console.log("skander did it as always");
+    } else {
+      console.log("I hate myself");
+    }
+  });
+}
