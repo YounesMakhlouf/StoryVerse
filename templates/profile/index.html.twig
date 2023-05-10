@@ -52,7 +52,7 @@
     <div class="profile-stats">
         <div class="row">
             <div class="col">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                <a class="nav-link dropdown-toggle" href="{{ path('app_followers',{'id':user.id}) }}" role="button" data-bs-toggle="dropdown"
                    aria-expanded="false">
                     <i class="fa-solid fa-user"></i>
                     <span class="profile-followers">{{ user.follower|length }} Followers</span>
@@ -69,7 +69,7 @@
                 </ul>
             </div>
             <div class="col">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                <a class="nav-link dropdown-toggle" href="{{ path('app_following',{'id':user.id}) }}" role="button" data-bs-toggle="dropdown"
                    aria-expanded="false">
                     <i class="fa-solid fa-user"></i>
                     <span class="profile-followers">{{ user.following|length }} Following</span>

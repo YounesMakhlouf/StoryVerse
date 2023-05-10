@@ -36,13 +36,11 @@ class ProfileController extends AbstractController
             $contributedStories = $user->getContributedStories();
 
             // Check if the current user is following the target user
-            $isFollowing = false;
-            if ($this->isGranted('IS_AUTHENTICATED_FULLY')) {
-                /** @var User $currentUser */
-                $currentUser = $this->getUser();
-                $isFollowing = $currentUser->getFollowing()->contains($user);
+            /** @var User $currentUser */
+            $currentUser = $this->getUser();
+            $isFollowing = $currentUser->getFollowing()->contains($user);
 
-            }
+
 
             $nextTier = $tierRepository->findNextTier($user->getXp());
             return $this->render('profile/index.html.twig', [
@@ -53,4 +51,27 @@ class ProfileController extends AbstractController
             ]);
         }
     }
-}
+    #[IsGranted('ROLE_USER')]
+    #[Route('/followers/{id}', name: 'app_followers')]
+    public function showFollowers($id,UserRepository $userRepository): Response
+    {
+        $user = $userRepository->find($id);
+        $followers=$user->getFollower();
+        return $this->render('profile/followers.html.twig',[
+            'followers'=>$followers
+        ]);
+
+    }
+    #[IsGranted('ROLE_USER')]
+    #[Route('/following/{id}', name: 'app_following')]
+    public function showFollowing($id, UserRepository $userRepository): Response
+    {
+        $user = $userRepository->find($id);
+        $following=$user->getFollowing();
+        return $this->render('profile/followers.html.twig',[
+            'followers'=>$following
+        ]);
+
+    }
+
+    }
