@@ -12,7 +12,7 @@
             <div class="col-md-3 mb-4">
                 <div class="card">
                     <a href="{{ path('app_profile', {'id': user.id }) }}">
-                    <img src="{{ user.avatar}}" class="card-img-top" alt="Profile Picture">
+                    <img src="{{ asset ('uploads/avatar_directory/'~ user.avatar)}}" class="card-img-top" alt="Profile Picture">
                     <div class="card-body">
                         <h5 class="card-title text-center">{{ user.username }}</h5>
                     </div>
@@ -34,7 +34,7 @@
                 <div class="col-md-3 mb-4">
                     <div class="card">
                         <a href="{{ path('app_storypage', {'id': story.id }) }}">
-                        <img src="{{ story.imageUrl() }}" class="card-img-top" alt="Story Image">
+                        <img src="{{ asset ('uploads/story_directory/'~ story.storyImage)}}" class="card-img-top" alt="Story Image">
                         <div class="card-body">
                             <h5 class="card-title">{{ story.title }}</h5>
                             <p class="card-text">

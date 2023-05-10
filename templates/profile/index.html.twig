@@ -11,12 +11,9 @@
     </div>
     <div class="profile-picture-container">
 
-        {% if user.avatar %}
 
-            <img id="avatar" src="{{ user.avatar }}" alt="Avatar" width="200" height="200" class="d-inline-block align-text-top">
-        {% else %}
-            <img id="avatar" src="https://www.gravatar.com/avatar/{{ user.emailHash }}?s=200" alt="Avatar"  width="200" height="200" class="d-inline-block align-text-top">
-   {% endif  %}
+            <img id="avatar" src="{{ asset ('uploads/avatar_directory/'~ user.avatar)}}" alt="Avatar" width="200" height="200" class="d-inline-block align-text-top">
+
     </div>
     <div>
         {% for type, messages in app.flashes %}
@@ -120,7 +117,7 @@
             {% for story in stories %}
                 <div class="row">
                     <div class="text-center col">
-                        <img alt="{{ story.title }}" src="{{ story.ImageUrl(300) }}">
+                        <img alt="{{ story.title }}" src="{{ asset ('uploads/story_directory/'~ story.storyImage)}}" style="max-width: 50%;">
                         <h5>{{ story.genre }}</h5>
                     </div>
 

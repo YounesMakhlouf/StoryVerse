@@ -15,13 +15,9 @@
                 <div class="infos">
                     <div class="container profile-cover"></div>
                     <div class="profile-picture-container">
-                        {% if user.avatar %}
-                            <img src="{{ asset('uploads/avatar_directory/' ~ user.avatar) }}" alt="Profile picture"
+                            <img src="{{ asset ('uploads/avatar_directory/'~ app.user.avatar)}}" alt="Profile picture"
                                  class="profile-picture rounded-circle">
-                        {% else %}
-                            <img src="{{ asset('https://us.123rf.com/450wm/yummytime/yummytime1608/yummytime160800630/61903988-anonyme-m%C3%A2le-photo-de-profil-avatar-de-l-%C3%A9motion-cr%C3%A9%C3%A9e-pour-mobile-web-d%C3%A9coration-produits-d.jpg') }}"
-                                 alt="Default profile picture" class="profile-picture rounded-circle">
-                        {% endif %}
+
                     </div>
                     <h1 class="profile-name">{{ user.username }}<a href="{{ path('app_modify_profile') }}"><i class="fa-solid fa-user-pen"></i></a></h1>
                     <span id="bio">{{ bio }}</span>
@@ -125,7 +121,7 @@
                     {% for story in stories %}
                         <div class="row">
                             <div class="text-center col">
-                                <img alt="{{ story.title }}" src="{{ story.ImageUrl(300) }}">
+                                <img alt="{{ story.title }}" src="{{ asset ('uploads/story_directory/'~ story.storyImage)}}" style="max-width: 50%;">
                                 <h5>{{ story.genre }}</h5>
                             </div>
 
