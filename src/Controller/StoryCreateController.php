@@ -50,6 +50,9 @@ class StoryCreateController extends AbstractController
                 $story->setStoryImage($newFilename);
                
             }
+            else{
+                $story->setStoryImage($story->getGenre().'.jpg');
+            }
 
             // save the story to the database
             $entityManager->persist($contribution);
