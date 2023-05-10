@@ -94,7 +94,7 @@ body{
   cursor: pointer;
 }
 
-#story_submit {
+#story_submit , #profile_submit {
   font-size: 16px;
   border-radius: 5px;
   padding: 12px 25px;
@@ -105,7 +105,7 @@ body{
   cursor: pointer;
   margin-top: 25px;
 }
-#story_submit:hover {
+#story_submit:hover , #profile_submit:hover {
   box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.05);
 }
 
