@@ -51,7 +51,7 @@ class TierRepository extends ServiceEntityRepository
     /**
      * @throws NonUniqueResultException
      */
-    public function findNextTier($xp)
+    public function findNextTier(int $xp)
     {
         return $this->createQueryBuilder('t')
             ->andWhere('t.xpThreshold > :xp')
