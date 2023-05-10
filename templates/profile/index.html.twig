@@ -1,148 +1,146 @@
 {% extends 'base.html.twig' %}
-
+ {% set epicMessages = [
+     "Master of the written word, slayer of writer's block!",
+     "Ink flows through my veins, tales unfurl with every stroke of the pen!",
+     "With quill in hand and imagination boundless, I craft stories that transcend time!",
+     "A bard of epic tales, weaving words into tapestries of wonder!",
+     "Behold, for I am the literary alchemist, turning words into gold!"
+ ] %}
+                    {% set epicBio = epicMessages[random(0, epicMessages|length - 1)] %}
+                    {% set bio = user.bio ?: epicBio %}
 {% block body %}
-<div class="profile-container text-center" style="margin-top: 20px">
-    <div class="profile-cover">
-        {% if user %}
-            <h1 class="profile-name">
-                welcome to {{ user.username|upper }}'s profile
-            </h1>
-        {% endif %}
-    </div>
-    <div class="profile-picture-container">
+    <div class="container">
+        <div class="main-body">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex flex-column align-items-center text-center">
+                                <img src="{{ asset ('uploads/avatar_directory/'~ app.user.avatar)}}" alt="Admin" width="200px">
+                                <div class="mt-3">
+                                    <h4>{{ user.username }}<a href="{{ path('app_modify_profile') }}"><i class="fa-solid fa-user-pen"></i></a></h4>
+                                    <p class="text-secondary mb-1">{{ bio }}</p>
 
-
-            <img id="avatar" src="{{ asset ('uploads/avatar_directory/'~ user.avatar)}}" alt="Avatar" width="200" height="200" class="d-inline-block align-text-top">
-
-    </div>
-    <div>
-        {% for type, messages in app.flashes %}
-            {% for message in messages %}
-                <div class="alert alert-{{ type }}">{{ message }}</div>
-            {% endfor %}
-        {% endfor %}
-    </div>
-    <span>{{ user.xp }} XP </span>
-    {% if user.tier %}
-        <div class="profile-tier">
-            <span>Current Tier: {{ user.tier.name }}</span>
-            {% if user.tier.badge %}
-                <img height="50" width="50" alt="tier badge"
-                     src="{{ asset('build/images/tierBadges/' ~ user.tier.badge ~ '.png') }}">
-            {% endif %}
-            {% if nextTier %}
-                <span>Missing XP to Next Tier: {{ nextTier.getXpThreshold() - user.xp }}</span>
-            {% endif %}
-        </div>
-    {% endif %}
-    {% set epicMessages = [
-        "Master of the written word, slayer of writer's block!",
-        "Ink flows through my veins, tales unfurl with every stroke of the pen!",
-        "With quill in hand and imagination boundless, I craft stories that transcend time!",
-        "A bard of epic tales, weaving words into tapestries of wonder!",
-        "Behold, for I am the literary alchemist, turning words into gold!"
-    ] %}
-    {% set epicBio = epicMessages[random(0, epicMessages|length - 1)] %}
-    {% if user.bio %}
-        {% set bio = user.bio %}
-    {% else %}
-        {% set bio = epicBio %}
-    {% endif %}
-    <div class="profile-bio">{{ bio }}</div>
-    <div class="profile-stats">
-        <div class="row">
-            <div class="col">
-                <a class="nav-link dropdown-toggle" href="{{ path('app_followers',{'id':user.id}) }}" role="button" data-bs-toggle="dropdown"
-                   aria-expanded="false">
-                    <i class="fa-solid fa-user"></i>
-                    <span class="profile-followers">{{ user.follower|length }} Followers</span>
-                </a>
-                <ul class="dropdown-menu">
-                    {% for follower in user.follower %}
-                        <li>
-                            <a class="dropdown-item" href="{{ path('app_profile', {'id': follower.id}) }}">
-                                <img id="avatar" src="{{ follower.avatar }}" alt="Avatar" width="40" height="40"
-                                     class="d-inline-block align-text-top"> {{ follower.username }}
+                                </div>
+                            </div>
+                            <hr class="my-4">
+                            {% if app.user %}
+                            {% if is_following %}
+                                {% set formAction = path('unfollow_user', {'id': user.id}) %}
+                                {% set followButtonLabel = 'Unfollow' %}
+                            {% else %}
+                                {% set formAction = path('follow_user', {'id': user.id}) %}
+                                {% set followButtonLabel = 'Follow' %}
+                            {% endif %}
+                            {% endif %}
+                            <form class="d-inline" action="{{ formAction }}" method="post">
+                                <button class="btn {{ is_following ? 'btn-primary' : 'btn-warning' }} follow-button">
+                                    {{ followButtonLabel }}
+                                </button>
+                            </form>
+                            <hr class="my-4">
+                            <a href="{{ path('app_following',{'id':user.id}) }}" >
+                                <i class="fa-solid fa-user"></i>
+                                <span class="profile-followers">{{ user.following|length }} Following</span>
                             </a>
-                        </li>
-                    {% endfor %}
-                </ul>
-            </div>
-            <div class="col">
-                <a class="nav-link dropdown-toggle" href="{{ path('app_following',{'id':user.id}) }}" role="button" data-bs-toggle="dropdown"
-                   aria-expanded="false">
-                    <i class="fa-solid fa-user"></i>
-                    <span class="profile-followers">{{ user.following|length }} Following</span>
-                </a>
-                <ul class="dropdown-menu">
-                    {% for following in user.following %}
-                        <li>
-                            <a class="dropdown-item" href="{{ path('app_profile', {'id': following.id}) }}">
-                                <img id="avatar" src="{{ following.avatar }}" alt="Avatar" width="40" height="40"
-                                     class="d-inline-block align-text-top"> {{ following.username }}
+                            <hr class="my-4">
+                            <a href="{{ path('app_followers',{'id':user.id}) }}" >
+                                <i class="fa-solid fa-user"></i>
+                                <span class="profile-followers">{{ user.follower|length }} Followers</span>
                             </a>
-                        </li>
-                    {% endfor %}
-                </ul>
-            </div>
-        </div>
-    </div>
 
 
-    <br><br>
-    <div class="d-grid gap-2 d-md-block buttons">
-        {% if app.user %}
-            {% if is_following %}
-                {% set formAction = path('unfollow_user', {'id': user.id}) %}
-                {% set followButtonLabel = 'Unfollow' %}
-            {% else %}
-                {% set formAction = path('follow_user', {'id': user.id}) %}
-                {% set followButtonLabel = 'Follow' %}
-            {% endif %}
-            <form class="d-inline" action="{{ formAction }}" method="post">
-                <button class="btn {{ is_following ? 'btn-primary' : 'btn-warning' }} follow-button">
-                    {{ followButtonLabel }}
-                </button>
-            </form>
-        {% else %}
-            <a href="{{ path('app_login') }}" class="btn btn-primary">Log in to follow</a>
-        {% endif %}
-
-
-    </div>
-    <br><br>
-    <div class="profile-stories-container">
-        <h2 class="profile-stories-title">Tales in which this person has embarked upon:</h2>
-        <div class="grid text-center">
-            {% for story in stories %}
-                <div class="row">
-                    <div class="text-center col">
-                        <img alt="{{ story.title }}" src="{{ asset ('uploads/story_directory/'~ story.storyImage)}}" style="max-width: 50%;">
-                        <h5>{{ story.genre }}</h5>
-                    </div>
-
-                    <div class="col-6 ">
-                        <div class="text-truncate description">
-                            {% for contribution in story.contributions %}
-                                <p>{{ contribution.content }}</p>
-                            {% endfor %}
                         </div>
-                        <a href="{{ path('app_storypage', { 'id': story.id }) }}" class="btn btn-warning">Continuez la
-                            lecture</a>
                     </div>
                 </div>
-            {% endfor %}
+                <div class="col-lg-8">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="profile-xp row align-items-center">
+                                <div class="tier-container col">
+                                    <h5 class="tier">Current tier :</h5>
+                                    <div class="tier-content">
+                                        {% if user.tier.badge %}
+                                            <img class="rounded-circle" height="50" width="50" alt="Tier badge"
+                                                 src="{{ asset('build/images/tierBadges/' ~ user.tier.badge) }}">
+                                        {% endif %}
+                                        <span class="tier-info">{{ user.tier.name }}</span>
+                                    </div>
+                                </div>
+                                <div class="tier-container col">
+                                    {% if nextTier %}
+                                        <h5 class="tier">Missing XP to Next Tier: {{ nextTier.xpThreshold - user.xp }}</h5>
+                                        <div class="tier-content row align-items-center">
+                                            {% if nextTier.badge %}
+                                                <img class="col-3 rounded-circle" height="50" width="50" alt="Tier badge"
+                                                     src="{{ asset('build/images/tierBadges/' ~ nextTier.badge) }}">
+                                            {% endif %}
+                                            {% set progress = (user.xp / nextTier.xpThreshold) * 100 %}
+                                            <div class="col-9">
+                                                <div class="progress">
+                                                    <div class="progress-bar" role="progressbar" aria-label="Quest progress"
+                                                         style="width: {{ progress }}%;" aria-valuenow="{{ progress }}"
+                                                         aria-valuemin="0" aria-valuemax="100">
+                                                        <span id="xp">{{ user.xp }} XP </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% else %}
+
+                                        <h5 class="tier">Congratulations!</h5>
+                                        <div class="tier-content">
+                                            <p>You have reached the highest tier available.</p>
+                                            <p>It seems we were too lazy to add more tiers, and we never expected anyone to make it
+                                                this far!</p>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    {% for story in stories %}
+                                        <a href="{{ path('app_storypage', { 'id': story.id }) }}">
+                                            <h5>{{ story.title }}<span
+                                                        class="badge rounded-pill {{ story.genre }}"> {{ story.genre }} </span></h5>
+                                            <img alt="{{ story.title }}" src="{{ asset ('uploads/story_directory/'~ story.storyImage)}}" style="max-width: 50%;">
+                                            <div class="text-truncate description">
+                                                {% for contribution in story.contributions %}
+                                                    <p>{{ contribution.content }}</p>
+                                                {% endfor %}
+                                            </div>
+                                        </a>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    {% endblock %}
 
-    {% block javascripts %}
-        {{ parent() }}
-        {{ encore_entry_script_tags('profile') }}
-    {% endblock %}
-
-    {% block stylesheets %}
-    {{ parent() }}
-    {{ encore_entry_link_tags('profile') }}
 
 {% endblock %}
+
+
+
+        {% block javascripts %}
+            {{ parent() }}
+            {{ encore_entry_script_tags('profile') }}
+        {% endblock %}
+
+
+        {% block stylesheets %}
+            {{ parent() }}
+            {{ encore_entry_link_tags('profile') }}
+        {% endblock %}
+
+{% block footer %}{% endblock %}
+
+
