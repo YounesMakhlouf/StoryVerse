@@ -16,7 +16,7 @@ class QuestFixture extends Fixture
             'Account Creator',
             'Master the ancient art of account creation on Storyverse. Create a new account and unlock the secrets of the digital realm!',
             'create_account',
-            100
+            50
         );
         $manager->persist($quest1);
 
@@ -26,7 +26,7 @@ class QuestFixture extends Fixture
             'Story Creator',
             'Embark on a mythical journey as you breathe life into your first story on Storyverse. Let your imagination run wild and witness the birth of a new literary universe!',
             'post_stories',
-            50,
+            100,
             1
         );
         $manager->persist($quest2);
@@ -36,7 +36,7 @@ class QuestFixture extends Fixture
             'Story Creator',
             'Unleash your creative prowess and conquer the literary world by publishing not one, not two, but five epic stories on Storyverse. Prepare to become a legend among authors!',
             'post_stories',
-            200,
+            600,
             5
         );
         $manager->persist($quest3);
@@ -46,7 +46,7 @@ class QuestFixture extends Fixture
             'Story Creator',
             'Channel your inner storytelling genius and grace the world with ten captivating stories on Storyverse. Claim your rightful place among the gods of imagination!',
             'post_stories',
-            500,
+            1500,
             10
         );
         $manager->persist($quest4);
@@ -67,7 +67,7 @@ class QuestFixture extends Fixture
             'Contributor',
             'Become a true Storyvore by contributing to 10 stories on Storyverse. Your insatiable appetite for storytelling shall be celebrated!',
             'post_contributions',
-            200,
+            2000,
             10
         );
         $manager->persist($quest6);
@@ -76,7 +76,7 @@ class QuestFixture extends Fixture
         $quest7 = $this->createQuest(
             'The Social Butterfly',
             'Community Quest',
-            'Spread your wings and become the ultimate social butterfly! Engage with the Storyverse community by leaving 50 witty comments on stories and ignite conversations that will go down in history!',
+            'Spread your wings and become the ultimate social butterfly! Engage with the Storyverse community by leaving 10 witty comments on stories and ignite conversations that will go down in history!',
             'post_comments',
             1000,
             50
@@ -86,7 +86,7 @@ class QuestFixture extends Fixture
         $quest8 = $this->createQuest(
             'The Epic High-Fiver',
             'Community Quest',
-            'Embrace the power of the high-five! Show your appreciation for fellow storytellers by giving 100 likes to their magnificent tales. Your mighty thumbs shall bring joy to the hearts of many!',
+            'Embrace the power of the high-five! Show your appreciation for fellow storytellers by giving 25 likes to their magnificent tales. Your mighty thumbs shall bring joy to the hearts of many!',
             'post_likes',
             1000,
             100
@@ -97,18 +97,20 @@ class QuestFixture extends Fixture
         $quest9 = $this->createQuest(
             'The Great Adventurer',
             'Achievement Quest',
-            'Embark on an epic journey of exploration and discovery! Complete 50 quests of various kinds, showcasing your unwavering determination and insatiable curiosity. Only the bravest and most relentless adventurers can claim this legendary title!',
+            'Embark on an epic journey of exploration and discovery! Complete 3 quests of various kinds, showcasing your unwavering determination and insatiable curiosity. Only the bravest and most relentless adventurers can claim this legendary title!',
             'complete_quests',
-            5555
+            1000,
+            3
         );
         $manager->persist($quest9);
 
         $quest10 = $this->createQuest(
             'The Time Traveler',
             'Achievement Quest',
-            'Bend the fabric of time and rewrite history! Contribute to Storyverse for 365 consecutive days, transcending the boundaries of space and time. Your commitment to storytelling shall be forever enshrined in the annals of legend!',
-            'daily_login',
-            9999
+            'Bend the fabric of time and rewrite history! Complete 9 quests of various kinds, showcasing your unwavering determination and insatiable curiosity. Only the bravest and most relentless adventurers can claim this legendary title!',
+            'complete_quests',
+            9999,
+            9
         );
         $manager->persist($quest10);
 
