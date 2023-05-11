@@ -13,9 +13,6 @@ class Notification
     #[ORM\Column]
     private ?int $id = null;
 
-    
-  
-
     #[ORM\ManyToOne(inversedBy: 'notifications')]
     #[ORM\JoinColumn(nullable: false)]
     private ?user $receiver = null;
