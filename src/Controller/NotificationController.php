@@ -10,7 +10,6 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Notification;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\User;
-use Psr\Log\LoggerInterface;
 
 
 class NotificationController extends AbstractController
