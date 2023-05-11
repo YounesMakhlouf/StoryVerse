@@ -36,6 +36,7 @@ class Story
     private ?string $genre = null;
 
     #[ORM\OneToMany(mappedBy: 'story', targetEntity: Contribution::class)]
+    #[ORM\OrderBy(['createdAt' => 'asc'])]
     private Collection $contributions;
 
     #[ORM\OneToMany(mappedBy: 'Story', targetEntity: Comment::class)]

@@ -120,6 +120,10 @@ class QuestCompletionService
             return 0.0;
         }
 
+        if (!$quest->getAmount()) {
+            return 100;
+        }
+
         // Calculate the progress as a percentage
         $progress = ($userRequirement / $quest->getAmount()) * 100;
 

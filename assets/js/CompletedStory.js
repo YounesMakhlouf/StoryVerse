@@ -80,6 +80,8 @@ $(document).ready(function () {
   });
 });
 
+
+
 ///// likes
 
 $("i.fa-heart").click(function () {
@@ -97,11 +99,16 @@ $("i.fa-heart").click(function () {
   });
 });
 
+
+
 ///// show contribute form
 $("#contribute-btn").click(function () {
   $("#contribute-btn").hide();
   $("#contribute-form").show();
 });
+
+
+
 
 ///// contribute submit button animation
 $(function () {
@@ -115,6 +122,8 @@ $(function () {
       $("#sub").addClass("validate", 450, callback);
     }, 2250);
   }
+
+
   function callback() {
     setTimeout(function () {
       $("#sub").removeClass("validate");
@@ -122,9 +131,12 @@ $(function () {
   }
 });
 
+
+
 ///// add contribution to the page without refreshing
 $(document).ready(function () {
   $('form[name="contribution"]').submit(function (event) {
+
     // Prevent the form from submitting normally
     event.preventDefault();
 
@@ -150,7 +162,10 @@ $(document).ready(function () {
   });
 });
 
+
 ///// show author name when hovering its contribution
+
+
 $(".contr").hover(
   function () {
     let id = $(this).attr("id") + "author";
@@ -202,7 +217,6 @@ $("#report").click(function () {
   });
 });
 
-console.log(user.id);
 //get the ids of the authors
 let AuthorId = [];
 const AllOfThem = document.querySelectorAll(".contr");

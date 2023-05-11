@@ -39,7 +39,8 @@ class ReportedStoryCrudController extends StoryCrudController
             ->remove(Crud::PAGE_DETAIL, Action::DELETE)
             ->remove(Crud::PAGE_INDEX,Action::EDIT)
             ->add(Crud::PAGE_DETAIL, $acceptReport)
-            ->add(Crud::PAGE_DETAIL,$rejectReport);
+            ->add(Crud::PAGE_DETAIL,$rejectReport)
+            ->remove(CRUD::PAGE_DETAIL,Action::EDIT);
 
     }
 
