@@ -16,7 +16,7 @@
 }
 
 #header .logo h1 {
-    font-size: 28px;
+    font-size: 1.75rem;
     margin: 0;
     padding: 0;
     line-height: 1;
@@ -58,7 +58,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 10px 0 10px 30px;
-    font-size: 15px;
+    font-size: 0.9375rem;
     font-weight: 500;
     font-family: "Poppins", sans-serif;
     color: rgba(255, 255, 255, 0.7);
@@ -68,7 +68,7 @@
 
 .navbar a i,
 .navbar a:focus i {
-    font-size: 12px;
+    font-size: 0.75rem;
     line-height: 0;
     margin-left: 5px;
 }
@@ -102,7 +102,7 @@
 /* Mobile Navigation */
 .mobile-nav-toggle {
     color: #fff;
-    font-size: 28px;
+    font-size: 1.75rem;
     cursor: pointer;
     display: none;
     line-height: 0;
@@ -159,7 +159,7 @@
 .navbar-mobile a,
 .navbar-mobile a:focus {
     padding: 10px 20px;
-    font-size: 15px;
+    font-size: 0.9375rem;
     color: $DarkTurquoise;
 }
 

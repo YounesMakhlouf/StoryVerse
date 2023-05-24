@@ -4,7 +4,7 @@
 }
 
 .contact .info i {
-  font-size: 20px;
+  font-size: 1.25rem;
   color: $DarkTurquoise;
   float: left;
   width: 44px;
@@ -19,7 +19,7 @@
 
 .contact .info h4 {
   padding: 0 0 0 60px;
-  font-size: 22px;
+  font-size: 1.375rem;
   font-weight: 600;
   margin-bottom: 5px;
   color: $DarkTurquoise;
@@ -28,7 +28,7 @@
 .contact .info p {
   padding: 0 0 0 60px;
   margin-bottom: 0;
-  font-size: 14px;
+  font-size: 0.875rem;
   color: darken($DarkTurquoise, 30%);
 }
 
@@ -98,7 +98,7 @@
 .contact .php-email-form textarea {
   border-radius: 0;
   box-shadow: none;
-  font-size: 14px;
+  font-size: 0.875rem;
 }
 
 .contact .php-email-form input {

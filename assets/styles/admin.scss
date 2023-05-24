@@ -31,7 +31,7 @@ body{
     display: flex;
     padding: 10px 0;
     color: var(--link-color);
-    font-size:15px;
+    font-size: 0.9375rem;
 }
 
 a {
@@ -58,7 +58,7 @@ a {
     left : 0;
 }
 .logo  {
-    font-size: 28px;
+    font-size: 1.75rem;
     margin: 0;
     padding: 0;
     line-height: 1;
@@ -87,7 +87,7 @@ a {
 }
 .card-stats .card-body .card-category {
     color: #9A9A9A;
-    font-size: 16px;
+    font-size: 1rem;
     line-height: 1.4em;
 }
 .card {

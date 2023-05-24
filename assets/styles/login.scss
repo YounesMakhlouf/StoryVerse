@@ -15,19 +15,21 @@ img {
   width: 10%;
   height: auto;
 }
-#login{
-    display: flex;
-    justify-content: center;
-    margin: 20px 0 12px 0;
-    flex-wrap: wrap;
-    flex-direction: column;
-    
+
+#login {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0 12px 0;
+  flex-wrap: wrap;
+  flex-direction: column;
+
 }
-form{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    margin: 20px 0 12px 0;
+
+form {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 20px 0 12px 0;
 }
 
 .gradient {
@@ -68,7 +70,7 @@ body {
 }
 
 .container .title {
-  font-size: 25px;
+  font-size: 1.5625rem;
   font-weight: 500;
   position: relative;
 }
@@ -108,7 +110,7 @@ body {
   height: 45px;
   width: 100%;
   outline: none;
-  font-size: 16px;
+  font-size: 1rem;
   border-radius: 5px;
   padding-left: 15px;
   border: 1px solid #ccc;
@@ -131,7 +133,7 @@ body {
 }
 
 .gender-title {
-  font-size: 20px;
+  font-size: 1.25rem;
   font-weight: 500;
 }
 
@@ -219,7 +221,7 @@ fieldset {
   border-radius: 5px;
   border: none;
   color: #fff;
-  font-size: 18px;
+  font-size: 1.125rem;
   font-weight: 500;
   letter-spacing: 1px;
   cursor: pointer;
