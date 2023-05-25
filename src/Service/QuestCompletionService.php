@@ -5,7 +5,6 @@ namespace App\Service;
 use App\Entity\Quest;
 use App\Entity\User;
 use App\Repository\TierRepository;
-use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\Persistence\ObjectRepository;
@@ -59,29 +58,39 @@ class QuestCompletionService
         $questName = $quest->getName();
         $notificationMessage = "Congratulations brave adventurer! You have completed the quest: $questName";
         $notificationUrl = $this->urlGenerator->generate('app_quest');
-
-        $script = <<<SCRIPT
-        <script>
-            Swal.fire({
-                title: 'Quest Completed!',
-                text: '$notificationMessage',
-                icon: 'success',
-                showCancelButton: false,
-                confirmButtonText: 'OK',
-                allowOutsideClick: false,
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.href = '$notificationUrl';
-                }
-            });
-        </script>
-    SCRIPT;
-
-        $request = $this->requestStack->getCurrentRequest();
-        $request->getSession()->getFlashBag()->add('sweetalert2', $script);
+        $this->showNotification($notificationMessage, $notificationUrl);
         $this->verifyTierUpdate($user);
         $this->entityManager->persist($user);
         $this->entityManager->flush();
+    }
+
+/** Displays a notification using SweetAlert2 library
+ * @param string $message The message to be displayed
+ * @param string $url The destination URL to redirect to when user clicks OK button
+ */
+    private function showNotification(string $message, string $url): void
+    {
+    // SweetAlert2 script to display the notification
+        $script = <<<SCRIPT
+    <script>
+        Swal.fire({
+            title: 'Quest Completed!',
+            text: '$message',
+            icon: 'success',
+            showCancelButton: false,
+            confirmButtonText: 'OK',
+            allowOutsideClick: false,
+        }).then((result) => {
+            // Redirect to specified URL when user clicks OK button
+            if (result.isConfirmed) {
+                window.location.href = '$url';
+            }
+        });
+    </script>
+SCRIPT;
+     // Add the script to the session flash bag to be displayed in the next request
+        $request = $this->requestStack->getCurrentRequest();
+        $request->getSession()->getFlashBag()->add('sweetalert2', $script);
     }
 
     private function verifyTierUpdate(User $user): void
@@ -111,17 +120,13 @@ class QuestCompletionService
     public function calculateQuestProgress(Quest $quest, User $user): float
     {
         $questRequirement = $quest->getRequirement();
-        if ($questRequirement == 'create_account') {
+        if (($questRequirement === 'create_account') || (!$quest->getAmount())) {
             return 100;
         }
         $userRequirement = $user->getUserRequirement($questRequirement);
 
         if ($userRequirement === -1) { // Unsupported or unknown quest requirement
             return 0.0;
-        }
-
-        if (!$quest->getAmount()) {
-            return 100;
         }
 
         // Calculate the progress as a percentage

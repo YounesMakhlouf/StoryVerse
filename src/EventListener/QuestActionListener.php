@@ -4,8 +4,6 @@ namespace App\EventListener;
 
 use App\Event\QuestActionEvent;
 use App\Service\QuestCompletionService;
-use Doctrine\ORM\Exception\ORMException;
-use Doctrine\ORM\OptimisticLockException;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class QuestActionListener implements EventSubscriberInterface
@@ -24,10 +22,6 @@ class QuestActionListener implements EventSubscriberInterface
         ];
     }
 
-    /**
-     * @throws OptimisticLockException
-     * @throws ORMException
-     */
     public function onQuestAction(QuestActionEvent $event): void
     {
         // Access the user and story associated with the action event
