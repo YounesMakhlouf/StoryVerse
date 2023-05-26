@@ -12,34 +12,29 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class FollowController extends AbstractController
 {
-    private EntityManagerInterface $entityManager;
-
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(private readonly EntityManagerInterface $entityManager)
     {
-        $this->entityManager = $entityManager;
     }
-    #[IsGranted('ROLE_USER')]
 
+    #[IsGranted('ROLE_USER')]
     #[Route('/profile/{id}/follow', name: 'follow_user')]
     public function followUser(User $user): Response
     {
-
-            $currentUser = $this->getUser();
-            // Check if the current user is already following the target user
-            if ($currentUser->getFollowing()->contains($user)) {
-                $this->addFlash('warning', 'You are already following this user');
-            } else {
-                // Add the target user to the current user's following collection
-                $currentUser->addFollowing($user);
-                $this->entityManager->flush();
-
-            }
+        $currentUser = $this->getUser();
+        $isFollowing = $currentUser->getFollowing()->contains($user);
+        if ($isFollowing) {
+            $this->addFlash('warning', 'You are already following this user');
+        } else {
+            // Add the target user to the current user's following collection
+            $currentUser->addFollowing($user);
+            $this->entityManager->flush();
+        }
 
         // Redirect back to the target user's profile page
         return $this->redirectToRoute('app_profile', ['id' => $user->getId()]);
     }
-    #[IsGranted('ROLE_USER')]
 
+    #[IsGranted('ROLE_USER')]
     #[Route('/profile/{id}/is_following', name: 'is_following')]
     public function isFollowing(User $user): JsonResponse
     {
@@ -56,19 +51,15 @@ class FollowController extends AbstractController
     #[Route('/profile/{id}/unfollow', name: 'unfollow_user', methods: ['POST'])]
     public function unfollowUser(User $user): Response
     {
-            $currentUser = $this->getUser();
-
-            // Check if the current user is already following the target user
-            if ($currentUser->getFollowing()->contains($user)) {
-                // Remove the target user from the current user's following collection
-                $currentUser->removeFollowing($user);
-                $this->entityManager->flush();
-
-
-            } else {
-                $this->addFlash('warning', 'You are not following this user');
-            }
-
+        $currentUser = $this->getUser();
+        $isFollowing = $currentUser->getFollowing()->contains($user);
+        if ($isFollowing) {
+            // Remove the target user from the current user's following collection
+            $currentUser->removeFollowing($user);
+            $this->entityManager->flush();
+        } else {
+            $this->addFlash('warning', 'You are not following this user');
+        }
 
         // Redirect back to the target user's profile page
         return $this->redirectToRoute('app_profile', ['id' => $user->getId()]);

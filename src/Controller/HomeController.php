@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Repository\StoryRepository;
-use App\Repository\TierRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,6 +12,7 @@ class HomeController extends AbstractController
     #[Route('/', name: 'app_home')]
     public function index(StoryRepository $storyRepository): Response
     {
+        // If the user is already logged in, redirect him to his feed
         if ($this->isGranted('ROLE_USER')) {
             return $this->redirectToRoute('app_browse_stories');
         }
@@ -24,7 +24,11 @@ class HomeController extends AbstractController
             'trendingStories' => $trendingStories,
         ]);
     }
-
+     /**
+     * Returns an array of team members with their details and social media profiles
+     *
+     * @return array
+     */
     private function getTeamMembers(): array
     {
         return [

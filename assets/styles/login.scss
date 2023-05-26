@@ -215,7 +215,7 @@ fieldset {
   margin: 35px 0
 }
 
-.button input {
+.button button {
   height: 100%;
   width: 100%;
   border-radius: 5px;
@@ -229,7 +229,7 @@ fieldset {
   transition: all 0.3s ease;
 }
 
-.button input:hover {
+.button button:hover {
   background-color: linear-gradient(-20deg, #469597 0%, #88d3ce 100%);
 }
 
