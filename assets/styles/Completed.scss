@@ -33,7 +33,7 @@ body {
 
 h1 {
   color: #1e2125;
-  font-size: 5vw;
+  font-size: 3rem;
 }
 
 .theme:before {
@@ -75,7 +75,7 @@ h1 {
 }
 
 .comments-title {
-  font-size: 16px;
+  font-size: 1rem;
   color: #262626;
   margin-bottom: 15px;
 }
@@ -104,7 +104,7 @@ h1 {
 }
 
 .be-comment-name {
-  font-size: 13px;
+  font-size: 0.8125rem;
 }
 
 .be-comment-content a {
@@ -122,12 +122,12 @@ h1 {
 }
 
 .be-comment-time {
-  font-size: 11px;
+  font-size: 0.6875rem;
   color: #b4b7c1;
 }
 
 .be-comment-text {
-  font-size: 13px;
+  font-size: 0.8125rem;
   line-height: 18px;
   color: #7a8192;
   display: block;
@@ -154,7 +154,7 @@ h1 {
 }
 
 .form-group .form-input {
-  font-size: 13px;
+  font-size: 0.8125rem;
   line-height: 50px;
   font-weight: 400;
   color: #b4b7c1;
@@ -332,7 +332,7 @@ button{
   }
 }
 .validate {
-  font-size:13px;
+  font-size: 0.8125rem;
   color: white;
   background: #299d87;
   &:after {
@@ -408,7 +408,7 @@ button{
   border-bottom: 1px solid #e5e5e5
 }
 .dialog-ovelay .dialog header h3 {
-  font-size: 14px;
+  font-size: 0.875rem;
   margin: 0;
   color: #555;
   display: inline-block
@@ -433,7 +433,7 @@ button{
 }
 .dialog-ovelay .dialog .dialog-msg p{
   margin: 0;
-  font-size: 15px;
+  font-size: 0.9375rem;
   color: #333
 }
 .dialog-ovelay .dialog footer {

@@ -51,8 +51,6 @@ class Story
     #[ORM\Column (nullable: true)]
     private ?string $storyImage ;
 
-
-
     public function getStoryImage(): ?string
     {
         return $this->storyImage;
@@ -106,15 +104,6 @@ class Story
         $this->status = $status;
 
         return $this;
-    }
-
-    public function getImageUrl(int $width=300): string
-    {
-        return sprintf(
-            'https://picsum.photos/id/%d/%d',
-            ($this->getId() + 50) % 1000, // number between 0 and 1000, based on the id
-            $width
-        );
     }
 
     public function getId(): ?int

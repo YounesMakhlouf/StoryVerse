@@ -24,12 +24,16 @@
     {% include "layout/header.html.twig" %}
 {% endblock %}
 {% block body %}
-    {% for flash in app.flashes('success') %}
-        <div class="alert alert-success">{{ flash }}</div>
+    <!-- Success and Error Messages -->
+    {% set successMessages = app.flashes('success') %}
+    {% set errorMessages = app.flashes('error') %}
+    {% for message in successMessages %}
+        <div class="alert alert-success">{{ message }}</div>
     {% endfor %}
-    {% for flash in app.flashes('error') %}
-        <div class="alert alert-success">{{ flash }}</div>
+    {% for message in errorMessages %}
+        <div class="alert alert-danger">{{ message }}</div>
     {% endfor %}
+    <!-- Flash Messages -->
     {% for flashMessage in app.session.flashbag.get('sweetalert2') %}
         {{ flashMessage|raw }}
     {% endfor %}
