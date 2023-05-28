@@ -12,25 +12,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
-
 class MyProfileController extends AbstractController
 {
-    #[IsGranted('ROLE_USER')]
-    #[Route('/myprofile', name: 'app_myprofile')]
-    public function showMyProfile(TierRepository $tierRepository): Response
-    {
-        $user = $this->getUser();
-        $contributedStories = $user->getContributedStories();
-
-        $nextTier = $tierRepository->findNextTier($user->getXp());
-
-        return $this->render('profile/myprofile.html.twig', [
-            'user' => $user,
-            'stories' => $contributedStories,
-            'nextTier' => $nextTier
-        ]);
-    }
-
     #[Route('/modify-profile', name: 'app_modify_profile')]
     public function modifyProfile(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -77,7 +60,7 @@ class MyProfileController extends AbstractController
             $entityManager->flush();
 
 
-            return $this->redirectToRoute('app_myprofile');
+            return $this->redirectToRoute('app_profile', ['id' => $user->getId()]);
         }
 
         return $this->render('profile/modifyprofile.html.twig', [
