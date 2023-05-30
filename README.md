@@ -3,13 +3,14 @@
 <!-- PROJECT SHIELDS -->
 
 [![Contributors][contributors-shield]][contributors-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
+[![LinkedIn][linkedin-shield]][linkedin-url-younes]
+[![LinkedIn][linkedin-shield]][linkedin-url-salma]
 
 
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/github_username/repo_name">
+  <a href="https://github.com/YounesMakhlouf/Projet-Web">
     <img src="assets/img/logo.webp" alt="Logo" width="80" height="80">
   </a>
 
@@ -18,14 +19,14 @@
   <p align="center">
 An innovative platform designed for collaborative storytelling
     <br />
-    <a href="https://github.com/github_username/repo_name"><strong>Explore the project »</strong></a>
+    <a href="https://github.com/YounesMakhlouf/Projet-Web"><strong>Explore the project »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/github_username/repo_name">View Demo</a>
+    <a href="https://github.com/YounesMakhlouf/Projet-Web">View Demo</a>
     ·
-    <a href="https://github.com/github_username/repo_name/issues">Report Bug</a>
+    <a href="https://github.com/YounesMakhlouf/Projet-Web/issues">Report Bug</a>
     ·
-    <a href="https://github.com/github_username/repo_name/issues">Request Feature</a>
+    <a href="https://github.com/YounesMakhlouf/Projet-Web/issues">Request Feature</a>
   </p>
 </div>
 
@@ -143,7 +144,8 @@ We welcome suggestions and pull requests from the community to make StoryVerse e
 [contributors-shield]: https://img.shields.io/github/contributors/YounesMakhlouf/Projet-Web.svg?style=for-the-badge
 [contributors-url]: https://github.com/YounesMakhlouf/Projet-Web/graphs/contributors
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://www.linkedin.com/in/younes-makhlouf-608321255/
+[linkedin-url-younes]: https://www.linkedin.com/in/younes-makhlouf-608321255/
+[linkedin-url-salma]: https://www.linkedin.com/in/selma-bouabidi-938b08237/
 [Bootstrap.com]: https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white
 [Bootstrap-url]: https://getbootstrap.com
 [Symfony.dev]: https://img.shields.io/static/v1?style=for-the-badge&message=Symfony&color=000000&logo=Symfony&logoColor=FFFFFF&label=
