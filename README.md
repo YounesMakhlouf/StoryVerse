@@ -86,7 +86,7 @@ To get a local copy up and running follow these simple steps.
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/github_username/repo_name.git
+   git clone https://github.com/YounesMakhlouf/Projet-Web
    ```
 2. Install NPM packages
    ```sh
@@ -97,10 +97,13 @@ To get a local copy up and running follow these simple steps.
    composer install
    ```
 4. Create a file named .env.local and define the following variables:
+</br>
 APP_SECRET </br>
 DATABASE_URL </br>
 MAILER_DSN
-5. Create a database using Symfony console
+</br>
+</br>
+5. Create a database
     ```sh
     symfony console doctrine:database:create
     ```
