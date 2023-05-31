@@ -25,7 +25,7 @@ body {
 
 .profile-container {
   margin: 0 auto;
-  max-width: 70vw;
+  max-width: 80vw;
   padding: 20px 24px;
   color: black;
   border-radius: 5px;
@@ -36,13 +36,10 @@ body {
 }
 
 #bio {
-  line-height: 16px;
+  line-height: 1.625rem;
   display: block;
   text-align: center;
-  margin-top: 4px;
-  margin-bottom: 4px;
   font-size: 1.25rem;
-  color: #53186a;
   font-weight: bold;
 }
 
@@ -62,10 +59,6 @@ body {
 
 .tier-container {
   margin: 12px;
-}
-
-.tier-content {
-  margin-top: 2px;
 }
 
 .tier-info {
@@ -106,10 +99,6 @@ body {
   font-style: italic;
 }
 
-.follow-button {
-  margin-left: 115px;
-}
-
 .level-up-message {
   background-color: #f8f9fa;
   border: 1px solid #dee2e6;
@@ -121,5 +110,5 @@ body {
 .level-up-message p {
   font-size: 1.125rem;
   font-weight: bold;
-  color: $Turquoise;
+  color: darken($DarkTurquoise, 10%);
 }

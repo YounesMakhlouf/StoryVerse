@@ -40,22 +40,28 @@
                                     {% set formAction = path('follow_user', {'id': user.id}) %}
                                     {% set followButtonLabel = 'Follow' %}
                                 {% endif %}
-                                <form class="d-inline" action="{{ formAction }}" method="post">
-                                    <button class="btn {{ is_following ? 'btn-primary' : 'btn-warning' }} follow-button">
-                                        {{ followButtonLabel }}
-                                    </button>
-                                </form>
+                                <div class="text-center">
+                                    <form class="d-inline" action="{{ formAction }}" method="post">
+                                        <button class="btn {{ is_following ? 'btn-primary' : 'btn-warning' }} follow-button">
+                                            {{ followButtonLabel }}
+                                        </button>
+                                    </form>
+                                </div>
                             {% endif %}
                             <hr class="my-4">
-                            <a class="icon-link" href="{{ path('app_following',{'id':user.id}) }}">
-                                <i class="fa-solid fa-user"></i>
-                                <span class="profile-followers">{{ user.following|length }} Following</span>
-                            </a>
+                            <div class="text-center">
+                                <a class="icon-link" href="{{ path('app_following',{'id':user.id}) }}">
+                                    <i class="fa-solid fa-user"></i>
+                                    <span class="profile-followers">{{ user.following|length }} Following</span>
+                                </a>
+                            </div>
                             <hr class="my-4">
-                            <a lass="icon-link" href="{{ path('app_followers',{'id':user.id}) }}">
-                                <i class="fa-solid fa-user"></i>
-                                <span class="profile-followers">{{ user.follower|length }} Followers</span>
-                            </a>
+                            <div class="text-center">
+                                <a class="icon-link" href="{{ path('app_followers',{'id':user.id}) }}">
+                                    <i class="fa-solid fa-user"></i>
+                                    <span class="profile-followers">{{ user.follower|length }} Followers</span>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -72,7 +78,7 @@
                                 <div class="profile-xp row align-items-center">
                                     <div class="tier-container col">
                                         <h5 class="tier">Current tier :</h5>
-                                        <div class="tier-content">
+                                        <div>
                                             {% if user.tier.badge %}
                                                 <img class="rounded-circle" height="50" width="50" alt="Tier badge"
                                                      src="{{ asset('build/images/tierBadges/' ~ user.tier.badge) }}">
@@ -84,7 +90,7 @@
                                         {% if nextTier %}
                                             <h5 class="tier">Missing XP to Next
                                                 Tier: {{ nextTier.xpThreshold - user.xp }}</h5>
-                                            <div class="tier-content row align-items-center">
+                                            <div class="row align-items-center">
                                                 {% if nextTier.badge %}
                                                     <img class="col-3 rounded-circle" height="50" width="50"
                                                          alt="Tier badge"
@@ -105,7 +111,7 @@
                                             </div>
                                         {% else %}
                                             <h5 class="tier">Congratulations!</h5>
-                                            <div class="tier-content">
+                                            <div>
                                                 <p>You have reached the highest tier available.</p>
                                                 <p>It seems we were too lazy to add more tiers, and we never expected
                                                     anyone to make it this far!</p>
