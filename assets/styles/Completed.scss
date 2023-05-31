@@ -5,12 +5,10 @@
 
 .like::after {
   content: 'like';
-  width: fit-content;
-  height: fit-content;
   position: absolute;
-  font-size: 15px;
+  font-size: 0.9375rem;
   color: black;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-family: 'Open Sans', sans-serif;
   opacity: 0;
   visibility: hidden;
   transition: .2s linear;
@@ -18,13 +16,7 @@
 }
 
 .fa-heart {
-  width: 30px;
-  height: 30px;
   transition: .2s linear;
-}
-
-.like {
-  margin: auto;
 }
 
 .like:hover > .fa-heart {
@@ -233,9 +225,7 @@ button {
   margin-top: 5%;
 }
 
-
 ///ADD CONTRIBUTION STYLE
-
 .text-box {
   margin-left: 33%;
   margin-top: 5%;
@@ -525,5 +515,5 @@ button {
 
 .link {
   padding: 5px 10px;
-  cursor: pointer
+  cursor: pointer;
 }
