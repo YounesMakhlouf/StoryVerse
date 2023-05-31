@@ -1,6 +1,40 @@
-body {
-  width: 100%;
-  height: 100%;
+.like {
+  position: relative;
+  cursor: pointer;
+}
+
+.like::after {
+  content: 'like';
+  width: fit-content;
+  height: fit-content;
+  position: absolute;
+  font-size: 15px;
+  color: black;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  opacity: 0;
+  visibility: hidden;
+  transition: .2s linear;
+  top: 115%;
+}
+
+.fa-heart {
+  width: 30px;
+  height: 30px;
+  transition: .2s linear;
+}
+
+.like {
+  margin: auto;
+}
+
+.like:hover > .fa-heart {
+  transform: scale(1.2);
+}
+
+.like:hover::after {
+  visibility: visible;
+  opacity: 1;
+  top: 105%;
 }
 
 #fixed {
@@ -135,6 +169,7 @@ h1 {
   border: 1px solid #edeff2;
   padding: 15px 20px 20px 20px;
 }
+
 .form-group.fl_icon .icon {
   position: absolute;
   top: 1px;
@@ -173,23 +208,27 @@ h1 {
 .form-group textarea.form-input {
   height: 150px;
 }
-.reply{
-  display:none;
-  margin-left:5%;
-}
-.icon{
-  margin-left: 10%;
-  margin-bottom:5%;
+
+.reply {
+  display: none;
+  margin-left: 5%;
 }
 
-#comment-form{
+.icon {
+  margin-left: 10%;
+  margin-bottom: 5%;
+}
+
+#comment-form {
   margin-left: 13%;
 }
-button{
-  border:0;
-  background:none;
+
+button {
+  border: 0;
+  background: none;
 }
-#newContribution{
+
+#newContribution {
   margin-left: 45%;
   margin-top: 5%;
 }
@@ -269,74 +308,81 @@ button{
 }
 
 /// contribution form style
-#contribute-form{
-  display:none;
-  margin-left:7%;
-  height:20%;
+#contribute-form {
+  display: none;
+  margin-left: 7%;
+  height: 20%;
 }
 
 //// contribution submit button
 .contain {
   position: absolute;
-  top:50%;
-  left:50%;
+  top: 50%;
+  left: 50%;
   margin-left: -65px;
   margin-top: -20px;
   width: 130px;
   height: 40px;
   text-align: center;
 }
+
 #sub {
-  outline:none;
+  outline: none;
   height: 40px;
   text-align: center;
   width: 130px;
-  border-radius:40px;
+  border-radius: 40px;
   background: #fff;
   border: 2px solid #299d87;
-  color:#299d87;
-  letter-spacing:1px;
-  text-shadow:0;
-  font:{
-    size:12px;
-    weight:bold;
+  color: #299d87;
+  letter-spacing: 1px;
+  font: {
+    size: 12px;
+    weight: bold;
   }
   cursor: pointer;
   transition: all 0.25s ease;
+
   &:hover {
-    color:white;
+    color: white;
     background: #299d87;
   }
+
   &:active {
     //letter-spacing: 2px;
-    letter-spacing: 2px ;
+    letter-spacing: 2px;
   }
+
   &:after {
-    content:"SUBMIT";
+    content: "SUBMIT";
   }
 }
+
 .onclic {
   width: 40px;
-  border-color:gray;
-  border-width:3px;
-  font-size:0;
-  border-left-color:#299d87;
+  border-color: gray;
+  border-width: 3px;
+  font-size: 0;
+  border-left-color: #299d87;
   animation: rotating 2s 0.25s linear infinite;
 
   &:after {
-    content:"";
+    content: "";
   }
+
   &:hover {
     color: #299d87;
     background: white;
   }
 }
+
 .validate {
   font-size: 0.8125rem;
   color: white;
   background: #299d87;
+
   &:after {
-    content:"\f00c";
+    content: "\f00c";
   }
 }
 
@@ -350,42 +396,44 @@ button{
 }
 
 //// browse button
-#message{
-  margin-top:3%;
-  margin-left:8%;
+#message {
+  margin-top: 3%;
+  margin-left: 8%;
 }
 
 
 //////// generate pdf button
-.pdf{
-  font-size:1.5rem;
-  border:2px solid  #299d87;
-  border-radius:100px;
-  width:40px;
-  height:40px;
-  padding:5px;
+.pdf {
+  font-size: 1.5rem;
+  border: 2px solid #299d87;
+  border-radius: 100px;
+  width: 40px;
+  height: 40px;
+  padding: 5px;
   margin: 10% auto;
   transition: .5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
-.icn{
+.icn {
   position: relative;
   top: 50%;
   transform: translateY(-50%);
-  text-align:center;
+  text-align: center;
 }
 
 /* Hover */
-.pdf:hover{
-  width:125px;
+.pdf:hover {
+  width: 125px;
   background-color: white;
-  box-shadow: 0 5px 5px rgba(0,0,0,0.2);
-  transition:.3s;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+  transition: .3s;
 }
-.pdf:active{
-  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+
+.pdf:active {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   transition: .05s
 }
+
 .dialog-ovelay {
   position: fixed;
   top: 0;
@@ -394,25 +442,29 @@ button{
   bottom: 0;
   z-index: 999999
 }
+
 .dialog-ovelay .dialog {
   width: 400px;
   margin: 100px auto 0;
   background-color: #fff;
-  box-shadow: 0 0 20px rgba(0,0,0,.2);
+  box-shadow: 0 0 20px rgba(0, 0, 0, .2);
   border-radius: 3px;
   overflow: hidden
 }
+
 .dialog-ovelay .dialog header {
   padding: 10px 8px;
   background-color: #f6f7f9;
   border-bottom: 1px solid #e5e5e5
 }
+
 .dialog-ovelay .dialog header h3 {
   font-size: 0.875rem;
   margin: 0;
   color: #555;
   display: inline-block
 }
+
 .dialog-ovelay .dialog header .fa-close {
   float: right;
   color: #c4c5c7;
@@ -421,45 +473,56 @@ button{
   padding: 0 2px;
   border-radius: 1px
 }
+
 .dialog-ovelay .dialog header .fa-close:hover {
   color: #b9b9b9
 }
+
 .dialog-ovelay .dialog header .fa-close:active {
   box-shadow: 0 0 5px #673AB7;
   color: #a2a2a2
 }
+
 .dialog-ovelay .dialog .dialog-msg {
   padding: 12px 10px
 }
-.dialog-ovelay .dialog .dialog-msg p{
+
+.dialog-ovelay .dialog .dialog-msg p {
   margin: 0;
   font-size: 0.9375rem;
   color: #333
 }
+
 .dialog-ovelay .dialog footer {
   border-top: 1px solid #e5e5e5;
   padding: 8px 10px
 }
+
 .dialog-ovelay .dialog footer .controls {
   direction: rtl
 }
+
 .dialog-ovelay .dialog footer .controls .button {
   padding: 5px 15px;
   border-radius: 3px
 }
+
 .button {
   cursor: pointer
 }
+
 .button-default {
   background-color: rgb(248, 248, 248);
   border: 1px solid rgba(204, 204, 204, 0.5);
   color: #5D5D5D;
 }
+
 .button-danger {
   background-color: #f44336;
   border: 1px solid #d32f2f;
   color: #f5f5f5
 }
+
 .link {
   padding: 5px 10px;
   cursor: pointer

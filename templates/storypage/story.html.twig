@@ -1,191 +1,180 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{story.title}}{% endblock %}
+{% block title %}{{ story.title }}{% endblock %}
 
 {% block body %}
     {% block like %}
-    <body>
-         <div class="theme" style="background-image: url('{{ asset('uploads/story_directory/' ~ story.storyImage) }}');">
-         </div>
-            <div class="page-content">
-                <div class="row">
-                    <div class="col-1" id="fixed">
-                        {#        report story#}
+        <body>
+        <div class="theme" style="background-image: url('{{ asset('uploads/story_directory/' ~ story.storyImage) }}');">
+        </div>
+        <div class="page-content">
+        <div class="row">
+        <div class="col-1" id="fixed">
 
-
-
-                            <div class="pdf" style="border:2px solid  #b30000;" id="report" data-story-id="{{ path('app_report_story',{'id':story.id}) }}">
-                                <div class="icn">
-
-                                    <i class="fa-solid fa-circle-exclamation" style="color: #b30000;"></i>
-                                </div>
-
-                            </div>
-
-
-
-                        {#        generate pdf#}
-
-
-                        <a href="{{ path('app_pdf',{'id':story.id}) }}">
-
-                        <div class="pdf" >
-                            <div class="icn">
-
-                                <i class="fa-solid fa-file-pdf"></i>
-                            </div>
-
-                        </div>
-                        </a>
-                        {#likes#}
-
-                        <i id="color" class="
-                            {% if hasLiked %}fa-solid
-                            {% else%}
-                            fa-regular
-                            {% endif%}
-                                fa-heart fa-2xl"
-                                data-story-id="{{ path('app_like', {'id': story.id}) }}" style="color: #d31717;"></i>
-                        <div id="likes">{{ story.likes|length }}</div>
-
-                    </div>
-        {% endblock %}
-
-{#            title        #}
-                    {% block story %}
-
-                <div  class="text col-8" >
-                    <div class="title">
-                        <h1>{{ story.title }}</h1>
-                    </div>
-                    {% for contribution in story.contributions %}
-                            <p class="contr" id="{{ contribution.author.id  }}">{{ contribution.content }}</p>
-                    {% endfor%}
-
-
+            {#        report story #}
+            <div class="pdf" style="border:2px solid  #b30000;" id="report"
+                 data-story-id="{{ path('app_report_story',{'id':story.id}) }}">
+                <div class="icn">
+                    <i class="fa-solid fa-circle-exclamation" style="color: #b30000;"></i>
                 </div>
+            </div>
 
-            <span  class="authors ">
-                <h5>Contributors</h5>
-                {% for contribution in story.contributions %}
-                        <a id="{{contribution.author.id ~ "author"}}" href='{{ path('app_profile',{id:contribution.author.id}) }}'>
-                    {{ contribution.author.username }}
-                    </a>
-                        <hr>
-                {% endfor %}
+            {# generate pdf #}
+            <a href="{{ path('app_pdf',{'id':story.id}) }}">
+
+                <div class="pdf">
+                    <div class="icn">
+                        <i class="fa-solid fa-file-pdf"></i>
+                    </div>
+                </div>
+            </a>
+            {# likes #}
+            <div class="like-container">
+                <button class="like">
+                    <i id="color" class="fa-heart fa-2xl
+                    {% if hasLiked %}fa-solid
+                    {% else %}
+                    fa-regular
+                    {% endif %}"
+                       data-story-id="{{ path('app_like', {'id': story.id}) }}" style="color: #d31717;"></i>
+                </button>
+                <div id="likes">{{ story.likes|length }}</div>
+            </div>
+        </div>
+    {% endblock %}
+
+    {#            title        #}
+{% block story %}
+
+    <div class="text col-8">
+        <div class="title">
+            <h1>{{ story.title }}</h1>
+        </div>
+        {% for contribution in story.contributions %}
+            <p class="contr" id="{{ contribution.author.id }}">{{ contribution.content }}</p>
+        {% endfor %}
 
 
-        </span>
     </div>
-                {% endblock %}
 
-                {% block contribute %}
-                {% if not hasContributed %}
-                <div class="text-box">
-                    <a id="contribute-btn" class="btn btn-white btn-animate">Be part of the story - Contribute now!</a>
-                </div>
-
-            </div>
-
-            <div class="row" id="contribute-form">
-                {{ form_start(contributionForm,{'action': path('app_storypage', {'id':story.id}),
-                    'attr': {'id': 'contribution-form'}}) }}
-                    {{ form_widget(contributionForm.content,{'attr':{'class':'form-input col-7', 'placeholder':'add your contribution'}}) }}
-                    <button id="sub" type="submit" ></button>
-                {{ form_end(contributionForm) }}
-
-            </div>
-            {% else %}
-
-            <div id="message" class="alert alert-light col-8">
-                Looks like you've already contributed to this story! How about exploring some other stories?
-            </div>
-                <a href="{{ path('app_browse_stories') }}" class="btn btn-white btn-animate col-2" style="margin-left:8%">Explore</a>
-            {% endif %}
+    <span class="authors ">
+        <h5>Contributors</h5>
+            {% for contribution in story.contributions %}
+                <a id="{{ contribution.author.id ~ "author" }}"
+                   href='{{ path('app_profile',{id:contribution.author.id}) }}'>
+                {{ contribution.author.username }}
+            </a>
+                <hr>
+            {% endfor %}
+    </span>
+    </div>
 {% endblock %}
 
+{% block contribute %}
+    {% if not hasContributed %}
+    <div class="text-box">
+        <a id="contribute-btn" class="btn btn-white btn-animate">Be part of the story - Contribute now!</a>
+    </div>
+</div>
 
-{#            comment section #}
+    <div class="row" id="contribute-form">
+        {{ form_start(contributionForm,{'action': path('app_storypage', {'id':story.id}),
+            'attr': {'id': 'contribution-form'}}) }}
+        {{ form_widget(contributionForm.content,{'attr':{'class':'form-input col-7', 'placeholder':'add your contribution'}}) }}
+        <button id="sub" type="submit"></button>
+        {{ form_end(contributionForm) }}
+    </div>
+    {% else %}
 
-{% block comments %}
-            <div id="comment_section" class="col-8">
-                <div class="be-comment-block">
-                    <h1 class="comments-title" id="comment-count">Comments ({{ story.comments|length }})</h1>
-                    {% for comment in story.comments %}
-                        {% if comment.comment is null %}
-                    <div class="be-comment">
-                        <div class="be-img-comment">
-                            <a href="{{ path('app_profile',{'id':comment.author.id})  }}">
-                                <img src="{{ asset ('uploads/avatar_directory/'~ comment.author.avatar)}}" alt="" class="be-ava-comment">
-                            </a>
-                        </div>
-                        <div class="be-comment-content">
+        <div id="message" class="alert alert-light col-8">
+            Looks like you've already contributed to this story! How about exploring some other stories?
+        </div>
+        <a href="{{ path('app_browse_stories') }}" class="btn btn-white btn-animate col-2" style="margin-left:8%">Explore</a>
+    {% endif %}
+{% endblock %}
 
-				<span class="be-comment-name">
-					<a href="">{{ comment.author.username }}</a>
-					</span>
-                            <span class="be-comment-time">
-					            <i class="fa fa-clock-o"></i>
-                                {{ comment.createdat|date('d-m-Y') }}
-                            </span>
-                            <div id="comments_section">
-                            <p class="be-comment-text">
-                                {{ comment.content }}
-                            </p>
-                            </div>
-                        </div>
-                    </div>
-                        {% endif %}
-{#                        reply#}
-
-                        {% for reply in comment.replies%}
-                            <div id="reply" class="row">
-                            <div class="icon col-12">
-                                <i id="arrow" class="fa-solid fa-arrow-right" style="color: #5c5e60;"></i>
-                                <a> Show replies</a>
-                            </div>
-                            </div>
-                        <div class="reply row" style="display:none;">
-                        <div class="be-comment col-8 ">
+    {# Comment section #}
+    {% block comments %}
+        <div id="comment_section" class="col-8">
+            <div class="be-comment-block">
+                <h1 class="comments-title" id="comment-count">Comments ({{ story.comments|length }})</h1>
+                {% for comment in story.comments %}
+                    {% if comment.comment is null %}
+                        <div class="be-comment">
                             <div class="be-img-comment">
-                                <a href="">
-                                    <img src="{{ asset ('uploads/avatar_directory/'~ comment.author.avatar)}}" alt="" class="be-ava-comment">
+                                <a href="{{ path('app_profile',{'id':comment.author.id}) }}">
+                                    <img src="{{ asset ('uploads/avatar_directory/'~ comment.author.avatar) }}" alt=""
+                                         class="be-ava-comment">
                                 </a>
                             </div>
                             <div class="be-comment-content">
 				<span class="be-comment-name">
-					<a href="">{{ reply.author.username }}</a>
+					<a href="">{{ comment.author.username }}</a>
 					</span>
                                 <span class="be-comment-time">
 					            <i class="fa fa-clock-o"></i>
-                                {{ reply.createdat|date('d-m-Y') }}
+                                {{ comment.createdat|date('d-m-Y') }}
                             </span>
-                                <p class="be-comment-text">
-                                    {{ reply.content }}
-                                </p>
+                                <div id="comments_section">
+                                    <p class="be-comment-text">
+                                        {{ comment.content }}
+                                    </p>
+                                </div>
                             </div>
                         </div>
+                    {% endif %}
+
+                    {# Reply #}
+                    {% for reply in comment.replies %}
+                        <div id="reply" class="row">
+                            <div class="icon col-12">
+                                <i id="arrow" class="fa-solid fa-arrow-right" style="color: #5c5e60;"></i>
+                                <a> Show replies</a>
+                            </div>
+                        </div>
+                        <div class="reply row" style="display:none;">
+                            <div class="be-comment col-8 ">
+                                <div class="be-img-comment">
+                                    <a href="">
+                                        <img src="{{ asset ('uploads/avatar_directory/'~ comment.author.avatar) }}"
+                                             alt="" class="be-ava-comment">
+                                    </a>
+                                </div>
+                                <div class="be-comment-content">
+				<span class="be-comment-name">
+					<a href="">{{ reply.author.username }}</a>
+					</span>
+                                    <span class="be-comment-time">
+					            <i class="fa fa-clock-o"></i>
+                                {{ reply.createdat|date('d-m-Y') }}
+                            </span>
+                                    <p class="be-comment-text">
+                                        {{ reply.content }}
+                                    </p>
+                                </div>
+                            </div>
                         </div>
 
-                        {% endfor %}
                     {% endfor %}
-                    {{ form_start(form,{'action': path('app_storypage', {'id':story.id}),
-                        'attr': {'id': 'comment-form'}}) }}
-                     <div class="row">
+                {% endfor %}
+                {{ form_start(form,{'action': path('app_storypage', {'id':story.id}),
+                    'attr': {'id': 'comment-form'}}) }}
+                <div class="row">
                     {{ form_widget(form.content,{'attr':{'class':'form-input col-8', 'placeholder':'add your comment'}}) }}
-                         <button class="col-1" type="submit">
-                             <i class="fa-solid fa-paper-plane fa-2xl" style="color:#5BA199;"></i>
-                         </button>
+                    <button class="col-1" type="submit">
+                        <i class="fa-solid fa-paper-plane fa-2xl" style="color:#5BA199;"></i>
+                    </button>
 
-                     </div>
-                    {{ form_end(form) }}
                 </div>
+                {{ form_end(form) }}
             </div>
+        </div>
 
-        <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
-    </body>
-{% endblock %}
+        <script src="https://code.jquery.com/jquery-3.6.3.min.js"
+                integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+        </body>
     {% endblock %}
+{% endblock %}
 
  {% block stylesheets %}
      {{ parent() }}
@@ -196,17 +185,16 @@
      {{ parent() }}
      {{ encore_entry_script_tags('completed') }}
      <script>
-        const story ={
-            id : {{story.id}},
-            title :'{{story.title}}'
-        }
-          
-     </script>
+         const story = {
+             id: {{ story.id }},
+             title: '{{ story.title }}'
+         }
 
+     </script>
      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.js"></script>
      {% for flash in app.session.flashbag.get('sweetalert2') %}
          {{ flash|raw }}
      {% endfor %}
-   
+
  {% endblock %}
 
