@@ -3,6 +3,7 @@
 @import '~bootstrap';
 @import "./layout/header";
 @import "./helper/general";
+
 body {
   background: #e7dfdb;
   margin-top: 20px;
@@ -21,29 +22,17 @@ body {
   margin-bottom: 1.5rem;
   box-shadow: 0 2px 6px 0 rgb(218 218 253 / 65%), 0 2px 6px 0 rgb(206 206 238 / 54%);
 }
-.me-2 {
-  margin-right: .5rem!important;
-}
 
 .profile-container {
   margin: 0 auto;
-  max-width: 1000px;
-  padding:20px 24px;
+  max-width: 70vw;
+  padding: 20px 24px;
   color: black;
   border-radius: 5px;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
   width: 100%;
   height: 100%;
-  background-color:white;
-}
-
-#profile-info {
-  width: 800px;
-  margin: auto;
-}
-
-.infos {
-  border-radius: 5px 5px 4px 4px;
+  background-color: white;
 }
 
 #bio {
@@ -60,18 +49,14 @@ body {
 .profile-picture {
   width: 200px;
   height: 200px;
+  border-radius: 50%;
   margin: auto;
   z-index: 1;
   position: relative;
 }
 
-.profile-name {
-  margin: 4px 0;
-  color: #53186a;
-}
-
 .fa-user-pen {
-  margin-left: 20px;
+  margin-left: 16px;
   color: $Turquoise;
 }
 
@@ -90,37 +75,20 @@ body {
   margin-left: 4px;
 }
 
-#xp {
-  color: black;
-}
-
-.profile-stats {
-  margin-top: 10px;
-}
-
-.fa-user {
-  padding-right: 5px;
-}
-
-.profile-followers,
-.profile-following {
-  display: inline-block;
+.profile-followers {
   font-weight: bold;
-  margin-right: 10px;
   font-size: 1.25rem;
   color: darken($DarkTurquoise, 10%);
-  margin-top: 5%;
 }
 
 .profile-stories-title {
-  margin-top: 20px;
-  font-size: 1.25rem;
   font-weight: bold;
   color: #2b5a89;
 }
 
 /* CSS pour l'effet de zoom */
 .zoom-image {
+  max-width: 50%;
   transition: transform 0.3s ease-in-out;
 }
 
@@ -137,7 +105,8 @@ body {
   color: #2b5a89;
   font-style: italic;
 }
-.follow-button{
+
+.follow-button {
   margin-left: 115px;
 }
 

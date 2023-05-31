@@ -5,15 +5,9 @@
 {% block body %}
     {% block like %}
     <body>
-        
-            <div class="theme " style="background-image: url({{ asset ('uploads/story_directory/'~ story.storyImage)}});">
-
-            </div>
+         <div class="theme" style="background-image: url('{{ asset('uploads/story_directory/' ~ story.storyImage) }}');">
+         </div>
             <div class="page-content">
-
-
-
-
                 <div class="row">
                     <div class="col-1" id="fixed">
                         {#        report story#}
@@ -196,8 +190,8 @@
  {% block stylesheets %}
      {{ parent() }}
      {{ encore_entry_link_tags('completed') }}
-     <link href="node_modules/bootstrap/dist/css/bootstrap.css"
  {% endblock %}
+
  {% block javascripts %}
      {{ parent() }}
      {{ encore_entry_script_tags('completed') }}

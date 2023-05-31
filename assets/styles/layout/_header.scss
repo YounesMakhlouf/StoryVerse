@@ -41,9 +41,6 @@
 .navbar a,
 .navbar a:focus,
 #notification-icon {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   padding: 10px 0 10px 30px;
   font-size: 1.125rem;
   font-weight: 500;
@@ -164,7 +161,6 @@
 }
 
 .navbar .dropdown ul a {
-  padding: 10px 20px;
   font-size: 0.875rem;
   font-weight: 500;
   text-transform: none;

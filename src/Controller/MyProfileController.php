@@ -3,10 +3,10 @@
 namespace App\Controller;
 
 use App\Form\ProfileType;
-use App\Repository\TierRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,59 +14,48 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class MyProfileController extends AbstractController
 {
+    public function __construct(private readonly EntityManagerInterface $entityManager)
+    {
+    }
+
+    #[IsGranted('ROLE_USER')]
     #[Route('/modify-profile', name: 'app_modify_profile')]
-    public function modifyProfile(Request $request, EntityManagerInterface $entityManager): Response
+    public function modifyProfile(Request $request): Response
     {
         $user = $this->getUser();
-
-        // Check if user is authenticated
-        if (!$user) {
-            return $this->redirectToRoute('app_login');
-        }
-
         $form = $this->createForm(ProfileType::class, $user);
         $form->handleRequest($request);
 
-
         if ($form->isSubmitted() && $form->isValid()) {
-            $File = $form->get('avatar')->getData();
-
-            // this condition is needed because the 'avatar' field is not required
-            // so the image  must be processed only when a file is uploaded
-
-            if ($File) {
-                $originalFilename = pathinfo($File->getClientOriginalName(), PATHINFO_FILENAME);
-
-                $newFilename = $originalFilename . '-' . uniqid() . '.' . $File->guessExtension();
-
-                // Move the file to the directory where brochures are stored
-                try {
-                    $File->move(
-                        $this->getParameter('avatar_directory'),
-                        $newFilename
-                    );
-                } catch (FileException $e) {
-                    // ... handle exception if something happens during file upload
-                }
-
-                // updates the 'brochureFilename' property to store the PDF file name
-                // instead of its contents
-                $user->setAvatar($newFilename);
+            try {
+                $this->handleAvatarUpload($form, $user);
+            } catch (FileException $e) {
+                throw new FileException('Failed to upload file: ' . $e->getMessage());
             }
-
-
-            // Persist changes to database
-            $entityManager->persist($user);
-            $entityManager->flush();
-
-
+            $this->entityManager->persist($user);
+            $this->entityManager->flush();
             return $this->redirectToRoute('app_profile', ['id' => $user->getId()]);
         }
 
         return $this->render('profile/modifyprofile.html.twig', [
             'form' => $form->createView(),
-            'errors' => $form->getErrors(true),
             'user' => $user
         ]);
+    }
+
+    private function handleAvatarUpload($form, $user): void
+    {
+        $file = $form->get('avatar')->getData();
+        if ($file instanceof UploadedFile) {
+            $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+            $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
+            $newFilename = $safeFilename . '-' . uniqid('', true) . '.' . $file->guessExtension();
+
+            $file->move(
+                $this->getParameter('avatar_directory'),
+                $newFilename
+            );
+            $user->setAvatar($newFilename);
+        }
     }
 }
