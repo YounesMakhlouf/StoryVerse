@@ -7,12 +7,10 @@ use Symfony\Contracts\EventDispatcher\Event;
 
 class QuestActionEvent extends Event
 {
-    private User $user;
-    const QUEST_ACTION_EVENT = 'action.quest';
+    public const QUEST_ACTION_EVENT = 'action.quest';
 
-    public function __construct(User $user)
+    public function __construct(private readonly User $user)
     {
-        $this->user = $user;
     }
 
     public function getUser(): User

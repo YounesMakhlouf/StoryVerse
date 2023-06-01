@@ -8,11 +8,8 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class QuestActionListener implements EventSubscriberInterface
 {
-    private QuestCompletionService $questCompletionService;
-
-    public function __construct(QuestCompletionService $questCompletionService)
+    public function __construct(private readonly QuestCompletionService $questCompletionService)
     {
-        $this->questCompletionService = $questCompletionService;
     }
 
     public static function getSubscribedEvents(): array

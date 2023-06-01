@@ -4,7 +4,6 @@
 
 {% block title %}Register{% endblock %}
 
-
 {% block body %}
     <main class="gradient">
     <div class="container">
@@ -14,7 +13,7 @@
         </div>
     {% else %}
         <div class="title">
-            <img src="{{ asset('build/images/logo.webp') }}" class="img-fluid" alt="Example Image">
+            <img src="{{ asset('build/images/logo.webp') }}" class="img-fluid" alt="Logo">
             Story Verse Registration Form
         </div>
         <div class="content">
@@ -22,40 +21,66 @@
                 {{ form_start(registrationForm) }}
                 {{ form_row(registrationForm.first_name,{
                     label:'First Name',
-                    attr:{'placeholder':"Enter your first name",'autocomplete':"off"},
-                    label_attr: {'class': 'details'},
-                    row_attr: { class: 'input-box' }
+                    attr:{
+                        'placeholder':"Enter your first name",
+                        'autocomplete':"off"
+                    },
+                    'row_attr': {
+                        'class': 'input-box',
+                    }
                 }) }}
                 {{ form_row(registrationForm.last_name,{
-                    label:'Last Name',
-                    attr:{'placeholder':"Enter your last name",'autocomplete':"off"},
-
-                    label_attr: {'class': 'details'},
-
-                    row_attr: { class: 'input-box' }}) }}
+                    'label': 'Last Name',
+                    'attr': {
+                        'placeholder': 'Enter your last name',
+                        'autocomplete': 'off',
+                    },
+                    'row_attr': {
+                        'class': 'input-box',
+                    }
+                }) }}
                 <div class="input-box">
                     {{ form_label(registrationForm.username) }}
-                    {{ form_widget(registrationForm.username,{attr:{'placeholder':"Enter your username",'autocomplete':"off"}}) }}
+                    {{ form_widget(registrationForm.username, {
+                        'attr': {
+                            'placeholder': 'Enter your username',
+                            'autocomplete': 'off',
+                        },
+                    }) }}
+                    {% if form_errors(registrationForm.username)|length > 0 %}
+                        <div class="alert alert-danger">
+                            {{ form_errors(registrationForm.username) }}
+                        </div>
+                    {% endif %}
                 </div>
                 <div class="input-box">
                     {{ form_label(registrationForm.email) }}
-                    {{ form_widget(registrationForm.email,{attr:{'placeholder':"Enter your email",'autocomplete':"off"}}) }}
+                    {{ form_widget(registrationForm.email, {
+                        'attr': {
+                            'placeholder': 'Enter your email',
+                            'autocomplete': 'off',
+                        },
+                    }) }}
                 </div>
                 <div class="input-box">
-                    {{ form_label(registrationForm.plainPassword, 'Password') }}
-                    {{ form_widget(registrationForm.plainPassword,{attr:{'placeholder':"Enter your password",'autocomplete':"off"}}) }}
+                    {{ form_widget(registrationForm.password, {
+                        'attr': {
+                            'placeholder': 'Enter your password',
+                            'autocomplete': 'off',
+                        },
+                    }) }}
                 </div>
             </div>
             <div class="gender_details">
-                {{ form_row(registrationForm.gender ,{
-                    label_attr:{class:"gender"}
+                {{ form_row(registrationForm.gender, {
+                    'label_attr': {
+                        'class': 'gender',
+                    }
                 }) }}
             </div>
-            {% if form_errors(registrationForm.username)|length > 0 or form_errors(registrationForm.plainPassword)|length > 0 or form_errors(registrationForm.email)|length > 0 %}
+            {% if form_errors(registrationForm) %}
                 <div class="alert alert-danger">
-                    {{ form_errors(registrationForm.plainPassword) }}
-                    {{ form_errors(registrationForm.email) }}
-                    {{ form_errors(registrationForm.username) }}
+                    {{ form_errors(registrationForm) }}
                 </div>
             {% endif %}
             <div class="button">

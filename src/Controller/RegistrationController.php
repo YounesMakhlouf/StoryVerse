@@ -35,7 +35,7 @@ class RegistrationController extends AbstractController
             $user->setPassword(
                 $userPasswordHasher->hashPassword(
                     $user,
-                    $form->get('plainPassword')->getData()
+                    $form->get('password')->getData()
                 )
             );
             // Set user's last login date
@@ -44,7 +44,9 @@ class RegistrationController extends AbstractController
             $entityManager->flush();
             // Mark login quest as completed
             $createAccountQuest = $questRepository->findOneBy(['requirement' => 'create_account']);
-            $questCompletionService->markQuestAsCompleted($user, $createAccountQuest);
+            if ($createAccountQuest) {
+                $questCompletionService->markQuestAsCompleted($user, $createAccountQuest);
+            }
             // Redirect to send verification email route
             return $this->redirectToRoute('app_send_verification_email', [
                 'id' => $user->getId(),
