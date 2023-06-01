@@ -116,8 +116,7 @@ To get a local copy up and running follow these simple steps.
    composer install
    ```
 4. Create a file named .env.local and define the following variables:
-5. <ul>
-
+<ul>
 <li>APP_SECRET</li>
 <li>DATABASE_URL</li>
 <li>MAILER_DSN</li>

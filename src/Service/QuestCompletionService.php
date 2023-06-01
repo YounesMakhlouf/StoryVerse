@@ -95,7 +95,7 @@ SCRIPT;
 
     private function verifyTierUpdate(User $user): void
     {
-        $tiers = $this->tierRepository->findAllOrderedByXpThreshold();
+        $tiers = $this->tierRepository->findAllOrderedByXpThresholdAscending();
         $currentTier = $user->getTier();
         if (!$currentTier) {
             $user->setTier($tiers[0]);

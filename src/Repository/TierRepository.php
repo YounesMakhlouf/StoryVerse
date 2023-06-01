@@ -40,7 +40,7 @@ class TierRepository extends ServiceEntityRepository
         }
     }
 
-    public function findAllOrderedByXpThreshold()
+    public function findAllOrderedByXpThresholdAscending(): array
     {
         return $this->createQueryBuilder('t')
             ->orderBy('t.xpThreshold', 'ASC')
@@ -51,7 +51,7 @@ class TierRepository extends ServiceEntityRepository
     /**
      * @throws NonUniqueResultException
      */
-    public function findNextTier(int $xp)
+    public function findNextTier(int $xp): ?Tier
     {
         return $this->createQueryBuilder('t')
             ->andWhere('t.xpThreshold > :xp')
@@ -61,30 +61,4 @@ class TierRepository extends ServiceEntityRepository
             ->getQuery()
             ->getOneOrNullResult();
     }
-
-
-//    /**
-//     * @return Tier[] Returns an array of Tier objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('t')
-//            ->andWhere('t.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('t.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?Tier
-//    {
-//        return $this->createQueryBuilder('t')
-//            ->andWhere('t.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
 }

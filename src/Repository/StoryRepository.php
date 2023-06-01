@@ -62,9 +62,7 @@ class StoryRepository extends ServiceEntityRepository
             $queryBuilder->andWhere("mix.genre = :genre")
                 ->setParameter('genre', $genre);
         }
-        return $queryBuilder
-            ->getQuery()
-            ->getResult();
+        return $queryBuilder->getQuery()->getResult();
     }
 
     /**
@@ -72,23 +70,24 @@ class StoryRepository extends ServiceEntityRepository
      */
     public function deleteStoryWithContributionsAndComments(int $storyId): void
     {
-        $story = $this->entityManager->getRepository(Story::class)->find($storyId);
+        $story = $this->find($storyId);
 
         if (!$story) {
             throw new Exception('Story not found.');
         }
 
+        $this->deleteContributions($story);
+        $this->deleteComments($story);
+
+        $this->entityManager->remove($story);
+        $this->entityManager->flush();
+    }
+
+    private function deleteContributions(Story $story): void
+    {
         foreach ($story->getContributions() as $contribution) {
             $this->entityManager->remove($contribution);
         }
-
-        foreach ($story->getComments() as $comment) {
-            $this->entityManager->remove($comment);
-        }
-
-        $this->entityManager->remove($story);
-
-        $this->entityManager->flush();
     }
 
     public function remove(Story $entity, bool $flush = false): void
@@ -100,22 +99,19 @@ class StoryRepository extends ServiceEntityRepository
         }
     }
 
+    private function deleteComments(Story $story): void
+    {
+        foreach ($story->getComments() as $comment) {
+            $this->entityManager->remove($comment);
+        }
+    }
+
     public function searchByTitle(string $searchQuery): array
     {
         return $this->createQueryBuilder('s')
-            ->where('s.title LIKE :searchQuery')
-            ->setParameter('searchQuery', '%' . $searchQuery . '%')
+            ->where('LOWER(s.title) LIKE :searchQuery')
+            ->setParameter('searchQuery', '%' . strtolower($searchQuery) . '%')
             ->getQuery()
             ->getResult();
     }
-
-//    public function findOneBySomeField($value): ?Story
-//    {
-//        return $this->createQueryBuilder('s')
-//            ->andWhere('s.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
 }
