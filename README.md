@@ -97,12 +97,9 @@ To get a local copy up and running follow these simple steps.
    composer install
    ```
 4. Create a file named .env.local and define the following variables:
-</br>
 APP_SECRET </br>
 DATABASE_URL </br>
 MAILER_DSN
-</br>
-</br>
 5. Create a database
     ```sh
     symfony console doctrine:database:create
