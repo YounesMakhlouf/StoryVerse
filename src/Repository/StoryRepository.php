@@ -19,7 +19,7 @@ use Exception;
  */
 class StoryRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry, private EntityManagerInterface $entityManager)
+    public function __construct(ManagerRegistry $registry, private readonly EntityManagerInterface $entityManager)
     {
         parent::__construct($registry, Story::class);
     }
@@ -98,6 +98,15 @@ class StoryRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    public function searchByTitle(string $searchQuery): array
+    {
+        return $this->createQueryBuilder('s')
+            ->where('s.title LIKE :searchQuery')
+            ->setParameter('searchQuery', '%' . $searchQuery . '%')
+            ->getQuery()
+            ->getResult();
     }
 
 //    public function findOneBySomeField($value): ?Story
