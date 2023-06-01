@@ -64,7 +64,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: self::class, inversedBy: 'following', fetch: 'EXTRA_LAZY')]
     private Collection $follower;
     #[ORM\Column]
-    private ?string $csrf_token;
+    private ?string $csrf_token = '';
 
     #[ORM\ManyToMany(targetEntity: self::class, mappedBy: 'follower', fetch: 'EXTRA_LAZY')]
     private Collection $following;
@@ -94,10 +94,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\ManyToOne(inversedBy: 'users')]
     private ?Tier $tier = null;
+    private ?string $fullName;
 
     public function __construct()
     {
-        $this->csrf_token = '';
         $this->follower = new ArrayCollection();
         $this->following = new ArrayCollection();
         $this->notifications = new ArrayCollection();
@@ -159,7 +159,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function eraseCredentials()
     {
         // If you store any temporary, sensitive data on the user, clear it here
-        // $this->plainPassword = null;
+        // $this->password = null;
     }
 
     public function getGender(): ?string
@@ -200,7 +200,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getFullName(): ?string
     {
-        return $this->getFirstName() . ' ' . $this->getLastName();
+        return $this->fullName;
     }
 
     public function getFirstName(): ?string
@@ -211,8 +211,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setFirstName(string $first_name): self
     {
         $this->first_name = $first_name;
+        $this->updateFullName();
 
         return $this;
+    }
+
+    private function updateFullName(): void
+    {
+        $this->fullName = $this->first_name . ' ' . $this->last_name;
     }
 
     public function getLastName(): ?string
@@ -223,6 +229,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setLastName(string $last_name): self
     {
         $this->last_name = $last_name;
+        $this->updateFullName();
 
         return $this;
     }
@@ -292,19 +299,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function __toString(): string
     {
-        return $this->getUsername();
-    }
-
-    public function getUsername(): ?string
-    {
-        return $this->username;
-    }
-
-    public function setUsername(string $username): self
-    {
-        $this->username = $username;
-
-        return $this;
+        return $this->username ?? '';
     }
 
     /**
@@ -445,16 +440,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-      public function setXp(int $xp): self
+    public function getXp(): ?int
+    {
+        return $this->xp;
+    }
+
+    public function setXp(int $xp): self
     {
         $this->xp = $xp;
 
         return $this;
-    }
-
-    public function getXp(): ?int
-    {
-        return $this->xp;
     }
 
     public function addXp(int $xp): self
@@ -492,25 +487,31 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getUserRequirement(string $questRequirement): int
     {
         return match ($questRequirement) {
-            'post_comments' => count($this->comments),
+            'post_comments' => $this->getCommentsCount(),
             'receive_comments' => $this->getCommentsReceivedCount(),
-            'post_likes' => count($this->likedStories),
+            'post_likes' => $this->getLikedStoriesCount(),
             'receive_likes' => $this->getLikesReceivedCount(),
-            'post_stories' => count($this->getStartedStories()),
-            'post_contributions' => count($this->contributions),
-            'complete_quests' => count($this->completedQuests),
+            'post_stories' => $this->getStartedStoriesCount(),
+            'post_contributions' => $this->getContributionsCount(),
+            'complete_quests' => $this->getCompletedQuestsCount(),
             default => -1,
         };
+    }
+
+    public function getCommentsCount(): int
+    {
+        return count($this->comments);
     }
 
     public function getCommentsReceivedCount(): int
     {
         $contributedStories = $this->getContributedStories();
         $commentCount = 0;
+
         foreach ($contributedStories as $story) {
-            $comments = $story->getComments();
-            $commentCount += count($comments);
+            $commentCount += $story->getCommentsCount();
         }
+
         return $commentCount;
     }
 
@@ -534,6 +535,53 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->contributions;
     }
 
+    public function getLikedStoriesCount(): int
+    {
+        return count($this->likedStories);
+    }
+
+    public function getLikesReceivedCount(): int
+    {
+        $contributedStories = $this->getContributedStories();
+        $likesCount = 0;
+
+        foreach ($contributedStories as $story) {
+            $likesCount += $story->getTotalLikes();
+        }
+
+        return $likesCount;
+    }
+
+    public function getStartedStoriesCount(): int
+    {
+        return count($this->getStartedStories());
+    }
+
+    public function getStartedStories(): array
+    {
+        $contributions = $this->getContributions();
+        $startedStories = [];
+
+        foreach ($contributions as $contribution) {
+            if ($contribution->getPosition() === 1) {
+                $story = $contribution->getStory();
+                $startedStories[] = $story;
+            }
+        }
+
+        return $startedStories;
+    }
+
+    public function getContributionsCount(): int
+    {
+        return count($this->contributions);
+    }
+
+    public function getCompletedQuestsCount(): int
+    {
+        return count($this->completedQuests);
+    }
+
     /**
      * @return Collection<int, Comment>
      */
@@ -542,33 +590,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->comments;
     }
 
-    public function getLikesReceivedCount(): int
+    public function getUsername(): ?string
     {
-        $contributedStories = $this->getContributedStories();
-        $likesCount = 0;
-        foreach ($contributedStories as $story) {
-            $likes = $story->getLikes();
-            $likesCount += count($likes);
-        }
-        return ($likesCount);
+        return $this->username;
     }
 
-    public function getStartedStories(): array
+    public function setUsername(string $username): self
     {
-        $contributions = $this->getContributions();
-        $startedStories = [];
-        foreach ($contributions as $contribution) {
-            if ($contribution->getPosition() === 1) {
-                $story = $contribution->getStory();
-                $startedStories[] = $story;
-            }
-        }
-        return $startedStories;
-    }
+        $this->username = $username;
 
-    public function hasCreatedAccount(): bool
-    {
-        return $this->getUsername() !== null;
+        return $this;
     }
 
     public function getEmail(): ?string

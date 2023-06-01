@@ -15,19 +15,14 @@ class Notification
 
     #[ORM\ManyToOne(inversedBy: 'notifications')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?user $receiver = null;
+    private ?user $receiver;
 
     #[ORM\Column(length: 100)]
-    private ?string $content = null;
+    private ?string $content;
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
-    private ?user $sender = null;
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
+    private ?user $sender;
 
     public function __construct(User $receiver, string $content, User $sender)
     {
@@ -35,8 +30,12 @@ class Notification
         $this->content = $content;
         $this->sender = $sender;
     }
-   
-   
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
     public function getReceiver(): ?user
     {
         return $this->receiver;

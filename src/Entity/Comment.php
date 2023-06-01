@@ -112,18 +112,6 @@ class Comment
         return $this;
     }
 
-    public function getComment(): ?self
-    {
-        return $this->comment;
-    }
-
-    public function setComment(?self $comment): self
-    {
-        $this->comment = $comment;
-
-        return $this;
-    }
-
     /**
      * @return Collection<int, self>
      */
@@ -150,6 +138,18 @@ class Comment
                 $reply->setComment(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getComment(): ?self
+    {
+        return $this->comment;
+    }
+
+    public function setComment(?self $comment): self
+    {
+        $this->comment = $comment;
 
         return $this;
     }

@@ -41,15 +41,24 @@ class Story
 
     #[ORM\OneToMany(mappedBy: 'Story', targetEntity: Comment::class)]
     private Collection $comments;
-
     #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'likedStories', fetch: 'EXTRA_LAZY')]
     private Collection $likes;
-
     #[ORM\Column(nullable: true)]
     private ?bool $IsReported = null;
-
     #[ORM\Column (nullable: true)]
-    private ?string $storyImage ;
+    private ?string $storyImage;
+
+    public function __construct()
+    {
+        $this->contributions = new ArrayCollection();
+        $this->comments = new ArrayCollection();
+        $this->likes = new ArrayCollection();
+    }
+
+    public function getCommentsCount(): int
+    {
+        return $this->comments->count();
+    }
 
     public function getStoryImage(): ?string
     {
@@ -61,13 +70,6 @@ class Story
         $this->storyImage = $storyImage;
 
         return $this;
-    }
-
-    public function __construct()
-    {
-        $this->contributions = new ArrayCollection();
-        $this->comments = new ArrayCollection();
-        $this->likes = new ArrayCollection();
     }
 
     public function getTitle(): ?string
@@ -135,14 +137,6 @@ class Story
         return $this;
     }
 
-    /**
-     * @return Collection<int, contribution>
-     */
-    public function getContributions(): Collection
-    {
-        return $this->contributions;
-    }
-
     public function addContribution(contribution $contribution): self
     {
         if (!$this->contributions->contains($contribution)) {
@@ -163,14 +157,6 @@ class Story
         }
 
         return $this;
-    }
-
-    /**
-     * @return Collection<int, User>
-     */
-    public function getLikes(): Collection
-    {
-        return $this->likes;
     }
 
     public function addLike(User $like): self
@@ -218,9 +204,18 @@ class Story
 
         return $this;
     }
+
     public function getTotalLikes(): int
     {
         return $this->getLikes()->count();
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getLikes(): Collection
+    {
+        return $this->likes;
     }
 
     public function isIsReported(): ?bool
@@ -234,12 +229,22 @@ class Story
 
         return $this;
     }
+
     public function getStoryContent(): string
     {
-        $content='';
-        foreach ($this->getContributions() as $contribution){
-            $content=$content.$contribution->getContent()."\n";
+        $contentArray = [];
+        foreach ($this->getContributions() as $contribution) {
+            $contentArray[] = $contribution->getContent();
         }
-        return $content;
+
+        return implode("\n", $contentArray);
+    }
+
+    /**
+     * @return Collection<int, contribution>
+     */
+    public function getContributions(): Collection
+    {
+        return $this->contributions;
     }
 }
