@@ -31,25 +31,49 @@ body {
   background-color: white;
 }
 
+h2 {
+  margin-bottom: 0.5em;
+}
+
 .fa-user-pen {
   margin-left: 0.25em;
 }
 
+.profile-followers {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.tiers-container {
+  max-width: 75ch;
+}
+
 .tier-container {
-  margin: 12px;
+  margin: 1em;
+}
+
+.level-up-message {
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 0.25em;
+  padding: 0.5em;
+  margin-bottom: 1em;
+}
+
+.level-up-message p {
+  font-size: 1.125rem;
+  font-weight: bold;
+  color: darken($DarkTurquoise, 10%);
 }
 
 .tier-info {
-  font-size: 1.125rem;
+  font-size: 1.25rem;
   font-weight: bold;
-  line-height: 16px;
-  margin-left: 4px;
+  margin-left: 0.5em;
 }
 
-.profile-followers {
-  font-weight: bold;
-  font-size: 1.25rem;
-  color: darken($DarkTurquoise, 10%);
+.xp-progress {
+  font-size: 1rem;
 }
 
 .profile-stories-title {
@@ -57,7 +81,7 @@ body {
   color: #2b5a89;
 }
 
-/* CSS pour l'effet de zoom */
+/* CSS for image zoom effect*/
 .zoom-image {
   max-width: 50%;
   transition: transform 0.3s ease-in-out;
@@ -67,7 +91,6 @@ body {
   transform: scale(1.05);
 }
 
-/* CSS pour la taille initiale de l'image */
 .zoom-image {
   transform: scale(1);
 }
@@ -77,16 +100,6 @@ body {
   font-style: italic;
 }
 
-.level-up-message {
-  background-color: #f8f9fa;
-  border: 1px solid #dee2e6;
-  border-radius: 5px;
-  padding: 10px;
-  margin-bottom: 20px;
-}
-
-.level-up-message p {
-  font-size: 1.125rem;
-  font-weight: bold;
-  color: darken($DarkTurquoise, 10%);
+.rounded-pill {
+  margin-left: 0.5em;
 }

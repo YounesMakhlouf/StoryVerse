@@ -65,8 +65,8 @@
                 </div>
                 <div class="col-lg-8">
                     {% if user.tier %}
-                        <div class="card">
-                            <div class="card-body">
+                        <div class="card align-items-center">
+                            <div class="card-body tiers-container">
                                 {% if app.user is defined and app.user.id == user.id %}
                                     <div class="container level-up-message">
                                         <p class="text-center">Level up, brave adventurer, and unlock the secrets of the
@@ -75,19 +75,18 @@
                                 {% endif %}
                                 <div class="profile-xp row align-items-center">
                                     <div class="tier-container col">
-                                        <h5 class="tier">Current tier :</h5>
-                                        <div>
+                                        <h4 class="tier">Current tier :</h4>
                                             {% if user.tier.badge %}
-                                                <img class="rounded-circle" height="50" width="50" alt="Tier badge"
-                                                     src="{{ asset('build/images/tierBadges/' ~ user.tier.badge) }}">
+                                                <div class="d-flex align-items-center">
+                                                    <img class="rounded-circle" height="50" width="50" alt="Tier badge"
+                                                         src="{{ asset('build/images/tierBadges/' ~ user.tier.badge) }}">
+                                                    <span class="figure-caption tier-info">{{ user.tier.name }}</span>
+                                                </div>
                                             {% endif %}
-                                            <span class="tier-info">{{ user.tier.name }}</span>
-                                        </div>
                                     </div>
                                     <div class="tier-container col">
                                         {% if nextTier %}
-                                            <h5 class="tier">Missing XP to Next
-                                                Tier: {{ nextTier.xpThreshold - user.xp }}</h5>
+                                            <h4 class="tier">Next Tier: {{ nextTier.name }}</h4>
                                             <div class="row align-items-center">
                                                 {% if nextTier.badge %}
                                                     <img class="col-3 rounded-circle" height="50" width="50"
@@ -101,13 +100,13 @@
                                                              aria-label="Quest progress" style="width: {{ progress }}%;"
                                                              aria-valuenow="{{ progress }}" aria-valuemin="0"
                                                              aria-valuemax="100">
-                                                            <span>{{ user.xp }} XP</span>
+                                                            <span class="xp-progress">{{ user.xp }} XP</span>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         {% else %}
-                                            <h5 class="tier">Congratulations!</h5>
+                                            <h4 class="tier">Congratulations!</h4>
                                             <div>
                                                 <p>You have reached the highest tier available.</p>
                                                 <p>It seems we were too lazy to add more tiers, and we never expected
