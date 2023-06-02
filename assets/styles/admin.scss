@@ -25,7 +25,7 @@
 }
 
 #main-menu .menu .menu-item-contents {
-  padding: 10px 0;
+  padding: 1em 0.5em;
   color: var(--link-color);
   font-size: 0.9375rem;
 }
@@ -66,12 +66,11 @@
 }
 
 .card {
-  border-radius: 12px;
+  border-radius: 1em;
   box-shadow: 0 6px 10px -4px rgba(0, 0, 0, 0.15);
   background-color: #FFFFFF;
   color: #252422;
-  margin-bottom: 20px;
-  margin-top: 20px;
+  margin: 2em 0;
 }
 
 .card-footer {
@@ -80,7 +79,7 @@
 }
 
 canvas{
-  max-height: 400px;
+  max-height: 25rem;
 }
 
 .fa-heart{

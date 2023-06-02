@@ -5,14 +5,16 @@
   }
 }
 
-/* General */
+:root{
+  --bs-link-color-rgb: 91, 161, 153;
+}
+
 body {
   font-family: "Open Sans", sans-serif;
   color: #444444;
 }
 
 a {
-  color: $DarkTurquoise;
   text-decoration: none;
 }
 

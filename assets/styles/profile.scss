@@ -6,7 +6,7 @@
 
 body {
   background: #e7dfdb;
-  margin-top: 20px;
+  margin-top: 1.25em;
 }
 
 .card {
@@ -24,37 +24,15 @@ body {
 }
 
 .profile-container {
-  margin: 0 auto;
-  max-width: 80vw;
-  padding: 20px 24px;
+  padding: 1.25em 1.5em;
   color: black;
-  border-radius: 5px;
+  border-radius: 0.5em;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
-  width: 100%;
-  height: 100%;
   background-color: white;
 }
 
-#bio {
-  line-height: 1.625rem;
-  display: block;
-  text-align: center;
-  font-size: 1.25rem;
-  font-weight: bold;
-}
-
-.profile-picture {
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  margin: auto;
-  z-index: 1;
-  position: relative;
-}
-
 .fa-user-pen {
-  margin-left: 16px;
-  color: $Turquoise;
+  margin-left: 0.25em;
 }
 
 .tier-container {
