@@ -10,8 +10,6 @@
   --button-primary-bg: #5BA199;
   --pagination-active-bg: #5BA199;
   --pagination-color: #5BA199;
-  --link-color: black;
-
 }
 
 body {
@@ -24,9 +22,10 @@ body {
 
 }
 
-#main-menu .menu .menu-item {
+#main-menu .menu .menu-item,
+#main-menu .menu .menu-item-contents {
   border-radius: var(--border-radius);
-  padding-right: 0px;
+  padding-right: 0;
   position: relative;
 }
 
@@ -40,6 +39,10 @@ body {
 
 a {
   position: relative;
+  color: var(--link-color);
+}
+
+.stats a{
   color: #5BA199;
 }
 
@@ -64,24 +67,17 @@ a {
   left: 0;
 }
 
-.logo {
+.navbar-brand {
+  color: $LightGray;
   font-size: 1.75rem;
   margin: 0;
   padding: 0;
   line-height: 1;
   font-weight: 700;
-  color: #E5E3E4;
 }
 
-.logo img {
-  padding: 0;
-  margin: 0;
-  max-height: 40px;
-}
-
-.img-fluid {
-  max-width: 100%;
-  height: auto;
+.navbar-brand:hover {
+  color: white;
 }
 
 #gender_chart {

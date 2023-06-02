@@ -1,0 +1,23 @@
+<div class="col-lg-3 col-md-6 col-sm-6">
+    <div class="card card-stats">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-5 col-md-4">
+                    <i class="fa-solid fa-2xl {{ icon }}" style="color: #ff7e67;"></i>
+                </div>
+                <div class="col-7 col-md-8">
+                    <h5 class="card-category">{{ category }}</h5>
+                    <p class="card-title">{{ title }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <hr/>
+            <div class="stats">
+                {% block update_now_link %}
+                    <a href="{{ path('app_admin') }}"><i class="fa fa-refresh"></i> Update Now</a>
+                {% endblock %}
+            </div>
+        </div>
+    </div>
+</div>
