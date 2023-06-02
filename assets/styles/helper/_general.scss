@@ -10,8 +10,20 @@
 }
 
 body {
-  font-family: "Open Sans", sans-serif;
+  font-family: "Lora", serif;
   color: #444444;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Playfair Display", serif;
+}
+
+p, li, blockquote, cite{
+    font-family: "Lora", serif;
+}
+
+strong, em, span{
+      font-family: "Cormorant", serif;
 }
 
 a {
@@ -22,9 +34,7 @@ a:hover {
   color: $Turquoise;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: "Montserrat", sans-serif;
-}
+
 
 img {
   display: block;
