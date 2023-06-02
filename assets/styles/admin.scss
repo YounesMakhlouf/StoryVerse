@@ -4,6 +4,7 @@
   --sidebar-bg: #5BA199;
   --sidebar-menu-active-item-color: white;
   --sidebar-menu-items-padding-left: 0px;
+  --sidebar-logo-color: white;
   --link-color: rgba(255, 255, 255, 0.7);
   --sidebar-menu-icon-color: rgba(255, 255, 255, 0.7);
   --badge-boolean-true-bg: #5BA199;
@@ -12,37 +13,24 @@
   --pagination-color: #5BA199;
 }
 
-body {
-  background-color: white;
-}
-
 #main-menu .menu .menu-item.active a {
   color: var(--sidebar-menu-active-item-color);
   background-color: #5BA199;
-
 }
 
 #main-menu .menu .menu-item,
 #main-menu .menu .menu-item-contents {
   border-radius: var(--border-radius);
   padding-right: 0;
-  position: relative;
 }
 
 #main-menu .menu .menu-item-contents {
-  align-items: flex-start;
-  display: flex;
   padding: 10px 0;
   color: var(--link-color);
   font-size: 0.9375rem;
 }
 
-a {
-  position: relative;
-  color: var(--link-color);
-}
-
-.stats a{
+.stats a {
   color: #5BA199;
 }
 
@@ -67,32 +55,13 @@ a {
   left: 0;
 }
 
-.navbar-brand {
-  color: $LightGray;
-  font-size: 1.75rem;
-  margin: 0;
-  padding: 0;
-  line-height: 1;
-  font-weight: 700;
-}
-
-.navbar-brand:hover {
-  color: white;
-}
-
-#gender_chart {
-  width: 400px;
-  height: 400px;
-}
-
-.row {
-  width: 100%;
-  height: 100%;
+.card-stats i {
+  color: #ff7e67;
 }
 
 .card-stats .card-body .card-category {
   color: #9A9A9A;
-  font-size: 1rem;
+  font-size: 1.25rem;
   line-height: 1.4em;
 }
 
@@ -105,9 +74,17 @@ a {
   margin-top: 20px;
 }
 
-.card .card-footer {
+.card-footer {
   background-color: transparent;
   border: 0;
+}
+
+canvas{
+  max-height: 400px;
+}
+
+.fa-heart{
+   color: #d82613;
 }
 
 #content-resizer-handler {
