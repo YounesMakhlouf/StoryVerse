@@ -25,13 +25,14 @@
 {% endblock %}
 {% block body %}
     <!-- Success and Error Messages -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.18/dist/sweetalert2.min.js"></script>
     {% set successMessages = app.flashes('success') %}
     {% set errorMessages = app.flashes('error') %}
     {% for message in successMessages %}
-        <div class="alert alert-success">{{ message }}</div>
+    <div class="alert alert-success">{{ message }}</div>
     {% endfor %}
     {% for message in errorMessages %}
-        <div class="alert alert-danger">{{ message }}</div>
+    <div class="alert alert-danger">{{ message }}</div>
     {% endfor %}
     <!-- Flash Messages -->
     {% for flashMessage in app.session.flashbag.get('sweetalert2') %}

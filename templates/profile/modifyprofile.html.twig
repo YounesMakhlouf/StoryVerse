@@ -1,12 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}
-    Modify Profile
-{% endblock %}
+{% block title %} Modify Profile {% endblock %}
 
 {% block body %}
-
-
     <h2>Modify Profile </h2>
     <div class="formbold-main-wrapper">
         <div class="formbold-form-wrapper">
@@ -25,14 +21,12 @@
 
             <div class="formbold-input-file">
                 <label for="upload" class="formbold-input-label">
-                    <i class="fa-solid fa-paperclip fa-xl" style="color: #22877b;"></i>
+                    <i class="fa-solid fa-paperclip fa-xl"></i>
                     {{ form_label(form.avatar, 'profile picture ') }}
                     {{ form_widget(form.avatar, {'attr': {'class': 'form-control-file'}}) }}
                 </label>
             </div>
-
             {{ form_end(form) }}
-
         </div>
     </div>
 {% endblock %}
@@ -40,3 +34,5 @@
     {{ parent() }}
     {{ encore_entry_link_tags('create') }}
 {% endblock %}
+
+{% block footer %} {% endblock %}

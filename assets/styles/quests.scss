@@ -1,36 +1,35 @@
 @import "helper/variables";
 
-.quest-card {
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  padding: 20px;
-  margin-bottom: 20px;
+.card {
+  padding: 1.25em;
+  margin-bottom: 1.25em;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.3s;
+  min-height: 22.5em;
 
   &:hover {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   }
 
-  .quest-title {
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin-bottom: 10px;
+  .card-body{
+    max-width: 75ch;
+    margin: auto;
   }
 
-  .quest-description {
-    margin-bottom: 20px;
+  .card-title {
+    font-weight: bold;
+    margin-bottom: 0.625em;
   }
 
   .quest-type {
     font-style: italic;
     color: #888;
-    margin-bottom: 10px;
   }
 
   .quest-points {
     font-weight: bold;
     color: $DarkTurquoise;
+    font-size: 1.25rem;
   }
 
   .quest-completion {
@@ -38,7 +37,7 @@
     font-size: 0.875rem;
   }
 
-  .epic-congratulation {
+  .congratulation {
     font-size: 1.125rem;
     font-weight: bold;
     color: $DarkTurquoise;
@@ -47,5 +46,4 @@
     border-radius: 5px;
     text-align: center;
   }
-
 }
