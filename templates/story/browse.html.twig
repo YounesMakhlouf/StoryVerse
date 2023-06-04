@@ -8,20 +8,15 @@
                 <h2>Trending Stories</h2>
                 <p>Discover Our Hottest Stories 🔥🔥</p>
             </header>
-            <ul class="genre-list ps-0 mt-2 mb-3">
-                <li class="d-inline">
-                    <a class="btn btn-primary genre"
-                       href="{{ path('app_browse_stories') }}">All genres</a>
-                </li>
-                {% for genre, description in genres %}
-                    <li class="d-inline">
-                        <a class="btn btn-primary genre"
+            <div class="btn-group" role="group" aria-label="Story Genre filter">
+
+                <a class="btn btn-outline-primary genre" href="{{ path('app_browse_stories') }}">All genres</a>
+{% for genre, description in genres %}
+                        <a class="btn btn-outline-primary genre"
                            href="{{ path('app_browse_stories', { 'genre': genre }) }}">{{ genre }}</a>
-                    </li>
                 {% endfor %}
-            </ul>
 
-
+            </div>
             <div>
                 <h3 id="genre-description">Browse {{ genre ?? 'All genres' }}</h3>
                 {% if genre %}
@@ -36,7 +31,7 @@
                             <a href="{{ path('app_storypage', { 'id': story.id }) }}" rel="bookmark">
                                 <div class="card h-100" data-aos="zoom-in" data-aos-delay="0">
                                     <img alt="{{ story.title }}" class="card-img-top"
-                                         src="{{ asset ('uploads/story_directory/'~ story.storyImage)}}">
+                                         src="{{ asset ('uploads/story_directory/'~ story.storyImage) }}">
                                     <div class="card-body">
                                         <h5 class="card-title">{{ story.title }}</h5>
                                         <p class="card-text">{# awel joumal #}</p>

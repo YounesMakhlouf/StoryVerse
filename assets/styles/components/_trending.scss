@@ -6,15 +6,6 @@
   font-size: 1em;
 }
 
-.trending a {
-  color: var(--DarkTurquoise);
-  transition: ease-in-out 0.3s;
-}
-
-.trending a:hover {
-  color: var(--Turquoise);
-}
-
 .trending .card:hover {
   background: var( --LightGray);
 }
