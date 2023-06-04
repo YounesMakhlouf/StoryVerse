@@ -7,16 +7,16 @@
 }
 
 .trending a {
-  color: $DarkTurquoise;
+  color: var(--DarkTurquoise);
   transition: ease-in-out 0.3s;
 }
 
 .trending a:hover {
-  color: $Turquoise;
+  color: var(--Turquoise);
 }
 
 .trending .card:hover {
-  background: $LightGray;
+  background: var( --LightGray);
 }
 
 .card-img-top {

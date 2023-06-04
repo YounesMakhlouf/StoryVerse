@@ -10,7 +10,7 @@
 #hero:before {
     content: "";
     opacity: 0.91;
-    background: $Turquoise;
+    background: var(--Turquoise);
     position: absolute;
     bottom: 0;
     top: 0;
@@ -29,7 +29,7 @@
 
 #hero h1 span {
     color: #fff;
-    border-bottom: 4px solid $wheat;
+    border-bottom: 4px solid var(--wheat);
 }
 
 #hero h2 {
@@ -48,11 +48,11 @@
     border-radius: 50px;
     transition: 0.5s;
     color: #fff;
-    background: $wheat;
+    background: var(--wheat);
 }
 
 #hero .btn-get-started:hover {
-    background: darken($wheat, 20%);
+    background:var(--wheat);
 }
 
 #hero .animated {

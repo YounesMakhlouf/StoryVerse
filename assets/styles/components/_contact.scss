@@ -5,11 +5,11 @@
 
 .contact .info i {
   font-size: 1.25rem;
-  color: $DarkTurquoise;
+  color: var(--DarkTurquoise);
   float: left;
   width: 44px;
   height: 44px;
-  background: $LightGray;
+  background: var( --LightGray);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -22,14 +22,14 @@
   font-size: 1.375rem;
   font-weight: 600;
   margin-bottom: 5px;
-  color: $DarkTurquoise;
+  color: var(--DarkTurquoise);
 }
 
 .contact .info p {
   padding: 0 0 0 60px;
   margin-bottom: 0;
   font-size: 0.875rem;
-  color: darken($DarkTurquoise, 30%);
+  color: var(--DarkTurquoise);
 }
 
 .contact .info .email,
@@ -40,7 +40,7 @@
 .contact .info .email:hover i,
 .contact .info .address:hover i,
 .contact .info .phone:hover i {
-  background: $Turquoise;
+  background: var(--Turquoise);
   color: #fff;
 }
 
@@ -69,7 +69,7 @@
 .contact .php-email-form .sent-message {
   display: none;
   color: #fff;
-  background: lighten($Turquoise, 10%);
+  background: var(--Turquoise);
   text-align: center;
   padding: 15px;
   font-weight: 600;
@@ -89,8 +89,8 @@
   width: 24px;
   height: 24px;
   margin: 0 10px -6px 0;
-  border: 3px solid lighten($Turquoise, 30%);
-  border-top-color: $LightGray;
+  border: 3px solid var(--Turquoise);
+  border-top-color: var( --LightGray);
   animation: animate-loading 1s linear infinite;
 }
 
@@ -110,7 +110,7 @@
 }
 
 .contact .php-email-form button[type=submit] {
-  background: lighten($Turquoise, 10%);
+  background: var(--Turquoise);
   border: 0;
   padding: 10px 30px;
   color: #fff;
@@ -119,7 +119,7 @@
 }
 
 .contact .php-email-form button[type=submit]:hover {
-  background: lighten($Turquoise, 20%);
+  background: var(--Turquoise);
 }
 
 @keyframes animate-loading {

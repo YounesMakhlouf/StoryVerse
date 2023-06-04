@@ -6,6 +6,11 @@
 }
 
 :root {
+  --DarkTurquoise: #469597;
+  --Turquoise: #5BA199;
+  --Silver: #BBC6C8;
+  --LightGray: #E5E3E4;
+  --wheat: #DDBEAA;
   --bs-link-color-rgb: 91, 161, 153;
 }
 
@@ -30,7 +35,7 @@ a {
   text-decoration: none;
 
   &:hover {
-    color: $Turquoise;
+    color: var(--Turquoise);
   }
 }
 
@@ -46,7 +51,7 @@ section {
 }
 
 .section-bg {
-  background-color: $LightGray;
+  background-color: var(--LightGray);
 }
 
 .section-title {
@@ -59,14 +64,14 @@ section {
   margin: 0 0 0.3125em 0;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: $Silver;
+  color: var(--Silver);
 
   &::after {
     content: "";
     width: 7.5em;
     height: 1px;
     display: inline-block;
-    background: $Turquoise;
+    background: var(--Turquoise);
     margin: 0.25em 0.625em;
   }
 }
@@ -76,5 +81,5 @@ section {
   font-size: 2.25rem;
   font-weight: 700;
   text-transform: uppercase;
-  color: $DarkTurquoise;
+  color: var(--DarkTurquoise);
 }

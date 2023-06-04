@@ -1,7 +1,5 @@
-@import "helper/variables";
-
 .genre {
-  background: $Turquoise;
+  background: var(--Turquoise);
   color: white !important;
 }
 

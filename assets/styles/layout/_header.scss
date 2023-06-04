@@ -2,11 +2,11 @@
   height: 80px;
   z-index: 997;
   transition: all 0.5s;
-  background: $Turquoise;
+  background: var(--Turquoise);
 }
 
 #header .navbar-brand {
-  color: $LightGray;
+  color: var(--LightGray);
   font-size: 1.75rem;
   margin: 0;
   padding: 0;
@@ -97,7 +97,7 @@
   right: 0;
   left: 0;
   bottom: 0;
-  background: $Turquoise;
+  background: var(--Turquoise);
   opacity: 0.9;
   transition: 0.3s;
   z-index: 999;
@@ -131,13 +131,13 @@
 .navbar-mobile a:focus {
   padding: 10px 20px;
   font-size: 0.9375rem;
-  color: $DarkTurquoise;
+  color: var(--DarkTurquoise);
 }
 
 .navbar-mobile a:hover,
 .navbar-mobile .active,
 .navbar-mobile li:hover > a {
-  color: $Turquoise;
+  color: var(--Turquoise);
 }
 
 .navbar .dropdown ul {
@@ -164,7 +164,7 @@
   font-size: 0.875rem;
   font-weight: 500;
   text-transform: none;
-  color: $DarkTurquoise;
+  color: var(--DarkTurquoise);
 }
 
 .navbar .dropdown ul a i {
@@ -174,7 +174,7 @@
 .navbar .dropdown ul a:hover,
 .navbar .dropdown ul .active:hover,
 .navbar .dropdown ul li:hover > a {
-  color: $Turquoise;
+  color: var(--Turquoise);
 }
 
 .navbar .dropdown:hover > ul {
@@ -240,7 +240,7 @@
 .navbar-mobile .dropdown .dropdown ul a:hover,
 .navbar-mobile .dropdown .dropdown ul .active:hover,
 .navbar-mobile .dropdown .dropdown ul li:hover > a {
-  color: $Turquoise;
+  color: var(--Turquoise);
 }
 
 .navbar-mobile .dropdown > .dropdown-active,
@@ -277,6 +277,6 @@
 }
 
 #dropdownMenuButton1 {
-  background: $Turquoise;
+  background: var(--Turquoise);
   border: 0;
 }
