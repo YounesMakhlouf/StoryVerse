@@ -5,7 +5,7 @@
   }
 }
 
-:root{
+:root {
   --bs-link-color-rgb: 91, 161, 153;
 }
 
@@ -18,23 +18,21 @@ h1, h2, h3, h4, h5, h6 {
   font-family: "Playfair Display", serif;
 }
 
-p, li, blockquote, cite{
-    font-family: "Lora", serif;
+p, li, blockquote, cite {
+  font-family: "Lora", serif;
 }
 
-strong, em, span{
-      font-family: "Cormorant", serif;
+strong, em, span {
+  font-family: "Cormorant", serif;
 }
 
 a {
   text-decoration: none;
+
+  &:hover {
+    color: $Turquoise;
+  }
 }
-
-a:hover {
-  color: $Turquoise;
-}
-
-
 
 img {
   display: block;
@@ -57,23 +55,20 @@ section {
 
 .section-title h2 {
   font-size: 0.875rem;
-  font-weight: 500;
-  padding: 0;
   line-height: 1px;
-  margin: 0 0 5px 0;
+  margin: 0 0 0.3125em 0;
   letter-spacing: 2px;
   text-transform: uppercase;
   color: $Silver;
-  font-family: "Poppins", sans-serif;
-}
 
-.section-title h2::after {
-  content: "";
-  width: 120px;
-  height: 1px;
-  display: inline-block;
-  background: $Turquoise;
-  margin: 4px 10px;
+  &::after {
+    content: "";
+    width: 7.5em;
+    height: 1px;
+    display: inline-block;
+    background: $Turquoise;
+    margin: 0.25em 0.625em;
+  }
 }
 
 .section-title p {
@@ -81,6 +76,5 @@ section {
   font-size: 2.25rem;
   font-weight: 700;
   text-transform: uppercase;
-  font-family: "Poppins", sans-serif;
   color: $DarkTurquoise;
 }
