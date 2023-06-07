@@ -19,77 +19,79 @@
 
 {% block main %}
     {{ parent() }}
-    <div class="row">
-        {# Users card #}
-        {% include '/admin/card.html.twig' with {
-            'icon': 'fa-users',
-            'category': 'Members',
-            'title': users
-        } %}
+    <div class="container">
+        <div class="row">
+            {# Users card #}
+            {% include '/admin/card.html.twig' with {
+                'icon': 'fa-users',
+                'category': 'Members',
+                'title': users
+            } %}
 
-        {# Stories Card #}
-        {% include '/admin/card.html.twig' with {
-            'icon': 'fa-book-open',
-            'category': 'Stories',
-            'title': story
-        } %}
+            {# Stories Card #}
+            {% include '/admin/card.html.twig' with {
+                'icon': 'fa-book-open',
+                'category': 'Stories',
+                'title': story
+            } %}
 
-        {# Interactions card #}
-        {% include '/admin/card.html.twig' with {
-            'icon': 'fa-heart',
-            'category': 'Interactions',
-            'title': interaction
-        } %}
+            {# Interactions card #}
+            {% include '/admin/card.html.twig' with {
+                'icon': 'fa-heart',
+                'category': 'Interactions',
+                'title': interaction
+            } %}
 
-        {# Challenges card #}
-        {% include '/admin/card.html.twig' with {
-            'icon': 'fa-trophy',
-            'category': 'Challenges',
-            'title': '450'
-        } %}
+            {# Challenges card #}
+            {% include '/admin/card.html.twig' with {
+                'icon': 'fa-trophy',
+                'category': 'Challenges',
+                'title': '450'
+            } %}
+        </div>
     </div>
+    <div class="container">
+        {# Statistics section #}
+        <div class="row">
+            <h1>Statistics</h1>
+            <hr/>
 
-    {# Statistics section #}
-    <div class="row">
-        <h1>Statistics</h1>
-        <hr/>
-
-        {# Story genre Statistics #}
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="card-title">Story Genre</h5>
+            {# Story genre Statistics #}
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">Story Genre</h5>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="genre_chart"></canvas>
+                    </div>
+                    <div class="card-footer"></div>
                 </div>
-                <div class="card-body">
-                    <canvas id="genre_chart"></canvas>
-                </div>
-                <div class="card-footer"></div>
             </div>
-        </div>
 
-        {# Gender statistics #}
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="card-title">Gender Statistics</h5>
+            {# Gender statistics #}
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">Gender Statistics</h5>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="gender_chart"></canvas>
+                    </div>
+                    <div class="card-footer"></div>
                 </div>
-                <div class="card-body">
-                    <canvas id="gender_chart"></canvas>
-                </div>
-                <div class="card-footer"></div>
             </div>
-        </div>
-
-        {# Language statistics #}
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="card-title">Story Language Analysis</h5>
+            {# Language statistics #}
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">Story Language Analysis</h5>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="language_chart"></canvas>
+                    </div>
+                    <div class="card-footer"></div>
                 </div>
-                <div class="card-body">
-                    <canvas id="language_chart"></canvas>
-                </div>
-                <div class="card-footer"></div>
             </div>
         </div>
     </div>

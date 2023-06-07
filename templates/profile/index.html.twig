@@ -67,7 +67,7 @@
                 <div class="col-lg-8">
                     {% if user.tier %}
                         <div class="card align-items-center">
-                            <div class="card-body tiers-container">
+                            <div class="card-body tiers-container container">
                                 {% if app.user is defined and app.user.id == user.id %}
                                     <div class="container level-up-message">
                                         <p class="text-center">Level up, brave adventurer, and unlock the secrets of the
@@ -88,7 +88,7 @@
                                     <div class="tier-container col">
                                         {% if nextTier %}
                                             <h4 class="tier">Next Tier: {{ nextTier.name }}</h4>
-                                            <div class="row align-items-center">
+                                            <div class="row align-items-center container">
                                                 {% if nextTier.badge %}
                                                     <img class="col-3 rounded-circle" height="50" width="50"
                                                          alt="Tier badge"
