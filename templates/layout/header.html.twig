@@ -9,7 +9,7 @@
                     <img src="{{ asset('build/images/logo.webp') }}" alt="Logo" width="40" height="40"
                          class="d-inline-block align-text-top"/> <span>StoryVerse</span>
                 </a>
-                <form id="search-bar" class="d-flex ms-md-auto ms-3 align-items-center justify-content-center p-2"
+                <form id="search-bar" class="d-flex ms-md-auto ms-2 align-items-center justify-content-center p-2"
                       method="get" action="{{ path('app_search') }}">
                     <input class="form-control me-2 p-2" type="search" placeholder="Search"
                            aria-label="Search"
@@ -19,6 +19,10 @@
                     </button>
                 </form>
                 <ul class="navbar-nav ms-auto align-items-center justify-content-center gap-md-3 gap-1">
+                     <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_quest') }}" title="Quests"><i
+                                    class="fa-solid fa-trophy fa-lg"></i></a>
+                    </li>
                     <li class="nav-item dropdown">
                             <button class="btn" type="button" id="notification-icon" data-bs-toggle="dropdown"
                                     aria-expanded="false">

@@ -14,13 +14,13 @@ nav {
   }
 }
 
-.navbar-brand:hover, .fa-plus, #profile, .fa-magnifying-glass, .fa-bell {
+.navbar-brand:hover, .fa-plus, #profile, .fa-magnifying-glass, .fa-bell, .fa-trophy {
   color: white;
 }
 
 //SEARCH
 #search-bar {
-  max-width: 35vw;
+  max-width: 30vw;
   opacity: 90%;
   background: var(--DarkTurquoise);
   border-radius: 60px;
