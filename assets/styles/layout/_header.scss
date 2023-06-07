@@ -5,60 +5,49 @@ nav {
 .navbar-brand {
   color: var(--LightGray);
   font-size: 1.75rem;
-  margin: 0;
-  padding: 0;
-  line-height: 1;
   font-weight: 700;
 }
 
-.navbar-brand:hover, .fa-plus, #profile {
+@media (max-width: 768px) {
+  span {
+    display: none;
+  }
+}
+
+.navbar-brand:hover, .fa-plus, #profile, .fa-magnifying-glass, .fa-bell {
   color: white;
 }
 
-.hidden {
-  display: none;
-}
-
-.navbar a i,
-.navbar a:focus i {
-  line-height: 0;
-  margin-left: 5px;
-}
-
-.navbar a:hover:before,
-.navbar li:hover > a:before,
-.navbar .active:before {
-  visibility: visible;
-  width: 25px;
-}
-
-.navbar a:hover,
-.navbar .active,
-.navbar .active:focus,
-.navbar li:hover > a {
-  color: #fff;
-}
-
 //SEARCH
-.form {
-  position: relative;
+#search-bar {
   max-width: 35vw;
+  opacity: 90%;
+  background: var(--DarkTurquoise);
+  border-radius: 60px;
+  backdrop-filter: blur(4px) saturate(180%);
 }
 
-.form .fa-magnifying-glass {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  color: #9ca3af;
+#search-bar input {
+  text-indent: 1em;
+  border: 0;
+  background: transparent;
+  outline: none;
+  color: white;
 }
 
-.form-input {
-  height: 55px;
-  text-indent: 33px;
-  border-radius: 10px;
+::placeholder {
+  color: white !important;
 }
 
-.form-input:focus {
-  box-shadow: none;
-  border: none;
+#search-bar button {
+  border: 0;
+  background: var(--DarkTurquoise);
+}
+
+#notification-icon{
+  border: 0;
+}
+
+#search-bar .fa-magnifying-glass {
+  width: 25px;
 }

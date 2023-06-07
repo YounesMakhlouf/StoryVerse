@@ -1,72 +1,65 @@
 {% block header %}
     <header>
-        <p class="hidden userid">
+        <p class="d-none userid">
             {{ app.user.id }}
         </p>
-        <nav class="navbar navbar-expand-lg fixed-top">
+        <nav class="navbar navbar-expand fixed-top px-md-4">
             <div class="container-fluid">
                 <a class="navbar-brand" href="{{ path('app_browse_stories') }}">
                     <img src="{{ asset('build/images/logo.webp') }}" alt="Logo" width="40" height="40"
-                         class="d-inline-block align-text-top"/> StoryVerse
+                         class="d-inline-block align-text-top"/> <span>StoryVerse</span>
                 </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false"
-                        aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                    <form class="d-flex ms-auto" method="get" action="{{ path('app_search') }}">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"
-                               name="searchQuery">
-                        <button class="btn btn-outline-success" type="submit">
-                            <i class="fa fa-magnifying-glass"></i>
-                        </button>
-                    </form>
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                            <div id="notification-icon" class="nav-link dropdown">
-                                <button class="btn btn-secondary" type="button" id="dropdownMenuButton1"
-                                        data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="fa-solid fa-bell fa-lg"></i>
-                                </button>
-                                <ul class="dropdown-menu notiflist" aria-labelledby="dropdownMenuButton1"></ul>
-                            </div>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ path('Story_new') }}" title="Add a post"><i
-                                        class="fa-solid fa-plus fa-lg"></i></a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle icon-link" href="#" role="button"
-                               data-bs-toggle="dropdown"
-                               aria-expanded="false" id="profile">
-                                <img class="rounded-circle" id="avatar"
-                                     src="{{ asset ('uploads/avatar_directory/'~ app.user.avatar) }}" alt="Avatar"
-                                     width="40" height="40"/>
-                                {{ app.user.username }}
-                            </a>
-                            <ul class="dropdown-menu">
-                                {% if is_granted('ROLE_ADMIN') %}
-                                    <li>
-                                        <a class="dropdown-item icon-link" href="{{ path('app_admin') }}"><i
-                                                    class="fa-solid fa-chart-line"></i>Admin Dashboard</a>
-                                    </li>
-                                    <hr/>
-                                {% endif %}
+                <form id="search-bar" class="d-flex ms-md-auto ms-3 align-items-center justify-content-center p-2"
+                      method="get" action="{{ path('app_search') }}">
+                    <input class="form-control me-2 p-2" type="search" placeholder="Search"
+                           aria-label="Search"
+                           name="searchQuery">
+                    <button>
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                </form>
+                <ul class="navbar-nav ms-auto align-items-center justify-content-center gap-md-3 gap-1">
+                    <li class="nav-item dropdown">
+                            <button class="btn" type="button" id="notification-icon" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
+                                <i class="fa-solid fa-bell fa-lg"></i>
+                            </button>
+                        <ul class="dropdown-menu notiflist"></ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('Story_new') }}" title="Add a post"><i
+                                    class="fa-solid fa-plus fa-lg"></i></a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle icon-link" href="#" role="button"
+                           data-bs-toggle="dropdown"
+                           aria-expanded="false" id="profile">
+                            <img class="rounded-circle" id="avatar"
+                                 src="{{ asset ('uploads/avatar_directory/'~ app.user.avatar) }}" alt="Avatar"
+                                 width="40" height="40"/>
+                            <span>{{ app.user.username }}</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            {% if is_granted('ROLE_ADMIN') %}
                                 <li>
-                                    <a class="dropdown-item icon-link"
-                                       href="{{ path('app_profile', {'id':app.user.id}) }}"><i
-                                                class="fa-solid fa-user-tie"></i>Profile</a>
+                                    <a class="dropdown-item icon-link" href="{{ path('app_admin') }}"><i
+                                                class="fa-solid fa-chart-line"></i>Admin Dashboard</a>
                                 </li>
-                                <hr class="dropdown-divider">
-                                <li>
-                                    <a class="dropdown-item icon-link" href="{{ path('app_logout') }}"><i
-                                                class="fa-solid fa-arrow-right-from-bracket"></i>Log out</a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
+                                <hr/>
+                            {% endif %}
+                            <li>
+                                <a class="dropdown-item icon-link"
+                                   href="{{ path('app_profile', {'id':app.user.id}) }}"><i
+                                            class="fa-solid fa-user-tie"></i>Profile</a>
+                            </li>
+                            <hr class="dropdown-divider">
+                            <li>
+                                <a class="dropdown-item icon-link" href="{{ path('app_logout') }}"><i
+                                            class="fa-solid fa-arrow-right-from-bracket"></i>Log out</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
             </div>
         </nav>
     </header>
