@@ -23,31 +23,30 @@ nav {
   max-width: 30vw;
   opacity: 90%;
   background: var(--DarkTurquoise);
-  border-radius: 60px;
+  border-radius: 100vh;
   backdrop-filter: blur(4px) saturate(180%);
-}
 
-#search-bar input {
-  text-indent: 1em;
-  border: 0;
-  background: transparent;
-  outline: none;
-  color: white;
+  & input {
+    text-indent: 1em;
+    border: 0;
+    background: transparent;
+    outline: none;
+    color: white;
+  }
+
+  & button {
+    border: 0;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--DarkTurquoise);
+  }
 }
 
 ::placeholder {
   color: white !important;
 }
 
-#search-bar button {
+#notification-icon {
   border: 0;
-  background: var(--DarkTurquoise);
-}
-
-#notification-icon{
-  border: 0;
-}
-
-#search-bar .fa-magnifying-glass {
-  width: 25px;
 }
