@@ -2,7 +2,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 48px;
 }
 
 .formbold-form-wrapper {
@@ -115,11 +114,6 @@
 
 #story_submit:hover, #profile_submit:hover {
   box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
-}
-
-h2 {
-  margin-left: 40%;
-  margin-top: 5%;
 }
 
 .fa-paperclip {

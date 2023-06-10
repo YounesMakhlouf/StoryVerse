@@ -3,52 +3,58 @@
 {% block title %}Search Results{% endblock %}
 
 {% block body %}
-    <br><br><br><br><br>
-    {% if users|length > 0 %}
-        <h2>Users Found:</h2>
-        <br>
-        <div class="row">
-
-                {% for user in users %}
-            <div class="col-md-3 mb-4">
-                <div class="card">
-                    <a href="{{ path('app_profile', {'id': user.id }) }}">
-                    <img src="{{ asset ('uploads/avatar_directory/'~ user.avatar)}}" class="card-img-top" alt="Profile Picture">
-                    <div class="card-body">
-                        <h5 class="card-title text-center">{{ user.username }}</h5>
-                    </div>
-                    </a>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-    {% else %}
-        <p><h2>No users found.</h2></p>
-    {% endif %}
-
-
-    {% if stories|length > 0 %}
-        <h2>Stories Found:</h2>
-        <br>
-        <div class="row">
-            {% for story in stories %}
-                <div class="col-md-3 mb-4">
-                    <div class="card">
-                        <a href="{{ path('app_storypage', {'id': story.id }) }}">
-                        <img src="{{ asset ('uploads/story_directory/'~ story.storyImage)}}" class="card-img-top" alt="Story Image">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ story.title }}</h5>
-                            <p class="card-text">
-                                <strong>Language:</strong> {{ story.language }}<br>
-                                <strong>Genre:</strong> {{ story.genre }}
-                            </p>
+    <main>
+        <h1 class="text-center">Search Results</h1>
+        <section class="search-results">
+            {% if users|length > 0 %}
+            <div class="container">
+                <h2 class="mb-3">Users</h2>
+                <div class="row">
+                    {% for user in users %}
+                        <div class="col-md-3 mb-4">
+                            <div class="card">
+                                <a href="{{ path('app_profile', {'id': user.id }) }}">
+                                    <img src="{{ asset ('uploads/avatar_directory/'~ user.avatar) }}"
+                                         class="card-img-top"
+                                         alt="Profile Picture">
+                                    <div class="card-body">
+                                        <h3 class="card-title text-center">{{ user.username }}</h3>
+                                    </div>
+                                </a>
+                            </div>
                         </div>
-                        </a>
-                    </div>
+                    {% endfor %}
                 </div>
-            {% endfor %}
-        </div>
-    {% else %}
-        <p><h2>No stories found.</h2></p>
-    {% endif %}
+                {% else %}
+                    <h2>No users found.</h2>
+                {% endif %}
+            </div>
+            <div class="container">
+                {% if stories|length > 0 %}
+                    <h2 class="mb-3">Stories</h2>
+                    <div class="row">
+                        {% for story in stories %}
+                            <div class="col-md-3 mb-4">
+                                <div class="card">
+                                    <a href="{{ path('app_storypage', {'id': story.id }) }}">
+                                        <img src="{{ asset ('uploads/story_directory/'~ story.storyImage) }}"
+                                             class="card-img-top" alt="Story Image">
+                                        <div class="card-body">
+                                            <h3 class="card-title">{{ story.title }}</h3>
+                                            <p class="card-text">
+                                                <strong>Language:</strong> {{ story.language }}<br>
+                                                <strong>Genre:</strong> {{ story.genre }}
+                                            </p>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <h2>No stories found.</h2>
+                {% endif %}
+            </div>
+        </section>
+    </main>
 {% endblock %}

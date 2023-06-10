@@ -11,23 +11,22 @@
                 </a>
                 <form id="search-bar" class="d-flex ms-md-auto ms-2 align-items-center justify-content-center p-1"
                       method="get" action="{{ path('app_search') }}">
-                    <input class="form-control me-2 px-2" type="search" placeholder="Search"
-                           aria-label="Search"
-                           name="searchQuery">
-                    <button>
+                    <input class="form-control me-2 px-2" type="search" id="search-form" placeholder="Search"
+                           aria-label="Search" name="searchQuery">
+                    <button aria-labelledby="search-form">
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </button>
                 </form>
                 <ul class="navbar-nav ms-auto align-items-center justify-content-center gap-md-3 gap-1">
-                     <li class="nav-item">
+                    <li class="nav-item">
                         <a class="nav-link" href="{{ path('app_quest') }}" title="Quests"><i
                                     class="fa-solid fa-trophy fa-lg"></i></a>
                     </li>
                     <li class="nav-item dropdown">
-                            <button class="btn" type="button" id="notification-icon" data-bs-toggle="dropdown"
-                                    aria-expanded="false">
-                                <i class="fa-solid fa-bell fa-lg"></i>
-                            </button>
+                        <button class="btn" type="button" id="notification-icon" data-bs-toggle="dropdown"
+                                aria-expanded="false" aria-label="notifications">
+                            <i class="fa-solid fa-bell fa-lg"></i>
+                        </button>
                         <ul class="dropdown-menu notiflist"></ul>
                     </li>
                     <li class="nav-item">
@@ -49,7 +48,7 @@
                                     <a class="dropdown-item icon-link" href="{{ path('app_admin') }}"><i
                                                 class="fa-solid fa-chart-line"></i>Admin Dashboard</a>
                                 </li>
-                                <hr/>
+                            <hr class="dropdown-divider">
                             {% endif %}
                             <li>
                                 <a class="dropdown-item icon-link"

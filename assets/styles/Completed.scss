@@ -100,7 +100,7 @@
 }
 
 .text {
-  border-radius: 12px;
+  border-radius: 1em;
   border: solid rgba(0, 0, 0, 0.125) 1px;
   max-width: 75ch;
 }
@@ -125,10 +125,6 @@
 
 .be-comment-content {
   margin-left: 5em;
-}
-
-#comment-name {
-  margin-bottom: 1em;
 }
 
 .be-comment-text {
@@ -159,10 +155,6 @@ button {
 }
 
 // ADD CONTRIBUTION STYLE
-.text-box {
-  margin-top: 3em;
-}
-
 .btn:link,
 .btn:visited {
   text-transform: uppercase;
@@ -310,7 +302,7 @@ button {
   border-bottom: 1px solid #e5e5e5
 }
 
-.dialog-ovelay .dialog header h3 {
+.dialog-ovelay .dialog header h2 {
   font-size: 0.875rem;
   margin: 0;
   color: #555;

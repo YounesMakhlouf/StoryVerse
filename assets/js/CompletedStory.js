@@ -34,25 +34,48 @@ $("#color").click(function () {
 });
 
 // Show comments directly after submitting without refreshing the page
-$('form[name="comment"]').submit(function (event) {
+$(document).on('submit', '#comment-form', function (event) {
     event.preventDefault();
 
-    const formData = $(this).serialize();
-    $.ajax({
-        url: window.location.href, method: "POST", data: formData, success: function (response) {
-            const start = '<div class="be-comment"> <div class="be-img-comment"> <a href=""> <img src="/uploads/avatar_directory/' + response.avatar + '" alt="" class="be-ava-comment"> </a></div> <div class="be-comment-content"> <span class="be-comment-name">';
-            const wost = ' </span> <span class="be-comment-time"> ';
-            const wost2 = '<i class="fa fa-clock-o"></i> </span> <div id="comments_section"> <p class="be-comment-text">';
-            const end = "</p> </div> </div> </div>";
+    const $form = $(this);
+    const formData = $form.serialize();
+    const url = window.location.href;
 
-            $("#comment-form").before(start + response.author + wost + response.createdAt + wost2 + response.content + end);
-            $("#comment-count").text("Comments (" + response.count + ")");
-            $('form[name="comment"]')[0].reset();
-        }, error: function () {
-            alert("An error occurred while submitting the comment.");
+    $.ajax({
+        url: url, method: "POST", data: formData, success: function (response) {
+            const commentHtml = createCommentHtml(response);
+
+            $("#comment-form").before(commentHtml);
+            $("#comment-count").text(`Comments (${response.count})`);
+            $form[0].reset();
+        }, error: function (xhr, textStatus, errorThrown) {
+            alert("An error occurred while submitting the comment: " + errorThrown);
         },
     });
 });
+
+function createCommentHtml(response) {
+    const {avatar, author, createdAt, content} = response;
+
+    return `
+        <div class="be-comment">
+            <div class="be-img-comment">
+                 <a href="{{ path('app_profile', {'id': comment.author.id}) }}">
+                    <img width="60" height="60" src="/uploads/avatar_directory/${avatar}" alt="Avatar" class="rounded-circle">
+                </a>
+            </div>
+            <div class="be-comment-content">
+                <div class="d-flex justify-content-between mb-3 comment-name">
+                <a href="{{ path('app_profile', {'id': comment.author.id}) }}">${author}</a>
+                  <span class="be-comment-time">
+                    <i class="fa-regular fa-clock"></i>
+                    ${createdAt}
+                  </span>
+                </div>
+                <p class="be-comment-text">${content}</p>
+            </div>
+        </div>`;
+}
 
 // Likes
 $("i.fa-heart").click(function () {

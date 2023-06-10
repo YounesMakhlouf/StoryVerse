@@ -4,28 +4,30 @@
 
 {% block body %}
     {{ parent() }}
-    <div class="container">
-        <h1 class="mt-4">All Quests</h1>
-        {% if quests is empty %}
-            <p>No quests available.</p>
-        {% else %}
-            <div class="row">
-                {% for quest in quests %}
-                    <div class="col-md-6">
-                        {{ include('/quest/quest_card.html.twig', { 'quest': quest }) }}
-                    </div>
-                {% endfor %}
-            </div>
-        {% endif %}
-    </div>
+    <main>
+        <div class="container">
+            <h1 class="my-4 text-center">All Quests</h1>
+            {% if quests is empty %}
+                <p>No quests available.</p>
+            {% else %}
+                <div class="row">
+                    {% for quest in quests %}
+                        <div class="col-md-6">
+                            {{ include('/quest/quest_card.html.twig', { 'quest': quest }) }}
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    </main>
 {% endblock %}
 
-    {% block javascripts %}
-        {{ parent() }}
-        {{ encore_entry_script_tags('quests') }}
-    {% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('quests') }}
+{% endblock %}
 
-    {% block stylesheets %}
-        {{ parent() }}
-        {{ encore_entry_link_tags('quests') }}
-    {% endblock %}
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('quests') }}
+{% endblock %}

@@ -1,41 +1,43 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-  <h2>Create a story </h2>
-  <div class="formbold-main-wrapper">
-    <div class="formbold-form-wrapper">
-      {{ form_start(form) }}
-      <div class="formbold-input-flex">
-        <div>
-          {{ form_widget(form.title, {'attr': {'class': "formbold-form-input"}}) }}
-          {{ form_label(form.title, 'Title',{'attr': {'class': "formbold-form-label"}}) }}
+    <main>
+        <div class="container">
+            <h1 class="text-center my-4">Create a story</h1>
+            <div class="formbold-main-wrapper p-5">
+                <div class="formbold-form-wrapper">
+                    {{ form_start(form) }}
+                    <div class="formbold-input-flex">
+                        <div>
+                            {{ form_widget(form.title, {'attr': {'class': "formbold-form-input"}}) }}
+                            {{ form_label(form.title, 'Title',{'attr': {'class': "formbold-form-label"}}) }}
+                        </div>
+                        <div>
+                            {{ form_widget(form.genre, {'attr': {'class': 'formbold-form-input'}}) }}
+                            {{ form_label(form.genre, 'Genre') }}
+                        </div>
+                    </div>
+
+                    <div class="formbold-textarea">
+                        {{ form_widget(form.firstContribution, {'attr': {'class': "formbold-form-input"}}) }}
+                        {{ form_label(form.firstContribution, 'Your first contribution',{'attr': {'class': "formbold-form-label"}}) }}
+                    </div>
+
+                    <div class="formbold-input-file">
+                        <label for="upload" class="formbold-input-label">
+                            <i class="fa-solid fa-paperclip fa-xl"></i>
+                            {{ form_label(form.storyImage, 'Add story Image ') }}
+                            {{ form_widget(form.storyImage, {'attr': {'class': 'form-control-file'}}) }}
+                        </label>
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
         </div>
-        <div>
-          {{ form_widget(form.genre, {'attr': {'class': 'formbold-form-input'}}) }}
-          {{ form_label(form.genre, 'Genre') }}
-        </div>
-      </div>
-
-      <div class="formbold-textarea">
-        {{ form_widget(form.firstContribution, {'attr': {'class': "formbold-form-input"}}) }}
-        {{ form_label(form.firstContribution, 'Your first contribution',{'attr': {'class': "formbold-form-label"}}) }}
-      </div>
-
-      <div class="formbold-input-file">
-        <label for="upload" class="formbold-input-label">
-         <i class="fa-solid fa-paperclip fa-xl" style="color: #22877b;"></i>
-          {{ form_label(form.storyImage, 'Add story Image ') }}
-          {{ form_widget(form.storyImage, {'attr': {'class': 'form-control-file'}}) }}
-        </label>
-      </div>
-
-        {{ form_end(form) }}
-
-    </div>
-  </div>
+    </main>
 {% endblock %}
 
 {% block stylesheets %}
-  {{ parent() }}
+    {{ parent() }}
     {{ encore_entry_link_tags('create') }}
 {% endblock %}
