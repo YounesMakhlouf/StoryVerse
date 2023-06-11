@@ -1,18 +1,17 @@
 {% extends 'storypage/story.html.twig' %}
 
-{% block header %}
-{%endblock %}
-{% block footer %}
-{% endblock %}
-{% block body %}
-{% block comments %}
-    {% endblock %}
+{% block header %}{% endblock %}
 
-    {% block contribute %}
-        {% endblock %}
-    {% block like %}
-        {% endblock %}
+{% block footer %}{% endblock %}
+
+{% block body %}
+    {% block comments %}{% endblock %}
+
+    {% block contribute %}{% endblock %}
+
+    {% block like %}{% endblock %}
+
     {% block story %}
         {{ parent() }}
-        {% endblock %}
+    {% endblock %}
 {% endblock %}

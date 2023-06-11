@@ -43,14 +43,14 @@
                 {% endblock %}
 
                 {% block story %}
-                    <div class="text col-auto">
+                    <div class="text rounded-4 col-8">
                         <h1 class="display-3">{{ story.title }}</h1>
                         {% for contribution in story.contributions %}
                             <p class="contr" id="{{ contribution.author.id }}">{{ contribution.content }}</p>
                         {% endfor %}
                     </div>
                     <div class="authors col-auto">
-                        <h2>{{ 'Contributors'|trans }}</h2>
+                        <h2 class="mb-3">{{ 'Contributors'|trans }}</h2>
                         {% for contribution in story.contributions %}
                             <a id="{{ contribution.author.id ~ 'author' }}"
                                href="{{ path('app_profile', {'id': contribution.author.id}) }}">
@@ -62,35 +62,36 @@
                 {% endblock %}
             </div>
         </div>
-        {% block contribute %}
-            {% if not hasContributed %}
-                <div class="text-center mt-5">
-                    <a id="contribute-btn"
-                       class="btn btn-white btn-animate">{{ 'Be part of the story - Contribute now!'|trans }}</a>
-                </div>
-                <div class="container">
-                    <div class="row" id="contribute-form">
-                        {{ form_start(contributionForm, {'action': path('app_storypage', {'id': story.id}),'attr': {'id': 'contribution-form'}}) }}
-                        {{ form_widget(contributionForm.content, {'attr': {'class': 'form-input col-7', 'placeholder': 'add your contribution'|trans}}) }}
-                        <button id="sub" type="submit"></button>
-                        {{ form_end(contributionForm) }}
+        <div class="container my-5">
+            {% block contribute %}
+                {% if not hasContributed %}
+                    <div class="text-center">
+                        <a id="contribute-btn"
+                           class="btn btn-white btn-animate">{{ 'Be part of the story - Contribute now!'|trans }}</a>
                     </div>
-                </div>
-            {% else %}
-                <div class="container" id="explore">
-                    <div id="message" class="alert alert-light">
-                        Looks like you've already contributed to this story! How about exploring some other stories?
+                    <div class="container text-center">
+                        <div class="row" id="contribute-form">
+                            {{ form_start(contributionForm, {'action': path('app_storypage', {'id': story.id}),'attr': {'id': 'contribution-form'}}) }}
+                            {{ form_widget(contributionForm.content, {'attr': {'class': 'form-input col-7', 'placeholder': 'add your contribution'|trans}}) }}
+                            <button id="sub" type="submit"></button>
+                            {{ form_end(contributionForm) }}
+                        </div>
                     </div>
-                    <a href="{{ path('app_browse_stories') }}" class="btn btn-white btn-animate">Explore</a>
-                </div>
-            {% endif %}
-        {% endblock %}
-
+                {% else %}
+                    <div class="container">
+                        <div class="alert alert-light">
+                            Looks like you've already contributed to this story! How about exploring some other stories?
+                        </div>
+                        <a href="{{ path('app_browse_stories') }}" class="btn btn-white btn-animate">Explore</a>
+                    </div>
+                {% endif %}
+            {% endblock %}
+        </div>
         {# Comment section #}
         {% block comments %}
-            <div id="comment-section">
-                <div class="be-comment-block">
-                    <h2 id="comment-count">{{ 'Comments'|trans }} ({{ story.comments|length }})</h2>
+            <div id="comment-section" class="container">
+                <div class="be-comment-block mb-5">
+                    <h2 class="mb-3">{{ 'Comments'|trans }} ({{ story.comments|length }})</h2>
                     {% for comment in story.comments %}
                     {% if comment.comment is null %}
                         <div class="be-comment">
@@ -109,7 +110,7 @@
                                             {{ comment.createdat|date('d-m-Y') }}
                                         </span>
                                 </div>
-                                <p class="be-comment-text">
+                                <p class="be-comment-text rounded">
                                     {{ comment.content }}
                                 </p>
                             </div>
@@ -142,7 +143,7 @@
                                             <i class="fa-regular fa-clock"></i>
                                                 {{ reply.createdat|date('d-m-Y') }}
                                         </span>
-                                <p class="be-comment-text">
+                                <p class="be-comment-text rounded">
                                     {{ reply.content }}
                                 </p>
                             </div>
@@ -150,16 +151,15 @@
                     </div>
                     {% endfor %}
                     {% endfor %}
-                    {{ form_start(form, {'action': path('app_storypage', {'id': story.id}),
-                        'attr': {'id': 'comment-form'}}) }}
-                    <div class="container">
-                    <div class="row">
-                        {{ form_widget(form.content, {'attr': {'class': 'form-input col-8', 'placeholder': 'add your comment'|trans}}) }}
-                        <button class="col-1" type="submit" aria-label="submit comment">
-                            <i class="fa-solid fa-paper-plane fa-2xl"></i>
-                        </button>
-                    </div>
+                    {{ form_start(form, {'action': path('app_storypage', {'id': story.id})}) }}
+                    <div class="container mt-4">
+                        <div class="row">
+                            {{ form_widget(form.content, {'attr': {'class': 'form-input col-8', 'placeholder': 'add your comment'|trans}}) }}
+                            <button class="col-1" type="submit" aria-label="submit comment">
+                                <i class="fa-solid fa-paper-plane fa-2xl"></i>
+                            </button>
                         </div>
+                    </div>
                     {{ form_end(form) }}
                 </div>
             </div>

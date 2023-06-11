@@ -26,6 +26,10 @@ nav {
   border-radius: 100vh;
   backdrop-filter: blur(4px) saturate(180%);
 
+  ::placeholder {
+    color: white !important;
+  }
+
   & input {
     text-indent: 1em;
     border: 0;
@@ -41,10 +45,6 @@ nav {
     border-radius: 50%;
     background: var(--DarkTurquoise);
   }
-}
-
-::placeholder {
-  color: white !important;
 }
 
 #notification-icon {
