@@ -1,3 +1,9 @@
+.section-title h1 {
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--DarkTurquoise);
+}
+
 .trending h3 {
   font-weight: 700;
   margin: 0;
@@ -7,7 +13,7 @@
 }
 
 .trending .card:hover {
-  background: var( --LightGray);
+  background: var(--LightGray);
 }
 
 .card-img-top {
@@ -40,10 +46,4 @@
 
 .Drama {
   background: #850101 !important;
-}
-
-#genre-description {
-  font-size: 1.25rem;
-  font-weight: bold;
-  margin-bottom: 10px;
 }

@@ -9,13 +9,6 @@ body {
 }
 
 .card {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  min-width: 0;
-  word-wrap: break-word;
-  background-color: #fff;
-  background-clip: border-box;
   border: 0 solid transparent;
   border-radius: 0.25rem;
   margin-bottom: 1.5rem;
@@ -23,19 +16,8 @@ body {
 }
 
 .profile-container {
-  padding: 1.25em 1.5em;
-  color: black;
-  border-radius: 0.5em;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
   background-color: white;
-}
-
-h2 {
-  margin-bottom: 0.5em;
-}
-
-.fa-user-pen {
-  margin-left: 0.25em;
 }
 
 .profile-followers {

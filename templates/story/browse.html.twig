@@ -5,8 +5,7 @@
         <section class="trending" id="trending">
             <div class="container">
                 <header class="section-title" data-aos="fade-up">
-                    <h1>{{ 'Trending Stories'|trans }}</h1>
-                    <p>{{ 'Discover Our Hottest Stories 🔥🔥'|trans }}</p>
+                    <h1>{{ 'Trending Stories 🔥🔥'|trans }}</h1>
                 </header>
                 <div class="btn-group" role="group" aria-label="Story Genre filter">
                     <a class="btn btn-outline-primary genre"
@@ -16,8 +15,8 @@
                            href="{{ path('app_browse_stories', { 'genre': genre }) }}">{{ genre }}</a>
                     {% endfor %}
                 </div>
-                <div>
-                    <h2 id="genre-description">{{ 'Browse'|trans }} {{ genre ?? ('All genres'|trans) }}</h2>
+                <div class="container my-4" id="genre-description">
+                    <h2 >{{ 'Browse'|trans }} {{ genre ?? ('All genres'|trans) }}</h2>
                     {% if genre %}
                         <p>{{ genres[genre] }}</p>
                     {% endif %}

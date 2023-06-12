@@ -16,159 +16,155 @@
 {% block body %}
     {{ parent() }}
     <main>
-        <div class="container profile-container">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="d-flex flex-column align-items-center text-center">
-                                    <img class="rounded-circle"
-                                         src="{{ asset('uploads/avatar_directory/' ~ user.avatar) }}"
-                                         alt="Profile image"
-                                         width="200px">
-                                    <div class="mt-3">
-                                        <h1 class="display-5">{{ user.username }}
-                                            {% if app.user and app.user.id == user.id %}
-                                                <a aria-label="Modify your profile"
-                                                   href="{{ path('app_modify_profile') }}"><i
-                                                            class="fa-solid fa-user-pen"></i></a>
-                                            {% endif %}
-                                        </h1>
-                                        <p class="text-secondary mb-1" id="bio">{{ bio }}</p>
-                                    </div>
+        <div class="container profile-container rounded-3 p-4">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="d-flex flex-column align-items-center text-center">
+                                <img class="rounded-circle"
+                                     src="{{ asset('uploads/avatar_directory/' ~ user.avatar) }}"
+                                     alt="Profile image"
+                                     width="200px">
+                                <div class="mt-3 container">
+                                    <h1 class="display-5">{{ user.username }}
+                                        {% if app.user and app.user.id == user.id %}
+                                            <a aria-label="Modify your profile"
+                                               href="{{ path('app_modify_profile') }}"><i
+                                                        class="fa-solid fa-user-pen ms-2"></i></a>
+                                        {% endif %}
+                                    </h1>
+                                    <p class="text-secondary mb-1" id="bio">{{ bio }}</p>
                                 </div>
-                                {% if app.user and app.user.id != user.id %}
-                                    <hr class="my-4">
-                                    {% set formAction = is_following ? path('unfollow_user', {'id': user.id}) : path('follow_user', {'id': user.id}) %}
-                                    {% set followButtonLabel = is_following ? 'Unfollow' : 'Follow' %}
-                                    <div class="text-center">
-                                        <form class="d-inline" action="{{ formAction }}" method="post">
-                                            <button class="btn {{ is_following ? 'btn-primary' : 'btn-warning' }} follow-button">
-                                                {{ followButtonLabel }}
-                                            </button>
-                                        </form>
-                                    </div>
-                                {% endif %}
+                            </div>
+                            {% if app.user and app.user.id != user.id %}
                                 <hr class="my-4">
+                                {% set formAction = is_following ? path('unfollow_user', {'id': user.id}) : path('follow_user', {'id': user.id}) %}
+                                {% set followButtonLabel = is_following ? 'Unfollow' : 'Follow' %}
                                 <div class="text-center">
-                                    <a class="icon-link" href="{{ path('app_following', {'id': user.id}) }}">
-                                        <i class="fa-solid fa-user"></i>
-                                        <span class="profile-followers">{{ user.following|length }} Following</span>
-                                    </a>
+                                    <form class="d-inline" action="{{ formAction }}" method="post">
+                                        <button class="btn {{ is_following ? 'btn-primary' : 'btn-warning' }} follow-button">
+                                            {{ followButtonLabel }}
+                                        </button>
+                                    </form>
                                 </div>
-                                <hr class="my-4">
-                                <div class="text-center">
-                                    <a class="icon-link" href="{{ path('app_followers', {'id': user.id}) }}">
-                                        <i class="fa-solid fa-user"></i>
-                                        <span class="profile-followers">{{ user.follower|length }} Followers</span>
-                                    </a>
-                                </div>
+                            {% endif %}
+                            <hr class="my-4">
+                            <div class="text-center">
+                                <a class="icon-link" href="{{ path('app_following', {'id': user.id}) }}">
+                                    <i class="fa-solid fa-user"></i>
+                                    <span class="profile-followers">{{ user.following|length }} Following</span>
+                                </a>
+                            </div>
+                            <hr class="my-4">
+                            <div class="text-center">
+                                <a class="icon-link" href="{{ path('app_followers', {'id': user.id}) }}">
+                                    <i class="fa-solid fa-user"></i>
+                                    <span class="profile-followers">{{ user.follower|length }} Followers</span>
+                                </a>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-8">
-                        {% if user.tier %}
-                            <div class="card align-items-center">
-                                <div class="card-body tiers-container container">
-                                    {% if app.user is defined and app.user.id == user.id %}
-                                        <div class="container level-up-message">
-                                            <p class="text-center">Level up, brave adventurer, and unlock the secrets of
-                                                the
-                                                next tier! Your destiny awaits, just a sprinkle of XP away!</p>
-                                        </div>
-                                    {% endif %}
-                                    <div class="profile-xp row align-items-center">
-                                        <div class="tier-container col">
-                                            <h2 class="tier">Current tier :</h2>
-                                            {% if user.tier.badge %}
-                                                <div class="d-flex align-items-center">
-                                                    <img class="rounded-circle" height="50" width="50" alt="Tier badge"
-                                                         src="{{ asset('build/images/tierBadges/' ~ user.tier.badge) }}">
-                                                    <span class="figure-caption tier-info">{{ user.tier.name }}</span>
-                                                </div>
-                                            {% endif %}
-                                        </div>
-                                        <div class="tier-container col">
-                                            {% if nextTier %}
-                                                <h2 class="tier">Next Tier: {{ nextTier.name }}</h2>
-                                                <div class="row align-items-center container">
-                                                    {% if nextTier.badge %}
-                                                        <img class="col-3 rounded-circle" height="50" width="50"
-                                                             alt="Tier badge"
-                                                             src="{{ asset('build/images/tierBadges/' ~ nextTier.badge) }}">
-                                                    {% endif %}
-                                                    {% set progress = (user.xp / nextTier.xpThreshold) * 100 %}
-                                                    <div class="col-9">
-                                                        <div class="progress">
-                                                            <div class="progress-bar" role="progressbar"
-                                                                 aria-label="Quest progress"
-                                                                 style="width: {{ progress }}%;"
-                                                                 aria-valuenow="{{ progress }}" aria-valuemin="0"
-                                                                 aria-valuemax="100">
-                                                                <span class="xp-progress">{{ user.xp }} XP</span>
-                                                            </div>
+                </div>
+                <div class="col-lg-8">
+                    {% if user.tier %}
+                        <div class="card align-items-center">
+                            <div class="card-body tiers-container container">
+                                {% if app.user is defined and app.user.id == user.id %}
+                                    <div class="container level-up-message">
+                                        <p class="text-center">Level up, brave adventurer, and unlock the secrets of
+                                            the next tier! Your destiny awaits, just a sprinkle of XP away!</p>
+                                    </div>
+                                {% endif %}
+                                <div class="profile-xp row align-items-center">
+                                    <div class="tier-container col">
+                                        <h2 class="tier">Current tier :</h2>
+                                        {% if user.tier.badge %}
+                                            <div class="d-flex align-items-center">
+                                                <img class="rounded-circle" height="50" width="50" alt="Tier badge"
+                                                     src="{{ asset('build/images/tierBadges/' ~ user.tier.badge) }}">
+                                                <span class="figure-caption tier-info">{{ user.tier.name }}</span>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                    <div class="tier-container col">
+                                        {% if nextTier %}
+                                            <h2 class="tier">Next Tier: {{ nextTier.name }}</h2>
+                                            <div class="row align-items-center container">
+                                                {% if nextTier.badge %}
+                                                    <img class="col-3 rounded-circle" height="50" width="50"
+                                                         alt="Tier badge"
+                                                         src="{{ asset('build/images/tierBadges/' ~ nextTier.badge) }}">
+                                                {% endif %}
+                                                {% set progress = (user.xp / nextTier.xpThreshold) * 100 %}
+                                                <div class="col-9">
+                                                    <div class="progress">
+                                                        <div class="progress-bar" role="progressbar"
+                                                             aria-label="Quest progress"
+                                                             style="width: {{ progress }}%;"
+                                                             aria-valuenow="{{ progress }}" aria-valuemin="0"
+                                                             aria-valuemax="100">
+                                                            <span class="xp-progress">{{ user.xp }} XP</span>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            {% else %}
-                                                <h2 class="tier">Congratulations!</h2>
-                                                <div>
-                                                    <p>You have reached the highest tier available.</p>
-                                                    <p>It seems we were too lazy to add more tiers, and we never
-                                                        expected
-                                                        anyone to make it this far!</p>
-                                                </div>
-                                            {% endif %}
-                                        </div>
+                                            </div>
+                                        {% else %}
+                                            <h2 class="tier">Congratulations!</h2>
+                                            <div>
+                                                <p>You have reached the highest tier available.</p>
+                                                <p>It seems we were too lazy to add more tiers, and we never
+                                                    expected anyone to make it this far!</p>
+                                            </div>
+                                        {% endif %}
                                     </div>
                                 </div>
                             </div>
-                        {% endif %}
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="card">
-                                    <div class="card-body">
-                                        {% if stories %}
-                                            {% for story in stories %}
-                                                <a href="{{ path('app_storypage', { 'id': story.id }) }}" class="mb-3">
-                                                    <h3 class="profile-stories-title">{{ story.title }}<span
-                                                                class="badge rounded-pill {{ story.genre }}"> {{ story.genre }}</span>
-                                                    </h3>
-                                                    <img alt="{{ story.title }}" class="zoom-image"
-                                                         src="{{ asset('uploads/story_directory/' ~ story.storyImage) }}">
-                                                    <div class="text-truncate description">
-                                                        {% for contribution in story.contributions %}
-                                                            <p>{{ contribution.content }}</p>
-                                                        {% endfor %}
-                                                    </div>
-                                                </a>
-                                            {% endfor %}
+                        </div>
+                    {% endif %}
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    {% if stories %}
+                                        {% for story in stories %}
+                                            <a href="{{ path('app_storypage', { 'id': story.id }) }}" class="mb-3">
+                                                <h3 class="profile-stories-title">{{ story.title }}<span
+                                                            class="badge rounded-pill {{ story.genre }}"> {{ story.genre }}</span>
+                                                </h3>
+                                                <img alt="{{ story.title }}" class="zoom-image"
+                                                     src="{{ asset('uploads/story_directory/' ~ story.storyImage) }}">
+                                                <div class="text-truncate description">
+                                                    {% for contribution in story.contributions %}
+                                                        <p>{{ contribution.content }}</p>
+                                                    {% endfor %}
+                                                </div>
+                                            </a>
+                                        {% endfor %}
+                                    {% else %}
+                                        {% if app.user is defined and app.user.id == user.id %}
+                                            <p>Oops! It seems like your profile is as empty as a vacuum in space.
+                                                Time
+                                                to unleash your creativity and make some contributions that will
+                                                rock
+                                                this world! Remember, even the tiniest pebble can create ripples in
+                                                the
+                                                vast ocean of knowledge. Get ready to shine and let your ideas flow
+                                                like
+                                                a river of awesomeness!</p>
                                         {% else %}
-                                            {% if app.user is defined and app.user.id == user.id %}
-                                                <p>Oops! It seems like your profile is as empty as a vacuum in space.
-                                                    Time
-                                                    to unleash your creativity and make some contributions that will
-                                                    rock
-                                                    this world! Remember, even the tiniest pebble can create ripples in
-                                                    the
-                                                    vast ocean of knowledge. Get ready to shine and let your ideas flow
-                                                    like
-                                                    a river of awesomeness!</p>
-                                            {% else %}
-                                                <p>Warning! You're about to enter the profile of a self-proclaimed
-                                                    'Master
-                                                    Procrastinator' who has yet to make any contributions. Proceed with
-                                                    caution, as you might catch a severe case of 'Procrastination
-                                                    Syndrome'
-                                                    if you spend too much time here. Don't be like them! Embrace your
-                                                    inner
-                                                    productivity ninja and start making waves in the world of
-                                                    awesomeness.
-                                                    Remember, the clock is ticking, and greatness awaits you!</p>
-                                            {% endif %}
+                                            <p>Warning! You're about to enter the profile of a self-proclaimed
+                                                'Master
+                                                Procrastinator' who has yet to make any contributions. Proceed with
+                                                caution, as you might catch a severe case of 'Procrastination
+                                                Syndrome'
+                                                if you spend too much time here. Don't be like them! Embrace your
+                                                inner
+                                                productivity ninja and start making waves in the world of
+                                                awesomeness.
+                                                Remember, the clock is ticking, and greatness awaits you!</p>
                                         {% endif %}
-                                    </div>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>
