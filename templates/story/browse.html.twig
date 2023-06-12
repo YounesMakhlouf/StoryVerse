@@ -16,7 +16,7 @@
                     {% endfor %}
                 </div>
                 <div class="container my-4" id="genre-description">
-                    <h2 >{{ 'Browse'|trans }} {{ genre ?? ('All genres'|trans) }}</h2>
+                    <h2>{{ 'Browse'|trans }} {{ genre ?? ('All genres'|trans) }}</h2>
                     {% if genre %}
                         <p>{{ genres[genre] }}</p>
                     {% endif %}
@@ -44,20 +44,12 @@
                         {% endfor %}
                     </article>
                     {% if pager.haveToPaginate %}
-                        {{ pagerfanta(pager) }}
+                        <div class="d-flex justify-content-center mt-4">
+                            {{ pagerfanta(pager) }}
+                        </div>
                     {% endif %}
                 </div>
             </div>
         </section>
     </main>
 {% endblock %}
-
-    {% block javascripts %}
-        {{ parent() }}
-        {{ encore_entry_script_tags('feed') }}
-    {% endblock %}
-
-    {% block stylesheets %}
-        {{ parent() }}
-        {{ encore_entry_link_tags('feed') }}
-    {% endblock %}
