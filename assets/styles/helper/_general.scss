@@ -11,32 +11,56 @@
   --Silver: #BBC6C8;
   --LightGray: #E5E3E4;
   --wheat: #DDBEAA;
+  --clr-text: #333333;
+  --ff-base: "Lora", serif;
+  --ff-accent: "Cormorant", serif;
+  --ff-headings: "Playfair Display", serif;
+  --fs-300: clamp(1.13rem, calc(1.08rem + 0.22vw), 1.25rem);
+  --fs-400: clamp(1.20rem, calc(1.07rem + 0.54vw), 1.56rem);
+  --fs-500: clamp(1.44rem, calc(1.26rem + 0.77vw), 1.95rem);
+  --fs-600: clamp(1.73rem, calc(1.48rem + 1.07vw), 2.44rem);
+  --fs-700: clamp(2.07rem, calc(1.73rem + 1.47vw), 3.05rem);
+  --fs-800: clamp(2.49rem, calc(2.02rem + 1.99vw), 3.82rem);
+  --bs-body-font-size: var(--fs-400);
+  --bs-body-font-family: var(--ff-base);
+  --bs-body-line-height: 1.6;
   --bs-link-color-rgb: 91, 161, 153;
 }
 
+html {
+  color-scheme: light dark;
+}
+
 /* Typography */
-body {
-  font-family: "Lora", serif;
-  color: #444444;
-}
-
 h1, h2, h3, h4, h5, h6 {
-  font-family: "Playfair Display", serif;
+  font-family: var(--ff-headings);
+  line-height: 1.1;
 }
 
-p, li, blockquote, cite {
-  font-family: "Lora", serif;
+h1 {
+  font-size: var(--fs-700);
+  color: var(--DarkTurquoise);
+}
+
+h2 {
+  font-size: var(--fs-600);
+  color: var(--DarkTurquoise);
+}
+
+h3 {
+  font-size: var(--fs-500);
+  color: var(--DarkTurquoise);
 }
 
 strong, em, span {
-  font-family: "Cormorant", serif;
+  font-family: var(--ff-accent);
 }
 
 /* Links */
 a {
   text-decoration: none;
 
-  &:hover {
+  &:hover, &:focus {
     color: var(--Turquoise);
   }
 }
