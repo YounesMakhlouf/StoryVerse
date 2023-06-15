@@ -25,6 +25,7 @@
   --bs-body-font-family: var(--ff-base);
   --bs-body-line-height: 1.6;
   --bs-link-color-rgb: 91, 161, 153;
+  --bs-emphasis-color-rgb: 229, 227, 228;
 }
 
 html {
@@ -35,6 +36,7 @@ html {
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--ff-headings);
   line-height: 1.1;
+  text-wrap: balance;
 }
 
 h1 {
@@ -49,11 +51,14 @@ h2 {
 
 h3 {
   font-size: var(--fs-500);
-  color: var(--DarkTurquoise);
 }
 
 strong, em, span {
   font-family: var(--ff-accent);
+}
+
+::marker{
+  color: var(--DarkTurquoise);
 }
 
 /* Links */
