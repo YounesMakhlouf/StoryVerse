@@ -12,3 +12,17 @@
 body {
   padding-top: 5em;
 }
+
+.navbar-brand {
+  color: var(--LightGray);
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+
+.navbar-brand:hover {
+  color: white;
+}
+
+nav {
+  background: var(--Turquoise);
+}

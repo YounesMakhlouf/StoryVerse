@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    {{ parent() }}
     <main>
         <!-- ======= Hero Section ======= -->
         <section aria-label="Hero section introducing StoryVerse platform" id="hero">
@@ -59,7 +60,7 @@
                             <a href="{{ path('app_storypage', { 'id': story.id }) }}" rel="bookmark">
                                 <div class="card h-100" data-aos="zoom-in" data-aos-delay="0">
                                     <img alt="{{ story.title }}" class="card-img-top"
-                                         src="{{ asset ('uploads/story_directory/'~ story.storyImage)}}">
+                                         src="{{ asset ('uploads/story_directory/'~ story.storyImage) }}">
                                     <div class="card-body">
                                         <h5 class="card-title">{{ story.title }}</h5>
                                         <p class="card-text">{# awel joumal #}</p>
@@ -177,25 +178,43 @@
 {% endblock %}
 
 {% block header %}
-    <header class="fixed-top d-flex align-items-center header-transparent" id="header">
-        <div class="container d-flex align-items-center justify-content-between">
-            <div class="logo">
-                <h1><a href="{{ path('app_home') }}"><span><img alt="StoryVerse logo" class="img-fluid"
-                                                                src="{{ asset('build/images/logo.webp') }}">StoryVerse</span></a>
-                </h1>
+    <header id="header" class="fixed-top">
+        <nav class="navbar navbar-expand-lg fixed-top px-md-4" id="navbar">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="{{ path('app_home') }}">
+                    <img src="{{ asset('build/images/logo.webp') }}" alt="Logo" width="40" height="40"
+                         class="d-inline-block align-text-top"/> <span>StoryVerse</span>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarNavDropdown"
+                        aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                    <ul class="navbar-nav ms-auto gap-3">
+                        <li class="nav-item">
+                            <a class="nav-link active scrollto" aria-current="page" href="{{ path('app_home') }}"
+                               title="Home">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link scrollto" href="#trending" title="Trending">Trending</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link scrollto" href="#team" title="Team">Team</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link scrollto" href="#contact" title="Contact">Contact</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('app_login') }}" title="Login">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('app_register') }}" title="Sign up">Sign up</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-            <nav class="navbar" id="navbar">
-                <ul>
-                    <li><a class="nav-link scrollto active" href="{{ path('app_home') }}" title="Home">Home</a></li>
-                    <li><a class="nav-link scrollto" href="#trending" title="Trending">Trending</a></li>
-                    <li><a class="nav-link scrollto" href="#team" title="Team">Team</a></li>
-                    <li><a class="nav-link scrollto" href="#contact" title="Contact">Contact</a></li>
-                    <li><a class="nav-link scrollto" href="{{ path('app_login') }}" title="Login">Login</a></li>
-                    <li><a class="nav-link scrollto" href="{{ path('app_register') }}" title="Sign up">Sign up</a></li>
-                </ul>
-                <i class="fa-solid fa-bars mobile-nav-toggle"></i>
-            </nav>
-        </div>
+        </nav>
     </header>
 {% endblock %}
 

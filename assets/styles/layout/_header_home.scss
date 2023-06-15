@@ -1,0 +1,45 @@
+#header {
+  height: 80px;
+  z-index: 997;
+  transition: all 0.5s;
+  background: var(--Turquoise);
+  opacity: 0.9;
+}
+
+#header.header-transparent {
+  background-color: transparent;
+}
+
+#header.header-scrolled {
+  background: var(--Turquoise);
+  height: 60px;
+}
+
+/*Navigation Menu*/
+.navbar-nav a,
+.navbar-nav a:focus {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  font-family: "Poppins", sans-serif;
+  color: rgba(255, 255, 255, 0.7);
+  white-space: nowrap;
+  transition: 0.3s;
+}
+
+.navbar-nav > li > a:before {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 20px;
+  background-color: var(--wheat);
+  visibility: visible;
+  transition: all 0.3s ease-in-out 0s;
+}
+
+.navbar-nav a:hover:before,
+.navbar-nav li:hover > a:before,
+.navbar-nav .active:before {
+  visibility: visible;
+  width: 25px;
+}

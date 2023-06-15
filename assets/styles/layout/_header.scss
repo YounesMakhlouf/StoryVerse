@@ -1,20 +1,10 @@
-nav {
-  background: var(--Turquoise);
-}
-
-.navbar-brand {
-  color: var(--LightGray);
-  font-size: 1.75rem;
-  font-weight: 700;
-}
-
 @media (max-width: 768px) {
   header span {
     display: none;
   }
 }
 
-.navbar-brand:hover, .fa-plus, #profile, .fa-magnifying-glass, .fa-bell, .fa-trophy {
+.fa-plus, #profile, .fa-magnifying-glass, .fa-bell, .fa-trophy {
   color: white;
 }
 
