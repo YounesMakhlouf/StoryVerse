@@ -151,9 +151,10 @@
                     </div>
                     {% endfor %}
                     {% endfor %}
-                    {{ form_start(form, {'action': path('app_storypage', {'id': story.id})}) }}
+                    <div class="container">
+                  {{ form_start(form, {'action': path('app_storypage', {'id': story.id}), 'attr': {'id': 'comment-form'}}) }}
                     <div class="container mt-4">
-                        <div class="row">
+                        <div class="row justify-content-center">
                             {{ form_widget(form.content, {'attr': {'class': 'form-input col-8', 'placeholder': 'add your comment'|trans}}) }}
                             <button class="col-1" type="submit" aria-label="submit comment">
                                 <i class="fa-solid fa-paper-plane fa-2xl"></i>
@@ -161,6 +162,7 @@
                         </div>
                     </div>
                     {{ form_end(form) }}
+                    </div>
                 </div>
             </div>
             <script src="https://code.jquery.com/jquery-3.6.3.min.js"
