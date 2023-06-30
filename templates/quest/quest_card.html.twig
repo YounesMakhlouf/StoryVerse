@@ -1,15 +1,17 @@
 <div class="card">
+    <div class="card-triangle">
+        <span class="quest-points">{{ quest.points }}</span>
+    </div>
     <div class="card-body">
         <h2 class="card-title">{{ quest.name }}</h2>
         <p class="card-text">{{ quest.description }}</p>
-        <p class="card-text d-flex justify-content-between quest-details">
-            <span class="quest-points">Points: <strong>{{ quest.points }}</strong></span>
-            <span class="quest-type"><em>{{ quest.type }}</em></span>
+        <p class="card-text">
+            <span class="card-text quest-type"><em>{{ quest.type }}</em></span>
         </p>
         {% if quest.users|length == 0 %}
             <p class="card-text quest-completion">No one has completed this quest yet</p>
         {% else %}
-            <p class="card-text quest-completion">{{ quest.users|length }} people completed this quest</p>
+            <p class="card-text quest-completion">{{ quest.getUserPercentage(userRepository) | number_format(1)}}% of users completed this quest</p>
         {% endif %}
         {% set progress = questCompletionService.calculateQuestProgress(quest, app.user) %}
         {% if progress >= 100 %}

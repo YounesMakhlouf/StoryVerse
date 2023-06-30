@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\QuestRepository;
+use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -145,4 +146,19 @@ class Quest
 
         return $this;
     }
+
+    public function getUserPercentage(UserRepository $userRepository): float
+    {
+        $totalUsers = $userRepository->countUsers();
+    
+        if ($totalUsers === 0) {
+            return 0.0;
+        }
+    
+        $completedUsers = count($this->getUsers());
+    
+        return ($completedUsers / $totalUsers) * 100;
+    }
+    
+
 }

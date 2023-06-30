@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Event\QuestActionEvent;
 use App\Repository\QuestRepository;
+use App\Repository\UserRepository;
 use App\Service\QuestCompletionService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -18,7 +19,7 @@ class QuestController extends AbstractController
     }
 
     #[Route('/quest', name: 'app_quest')]
-    public function index(QuestRepository $questRepository): Response
+    public function index(QuestRepository $questRepository, UserRepository $userRepository): Response
     {
         $quests = $questRepository->findAll();
         $user = $this->getUser();
@@ -29,6 +30,7 @@ class QuestController extends AbstractController
         return $this->render('quest/index.html.twig', [
             'quests' => $quests,
             'questCompletionService' => $this->questCompletionService,
+            'userRepository' => $userRepository,
         ]);
     }
 }
