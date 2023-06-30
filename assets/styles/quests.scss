@@ -20,6 +20,17 @@
     clip-path: polygon(0 0, 100% 0, 0 100%);
     border-top-right-radius: 10px;
   }
+  
+  .quest-points {
+    position: absolute;
+    top: 30%;
+    left: 30%;      
+    transform: translate(-50%, -50%);
+    font-size: 1.25rem;
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    font-weight: bold;
+  }
 
   .card-body{
     max-width: 75ch;
@@ -36,20 +47,9 @@
     color: #888;
   }
 
-  .quest-points {
-    position: absolute;
-    top: 30%;
-    left: 30%;      
-    transform: translate(-50%, -50%);
-    font-size: 1.25rem;
-    color: white;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-    font-weight: bold;
-  }
-
   .quest-completion {
     color: #f44336;
-    font-size: 0.875rem;
+    font-size: var(--fs-300);
   }
 
   .congratulation {
