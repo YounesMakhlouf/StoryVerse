@@ -11,14 +11,6 @@ function scrollToTop() {
   $("html, body").animate({ scrollTop: 0 }, "slow");
 }
 
-$(document).ready(function () {
-  handleImageThemeEffect();
-
-  $(window).resize(function () {
-    handleImageThemeEffect(); // Recalculate image height on window resize
-  });
-});
-
 // Function to handle image theme effect
 function handleImageThemeEffect() {
   const image = $(".theme");
