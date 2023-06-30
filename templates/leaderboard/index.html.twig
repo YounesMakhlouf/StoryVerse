@@ -1,8 +1,12 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Leaderboard{% endblock %}
+
 {% block body %}
-    <h1>Leaderboard</h1>
-    <table class="table">
+    {{ parent() }}
+<main>
+    <h1 class="mb-5 text-center">Leaderboard</h1>
+    <table class="table leaderboard-table">
         <thead>
             <tr>
                 <th>Rank</th>
@@ -13,11 +17,27 @@
         <tbody>
             {% for user in users %}
                 <tr>
-                    <td>{{ loop.index }}</td>
-                    <td>{{ user.username }}</td>
-                    <td>{{ user.xp }}</td>
+                    <td class="leaderboard-rank">{{ loop.index }}</td>
+                    <td class="leaderboard-user">
+                        <div class="d-flex align-items-center">
+                                <img class="rounded-circle me-2" src="{{ asset('uploads/avatar_directory/' ~ user.avatar) }}" alt="Profile image" width="40px">
+                            <div class="leaderboard-username">{{ user.username }}</div>
+                        </div>
+                    </td>
+                <td class="leaderboard-xp">{{ user.xp }}</td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
+</main>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ encore_entry_script_tags('leaderboard') }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ encore_entry_link_tags('leaderboard') }}
 {% endblock %}

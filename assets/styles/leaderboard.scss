@@ -1,0 +1,29 @@
+.leaderboard-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .leaderboard-table th {
+    background-color: #f8f9fa;
+    font-weight: bold;
+    padding: 10px;
+  }
+  
+  .leaderboard-table td {
+    padding: 10px;
+  }
+  
+  .leaderboard-rank {
+    font-size: 1.2rem;
+    color: #888;
+  }
+  
+  .leaderboard-username {
+    font-weight: bold;
+  }
+  
+  .leaderboard-xp {
+    color: var(--DarkTurquoise);
+    font-weight: bold;
+  }
+  
