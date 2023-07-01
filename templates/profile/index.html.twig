@@ -122,51 +122,49 @@
                             </div>
                         </div>
                     {% endif %}
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <div class="card">
-                                <div class="card-body">
-                                    {% if stories %}
-                                        {% for story in stories %}
-                                            <a href="{{ path('app_storypage', { 'id': story.id }) }}" class="mb-3">
-                                                <h3 class="profile-stories-title">{{ story.title }}<span
-                                                            class="badge rounded-pill {{ story.genre }}"> {{ story.genre }}</span>
-                                                </h3>
-                                                <img alt="{{ story.title }}" class="zoom-image"
-                                                     src="{{ asset('uploads/story_directory/' ~ story.storyImage) }}">
-                                                <div class="text-truncate description">
+                    <div class="card">
+                        <div class="card-body">
+                            {% if stories %}
+                                {% for story in stories %}
+                                    <div class="container-lg mb-4">
+                                        <a href="{{ path('app_storypage', { 'id': story.id }) }}" class="mb-3">
+                                            <div class="row justifiy-content-center align-items-center">
+                                                <div class="col-md-5 text-center d-none d-md-block">
+                                                    <img alt="{{ story.title }}" class="zoom-image img-fluid"
+                                                         src="{{ asset('uploads/story_directory/' ~ story.storyImage) }}">
+                                                </div>
+                                                <div class="text-truncate description col-md-5 text-center text-md-start">
+                                                    <h3 class="profile-stories-title">{{ story.title }}<span
+                                                                class="badge rounded-pill {{ story.genre }}"> {{ story.genre }}</span>
+                                                    </h3>
                                                     {% for contribution in story.contributions %}
-                                                        <p>{{ contribution.content }}</p>
+                                                        <p class="lead my-4">{{ contribution.content }}</p>
                                                     {% endfor %}
                                                 </div>
-                                            </a>
-                                        {% endfor %}
-                                    {% else %}
-                                        {% if app.user is defined and app.user.id == user.id %}
-                                            <p>Oops! It seems like your profile is as empty as a vacuum in space.
-                                                Time
-                                                to unleash your creativity and make some contributions that will
-                                                rock
-                                                this world! Remember, even the tiniest pebble can create ripples in
-                                                the
-                                                vast ocean of knowledge. Get ready to shine and let your ideas flow
-                                                like
-                                                a river of awesomeness!</p>
-                                        {% else %}
-                                            <p>Warning! You're about to enter the profile of a self-proclaimed
-                                                'Master
-                                                Procrastinator' who has yet to make any contributions. Proceed with
-                                                caution, as you might catch a severe case of 'Procrastination
-                                                Syndrome'
-                                                if you spend too much time here. Don't be like them! Embrace your
-                                                inner
-                                                productivity ninja and start making waves in the world of
-                                                awesomeness.
-                                                Remember, the clock is ticking, and greatness awaits you!</p>
-                                        {% endif %}
-                                    {% endif %}
-                                </div>
-                            </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                {% if app.user is defined and app.user.id == user.id %}
+                                    <p>Oops! It seems like your profile is as empty as a vacuum in space.
+                                        Time
+                                        to unleash your creativity and make some contributions that will
+                                        rock
+                                        this world! Remember, even the tiniest pebble can create ripples in
+                                        the
+                                        vast ocean of knowledge. Get ready to shine and let your ideas flow
+                                        like
+                                        a river of awesomeness!</p>
+                                {% else %}
+                                    <p>Warning! You're about to enter the profile of a self-proclaimed
+                                        'Master Procrastinator' who has yet to make any contributions. Proceed with
+                                        caution, as you might catch a severe case of 'Procrastination Syndrome'
+                                        if you spend too much time here. Don't be like them! Embrace your inner
+                                        productivity ninja and start making waves in the world of awesomeness.
+                                        Remember, the clock is ticking, and greatness awaits you!</p>
+                                {% endif %}
+                            {% endif %}
                         </div>
                     </div>
                 </div>
