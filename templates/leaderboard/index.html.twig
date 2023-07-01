@@ -4,32 +4,36 @@
 
 {% block body %}
     {{ parent() }}
-<main>
-    <h1 class="mb-5 text-center">Leaderboard</h1>
-    <table class="table leaderboard-table">
-        <thead>
+    <main>
+        <h1 class="mb-5 text-center">Leaderboard</h1>
+        <table class="table table-hover leaderboard-table">
+            <thead>
             <tr>
-                <th>Rank</th>
-                <th>Username</th>
-                <th>XP</th>
+                <th scope="col">Rank</th>
+                <th scope="col">Username</th>
+                <th scope="col">XP</th>
             </tr>
-        </thead>
-        <tbody>
+            </thead>
+            <tbody>
             {% for user in users %}
-                <tr>
+                <tr {% if app.user and app.user.id == user.id %} class="table-primary" {% endif %}>
                     <td class="leaderboard-rank">{{ loop.index }}</td>
                     <td class="leaderboard-user">
-                        <div class="d-flex align-items-center">
-                                <img class="rounded-circle me-2" src="{{ asset('uploads/avatar_directory/' ~ user.avatar) }}" alt="Profile image" width="40px">
-                            <div class="leaderboard-username">{{ user.username }}</div>
-                        </div>
+                        <a href="{{ path('app_profile', {'id': user.id}) }}">
+                            <div class="d-flex align-items-center">
+                                <img class="rounded-circle me-2"
+                                     src="{{ asset('uploads/avatar_directory/' ~ user.avatar) }}" alt="Profile image"
+                                     width="40px">
+                                <div class="leaderboard-username">{{ user.username }}</div>
+                            </div>
+                        </a>
                     </td>
-                <td class="leaderboard-xp">{{ user.xp }}</td>
+                    <td class="leaderboard-xp">{{ user.xp }}</td>
                 </tr>
             {% endfor %}
-        </tbody>
-    </table>
-</main>
+            </tbody>
+        </table>
+    </main>
 {% endblock %}
 
 {% block javascripts %}
