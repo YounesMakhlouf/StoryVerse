@@ -1,6 +1,6 @@
 import "../styles/app.scss";
 
-// import "./components/AOSInit";
+import "./components/AOSInit";
 import "./components/notifications";
 import Swal from "sweetalert2";
 
