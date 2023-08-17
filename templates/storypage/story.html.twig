@@ -12,7 +12,7 @@
         <div class="container">
             <div class="row justify-content-between">
                 {% block like %}
-                    <div class="col-auto" id="fixed">
+                    <aside class="col-auto" id="fixed">
                         {# Report story #}
                         <div class="action-button" id="report"
                              data-story-id="{{ path('app_report_story', {'id': story.id}) }}">
@@ -39,16 +39,16 @@
                             </button>
                             <div id="likes">{{ story.likes|length }}</div>
                         </div>
-                    </div>
+                    </aside>
                 {% endblock %}
 
                 {% block story %}
-                    <div class="text rounded-4 col-8">
+                    <article class="text rounded-4 col-8">
                         <h1 class="display-3">{{ story.title }}</h1>
                         {% for contribution in story.contributions %}
                             <p class="contr" id="{{ contribution.author.id }}">{{ contribution.content }}</p>
                         {% endfor %}
-                    </div>
+                    </article>
                     <div class="authors col-auto">
                         <h2 class="mb-3">{{ 'Contributors'|trans }}</h2>
                         {% for contribution in story.contributions %}

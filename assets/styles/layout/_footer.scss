@@ -1,14 +1,8 @@
 @import "../helper/general";
 
-#footer {
+.main-footer {
   background: var(--DarkTurquoise);
-  padding: 0 0 30px 0;
+  padding-block: 0.5em;
   color: #fff;
-  font-size: 0.875rem;
-}
-
-#footer .copyright {
-  border-top: 1px solid var(--DarkTurquoise);
   text-align: center;
-  padding-top: 30px;
 }
