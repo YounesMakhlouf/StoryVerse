@@ -1,5 +1,4 @@
 #header {
-  height: 80px;
   z-index: 997;
   transition: all 0.5s;
   background: var(--Turquoise);
@@ -11,8 +10,7 @@
 }
 
 #header.header-scrolled {
-  background: var(--Turquoise);
-  height: 60px;
+  opacity: 1;
 }
 
 /*Navigation Menu*/

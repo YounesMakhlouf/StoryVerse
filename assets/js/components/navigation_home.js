@@ -22,20 +22,6 @@ window.addEventListener("load", navbarlinksActive);
 window.addEventListener("scroll", navbarlinksActive);
 
 /**
- * Scrolls to an element with header offset
- */
-const scrollto = (el) => {
-    let offset = header.offsetHeight;
-    if (!header.classList.contains("header-scrolled")) {
-        offset -= 20;
-    }
-    let elementPos = document.querySelector(el).offsetTop;
-    window.scrollTo({
-        top: elementPos - offset, behavior: "smooth",
-    });
-};
-
-/**
  * Toggle .header-scrolled class to #header when page is scrolled
  */
 if (header) {
@@ -49,33 +35,3 @@ if (header) {
     window.addEventListener("load", headerScrolled);
     document.addEventListener("scroll", headerScrolled);
 }
-
-/**
- * Scroll with offset on links with a class name .scrollto
- */
-document.querySelectorAll(".scrollto").forEach((link) => {
-    link.addEventListener("click", (e) => {
-        if (document.querySelector(link.hash)) {
-            e.preventDefault();
-            let navbar = document.querySelector("#navbar");
-            if (navbar.classList.contains("navbar-mobile")) {
-                navbar.classList.remove("navbar-mobile");
-                let navbarToggle = document.querySelector(".mobile-nav-toggle");
-                navbarToggle.classList.toggle("fa-bars");
-                navbarToggle.classList.toggle("fa-x");
-            }
-            scrollto(link.hash);
-        }
-    }, true);
-});
-
-/**
- * Scroll with offset on page load with hash links in the url
- */
-window.addEventListener("load", () => {
-    if (window.location.hash) {
-        if (document.querySelector(window.location.hash)) {
-            scrollto(window.location.hash);
-        }
-    }
-});

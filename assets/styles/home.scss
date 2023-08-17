@@ -11,5 +11,9 @@
 @import "./components/contact";
 
 body {
-    padding-top: 0;
+    padding: 0;
+}
+
+html{
+    scroll-padding-block-start: 3rem;
 }
