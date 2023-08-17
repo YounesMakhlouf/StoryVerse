@@ -10,6 +10,7 @@
 }
 
 #header.header-scrolled {
+  background: var(--Turquoise);
   opacity: 1;
 }
 
@@ -19,12 +20,11 @@
   font-size: 0.9375rem;
   font-weight: 500;
   font-family: "Poppins", sans-serif;
-  color: rgba(255, 255, 255, 0.7);
   white-space: nowrap;
   transition: 0.3s;
 }
 
-.navbar-nav > li > a:before {
+.nav-link:before {
   content: "";
   position: absolute;
   width: 0;
@@ -35,7 +35,7 @@
   transition: all 0.3s ease-in-out 0s;
 }
 
-.navbar-nav a:hover:before,
+.nav-link:hover:before,
 .navbar-nav li:hover > a:before,
 .navbar-nav .active:before {
   visibility: visible;
