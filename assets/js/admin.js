@@ -2,23 +2,9 @@ import '../styles/admin.scss';
 import '../bootstrap';
 import Chart from 'chart.js/auto';
 
-let genderColors = ["#89CFF0", "#f4c2c2"]
-let languageColors = [
-    'rgb(255, 99, 132)',
-    'rgb(255, 159, 64)',
-    'rgb(255, 205, 86)',
-    'rgb(75, 192, 192)',
-    'rgb(54, 162, 235)',
-    'rgb(153, 102, 255)',
-    'rgb(201, 203, 207)']
-let genresColors = [
-    '#FF8C8C',
-    '#FEE440',
-    '#146C94',
-    '#FFBF9B',
-    '#54B435',
-    '#B2A4FF'
-]
+let genderColors = ["#89CFF0", "#f4c2c2"];
+let languageColors = ['rgb(255, 99, 132)', 'rgb(255, 159, 64)', 'rgb(255, 205, 86)', 'rgb(75, 192, 192)', 'rgb(54, 162, 235)', 'rgb(153, 102, 255)', 'rgb(201, 203, 207)'];
+let genresColors = ['#FF8C8C', '#FEE440', '#146C94', '#FFBF9B', '#54B435', '#B2A4FF'];
 
 function fetchData(url) {
     return fetch(url)
@@ -35,18 +21,11 @@ function fetchData(url) {
 
 function createChart(ctx, data, colors, type, legendVisibility) {
     return new Chart(ctx, {
-        type: type,
-        data: {
-            labels: data.labels,
-            datasets: [
-                {
-                    label: '',
-                    data: data.data,
-                    backgroundColor: colors
-                }
-            ]
-        },
-        options: {
+        type: type, data: {
+            labels: data.labels, datasets: [{
+                label: '', data: data.data, backgroundColor: colors
+            }]
+        }, options: {
             plugins: {
                 legend: {
                     display: legendVisibility

@@ -42,10 +42,10 @@
 #hero .btn-get-started {
   font-family: "Montserrat", sans-serif;
   font-weight: 500;
-  font-size: 1rem;
-  letter-spacing: 1px;
+  font-size: var(--fs-300);
+  letter-spacing: 0.0625em;
   display: inline-block;
-  padding: 10px 30px;
+  padding: 0.625em 1.875em;
   border-radius: 50px;
   transition: 0.5s;
   color: #fff;
@@ -53,7 +53,8 @@
 }
 
 #hero .btn-get-started:hover {
-  background: var(--wheat);
+  background: #fff;
+  color: var(--wheat);
 }
 
 #hero .animated {
@@ -62,10 +63,10 @@
 
 @keyframes up-down {
   0% {
-    transform: translateY(10px);
+    transform: translateY(0.625rem);
   }
   100% {
-    transform: translateY(-10px);
+    transform: translateY(-0.625rem);
   }
 }
 
@@ -84,22 +85,19 @@
     animation: none;
   }
 
-  #hero .hero-img {
-    text-align: center;
-  }
-
   #hero .hero-img img {
     max-width: 50%;
+    margin-inline: auto;
   }
 
   #hero h1 {
     font-size: 1.75rem;
-    line-height: 32px;
-    margin-bottom: 10px;
+    line-height: 2rem;
+    margin-block-end: 0.625em;
   }
 
   #hero .description {
-    font-size: 1.125rem;
+    font-size: var(--fs-400);
     line-height: 1.5;
   }
 }

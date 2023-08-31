@@ -16,7 +16,7 @@
   --ff-base: "Lora", serif;
   --ff-accent: "Cormorant", serif;
   --ff-headings: "Playfair Display", serif;
-  
+
   --fs-300: clamp(1.00rem, calc(1.00rem + 0.00vw), 1.00rem);
   --fs-400: clamp(1.20rem, calc(1.18rem + 0.08vw), 1.25rem);
   --fs-500: clamp(1.44rem, calc(1.40rem + 0.18vw), 1.56rem);
@@ -60,7 +60,7 @@ strong, em, span {
   font-family: var(--ff-accent);
 }
 
-::marker{
+::marker {
   color: var(--DarkTurquoise);
 }
 

@@ -20,11 +20,11 @@
     clip-path: polygon(0 0, 100% 0, 0 100%);
     border-top-right-radius: 10px;
   }
-  
+
   .quest-points {
     position: absolute;
     top: 30%;
-    left: 30%;      
+    left: 30%;
     transform: translate(-50%, -50%);
     font-size: 1.25rem;
     color: white;
@@ -32,7 +32,7 @@
     font-weight: bold;
   }
 
-  .card-body{
+  .card-body {
     max-width: 75ch;
     margin: auto;
   }

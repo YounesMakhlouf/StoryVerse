@@ -7,34 +7,36 @@
             <div class="container-xxl">
                 <a class="navbar-brand" href="{{ path('app_browse_stories') }}">
                     <img src="{{ asset('build/images/logo.webp') }}" alt="Logo" width="40" height="40"
-                         class="d-inline-block align-text-top"/> <span>StoryVerse</span>
+                         class="d-inline-block align-text-top"/>
+                    <span>StoryVerse</span>
                 </a>
                 <form id="search-bar" class="d-flex ms-md-auto ms-2 align-items-center justify-content-center p-1"
                       method="get" action="{{ path('app_search') }}">
                     <input class="form-control me-2 px-2" type="search" id="search-form" placeholder="Search"
                            aria-label="Search" name="searchQuery">
                     <button aria-labelledby="search-form">
-                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <span class="fa-solid fa-magnifying-glass"></span>
                     </button>
                 </form>
                 <ul class="navbar-nav ms-auto align-items-center justify-content-center gap-md-3 gap-1">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_quest') }}" title="Quests"><i
-                                    class="fa-solid fa-trophy"></i></a>
+                        <a class="nav-link" href="{{ path('app_quest') }}" title="Quests"><span
+                                    class="fa-solid fa-trophy"></span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('app_leaderboard') }}" title="Leaderboard"><i
-                                    class="fa-solid fa-gamepad"></i></a>
+                        <a class="nav-link" href="{{ path('app_leaderboard') }}" title="Leaderboard"><span
+                                    class="fa-solid fa-gamepad"></span></a>
                     </li>
                     <li class="nav-item dropdown">
                         <button class="btn nav-link" type="button" id="notification-icon" data-bs-toggle="dropdown"
                                 aria-expanded="false" aria-label="notifications">
-                            <i class="fa-solid fa-bell"></i>
+                            <span class="fa-solid fa-bell"></span>
                         </button>
                         <ul class="dropdown-menu notiflist"></ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('Story_new') }}" title="Add a post"><i class="fa-solid fa-plus"></i></a>
+                        <a class="nav-link" href="{{ path('Story_new') }}" title="Add a post"><span
+                                    class="fa-solid fa-plus"></span></a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle icon-link" href="#" role="button"
@@ -48,20 +50,20 @@
                         <ul class="dropdown-menu">
                             {% if is_granted('ROLE_ADMIN') %}
                                 <li>
-                                    <a class="dropdown-item icon-link" href="{{ path('app_admin') }}"><i
-                                                class="fa-solid fa-chart-line"></i>Admin Dashboard</a>
+                                    <a class="dropdown-item icon-link" href="{{ path('app_admin') }}"><span
+                                                class="fa-solid fa-chart-line"></span>Admin Dashboard</a>
                                 </li>
-                            <hr class="dropdown-divider">
+                                <hr class="dropdown-divider">
                             {% endif %}
                             <li>
                                 <a class="dropdown-item icon-link"
-                                   href="{{ path('app_profile', {'id':app.user.id}) }}"><i
-                                            class="fa-solid fa-user-tie"></i>Profile</a>
+                                   href="{{ path('app_profile', {'id':app.user.id}) }}"><span
+                                            class="fa-solid fa-user-tie"></span>Profile</a>
                             </li>
                             <hr class="dropdown-divider">
                             <li>
-                                <a class="dropdown-item icon-link" href="{{ path('app_logout') }}"><i
-                                            class="fa-solid fa-arrow-right-from-bracket"></i>Log out</a>
+                                <a class="dropdown-item icon-link" href="{{ path('app_logout') }}"><span
+                                            class="fa-solid fa-arrow-right-from-bracket"></span>Log out</a>
                             </li>
                         </ul>
                     </li>

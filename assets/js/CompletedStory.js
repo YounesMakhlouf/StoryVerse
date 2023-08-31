@@ -3,33 +3,33 @@ import "../bootstrap";
 import Swal from "sweetalert2";
 
 $(document).ready(function () {
-  scrollToTop();
+    scrollToTop();
 });
 
 // Function to scroll the page to the top
 function scrollToTop() {
-  $("html, body").animate({ scrollTop: 0 }, "slow");
+    $("html, body").animate({scrollTop: 0}, "slow");
 }
 
 // Function to handle image theme effect
 function handleImageThemeEffect() {
-  const image = $(".theme");
-  const container = image.parent();
-  const heroHeight = image.outerHeight(true);
+    const image = $(".theme");
+    const container = image.parent();
+    const heroHeight = image.outerHeight(true);
 
-  container.css("padding-top", heroHeight);
+    container.css("padding-top", heroHeight);
 
-  $(window).scroll(function () {
-    const scrollOffset = $(window).scrollTop();
-    if (scrollOffset < heroHeight) {
-      image.css("height", heroHeight - scrollOffset);
-    }
-    if (scrollOffset > heroHeight - 215) {
-      image.addClass("fixme");
-    } else {
-      image.removeClass("fixme");
-    }
-  });
+    $(window).scroll(function () {
+        const scrollOffset = $(window).scrollTop();
+        if (scrollOffset < heroHeight) {
+            image.css("height", heroHeight - scrollOffset);
+        }
+        if (scrollOffset > heroHeight - 215) {
+            image.addClass("fixme");
+        } else {
+            image.removeClass("fixme");
+        }
+    });
 }
 
 // // Show replies on click
@@ -41,38 +41,34 @@ function handleImageThemeEffect() {
 
 // Color like icon on click
 $("#color").click(function () {
-  $(this).toggleClass("fa-solid");
+    $(this).toggleClass("fa-solid");
 });
 
 // Show comments directly after submitting without refreshing the page
 $(document).on("submit", "#comment-form", function (event) {
-  event.preventDefault();
+    event.preventDefault();
 
-  const $form = $(this);
-  const formData = $form.serialize();
-  const url = window.location.href;
+    const $form = $(this);
+    const formData = $form.serialize();
+    const url = window.location.href;
 
-  $.ajax({
-    url: url,
-    method: "POST",
-    data: formData,
-    success: function (response) {
-      const commentHtml = createCommentHtml(response);
+    $.ajax({
+        url: url, method: "POST", data: formData, success: function (response) {
+            const commentHtml = createCommentHtml(response);
 
-      $("#comment-form").before(commentHtml);
-      $("#comment-count").text(`Comments (${response.count})`);
-      $form[0].reset();
-    },
-    error: function (xhr, textStatus, errorThrown) {
-      alert("An error occurred while submitting the comment: " + errorThrown);
-    },
-  });
+            $("#comment-form").before(commentHtml);
+            $("#comment-count").text(`Comments (${response.count})`);
+            $form[0].reset();
+        }, error: function (xhr, textStatus, errorThrown) {
+            alert("An error occurred while submitting the comment: " + errorThrown);
+        },
+    });
 });
 
 function createCommentHtml(response) {
-  const { avatar, author, createdAt, content } = response;
+    const {avatar, author, createdAt, content} = response;
 
-  return `
+    return `
         <div class="be-comment">
             <div class="be-img-comment">
                  <a href="{{ path('app_profile', {'id': comment.author.id}) }}">
@@ -94,158 +90,135 @@ function createCommentHtml(response) {
 
 // Likes
 $("i.fa-heart").click(function () {
-  const storyId = $(this).data("story-id");
-  event.preventDefault();
+    const storyId = $(this).data("story-id");
+    event.preventDefault();
 
-  const likeCountElement = $("#likes");
-  $.ajax({
-    type: "POST",
-    url: storyId,
-    success: function (data) {
-      likeCountElement.text(data.count);
-    },
-  });
+    const likeCountElement = $("#likes");
+    $.ajax({
+        type: "POST", url: storyId, success: function (data) {
+            likeCountElement.text(data.count);
+        },
+    });
 });
 
 // Show contribute form
 $("#contribute-btn").click(function () {
-  $(this).hide();
-  $("#contribute-form").show();
+    $(this).hide();
+    $("#contribute-form").show();
 });
 
 // Contribute submit button animation
 $("#button").click(function () {
-  $(this).addClass("onclic", 250, validate);
+    $(this).addClass("onclic", 250, validate);
 });
 
 function validate() {
-  const $sub = $("#sub");
-  setTimeout(function () {
-    $sub.removeClass("onclic");
-    $sub.addClass("validate", 450, callback);
-  }, 2250);
+    const $sub = $("#sub");
+    setTimeout(function () {
+        $sub.removeClass("onclic");
+        $sub.addClass("validate", 450, callback);
+    }, 2250);
 }
 
 function callback() {
-  setTimeout(function () {
-    $("#sub").removeClass("validate");
-  }, 1250);
+    setTimeout(function () {
+        $("#sub").removeClass("validate");
+    }, 1250);
 }
 
 // Add contribution to the page without refreshing
 $('form[name="contribution"]').submit(function (event) {
-  event.preventDefault();
+    event.preventDefault();
 
-  const formData = $(this).serialize();
+    const formData = $(this).serialize();
 
-  $.ajax({
-    url: $("#contribution-form").attr("action"),
-    method: "POST",
-    data: formData,
-    success: function (response) {
-      $("#contribution-form").hide();
-      const content = response.content;
-      $(".text").append('<p id="' + response.id + '">' + content + "</p>");
-    },
-    error: function () {
-      alert("An error occurred while submitting the contribution.");
-    },
-  });
+    $.ajax({
+        url: $("#contribution-form").attr("action"), method: "POST", data: formData, success: function (response) {
+            $("#contribution-form").hide();
+            const content = response.content;
+            $(".text").append('<p id="' + response.id + '">' + content + "</p>");
+        }, error: function () {
+            alert("An error occurred while submitting the contribution.");
+        },
+    });
 });
 
 // Show author name when hovering over its contribution
-$(".contr").hover(
-  function () {
+$(".contr").hover(function () {
     const id = $(this).attr("id") + "author";
     $("#" + id).css("font-size", "var(--fs-500)");
     $(this).css("background-color", "#F0F8FF");
-  },
-  function () {
+}, function () {
     const id = $(this).attr("id") + "author";
     $("#" + id).css("font-size", "var(--fs-400)");
     $(this).css("background-color", "white");
-  }
-);
+});
 
 // Display alert after reporting
 $("#report").click(function () {
-  Swal.fire({
-    title: "Are you sure you want to report this story?",
-    icon: "warning",
-    buttonsStyling: true,
-    showCancelButton: true,
-    dangerMode: true,
-  }).then((willDelete) => {
-    if (willDelete.isConfirmed) {
-      $.ajax({
-        type: "POST",
-        url: $("#report").data("story-id"),
-        success: function (response) {
-          console.log(response);
-        },
-      });
-      $(this)
-        .parents(".dialog-ovelay")
-        .fadeOut(500, function () {
-          $(this).remove();
-          $("#report").hide();
-        });
+    Swal.fire({
+        title: "Are you sure you want to report this story?",
+        icon: "warning",
+        buttonsStyling: true,
+        showCancelButton: true,
+        dangerMode: true,
+    }).then((willDelete) => {
+        if (willDelete.isConfirmed) {
+            $.ajax({
+                type: "POST", url: $("#report").data("story-id"), success: function (response) {
+                    console.log(response);
+                },
+            });
+            $(this)
+                .parents(".dialog-ovelay")
+                .fadeOut(500, function () {
+                    $(this).remove();
+                    $("#report").hide();
+                });
 
-      Swal.fire(
-        "Thank you for reporting the story",
-        "We will investigate and take appropriate action.",
-        "success"
-      );
-    } else if (willDelete.dismiss === Swal.DismissReason.cancel) {
-      Swal.fire("Reporting cancelled", "No action was taken.", "info");
-    }
-  });
+            Swal.fire("Thank you for reporting the story", "We will investigate and take appropriate action.", "success");
+        } else if (willDelete.dismiss === Swal.DismissReason.cancel) {
+            Swal.fire("Reporting cancelled", "No action was taken.", "info");
+        }
+    });
 });
 
 // Get the ids of the authors
-const authorIds = Array.from(document.querySelectorAll(".contr")).map(
-  (contributionAuthorId) => contributionAuthorId.getAttribute("id")
-);
+const authorIds = Array.from(document.querySelectorAll(".contr")).map((contributionAuthorId) => contributionAuthorId.getAttribute("id"));
 
 let alreadyLiked = 0;
 // skander's incredible way of linking the like and notifications
 
 const heartIcon = document.querySelector("#color");
 heartIcon.addEventListener("click", () => {
-  if (alreadyLiked === 0) {
-    for (const receiver of authorIds) {
-      sendLikeNotification(receiver);
+    if (alreadyLiked === 0) {
+        for (const receiver of authorIds) {
+            sendLikeNotification(receiver);
+        }
     }
-  }
-  alreadyLiked = 1;
+    alreadyLiked = 1;
 });
 
 function sendLikeNotification(receiver) {
-  const formData = new FormData();
-  const content =
-    "Your contribution in " +
-    story.title +
-    " got a like from " +
-    user.name +
-    "!";
-  formData.append("content", content);
-  formData.append("sender_id", user.id);
-  formData.append("receiver_id", parseInt(receiver));
+    const formData = new FormData();
+    const content = "Your contribution in " + story.title + " got a like from " + user.name + "!";
+    formData.append("content", content);
+    formData.append("sender_id", user.id);
+    formData.append("receiver_id", parseInt(receiver));
 
-  fetch("../notification/create", {
-    method: "POST",
-    body: formData,
-  })
-    .then((response) => {
-      if (response.ok) {
-        console.log("skander did it as always");
-      } else {
-        console.log("I hate myself");
-      }
+    fetch("../notification/create", {
+        method: "POST", body: formData,
     })
-    .catch((error) => {
-      console.log("An error occurred while sending the notification:", error);
-    });
+        .then((response) => {
+            if (response.ok) {
+                console.log("skander did it as always");
+            } else {
+                console.log("I hate myself");
+            }
+        })
+        .catch((error) => {
+            console.log("An error occurred while sending the notification:", error);
+        });
 }
 
 handleImageThemeEffect();
