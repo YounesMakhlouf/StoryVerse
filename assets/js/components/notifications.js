@@ -1,8 +1,6 @@
 const navbar = document.querySelector("#navbar");
 const header = document.querySelector("#header");
 const notificationList = document.querySelector(".notiflist");
-const userId = document.querySelector(".userid").textContent.trim();
-console.log(userId);
 
 // Fetch notifications data from the server
 async function fetchNotifications(userId) {

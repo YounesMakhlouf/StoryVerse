@@ -5,9 +5,8 @@
 }
 
 .formbold-form-wrapper {
-  margin: 0 auto;
-  max-width: 550px;
-  width: 100%;
+  margin-inline: auto;
+  width: min(550px, 100%);
   background: white;
 }
 
@@ -30,19 +29,13 @@
 
 .formbold-form-input {
   width: 100%;
-  padding-bottom: 10px;
+  padding-bottom: 0.5rem;
   border: none;
   border-bottom: 1px solid #DDE3EC;
-  background: #FFFFFF;
   font-weight: 500;
-  font-size: 1rem;
   color: #297563;
   outline: none;
   resize: none;
-}
-
-.formbold-form-input::placeholder {
-  color: #299d87;
 }
 
 .formbold-form-input:focus {
@@ -101,15 +94,13 @@
 }
 
 #story_submit, #profile_submit {
-  font-size: 1rem;
-  border-radius: 5px;
-  padding: 12px 25px;
-  border: none;
+  border-radius: 4px;
+  padding: 0.75em 1.5em;
   font-weight: 500;
   background-color: #297563;
   color: white;
   cursor: pointer;
-  margin-top: 25px;
+  margin-top: 1.5rem;
 }
 
 #story_submit:hover, #profile_submit:hover {
