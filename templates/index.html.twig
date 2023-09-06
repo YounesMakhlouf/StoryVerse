@@ -91,13 +91,13 @@
                     {% for member in teamMembers %}
                         <div class="col-12 col-md-6 col-lg-4">
                             <div class="member" data-aos="zoom-in" data-aos-delay="100">
-                                <div class="pic">
+                                <div class="pic rounded-1">
                                     <img alt="{{ member.firstName ~ ' ' ~ member.lastName }}" class="img-fluid"
                                          src="{{ asset('build/images/team/' ~ member.firstName|lower ~ '.webp') }}">
                                 </div>
-                                <div class="member-info">
-                                    <h4>{{ member.firstName ~ ' ' ~ member.lastName }}</h4>
-                                    <span>{{ member.position }}</span>
+                                <div class="member-info py-3 rounded-bottom-1">
+                                    <h4 class="pb-2 mb-2 member-name">{{ member.firstName ~ ' ' ~ member.lastName }}</h4>
+                                    <div class="member-position mb-2">{{ member.position }}</div>
                                     <div class="social">
                                         {% for network, link in member.social %}
                                             <a href="{{ link }}" rel="noopener noreferrer" target="_blank">
