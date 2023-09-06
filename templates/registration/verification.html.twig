@@ -16,8 +16,9 @@
                     you’re good to go.
                 </div>
                 <div>Did not receive the email?</div>
-                <footer><a href={{ path("app_send_verification_email",{'id': id,'resend':'1'}) }} class="btn btn-primary">click
-                    here to resend</a> </footer>
+                <footer><a href="{{ path("app_send_verification_email",{'id': id,'resend':'1'}) }}"
+                           class="btn btn-primary">click
+                        here to resend</a></footer>
             </div>
         </div>
     </main>

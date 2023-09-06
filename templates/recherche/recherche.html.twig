@@ -7,25 +7,25 @@
     <main>
         <h1 class="text-center">Search Results</h1>
         <section class="search-results">
-            {% if users|length > 0 %}
-            <div class="container">
-                <h2 class="mb-3">Users</h2>
-                <div class="row">
-                    {% for user in users %}
-                        <div class="col-md-3 mb-4">
-                            <div class="card">
-                                <a href="{{ path('app_profile', {'id': user.id }) }}">
-                                    <img src="{{ asset ('uploads/avatar_directory/'~ user.avatar) }}"
-                                         class="card-img-top"
-                                         alt="Profile Picture">
-                                    <div class="card-body">
-                                        <h3 class="card-title text-center">{{ user.username }}</h3>
-                                    </div>
-                                </a>
+            <div class="container mb-5">
+                {% if users|length > 0 %}
+                    <h2 class="mb-3">Users</h2>
+                    <div class="row">
+                        {% for user in users %}
+                            <div class="col-md-3 mb-4">
+                                <div class="card">
+                                    <a href="{{ path('app_profile', {'id': user.id }) }}">
+                                        <img src="{{ asset ('uploads/avatar_directory/'~ user.avatar) }}"
+                                             class="card-img-top"
+                                             alt="Profile Picture">
+                                        <div class="card-body">
+                                            <h3 class="card-title text-center">{{ user.username }}</h3>
+                                        </div>
+                                    </a>
+                                </div>
                             </div>
-                        </div>
-                    {% endfor %}
-                </div>
+                        {% endfor %}
+                    </div>
                 {% else %}
                     <h2>No users found.</h2>
                 {% endif %}
