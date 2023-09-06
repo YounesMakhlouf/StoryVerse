@@ -1,10 +1,10 @@
 /* Hero Section */
 #hero {
-  width: 100%;
   background: url("../../img/hero-bg.webp");
   position: relative;
-  padding: 120px 0 0 0;
+  padding-block: 6.5rem 0;
   z-index: 1;
+  color: rgba(255, 255, 255, 0.8);
 }
 
 #hero:before {
@@ -20,10 +20,7 @@
 }
 
 #hero h1 {
-  margin: 0 0 20px 0;
-  font-size: 3rem;
   font-weight: 700;
-  line-height: 3;
   color: rgba(255, 255, 255, 0.8);
 }
 
@@ -33,19 +30,16 @@
 }
 
 #hero .description {
-  color: rgba(255, 255, 255, 0.8);
   margin-block-end: 2rem;
   font-size: 1.5rem;
-  line-height: 1.2;
+  line-height: 1.4;
 }
 
 #hero .btn-get-started {
-  font-family: "Montserrat", sans-serif;
   font-weight: 500;
-  font-size: var(--fs-300);
-  letter-spacing: 0.0625em;
+  letter-spacing: 0.05em;
   display: inline-block;
-  padding: 0.625em 1.875em;
+  padding: 0.5em 1.75em;
   border-radius: 50px;
   transition: 0.5s;
   color: #fff;
