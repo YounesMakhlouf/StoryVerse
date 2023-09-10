@@ -1,42 +1,11 @@
-@media (max-width: 768px) {
+@use '../abstracts/breakpoints' as *;
+
+@include mq(small) {
   header span {
     display: none;
   }
 }
 
-.fa-plus, #profile, .fa-magnifying-glass, .fa-bell, .fa-trophy {
+ul.navbar-nav > li > :is(a, button) {
   color: white;
-}
-
-//SEARCH
-#search-bar {
-  max-width: 30vw;
-  opacity: 90%;
-  background: var(--DarkTurquoise);
-  border-radius: 100vh;
-  backdrop-filter: blur(4px) saturate(180%);
-
-  ::placeholder {
-    color: white !important;
-  }
-
-  & input {
-    text-indent: 1em;
-    border: 0;
-    background: transparent;
-    outline: none;
-    color: white;
-  }
-
-  & button {
-    border: 0;
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background: var(--DarkTurquoise);
-  }
-}
-
-#notification-icon {
-  border: 0;
 }

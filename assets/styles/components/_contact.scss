@@ -38,8 +38,7 @@
   color: #fff;
 }
 
-.contact .php-email-form input,
-.contact .php-email-form textarea {
+.contact .php-email-form :is(input, textarea) {
   border-radius: 0;
   box-shadow: none;
 }

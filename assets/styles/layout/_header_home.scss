@@ -2,15 +2,15 @@
   transition: all 0.5s;
   background: var(--Turquoise);
   opacity: 0.9;
-}
 
-#header.header-transparent {
-  background-color: transparent;
-}
+  &.header-transparent {
+    background-color: transparent;
+  }
 
-#header.header-scrolled {
-  background: var(--Turquoise);
-  opacity: 1;
+  &.header-scrolled {
+    background: var(--Turquoise);
+    opacity: 1;
+  }
 }
 
 /*Navigation Menu*/
@@ -19,7 +19,6 @@
   font-size: 0.9375rem;
   font-weight: 500;
   font-family: "Poppins", sans-serif;
-  white-space: nowrap;
   transition: 0.3s;
 }
 
@@ -28,7 +27,7 @@
   position: absolute;
   width: 0;
   height: 2px;
-  bottom: 20px;
+  bottom: 1.25em;
   background-color: var(--wheat);
   visibility: visible;
   transition: all 0.3s ease-in-out 0s;

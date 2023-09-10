@@ -1,3 +1,5 @@
+@charset 'utf-8';
+
 @import url('https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 @import "~bootstrap";
 @import "~sweetalert2/dist/sweetalert2.css";
@@ -8,20 +10,21 @@
 @import "./layout/footer";
 
 @import "./components/trending";
+@import './components/search';
 
 body {
   padding-top: 5em;
 }
 
-.navbar-brand {
-  font-size: 1.75rem;
-  font-weight: 700;
-}
-
-.navbar-brand:hover {
-  color: white;
-}
-
 nav {
   background: var(--Turquoise);
+
+  .navbar-brand {
+    font-size: 1.75rem;
+    font-weight: 700;
+
+    &:hover {
+      color: white;
+    }
+  }
 }

@@ -1,10 +1,9 @@
+@use 'colors';
+
 :root {
-  --DarkTurquoise: #469597;
-  --Turquoise: #5BA199;
-  --Silver: #BBC6C8;
-  --LightGray: #E5E3E4;
-  --wheat: #DDBEAA;
-  --clr-text: #333333;
+  @each $color, $value in colors.$colors {
+    --#{$color}: #{$value};
+  }
 
   --ff-base: "Lora", serif;
   --ff-accent: "Cormorant", serif;

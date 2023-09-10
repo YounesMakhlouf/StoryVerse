@@ -1,7 +1,11 @@
+@import '../abstracts/variables';
+
 @import '../base/reset';
 @import '../base/typography';
-@import '../abstracts/variables';
+
 @import '../layout/section';
+
+@import '../components/links';
 
 /* Disable AOS delay on mobile */
 @media screen and (max-width: 768px) {
@@ -10,19 +14,6 @@
   }
 }
 
-html {
-  color-scheme: light dark;
-}
-
 ::marker {
   color: var(--DarkTurquoise);
-}
-
-/* Links */
-a {
-  text-decoration: none;
-
-  &:hover, &:focus {
-    color: var(--Turquoise);
-  }
 }
