@@ -1,3 +1,5 @@
+@use 'abstracts/mixins' as m;
+
 #fixed {
   text-align: center;
   position: sticky;
@@ -13,7 +15,7 @@
   left: 0;
   background-size: cover;
   background-position: center;
-  overflow: hidden; 
+  overflow: hidden;
 }
 
 .page-content {
@@ -61,15 +63,14 @@
   cursor: pointer;
 }
 
-.like::after {
-  content: 'like';
-  position: absolute;
-  font-size: 0.9375rem;
-  color: black;
-  opacity: 0;
-  visibility: hidden;
-  transition: .2s linear;
-  top: 115%;
+.like {
+  @include m.pseudo($loc: after, $content: 'like', $top: 115%, $left: 100%) {
+    font-size: 0.9375rem;
+    color: black;
+    opacity: 0;
+    visibility: hidden;
+    transition: .2s linear;
+  }
 }
 
 .fa-heart {
@@ -112,7 +113,7 @@
   margin-left: 5em;
 }
 
-.be-comment-text{
+.be-comment-text {
   font-size: var(--fs-300);
   line-height: 1.25;
   background: #f6f6f7;
@@ -123,6 +124,7 @@
 .be-comment-time {
   font-size: var(--fs-300);
 }
+
 //.reply {
 //  display: none;
 //  margin-left: 5%;
@@ -211,7 +213,7 @@ button {
     letter-spacing: 2px;
   }
 
-  &:after {
+  &::after {
     content: "SUBMIT";
   }
 }
@@ -239,7 +241,7 @@ button {
   color: white;
   background: #299d87;
 
-  &:after {
+  &::after {
     content: "\f00c";
   }
 }

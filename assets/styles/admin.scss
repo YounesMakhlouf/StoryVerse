@@ -1,7 +1,10 @@
+@use 'abstracts/mixins' as m;
+
 :root {
   --sidebar-bg: #5BA199;
   --sidebar-menu-active-item-color: white;
   --sidebar-menu-items-padding-left: 0px;
+  --sidebar-menu-active-item-bg: #5BA199;
   --sidebar-logo-color: white;
   --link-color: rgba(255, 255, 255, 0.7);
   --sidebar-menu-icon-color: rgba(255, 255, 255, 0.7);
@@ -9,46 +12,27 @@
   --button-primary-bg: #5BA199;
   --pagination-active-bg: #5BA199;
   --pagination-color: #5BA199;
-}
-
-#main-menu .menu .menu-item.active a {
-  color: var(--sidebar-menu-active-item-color);
-  background-color: #5BA199;
-}
-
-#main-menu .menu .menu-item,
-#main-menu .menu .menu-item-contents {
-  border-radius: var(--border-radius);
-  padding-right: 0;
+  --sidebar-menu-color: var(--link-color);
 }
 
 #main-menu .menu .menu-item-contents {
   padding: 1em 0.5em;
-  color: var(--link-color);
   font-size: 0.9375rem;
+
+  @include m.pseudo($bottom: 3px, $left: 30px, $top: 100%) {
+    width: 0;
+    height: 2px;
+    background-color: #DDBEAA;
+    transition: all 0.3s ease-in-out 0s;
+  }
 }
 
-.stats a {
-  color: #5BA199;
-}
-
-.menu .menu-item a:before {
-  content: "";
-  position: absolute;
-  width: 0;
-  height: 2px;
-  bottom: 3px;
-  left: 30px;
-  background-color: #DDBEAA;
-  transition: all 0.3s ease-in-out 0s;
-}
-
-.menu .menu-item a:active:before {
+#main-menu .menu .menu-item .menu-item-contents:active:before {
   visibility: visible;
   width: 25px;
 }
 
-.menu .menu-item a:hover:before {
+#main-menu .menu .menu-item .menu-item-contents:hover:before {
   width: 100%;
   left: 0;
 }
@@ -76,12 +60,16 @@
   border: 0;
 }
 
-canvas{
+canvas {
   max-height: 25rem;
 }
 
-.fa-heart{
-   color: #d82613;
+.fa-heart {
+  color: #d82613;
+}
+
+.stats a {
+  color: #5BA199;
 }
 
 #content-resizer-handler {

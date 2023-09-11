@@ -1,6 +1,6 @@
-@use '../abstracts/breakpoints' as *;
+@use '../abstracts/mixins' as m;
 
-@include mq(small) {
+@include m.mq(small) {
   header span {
     display: none;
   }

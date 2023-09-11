@@ -1,22 +1,17 @@
+@use '../abstracts/mixins' as m;
+
 /* Hero Section */
 #hero {
   background: url("../../img/hero-bg.webp");
-  position: relative;
   padding-block: 6.5rem 0;
   z-index: 1;
   color: rgba(255, 255, 255, 0.8);
-}
 
-#hero:before {
-  content: "";
-  opacity: 0.91;
-  background: var(--Turquoise);
-  position: absolute;
-  bottom: 0;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: -1;
+  @include m.pseudo() {
+    opacity: 0.91;
+    background: var(--Turquoise);
+    z-index: -1;
+  }
 }
 
 #hero h1 {
@@ -52,7 +47,7 @@
 }
 
 #hero .hero-img img {
-    width: min(100% - 3rem, 25rem);
+  width: min(100% - 3rem, 25rem);
 }
 
 #hero .animated {
