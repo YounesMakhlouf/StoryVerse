@@ -1,3 +1,5 @@
+@use 'abstracts/mixins' as m;
+
 @import "./layout/header";
 @import "./helper/general";
 
@@ -60,17 +62,8 @@ body {
   color: #2b5a89;
 }
 
-/* CSS for image zoom effect */
 .zoom-image {
-  transition: transform 0.3s ease-in-out;
-
-  &:hover {
-    transform: scale(1.05);
-  }
-
-  &:focus {
-    transform: scale(1);
-  }
+  @include m.hover-lift();
 }
 
 .description {

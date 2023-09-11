@@ -1,50 +1,48 @@
+@use '../abstracts/mixins' as m;
+
 .team .member {
-    margin-bottom: 6.25rem;
-    position: relative;
+  margin-bottom: 6.25rem;
+  position: relative;
 }
 
 .team .member .pic {
-    overflow: hidden;
+  overflow: hidden;
 }
 
 .team .member img {
-    transition: all ease-in-out 0.4s;
-}
-
-.team .member:hover img {
-    transform: scale(1.1);
+  @include m.hover-lift();
 }
 
 .team .member .member-info {
-    position: absolute;
-    bottom: -80px;
-    left: 0;
-    right: 0;
-    color: var(--DarkTurquoise);
-    background: rgba(255, 255, 255, 0.9);
-    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  bottom: -80px;
+  left: 0;
+  right: 0;
+  color: var(--DarkTurquoise);
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
 }
 
 .member-name {
-    font-weight: 700;
-    font-size: 1rem;
+  font-weight: 700;
+  font-size: 1rem;
 }
 
 .member-position {
-    font-style: italic;
-    font-size: 0.875rem;
+  font-style: italic;
+  font-size: 0.875rem;
 }
 
 .team .member .social a {
-    transition: color 0.3s;
-    color: var(--DarkTurquoise);
+  transition: color 0.3s;
+  color: var(--DarkTurquoise);
 }
 
 .team .member .social a:hover {
-    color: var(--Turquoise);
+  color: var(--Turquoise);
 }
 
 .fa-brands {
-    font-size: 1rem;
-    margin-inline: 2px;
+  font-size: 1rem;
+  margin-inline: 2px;
 }

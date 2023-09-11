@@ -22,3 +22,23 @@
     @content;
   }
 }
+
+@mixin hover-lift() {
+  transition: transform 350ms ease-in-out;
+  box-shadow: 0 .25em .5em rgba(black, 0.2);
+
+  @include pseudo($loc: after) {
+    box-shadow: 0 0 1.25em 0 rgba(black, 0.4);
+    transition: transform 350ms ease-in-out;
+    opacity: 0;
+  }
+
+  &:hover,
+  &:focus {
+    transform: scale(1.05);
+
+    &::before {
+      opacity: 1;
+    }
+  }
+}
