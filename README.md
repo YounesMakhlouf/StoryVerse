@@ -9,24 +9,24 @@
 
 <!-- PROJECT LOGO -->
 <br />
-<div align="center">
-  <a href="https://github.com/YounesMakhlouf/Projet-Web">
+<div style="text-align:center">
+  <a href="https://github.com/YounesMakhlouf/StoryVerse">
     <img src="assets/img/logo.webp" alt="Logo" width="80" height="80">
   </a>
 
-<h3 align="center">StoryVerse</h3>
+<h3 style="text-align:center">StoryVerse</h3>
 
-  <p align="center">
+   <p style="text-align:center">
 An innovative platform designed for collaborative storytelling
     <br />
-    <a href="https://github.com/YounesMakhlouf/Projet-Web"><strong>Explore the project »</strong></a>
+    <a href="https://github.com/YounesMakhlouf/StoryVerse"><strong>Explore the project »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/YounesMakhlouf/Projet-Web">View Demo</a>
+    <a href="https://github.com/YounesMakhlouf/StoryVerse">View Demo</a>
     ·
-    <a href="https://github.com/YounesMakhlouf/Projet-Web/issues">Report Bug</a>
+    <a href="https://github.com/YounesMakhlouf/StoryVerse/issues">Report Bug</a>
     ·
-    <a href="https://github.com/YounesMakhlouf/Projet-Web/issues">Request Feature</a>
+    <a href="https://github.com/YounesMakhlouf/StoryVerse/issues">Request Feature</a>
   </p>
 </div>
 
@@ -84,7 +84,7 @@ We've incorporated a robust notification system to keep you connected and engage
 someone interacts with your stories, whether it's likes, comments, or new followers. Stay in the loop and never miss a
 beat.
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p style="text-align:right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Built With
 
@@ -93,7 +93,7 @@ beat.
 * [![MySQL][MySQL.dev]][MySQL-url]
 * [![Bootstrap][Bootstrap.com]][Bootstrap-url]
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p style="text-align:right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
@@ -105,7 +105,7 @@ To get a local copy up and running follow these simple steps.
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/YounesMakhlouf/Projet-Web
+   git clone https://github.com/YounesMakhlouf/StoryVerse
    ```
 2. Install NPM packages
    ```sh
@@ -116,12 +116,9 @@ To get a local copy up and running follow these simple steps.
    composer install
    ```
 4. Create a file named .env.local and define the following variables:
-<ul>
-<li>APP_SECRET</li>
-<li>DATABASE_URL</li>
-<li>MAILER_DSN</li>
-</ul>
-
+   -  APP_SECRET 
+   - DATABASE_URL 
+   - MAILER_DSN
 5. Create a database
     ```sh
     symfony console doctrine:database:create
@@ -149,7 +146,7 @@ To get a local copy up and running follow these simple steps.
 
 That's it! Enjoy the immersive world of StoryVerse.
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p style="text-align:right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- CONTRIBUTING -->
 
@@ -160,14 +157,14 @@ We welcome suggestions and pull requests from the community to make StoryVerse e
 
 #### Adventure awaits! 📖✨
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p style="text-align:right">(<a href="#readme-top">back to top</a>)</p>
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
 
-[contributors-shield]: https://img.shields.io/github/contributors/YounesMakhlouf/Projet-Web.svg?style=for-the-badge
+[contributors-shield]: https://img.shields.io/github/contributors/YounesMakhlouf/StoryVerse.svg?style=for-the-badge
 
-[contributors-url]: https://github.com/YounesMakhlouf/Projet-Web/graphs/contributors
+[contributors-url]: https://github.com/YounesMakhlouf/StoryVerse/graphs/contributors
 
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 
