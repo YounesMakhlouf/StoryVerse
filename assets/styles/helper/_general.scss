@@ -2,18 +2,8 @@
 
 @import '../base/reset';
 @import '../base/typography';
+@import '../base/aos';
 
 @import '../layout/section';
 
 @import '../components/links';
-
-/* Disable AOS delay on mobile */
-@media screen and (max-width: 768px) {
-  [data-aos-delay] {
-    transition-delay: 0ms !important;
-  }
-}
-
-::marker {
-  color: var(--DarkTurquoise);
-}

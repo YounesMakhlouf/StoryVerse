@@ -34,6 +34,20 @@
   height: 40px;
   margin: 0.5em auto;
   transition: .5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+  &:hover {
+    @include m.mq(small, min) {
+      width: 125px;
+      background-color: white;
+      box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+      transition: .3s;
+    }
+  }
+
+  &:active {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: .05s
+  }
 }
 
 .icn {
@@ -43,23 +57,7 @@
   text-align: center;
 }
 
-@media (min-width: 768px) {
-  /* Hover */
-  .action-button:hover {
-    width: 125px;
-    background-color: white;
-    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
-    transition: .3s;
-  }
-}
-
-.action-button:active {
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  transition: .05s
-}
-
 .like, .action-button {
-  position: relative;
   cursor: pointer;
 }
 

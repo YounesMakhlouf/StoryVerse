@@ -1,0 +1,8 @@
+@use '../abstracts/mixins' as m;
+
+/* Disable AOS delay on mobile */
+@include m.mq(small, min) {
+  [data-aos-delay] {
+    transition-delay: 0ms !important;
+  }
+}

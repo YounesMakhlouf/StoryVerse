@@ -25,3 +25,7 @@ h4 {
 strong, em, span {
   font-family: var(--ff-accent);
 }
+
+::marker {
+  color: var(--DarkTurquoise);
+}
