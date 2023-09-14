@@ -9,14 +9,14 @@
 
 <!-- PROJECT LOGO -->
 <br />
-<div style="text-align:center">
+<div align="center">
   <a href="https://github.com/YounesMakhlouf/StoryVerse">
     <img src="assets/img/logo.webp" alt="Logo" width="80" height="80">
   </a>
 
-<h3 style="text-align:center">StoryVerse</h3>
+<h3 align="center">StoryVerse</h3>
 
-   <p style="text-align:center">
+   <p align="center">
 An innovative platform designed for collaborative storytelling
     <br />
     <a href="https://github.com/YounesMakhlouf/StoryVerse"><strong>Explore the project »</strong></a>
@@ -84,7 +84,7 @@ We've incorporated a robust notification system to keep you connected and engage
 someone interacts with your stories, whether it's likes, comments, or new followers. Stay in the loop and never miss a
 beat.
 
-<p style="text-align:right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Built With
 
@@ -93,7 +93,7 @@ beat.
 * [![MySQL][MySQL.dev]][MySQL-url]
 * [![Bootstrap][Bootstrap.com]][Bootstrap-url]
 
-<p style="text-align:right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
@@ -116,9 +116,9 @@ To get a local copy up and running follow these simple steps.
    composer install
    ```
 4. Create a file named .env.local and define the following variables:
-   -  APP_SECRET 
-   - DATABASE_URL 
-   - MAILER_DSN
+    - APP_SECRET
+    - DATABASE_URL
+    - MAILER_DSN
 5. Create a database
     ```sh
     symfony console doctrine:database:create
@@ -146,7 +146,7 @@ To get a local copy up and running follow these simple steps.
 
 That's it! Enjoy the immersive world of StoryVerse.
 
-<p style="text-align:right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- CONTRIBUTING -->
 
@@ -157,7 +157,7 @@ We welcome suggestions and pull requests from the community to make StoryVerse e
 
 #### Adventure awaits! 📖✨
 
-<p style="text-align:right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
