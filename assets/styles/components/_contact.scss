@@ -7,7 +7,7 @@
   float: left;
   width: 2.75rem;
   aspect-ratio: 1/1;
-  background: var(--LightGray);
+  background: var(--clr-accent);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -34,7 +34,7 @@
 }
 
 .contact .info > div:hover i {
-  background: var(--Turquoise);
+  background: var(--clr-primary);
   color: #fff;
 }
 
@@ -44,7 +44,7 @@
 }
 
 .contact .php-email-form button[type=submit] {
-  background: var(--Turquoise);
+  background: var(--clr-primary);
   border: 0;
   padding: 0.625em 1.875em;
   color: #fff;
@@ -53,6 +53,6 @@
 }
 
 .contact .php-email-form button[type=submit]:hover {
-  color: var(--Turquoise);
+  color: var(--clr-primary);
   background: ghostwhite;
 }

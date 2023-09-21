@@ -15,8 +15,8 @@
     position: absolute;
     top: 0;
     left: 0;
-    width: 3em;
-    height: 3em;
+    width: 4em;
+    height: 3.5em;
     background-color: var(--DarkTurquoise);
     clip-path: polygon(0 0, 100% 0, 0 100%);
     border-top-right-radius: 10px;
@@ -43,6 +43,10 @@
     margin-bottom: 0.625em;
   }
 
+  .card-text {
+    margin-block-end: 1em;
+  }
+
   .quest-type {
     font-style: italic;
     color: #888;
@@ -57,7 +61,7 @@
     font-size: 1.125rem;
     font-weight: bold;
     color: var(--DarkTurquoise);
-    background-color: #ffc107;
+    background-color: var(--clr-accent);
     padding: 10px;
     border-radius: 5px;
     text-align: center;

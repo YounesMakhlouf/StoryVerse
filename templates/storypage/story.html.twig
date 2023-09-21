@@ -12,7 +12,7 @@
         <div class="container">
             <div class="row justify-content-between">
                 {% block like %}
-                    <aside class="col-auto" id="fixed">
+                    <aside class="col-auto sticky-bottom">
                         {# Report story #}
                         <div class="action-button" id="report"
                              data-story-id="{{ path('app_report_story', {'id': story.id}) }}">
@@ -31,8 +31,8 @@
                         </a>
 
                         {# Likes #}
-                        <div class="like-container">
-                            <button class="like" aria-label="like">
+                        <div class="like-container text-center">
+                            <button class="like btn" aria-label="like">
                                 <i id="color"
                                    class="fa-heart fa-2xl {% if hasLiked %}fa-solid{% else %}fa-regular{% endif %}"
                                    data-story-id="{{ path('app_like', {'id': story.id}) }}"></i>
@@ -43,7 +43,7 @@
                 {% endblock %}
 
                 {% block story %}
-                    <article class="text rounded-4 col-8">
+                    <article class="text rounded-4 col-8 p-4">
                         <h1 class="display-3">{{ story.title }}</h1>
                         {% for contribution in story.contributions %}
                             <p class="contr" id="{{ contribution.author.id }}">{{ contribution.content }}</p>
@@ -67,13 +67,13 @@
                 {% if not hasContributed %}
                     <div class="text-center">
                         <a id="contribute-btn"
-                           class="btn btn-white btn-animate">{{ 'Be part of the story - Contribute now!'|trans }}</a>
+                           class="btn btn-animated btn-primary">{{ 'Be part of the story - Contribute now!'|trans }}</a>
                     </div>
                     <div class="container text-center">
                         <div class="row" id="contribute-form">
                             {{ form_start(contributionForm, {'action': path('app_storypage', {'id': story.id}),'attr': {'id': 'contribution-form'}}) }}
                             {{ form_widget(contributionForm.content, {'attr': {'class': 'form-input col-7', 'placeholder': 'add your contribution'|trans}}) }}
-                            <button id="sub" type="submit"></button>
+                            <button id="sub" class="btn btn-primary" type="submit">SUBMIT</button>
                             {{ form_end(contributionForm) }}
                         </div>
                     </div>
@@ -82,7 +82,7 @@
                         <div class="alert alert-light">
                             Looks like you've already contributed to this story! How about exploring some other stories?
                         </div>
-                        <a href="{{ path('app_browse_stories') }}" class="btn btn-white btn-animate">Explore</a>
+                        <a href="{{ path('app_browse_stories') }}" class="btn btn-animated btn-primary">Explore</a>
                     </div>
                 {% endif %}
             {% endblock %}
@@ -156,7 +156,7 @@
                         <div class="container mt-4">
                             <div class="row justify-content-center">
                                 {{ form_widget(form.content, {'attr': {'class': 'form-input col-8', 'placeholder': 'add your comment'|trans}}) }}
-                                <button class="col-1" type="submit" aria-label="submit comment">
+                                <button class="col-1 btn" type="submit" aria-label="submit comment">
                                     <i class="fa-solid fa-paper-plane fa-2xl"></i>
                                 </button>
                             </div>

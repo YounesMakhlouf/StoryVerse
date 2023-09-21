@@ -1,8 +1,8 @@
 $colors: (
-        DarkTurquoise: hsl(181, 37%, 43%),
-        Turquoise: hsl(173, 28%, 49%),
-        Silver: hsl(189, 11%, 76%),
-        LightGray: hsl(330, 4%, 89%),
-        wheat: hsl(24, 43%, 77%),
+        clr-primary: hsl(215.1, 75.2%, 49%),
+        DarkTurquoise: mix(hsl(215.1, 75.2%, 49%), black, 90%),
+  //clr-accent: hsl(48.2, 100%, 81%),
+        clr-accent: hsl(48.7, 91%, 56.7%),
         clr-text: hsl(0, 0%, 20%),
+        clr-titles: hsl(220, 6%, 22%),
 )

@@ -3,10 +3,6 @@ section {
   overflow: hidden;
 }
 
-.section-bg {
-  background-color: var(--LightGray);
-}
-
 .section-title {
   padding-bottom: 40px;
 }
@@ -17,14 +13,14 @@ section {
   margin: 0 0 0.3125em 0;
   letter-spacing: 2px;
   text-transform: uppercase;
-  color: var(--Silver);
+  color: var(--clr-accent);
 
   &::after {
     content: "";
     width: 7.5em;
     height: 1px;
     display: inline-block;
-    background: var(--Turquoise);
+    background: var(--clr-primary);
     margin: 0.25em 0.625em;
   }
 }

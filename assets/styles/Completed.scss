@@ -1,9 +1,6 @@
 @use 'abstracts/mixins' as m;
 
-#fixed {
-  text-align: center;
-  position: sticky;
-  bottom: 1rem;
+.sticky-bottom {
   align-self: flex-end;
 }
 
@@ -24,7 +21,7 @@
 }
 
 #pdf {
-  border: 2px solid #299d87;
+  border: 2px solid var(--clr-primary);
 }
 
 .action-button {
@@ -86,17 +83,18 @@
   color: #d31717;
 }
 
-.fa-circle-exclamation {
-  color: #b30000;
-}
-
 #report {
   border: 2px solid #b30000;
+  color: #b30000;
 }
 
 .text {
   border: solid rgba(0, 0, 0, 0.125) 1px;
   max-width: 75ch;
+
+  h1 {
+    margin-block-end: 0.75em;
+  }
 }
 
 #comment-section {
@@ -123,47 +121,6 @@
   font-size: var(--fs-300);
 }
 
-//.reply {
-//  display: none;
-//  margin-left: 5%;
-//}
-//
-//.icon {
-//  margin-left: 10%;
-//  margin-bottom: 5%;
-//}
-
-button {
-  border: 0;
-  background: none;
-}
-
-// ADD CONTRIBUTION STYLE
-.btn:link,
-.btn:visited {
-  text-transform: uppercase;
-  text-decoration: none;
-  padding: 15px 40px;
-  display: inline-block;
-  border-radius: 100px;
-  transition: all .2s;
-}
-
-.btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-}
-
-.btn:active {
-  transform: translateY(-1px);
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-}
-
-.btn-white {
-  background-color: #299d87;
-  color: #ffffff;
-}
-
 .btn-animated {
   animation: moveInBottom 5s ease-out;
   animation-fill-mode: backwards;
@@ -186,34 +143,12 @@ button {
   display: none;
 }
 
-#sub {
-  outline: none;
-  min-height: 40px;
-  max-width: 130px;
-  border-radius: 40px;
-  background: #fff;
-  border: 2px solid #299d87;
-  color: #299d87;
-  letter-spacing: 1px;
-  font: {
-    size: 0.75rem;
-    weight: bold;
-  }
-  cursor: pointer;
-  transition: all 0.25s ease;
-
-  &:hover {
-    color: white;
-    background: #299d87;
-  }
-
-  &:active {
-    letter-spacing: 2px;
-  }
-
-  &::after {
-    content: "SUBMIT";
-  }
+#contribution-form {
+  margin-inline: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
 }
 
 .onclic {
@@ -237,7 +172,7 @@ button {
 .validate {
   font-size: 0.8125rem;
   color: white;
-  background: #299d87;
+  background: var(--clr-primary);
 
   &::after {
     content: "\f00c";
@@ -274,7 +209,7 @@ button {
 .dialog-ovelay .dialog header {
   padding: 10px 8px;
   background-color: #f6f7f9;
-  border-bottom: 1px solid #e5e5e5
+  border-bottom: 1px solid #e5e5e5;
 }
 
 .dialog-ovelay .dialog header h2 {
@@ -335,5 +270,5 @@ button {
 }
 
 .fa-paper-plane {
-  color: #5BA199;
+  color: var(--clr-primary);
 }

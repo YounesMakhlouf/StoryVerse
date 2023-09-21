@@ -1,6 +1,6 @@
 #header {
   transition: all 0.5s;
-  background: var(--Turquoise);
+  background: var(--clr-primary);
   opacity: 0.9;
 
   &.header-transparent {
@@ -8,7 +8,7 @@
   }
 
   &.header-scrolled {
-    background: var(--Turquoise);
+    background: var(--clr-primary);
     opacity: 1;
   }
 }
@@ -28,7 +28,7 @@
   width: 0;
   height: 2px;
   bottom: 1.25em;
-  background-color: var(--wheat);
+  background-color: var(--clr-accent);
   visibility: visible;
   transition: all 0.3s ease-in-out 0s;
 }
