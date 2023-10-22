@@ -28,7 +28,7 @@
                         <label for="upload" class="formbold-input-label">
                             <i class="fa-solid fa-paperclip fa-xl"></i>
                             {{ form_label(form.storyImage, 'Add story Image ') }}
-                            {{ form_widget(form.storyImage, {'attr': {'class': 'form-control-file'}}) }}
+                            {{ form_widget(form.storyImage, {'attr': {'class': 'form-control-file', 'accept' : "image/*"}}) }}
                         </label>
                     </div>
                     {{ form_end(form) }}

@@ -24,7 +24,7 @@
                 <label for="upload" class="formbold-input-label">
                     <i class="fa-solid fa-paperclip fa-xl"></i>
                     {{ form_label(form.avatar, 'profile picture ') }}
-                    {{ form_widget(form.avatar, {'attr': {'class': 'form-control-file'}}) }}
+                    {{ form_widget(form.avatar, {'attr': {'class': 'form-control-file', 'accept' : "image/*"}}) }}
                 </label>
             </div>
             {{ form_end(form) }}
