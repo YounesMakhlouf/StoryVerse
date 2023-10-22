@@ -8,7 +8,7 @@
     {{ parent() }}
     <div class="theme"
          style="background-image: url('{{ asset('uploads/story_directory/' ~ story.storyImage) }}');"></div>
-    <main class="page-content">
+    <main id="main" class="page-content">
         <div class="container">
             <div class="row justify-content-between">
                 {% block like %}
@@ -46,7 +46,7 @@
                     <article class="text rounded-4 col-8 p-4">
                         <h1 class="display-3">{{ story.title }}</h1>
                         {% for contribution in story.contributions %}
-                            <p class="contr" id="{{ contribution.author.id }}">{{ contribution.content }}</p>
+                            <p class="contr" id="{{ contribution.author.id }}" aria-live="assertive">{{ contribution.content }}</p>
                         {% endfor %}
                     </article>
                     <div class="authors col-auto">
@@ -94,7 +94,7 @@
                     <h2 class="mb-3">{{ 'Comments'|trans }} ({{ story.comments|length }})</h2>
                     {% for comment in story.comments %}
                     {% if comment.comment is null %}
-                        <div class="be-comment">
+                        <div class="be-comment" aria-live="polite">
                             <div class="be-img-comment">
                                 <a href="{{ path('app_profile', {'id': comment.author.id}) }}">
                                     <img width="60" height="60"

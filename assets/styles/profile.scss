@@ -1,8 +1,5 @@
 @use 'abstracts/mixins' as m;
 
-@import "./layout/header";
-@import "./helper/general";
-
 body {
   background: #e7dfdb;
   margin-bottom: 1.25em;

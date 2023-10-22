@@ -4,6 +4,7 @@
             {{ app.user.id }}
         </p>
         <nav class="navbar navbar-expand fixed-top px-md-4">
+            <a class="skip-link" href='#main'>Skip to content</a>
             <div class="container-xxl">
                 <a class="navbar-brand" href="{{ path('app_browse_stories') }}">
                     <img src="{{ asset('build/images/logo.webp') }}" alt="Logo" width="40" height="40"
@@ -34,7 +35,7 @@
                                 aria-expanded="false" aria-label="notifications">
                             <span class="fa-solid fa-bell"></span>
                         </button>
-                        <ul class="dropdown-menu notiflist"></ul>
+                        <ul class="dropdown-menu notiflist" aria-live="polite"></ul>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('Story_new') }}" title="Add a post"><span

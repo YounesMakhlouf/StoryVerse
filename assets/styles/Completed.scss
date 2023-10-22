@@ -101,6 +101,10 @@
   max-width: 75ch;
 }
 
+.be-comment:not(:last-child){
+  margin-bottom: 1rem;
+}
+
 .be-img-comment {
   float: left;
 }

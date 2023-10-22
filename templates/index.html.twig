@@ -2,7 +2,7 @@
 
 {% block body %}
     {{ parent() }}
-    <main>
+    <main id="main">
         <!-- ======= Hero Section ======= -->
         <section aria-label="Hero section introducing StoryVerse platform" id="hero">
             <div class="container">
@@ -17,14 +17,15 @@
                                 Don't just read stories, be a part of creating them. Get involved and start writing
                                 today.</p>
                             <div class="text-center text-lg-start">
-                                <a class="btn btn-primary btn-get-started scrollto" data-aos="zoom-out" data-aos-delay="400"
+                                <a class="btn btn-primary btn-get-started scrollto" data-aos="zoom-out"
+                                   data-aos-delay="400"
                                    href="{{ path('app_register') }}">Start writing now</a>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-4 order-1 order-lg-2 hero-img" data-aos="zoom-out" data-aos-delay="300">
-                        <img alt="Kids sharing stories around a campfire at a StoryVerse writing camp"
-                             class="img-fluid rounded animated mx-auto" src="{{ asset('build/images/hero-img.webp') }}">
+                        <img alt="People sharing stories around a campfire" class="img-fluid rounded animated mx-auto"
+                             src="{{ asset('build/images/hero-img.webp') }}">
                     </div>
                 </div>
             </div>
