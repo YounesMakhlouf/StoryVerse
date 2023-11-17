@@ -23,7 +23,7 @@ Encore
     .addEntry("app", "./assets/js/app.js")
     .addEntry("home", "./assets/js/home.js")
     .addEntry("admin", "./assets/js/admin.js")
-    .addEntry("completed", "./assets/js/CompletedStory.js")
+    .addEntry("completed", "./assets/js/completedStory.js")
 
     .addStyleEntry("login", "./assets/styles/login.scss")
     .addStyleEntry("profile", "./assets/styles/profile.scss")

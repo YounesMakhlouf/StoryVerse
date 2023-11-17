@@ -6,8 +6,12 @@
 
 {% block body %}
     {{ parent() }}
-    <div class="theme"
-         style="background-image: url('{{ asset('uploads/story_directory/' ~ story.storyImage) }}');"></div>
+    <div class="parallax">
+        <div class="hero container">
+            <h1 class="hero__title">{{ story.title }}</h1>
+        </div>
+        <img class="parallax__bg" src="{{ asset('uploads/story_directory/' ~ story.storyImage) }}" alt="">
+    </div>
     <main id="main" class="page-content">
         <div class="container">
             <div class="row justify-content-between">
@@ -46,7 +50,8 @@
                     <article class="text rounded-4 col-8 p-4">
                         <h1 class="display-3">{{ story.title }}</h1>
                         {% for contribution in story.contributions %}
-                            <p class="contr" id="{{ contribution.author.id }}" aria-live="assertive">{{ contribution.content }}</p>
+                            <p class="contr" id="{{ contribution.author.id }}"
+                               aria-live="assertive">{{ contribution.content }}</p>
                         {% endfor %}
                     </article>
                     <div class="authors col-auto">

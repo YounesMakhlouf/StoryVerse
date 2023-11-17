@@ -1,36 +1,36 @@
-import "../styles/Completed.scss";
+import "../styles/completed.scss";
 import "../bootstrap";
 import Swal from "sweetalert2";
-
-$(document).ready(function () {
-    scrollToTop();
-});
-
-// Function to scroll the page to the top
-function scrollToTop() {
-    $("html, body").animate({scrollTop: 0}, "slow");
-}
+//
+// $(document).ready(function () {
+//     scrollToTop();
+// });
+//
+// // Function to scroll the page to the top
+// function scrollToTop() {
+//     $("html, body").animate({scrollTop: 0}, "slow");
+// }
 
 // Function to handle image theme effect
-function handleImageThemeEffect() {
-    const image = $(".theme");
-    const container = image.parent();
-    const heroHeight = image.outerHeight(true);
-
-    container.css("padding-top", heroHeight);
-
-    $(window).scroll(function () {
-        const scrollOffset = $(window).scrollTop();
-        if (scrollOffset < heroHeight) {
-            image.css("height", heroHeight - scrollOffset);
-        }
-        if (scrollOffset > heroHeight - 215) {
-            image.addClass("fixme");
-        } else {
-            image.removeClass("fixme");
-        }
-    });
-}
+// function handleImageThemeEffect() {
+//     const image = $(".theme");
+//     const container = image.parent();
+//     const heroHeight = image.outerHeight(true);
+//
+//     container.css("padding-top", heroHeight);
+//
+//     $(window).scroll(function () {
+//         const scrollOffset = $(window).scrollTop();
+//         if (scrollOffset < heroHeight) {
+//             image.css("height", heroHeight - scrollOffset);
+//         }
+//         if (scrollOffset > heroHeight - 215) {
+//             image.addClass("fixme");
+//         } else {
+//             image.removeClass("fixme");
+//         }
+//     });
+// }
 
 // // Show replies on click
 // $("#arrow").click(function () {
@@ -221,4 +221,4 @@ function sendLikeNotification(receiver) {
         });
 }
 
-handleImageThemeEffect();
+// handleImageThemeEffect();
