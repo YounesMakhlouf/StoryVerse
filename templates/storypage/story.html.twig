@@ -37,8 +37,7 @@
                         {# Likes #}
                         <div class="like-container text-center">
                             <button class="like btn" aria-label="like">
-                                <i id="color"
-                                   class="fa-heart fa-2xl {% if hasLiked %}fa-solid{% else %}fa-regular{% endif %}"
+                                <i class="fa-heart fa-2xl {% if hasLiked %}fa-solid{% else %}fa-regular{% endif %}"
                                    data-story-id="{{ path('app_like', {'id': story.id}) }}"></i>
                             </button>
                             <div id="likes">{{ story.likes|length }}</div>
@@ -57,7 +56,7 @@
                     <div class="authors col-auto">
                         <h2 class="mb-3">{{ 'Contributors'|trans }}</h2>
                         {% for contribution in story.contributions %}
-                            <a id="{{ contribution.author.id ~ 'author' }}"
+                            <a class="author" id="{{ contribution.author.id ~ 'author' }}"
                                href="{{ path('app_profile', {'id': contribution.author.id}) }}">
                                 {{ contribution.author.username }}
                             </a>

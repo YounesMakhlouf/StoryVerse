@@ -1,48 +1,12 @@
 import "../styles/completed.scss";
 import "../bootstrap";
 import Swal from "sweetalert2";
-//
-// $(document).ready(function () {
-//     scrollToTop();
-// });
-//
-// // Function to scroll the page to the top
-// function scrollToTop() {
-//     $("html, body").animate({scrollTop: 0}, "slow");
-// }
 
-// Function to handle image theme effect
-// function handleImageThemeEffect() {
-//     const image = $(".theme");
-//     const container = image.parent();
-//     const heroHeight = image.outerHeight(true);
-//
-//     container.css("padding-top", heroHeight);
-//
-//     $(window).scroll(function () {
-//         const scrollOffset = $(window).scrollTop();
-//         if (scrollOffset < heroHeight) {
-//             image.css("height", heroHeight - scrollOffset);
-//         }
-//         if (scrollOffset > heroHeight - 215) {
-//             image.addClass("fixme");
-//         } else {
-//             image.removeClass("fixme");
-//         }
-//     });
-// }
-
-// // Show replies on click
-// $("#arrow").click(function () {
-//     $(".reply").show();
-//     $(".icon").hide();
-//     $(".reply").css("margin-left", "10%");
-// });
-
-// Color like icon on click
-$("#color").click(function () {
-    $(this).toggleClass("fa-solid");
-});
+// Get the ids of the authors
+const authorIds = Array.from(document.querySelectorAll(".contr")).map((contributionAuthorId) => contributionAuthorId.getAttribute("id"));
+const button = document.querySelector("#button");
+const heartIcon = document.querySelector("i.fa-heart");
+let alreadyLiked = heartIcon.classList.contains("fa-solid");
 
 // Show comments directly after submitting without refreshing the page
 $(document).on("submit", "#comment-form", function (event) {
@@ -89,16 +53,24 @@ function createCommentHtml(response) {
 }
 
 // Likes
-$("i.fa-heart").click(function () {
+$(heartIcon).click(function () {
     const storyId = $(this).data("story-id");
-    event.preventDefault();
-
     const likeCountElement = $("#likes");
+
+    $(this).toggleClass("fa-solid fa-regular");
+
     $.ajax({
         type: "POST", url: storyId, success: function (data) {
             likeCountElement.text(data.count);
-        },
+        }, error: function (error) {
+            console.error("Error occurred:", error);
+        }
     });
+
+    if (!alreadyLiked) {
+        authorIds.forEach(sendLikeNotification);
+    }
+    alreadyLiked = !alreadyLiked;
 });
 
 // Show contribute form
@@ -108,19 +80,27 @@ $("#contribute-btn").click(function () {
 });
 
 // Contribute submit button animation
-$("#button").click(function () {
-    $(this).addClass("onclic", 250, validate);
+$(button).click(function () {
+    animateSubmitButton();
 });
 
+function animateSubmitButton() {
+    $(button).addClass("onclic", 250, validate);
+}
+
 function validate() {
-    const $sub = $("#sub");
     setTimeout(function () {
-        $sub.removeClass("onclic");
-        $sub.addClass("validate", 450, callback);
+        completeAnimation();
     }, 2250);
 }
 
-function callback() {
+function completeAnimation() {
+    const $sub = $("#sub");
+    $sub.removeClass("onclic");
+    $sub.addClass("validate", 450, removeValidationClass);
+}
+
+function removeValidationClass() {
     setTimeout(function () {
         $("#sub").removeClass("validate");
     }, 1250);
@@ -136,7 +116,7 @@ $('form[name="contribution"]').submit(function (event) {
         url: $("#contribution-form").attr("action"), method: "POST", data: formData, success: function (response) {
             $("#contribution-form").hide();
             const content = response.content;
-            $(".text").append('<p id="' + response.id + '">' + content + "</p>");
+            $(".text").append(`<p id="${response.id}">${content}</p>`);
         }, error: function () {
             alert("An error occurred while submitting the contribution.");
         },
@@ -183,25 +163,9 @@ $("#report").click(function () {
     });
 });
 
-// Get the ids of the authors
-const authorIds = Array.from(document.querySelectorAll(".contr")).map((contributionAuthorId) => contributionAuthorId.getAttribute("id"));
-
-let alreadyLiked = 0;
-// skander's incredible way of linking the like and notifications
-
-const heartIcon = document.querySelector("#color");
-heartIcon.addEventListener("click", () => {
-    if (alreadyLiked === 0) {
-        for (const receiver of authorIds) {
-            sendLikeNotification(receiver);
-        }
-    }
-    alreadyLiked = 1;
-});
-
 function sendLikeNotification(receiver) {
     const formData = new FormData();
-    const content = "Your contribution in " + story.title + " got a like from " + user.name + "!";
+    const content = `Your contribution in ${story.title} got a like from ${user.name}!`;
     formData.append("content", content);
     formData.append("sender_id", user.id);
     formData.append("receiver_id", parseInt(receiver));
@@ -211,9 +175,9 @@ function sendLikeNotification(receiver) {
     })
         .then((response) => {
             if (response.ok) {
-                console.log("skander did it as always");
+                console.log("Notification sent successfully!");
             } else {
-                console.log("I hate myself");
+                console.error("Failed to send notification. Status:", response.status);
             }
         })
         .catch((error) => {
@@ -221,4 +185,9 @@ function sendLikeNotification(receiver) {
         });
 }
 
-// handleImageThemeEffect();
+// // Show replies on click
+// $("#arrow").click(function () {
+//     $(".reply").show();
+//     $(".icon").hide();
+//     $(".reply").css("margin-left", "10%");
+// });

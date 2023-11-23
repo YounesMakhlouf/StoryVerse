@@ -3,11 +3,9 @@ body {
   margin: 0;
 }
 
-
 .parallax {
   position: relative;
   z-index: 0;
-  min-height: 75vh;
   min-height: 75svh;
   display: grid;
   grid-template-areas: "stack";
@@ -38,7 +36,6 @@ body {
 
 .hero__title {
   font-size: 6rem;
-  line-height: 1;
   font-style: italic;
   font-weight: 900;
   position: relative;

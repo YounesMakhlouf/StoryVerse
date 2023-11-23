@@ -45,7 +45,7 @@
 }
 
 .like {
-  @include m.pseudo($loc: after, $content: 'like', $top: 115%, $left: 100%) {
+  @include m.pseudo($loc: after, $content: 'like', $top: 115%, $left: 80%) {
     font-size: 0.9375rem;
     color: black;
     opacity: 0;
