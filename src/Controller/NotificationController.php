@@ -36,14 +36,10 @@ class NotificationController extends AbstractController
         return $this->json(['success' => true]);
     }
 
-    #[Route('/notification/user/{userId}', name: 'app_notification_user', methods: ['GET'])]
-    public function getUserNotifications(int $userId): JsonResponse
+    #[Route('/notification/user', name: 'app_notification_user', methods: ['GET'])]
+    public function getUserNotifications(): JsonResponse
     {
-        $user = $this->entityManager->getRepository(User::class)->find($userId);
-        // Handle case where user does not exist
-        if (!$user) {
-            throw $this->createNotFoundException('User not found');
-        }
+        $user = $this->getUser();
         $notifications = $this->entityManager->getRepository(Notification::class)->findBy([
             'receiver' => $user,
         ]);
@@ -58,7 +54,6 @@ class NotificationController extends AbstractController
                 ],
             ];
         }, $notifications);
-        // Return the notification data as JSON in a JsonResponse object
         return new JsonResponse($notificationData);
     }
 }
