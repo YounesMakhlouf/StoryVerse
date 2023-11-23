@@ -103,7 +103,6 @@ class Tier
             $this->users->add($user);
             $user->setTier($this);
         }
-
         return $this;
     }
 
@@ -115,7 +114,6 @@ class Tier
                 $user->setTier(null);
             }
         }
-
         return $this;
     }
 }

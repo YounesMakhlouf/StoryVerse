@@ -24,3 +24,12 @@ header span {
 ul.navbar-nav > li > :is(a, button) {
   color: white;
 }
+
+.notiflist {
+  width: min(40ch, 25rem);
+}
+
+.dropdown-item {
+  padding-block: 0.5rem;
+  white-space: normal;
+}

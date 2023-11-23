@@ -159,6 +159,4 @@ class Quest
     
         return ($completedUsers / $totalUsers) * 100;
     }
-    
-
 }

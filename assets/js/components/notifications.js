@@ -1,5 +1,4 @@
-const navbar = document.querySelector("#navbar");
-const header = document.querySelector("#header");
+const header = document.getElementById("header");
 const notificationList = document.querySelector(".notiflist");
 
 // Fetch notifications data from the server
@@ -10,23 +9,26 @@ async function fetchNotifications(userId) {
 
         if (Array.isArray(data) && data.length > 0) {
             data.forEach((notification) => {
-                displayNotification(notification.content);
+                displayNotification(notification);
             });
         } else {
             displayNotification("No notifications yet, don't lose hope!");
         }
     } catch (error) {
-        console.error(error);
+        console.error("Failed to fetch notifications:", error);
         displayNotification("Failed to fetch notifications. Please try again later.");
     }
 }
 
 // Display a notification in the list
-function displayNotification(content) {
+function displayNotification(notification) {
     const listItem = document.createElement("li");
+    const userLink = document.createElement("a");
+    userLink.href =`/profile/${notification.sender.id}`;
     listItem.classList.add("dropdown-item");
-    listItem.textContent = content;
-    notificationList.appendChild(listItem);
+    listItem.textContent = notification.content;
+    userLink.appendChild(listItem);
+    notificationList.appendChild(userLink);
 }
 
 // Get the user ID from the DOM
