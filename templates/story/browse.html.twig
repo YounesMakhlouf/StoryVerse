@@ -8,16 +8,20 @@
                 <header class="section-title text-center" data-aos="fade-up">
                     <h1>{{ 'Trending Stories 🔥🔥'|trans }}</h1>
                 </header>
-                <div class="btn-group" role="group" aria-label="Story Genre filter">
-                    <a class="btn btn-outline-primary genre"
-                       href="{{ path('app_browse_stories') }}">{{ 'All genres'|trans }}</a>
-                    {% for genre, description in genres %}
-                        <a class="btn btn-outline-primary genre"
-                           href="{{ path('app_browse_stories', { 'genre': genre }) }}">{{ genre }}</a>
+                <div role="group" class="d-flex justify-content-around my-4 genres" aria-label="Story Genre filter">
+                    <a class="genre text-center {% if genre is null%} selected{% endif %}" href="{{ path('app_browse_stories') }}">
+                        <img class="mx-auto" height="40" width="40" alt="All genres"
+                             src="{{ asset('build/images/genres/all.png') }}">
+                        {{ 'All'|trans }}</a>
+                    {% for g, d in genres %}
+                        <a class="genre {% if genre == g %} selected{% endif %}"
+                           href="{{ path('app_browse_stories', { 'genre': g }) }}">
+                            <img class="mx-auto" height="40" width="40" alt="{{ g }}"
+                                 src="{{ asset('build/images/genres/' ~ g|lower  ~ '.png') }}">
+                            {{ g }}</a>
                     {% endfor %}
                 </div>
-                <div class="container my-4" id="genre-description">
-                    <h2>{{ 'Browse'|trans }} {{ genre ?? ('All genres'|trans) }}</h2>
+                <div class="container my-5" id="genre-description">
                     {% if genre %}
                         <p class="lead text-muted">{{ genres[genre] }}</p>
                     {% endif %}
