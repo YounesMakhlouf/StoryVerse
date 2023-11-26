@@ -1,17 +1,10 @@
 @use 'abstracts/mixins' as m;
 
-@import '~bootstrap';
-
 body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
+  display: grid;
+  place-content: center;
+  padding: 0;
   background: linear-gradient(to top, #469597 0%, #88d3ce 100%) no-repeat fixed;
-}
-
-img {
-  width: 10%;
 }
 
 form {
@@ -22,7 +15,6 @@ form {
 }
 
 #login {
-  justify-content: center;
   flex-direction: column;
 }
 
@@ -44,11 +36,11 @@ form {
   }
 }
 
+//TODO: fix these
 .container {
-  max-width: 700px;
-  width: 100%;
+  //width: min(65ch, 100% - 3rem);
   background-color: #fff;
-  padding: 25px 30px;
+  padding: 1.5em 2em;
   border-radius: 5px;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
 
@@ -66,12 +58,11 @@ form {
 }
 
 /* Input boxes style  */
-
 .content .user-details {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  margin: 20px 0 12px 0;
+  margin-block: 1em;
 }
 
 .user-details .input-box {
@@ -188,7 +179,6 @@ fieldset {
 }
 
 /* Button style */
-
 .button {
   height: 45px;
   margin: 35px 0
@@ -217,7 +207,7 @@ footer {
   transition: all 0.3s ease;
 }
 
-@include m.mq(mobile) {
+@include m.mq(small) {
   .container {
     max-width: 100%;
   }

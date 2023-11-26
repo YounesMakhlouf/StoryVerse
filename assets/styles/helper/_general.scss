@@ -1,10 +1,12 @@
-@import '../abstracts/variables';
+@use '../abstracts/variables';
 
-@import '../base/reset';
-@import '../base/typography';
-@import '../base/aos';
+@use '../base/root';
+@use '../base/reset';
+@use '../base/typography';
+@use '../base/aos';
 
-@import '../layout/section';
+@use '../layout/section';
 
-@import '../components/links';
-@import '../components/button';
+@use '../components/links';
+@use '../components/button';
+@use '../components/form';

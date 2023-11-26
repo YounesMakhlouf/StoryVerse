@@ -1,27 +1,11 @@
-@use 'colors';
-
-:root {
-  @each $color, $value in colors.$colors {
-    --#{$color}: #{$value};
-  }
-  --clr-text-on-primary: #333;
-
-  --ff-base: "Lora", serif;
-  --ff-headings: "Playfair Display", serif;
-
-  --fs-300: clamp(1.00rem, calc(1.00rem + 0.00vw), 1.00rem);
-  --fs-400: clamp(1.20rem, calc(1.18rem + 0.08vw), 1.25rem);
-  --fs-500: clamp(1.44rem, calc(1.40rem + 0.18vw), 1.56rem);
-  --fs-600: clamp(1.73rem, calc(1.65rem + 0.34vw), 1.95rem);
-  --fs-700: clamp(2.07rem, calc(1.94rem + 0.55vw), 2.44rem);
-  --fs-800: clamp(2.49rem, calc(2.29rem + 0.85vw), 3.05rem);
-
-  --color-button-primary-bg: var(--clr-primary);
-  --color-button-secondary-bg: var(--clr-accent);
-
-  --bs-body-font-size: var(--fs-400);
-  --bs-body-font-family: var(--ff-base);
-  --bs-body-line-height: 1.6;
-  --bs-emphasis-color-rgb: 229, 227, 228;
-  --bs-card-title-color: var(--clr-titles);
-}
+$breakpoints: (
+        small: 40em,
+        medium: 65em,
+);
+$colors: (
+        clr-primary: hsl(215.1, 75.2%, 49%),
+        DarkTurquoise: mix(hsl(215.1, 75.2%, 49%), black, 90%),
+        clr-accent: hsl(48.7, 91%, 56.7%),
+        clr-text: hsl(0, 0%, 20%),
+        clr-titles: hsl(220, 6%, 22%),
+);

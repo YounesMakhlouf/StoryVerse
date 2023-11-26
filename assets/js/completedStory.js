@@ -44,7 +44,7 @@ function createCommentHtml(response) {
                 <a href="{{ path('app_profile', {'id': comment.author.id}) }}">${author}</a>
                   <span class="be-comment-time">
                     <i class="fa-regular fa-clock"></i>
-                    ${createdAt}
+                    <time>${createdAt}</time>
                   </span>
                 </div>
                 <p class="be-comment-text">${content}</p>

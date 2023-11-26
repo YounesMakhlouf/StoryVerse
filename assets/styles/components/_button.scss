@@ -20,3 +20,17 @@
     background: var(--color-button-secondary-bg);
   }
 }
+
+button[type=submit] {
+  background: var(--clr-primary);
+  border: 0;
+  padding: 0.625em 1.875em;
+  color: #fff;
+  transition: 0.4s;
+  border-radius: 50px;
+}
+
+button[type=submit]:hover {
+  color: var(--clr-primary);
+  background: ghostwhite;
+}

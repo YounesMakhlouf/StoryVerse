@@ -45,3 +45,36 @@
 .fa-brands {
   margin-inline: 2px;
 }
+
+.contact .info {
+  color: var(--DarkTurquoise);
+}
+
+.contact .info i {
+  float: left;
+  width: 2.75rem;
+  aspect-ratio: 1/1;
+  background: var(--clr-accent);
+  display: grid;
+  place-content: center;
+  border-radius: 50px;
+  transition: all 0.3s ease-in-out;
+}
+
+.contact .info h4 {
+  font-weight: 600;
+  margin-bottom: 0.25em;
+}
+
+.contact-info {
+  padding-inline-start: 3.75rem;
+}
+
+.contact .info > div:not(:first-child) {
+  margin-top: 2.5rem;
+}
+
+.contact .info > div:hover i {
+  background: var(--clr-primary);
+  color: #fff;
+}

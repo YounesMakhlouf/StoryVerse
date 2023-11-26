@@ -11,7 +11,8 @@
         {% if quest.users|length == 0 %}
             <p class="card-text quest-completion">No one has completed this quest yet</p>
         {% else %}
-            <p class="card-text quest-completion">{{ quest.getUserPercentage(userRepository) | number_format(1)}}% of users completed this quest</p>
+            <p class="card-text quest-completion">{{ quest.getUserPercentage(userRepository) | number_format(1) }}% of
+                users completed this quest</p>
         {% endif %}
         {% set progress = questCompletionService.calculateQuestProgress(quest, app.user) %}
         {% if progress >= 100 %}
@@ -25,12 +26,10 @@
             {% set randomIndex = random(0, epicMessages|length - 1) %}
             <p class="card-text congratulation">{{ epicMessages[randomIndex] }}</p>
         {% else %}
-            <div class="progress">
+            <div class="progress" role="progressbar" aria-label="Quest progress" aria-valuenow="{{ progress }}"
+                 aria-valuemin="0" aria-valuemax="100">
                 <div class="progress-bar progress-bar-striped progress-bar-animated"
-                     role="progressbar" aria-label="Quest progress"
-                     style="width: {{ progress }}%;" aria-valuenow="{{ progress }}"
-                     aria-valuemin="0" aria-valuemax="100">
-                    {{ progress }}%
+                     style="width: {{ progress }}%;">{{ progress }}%
                 </div>
             </div>
         {% endif %}

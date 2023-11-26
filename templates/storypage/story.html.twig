@@ -112,7 +112,8 @@
                                     <a href="{{ path('app_profile', {'id': comment.author.id}) }}">{{ comment.author.username }}</a>
                                     <span class="be-comment-time">
                                             <i class="fa-regular fa-clock"></i>
-                                            {{ comment.createdat|date('d-m-Y') }}
+                                            <time datetime="{{ comment.createdat|date('Y-m-d') }}"
+                                                  class="date">{{ comment.createdat|date('d-m-Y') }}</time>
                                         </span>
                                 </div>
                                 <p class="be-comment-text rounded">
@@ -146,7 +147,8 @@
 					                    </span>
                                 <span class="be-comment-time">
                                             <i class="fa-regular fa-clock"></i>
-                                                {{ reply.createdat|date('d-m-Y') }}
+                                    <time datetime="{{ reply.createdat|date('Y-m-d') }}"
+                                          class="date">{{ reply.createdat|date('d-m-Y') }}</time>
                                         </span>
                                 <p class="be-comment-text rounded">
                                     {{ reply.content }}

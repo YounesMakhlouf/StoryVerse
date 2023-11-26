@@ -98,12 +98,10 @@
                                                 {% endif %}
                                                 {% set progress = (user.xp / nextTier.xpThreshold) * 100 %}
                                                 <div class="col-9">
-                                                    <div class="progress">
-                                                        <div class="progress-bar" role="progressbar"
-                                                             aria-label="Quest progress"
-                                                             style="width: {{ progress }}%;"
-                                                             aria-valuenow="{{ progress }}" aria-valuemin="0"
-                                                             aria-valuemax="100">
+                                                    <div class="progress" role="progressbar" aria-label="XP progress"
+                                                         aria-valuenow="{{ progress }}" aria-valuemin="0"
+                                                         aria-valuemax="100">
+                                                        <div class="progress-bar" style="width: {{ progress }}%;">
                                                             <span class="xp-progress">{{ user.xp }} XP</span>
                                                         </div>
                                                     </div>

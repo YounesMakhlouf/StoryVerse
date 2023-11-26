@@ -6,7 +6,8 @@
 @import "~sweetalert2/dist/sweetalert2.css";
 @import "~@fortawesome/fontawesome-free/css/all.css";
 
-@import "helper/general";
+@import "./helper/general";
+
 @import "./layout/header";
 @import "./layout/footer";
 
@@ -14,7 +15,7 @@
 @import './components/search';
 
 body {
-  padding-top: 5em;
+  padding-block-start: 5em;
 }
 
 nav {
