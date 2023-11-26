@@ -1,5 +1,6 @@
 @use 'abstracts/mixins' as m;
 @use 'helper/parallax';
+@import 'components/scroll_progress';
 
 .page-content {
   line-height: 1.625;
