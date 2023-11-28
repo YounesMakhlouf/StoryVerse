@@ -1,19 +1,18 @@
 @use 'abstracts/mixins' as m;
 
 body {
-  display: grid;
-  place-content: center;
   padding: 0;
   background: linear-gradient(-45deg, #3c8c8d, #88d3ce, #ffebde);
   background-size: 400% 400%;
   animation: gradient-bg 12s ease infinite;
+  display: grid;
+  place-content: center;
 }
 
-//TODO: fix these
 #main {
-  width: min(50ch, 100vw - 3rem);
+  margin-inline: auto;
+  width: min(55ch, 100% - 3rem);
   background-color: #fff;
-  padding: 2em;
   border-radius: 4px;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
 }
@@ -21,181 +20,66 @@ body {
 .title {
   @include m.pseudo($top: 100%) {
     height: 3px;
-    width: 30px;
+    width: 2rem;
     border-radius: 5px;
     background: linear-gradient(-20deg, #469597 0%, #88d3ce 100%);
   }
 }
 
-///* Input boxes style  */
-.content .user-details {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  margin-block: 1em;
+input[type="radio"] {
+  margin-left: 22px;
+  margin-top: 20px;
+  height: 1.2rem;
+  width: 1.2rem;
+  margin-right: 0.5rem;
+  border: 0.1rem solid #d9d9d9;
+  background-color: #d9d9d9;
+  border-radius: 50%;
 }
 
-.user-details .input-box {
-  margin-bottom: 15px;
-  width: calc(100% / 2 - 20px);
-}
-
-.input-box label.details {
-  display: block;
-  font-weight: 500;
-  margin-bottom: 5px;
-}
-
-.user-details .input-box input {
+/* Button style */
+.button {
   height: 45px;
+  margin: 35px 0
+}
+
+.button button {
+  height: 100%;
   width: 100%;
-  outline: none;
-  font-size: 1rem;
   border-radius: 5px;
-  padding-left: 15px;
-  border: 1px solid #ccc;
-  border-bottom-width: 2px;
+  border: none;
+  color: #fff;
+  font-size: 1.125rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  cursor: pointer;
+  background: linear-gradient(-20deg, #469597 0%, #88d3ce 100%);
   transition: all 0.3s ease;
 }
 
-.user-details .input-box input:focus,
-.user-details .input-box input:valid {
-  border-color: #E5E3E4;
+.button button:hover {
+  background-color: linear-gradient(-20deg, #469597 0%, #88d3ce 100%);
 }
 
-///* gender details  */
-//.form-check {
-//  flex: 1 0 100%
-//}
-//
-//#registration_form_gender {
-//  display: block;
-//}
-//
-//.gender-title {
-//  font-size: 1.25rem;
-//  font-weight: 500;
-//}
-//
-//.gender_details {
-//  width: 80%;
-//  margin: 14px 0;
-//}
-//
-//.gender_details label {
-//  align-items: center;
-//  cursor: pointer;
-//}
-//
-//input[type="radio"] {
-//  margin-left: 22px;
-//  margin-top: 20px;
-//  height: 1.2rem;
-//  width: 1.2rem;
-//  margin-right: 0.5rem;
-//}
-//
-//input[type="radio"] {
-//  appearance: none;
-//  border: 0.1rem solid #d9d9d9;
-//  background-color: #d9d9d9;
-//  border-radius: 50%;
-//}
-//
-//input[type="radio"]:focus-visible {
-//  outline-offset: 0;
-//}
-//
-//#registration_form_gender_1,
-//#registration_form_gender_0 {
-//  outline: 1px solid #d9d9d9;
-//}
-//
-//#registration_form_gender_1:hover,
-//#registration_form_gender_0:hover {
-//  outline-color: #469597;
-//}
-//
-//#registration_form_gender_1:checked,
-//#registration_form_gender_0:checked {
-//  outline-color: #469597;
-//  background-color: #469597;
-//}
-//
-//@keyframes outline-checked {
-//  0% {
-//    outline-offset: 0;
-//  }
-//
-//  100% {
-//    outline-offset: -0.2rem;
-//  }
-//}
-//
-//fieldset {
-//  display: flex;
-//  flex-direction: row;
-//  margin-inline-start: 2px;
-//  margin-inline-end: 2px;
-//  padding-block-start: 0.35em;
-//  padding-inline-start: 0.75em;
-//  padding-inline-end: 0.75em;
-//  padding-block-end: 0.625em;
-//  min-inline-size: min-content;
-//  border-width: 2px;
-//  border-style: none;
-//  border-color: white;
-//  border-image: initial;
-//}
-//
-///* Button style */
-//.button {
-//  height: 45px;
-//  margin: 35px 0
-//}
-//
-//.button button {
-//  height: 100%;
-//  width: 100%;
-//  border-radius: 5px;
-//  border: none;
-//  color: #fff;
-//  font-size: 1.125rem;
-//  font-weight: 500;
-//  letter-spacing: 1px;
-//  cursor: pointer;
-//  background: linear-gradient(-20deg, #469597 0%, #88d3ce 100%);
-//  transition: all 0.3s ease;
-//}
-//
-//.button button:hover {
-//  background-color: linear-gradient(-20deg, #469597 0%, #88d3ce 100%);
-//}
-//
-//footer {
-//  text-align: center;
-//  transition: all 0.3s ease;
-//}
-//
-//@include m.mq(small) {
-//  .container {
-//    max-width: 100%;
-//  }
-//  .user-details .input-box {
-//    margin-bottom: 15px;
-//    width: 100%;
-//  }
-//  .category {
-//    width: 100%;
-//  }
-//  .content .user-details {
-//    max-height: 300px;
-//    overflow-y: scroll;
-//  }
-//  .container .content .category {
-//    flex-direction: column;
-//  }
-//}
+@include m.mq(small) {
+  .container {
+    max-width: 100%;
+  }
+  .user-details .input-box {
+    margin-bottom: 15px;
+    width: 100%;
+  }
+  .category {
+    width: 100%;
+  }
+  .content .user-details {
+    max-height: 300px;
+    overflow-y: scroll;
+  }
+  .container .content .category {
+    flex-direction: column;
+  }
+}
 
 @keyframes gradient-bg {
   0% {

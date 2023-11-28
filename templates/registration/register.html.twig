@@ -6,99 +6,70 @@
 
 {% block body %}
     {{ parent() }}
-    <main id="main" class="gradient">
+    <main id="main" class="p-5">
     <div class="container">
     {% if app.user %}
         <div class="alert alert-success">
             You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
         </div>
     {% else %}
-        <div class="title d-flex">
+        <div class="title d-flex mb-4 gap-2">
             <img src="{{ asset('build/images/logo.webp') }}" class="img-fluid" alt="Logo" height="40" width="40">
             <h1>Story Verse Registration Form</h1>
         </div>
         {{ form_start(registrationForm) }}
         <div class="content">
-            <div class="user-details">
-                {{ form_row(registrationForm.first_name,{
-                    label:'First Name',
-                    label_attr: {
-                        'class': 'form-label',
-                    },
-                    attr:{
-                        'placeholder':"Enter your first name",
-                        'autocomplete':"off",
-                        'class': 'form-control'
-                    },
-                    'row_attr': {
-                        'class': 'input-box',
-                    }
-                }) }}
-                {{ form_row(registrationForm.last_name,{
-                    'label': 'Last Name',
-                    label_attr: {
-                        'class': 'form-label',
-                    },
-                    'attr': {
-                        'placeholder': 'Enter your last name',
-                        'autocomplete': 'off',
-                        'class': 'form-control'
-                    },
-                    'row_attr': {
-                        'class': 'input-box',
-                    }
-                }) }}
-                <div class="input-box">
-                    {{ form_label(registrationForm.username) }}
-                    {{ form_widget(registrationForm.username, {
-                        'attr': {
-                            'placeholder': 'Enter your username',
-                            'autocomplete': 'off',
-                            'class': 'form-control'
-                        },
-                        label_attr: {
-                            'class': 'form-label',
-                        },
-                    }) }}
-                    {% if form_errors(registrationForm.username)|length > 0 %}
-                        <div class="alert alert-danger">
-                            {{ form_errors(registrationForm.username) }}
-                        </div>
-                    {% endif %}
-                </div>
-                <div class="input-box">
-                    {{ form_label(registrationForm.email) }}
-                    {{ form_widget(registrationForm.email, {
-                        'attr': {
-                            'placeholder': 'Enter your email',
-                            'autocomplete': 'off',
-                            'class': 'form-control'
-                        },
-                    }) }}
-                </div>
-                <div class="input-box">
-                    {{ form_widget(registrationForm.password, {
-                        'attr': {
-                            'placeholder': 'Enter your password',
-                            'autocomplete': 'off',
-                            'class': 'form-control'
-                        },
-                        label_attr: {
-                            'class': 'form-label',
-                        },
-                    }) }}
-                </div>
+            <div class="user-details mb-3">
+                <fieldset class="row">
+                <div class="input-box mb-3 col-lg-6">
+                        {{ form_label(registrationForm.first_name) }}
+                        {{ form_widget(registrationForm.first_name,{
+                            'attr': {
+                                'placeholder': 'Enter your first name',
+                                'autocomplete': 'off',
+                            }
+                        }) }}
+                    </div>
+                    <div class="input-box mb-3 col-lg-6">
+                        {{ form_label(registrationForm.last_name) }}
+                        {{ form_widget(registrationForm.last_name,{
+                            'attr': {
+                                'placeholder': 'Enter your last name',
+                                'autocomplete': 'off',
+                            }
+                        }) }}
+                    </div>
+                    <div class="input-box mb-3">
+                        {{ form_label(registrationForm.username) }}
+                        {{ form_widget(registrationForm.username, {
+                            'attr': {
+                                'placeholder': 'Enter your username',
+                                'autocomplete': 'off',
+                            },
+                        }) }}
+                        {% if form_errors(registrationForm.username)|length > 0 %}
+                            <div class="alert alert-danger">
+                                {{ form_errors(registrationForm.username) }}
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="input-box mb-3">
+                        {{ form_label(registrationForm.email) }}
+                        {{ form_widget(registrationForm.email, {
+                            'attr': {
+                                'placeholder': 'Enter your email',
+                                'autocomplete': 'off',
+                            },
+                        }) }}
+                    </div>
+                </fieldset>
+                <fieldset class="input-box mb-3">
+                    {{ form_widget(registrationForm.password) }}
+                </fieldset>
             </div>
-            <div class="gender_details">
-                {{ form_row(registrationForm.gender, {
-                    'label_attr': {
-                        'class': 'gender form-check-label',
-                    },
-                    'attr':{
-                        'class': 'form-control'
-                    }
-                }) }}
-            </div>
+            <fieldset class="gender_details mb-3">
+                {{ form_row(registrationForm.gender) }}
+            </fieldset>
             {% if form_errors(registrationForm) %}
                 <div class="alert alert-danger">
                     {{ form_errors(registrationForm) }}
@@ -108,7 +79,7 @@
                 <button class="btn btn-primary" type="submit" value="Register">Register</button>
             </div>
         </div>
-        <footer>Already have an account ?
+        <footer class="text-center">Already have an account ?
             <a href="{{ path('app_login') }}">Login here</a>
         </footer>
         {{ form_end(registrationForm) }}
