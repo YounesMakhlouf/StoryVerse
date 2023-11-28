@@ -13,18 +13,22 @@
             You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
         </div>
     {% else %}
-        <div class="title">
+        <div class="title d-flex">
             <img src="{{ asset('build/images/logo.webp') }}" class="img-fluid" alt="Logo" height="40" width="40">
-            Story Verse Registration Form
+            <h1>Story Verse Registration Form</h1>
         </div>
+        {{ form_start(registrationForm) }}
         <div class="content">
             <div class="user-details">
-                {{ form_start(registrationForm) }}
                 {{ form_row(registrationForm.first_name,{
                     label:'First Name',
+                    label_attr: {
+                        'class': 'form-label',
+                    },
                     attr:{
                         'placeholder':"Enter your first name",
-                        'autocomplete':"off"
+                        'autocomplete':"off",
+                        'class': 'form-control'
                     },
                     'row_attr': {
                         'class': 'input-box',
@@ -32,9 +36,13 @@
                 }) }}
                 {{ form_row(registrationForm.last_name,{
                     'label': 'Last Name',
+                    label_attr: {
+                        'class': 'form-label',
+                    },
                     'attr': {
                         'placeholder': 'Enter your last name',
                         'autocomplete': 'off',
+                        'class': 'form-control'
                     },
                     'row_attr': {
                         'class': 'input-box',
@@ -46,6 +54,10 @@
                         'attr': {
                             'placeholder': 'Enter your username',
                             'autocomplete': 'off',
+                            'class': 'form-control'
+                        },
+                        label_attr: {
+                            'class': 'form-label',
                         },
                     }) }}
                     {% if form_errors(registrationForm.username)|length > 0 %}
@@ -60,6 +72,7 @@
                         'attr': {
                             'placeholder': 'Enter your email',
                             'autocomplete': 'off',
+                            'class': 'form-control'
                         },
                     }) }}
                 </div>
@@ -68,6 +81,10 @@
                         'attr': {
                             'placeholder': 'Enter your password',
                             'autocomplete': 'off',
+                            'class': 'form-control'
+                        },
+                        label_attr: {
+                            'class': 'form-label',
                         },
                     }) }}
                 </div>
@@ -75,7 +92,10 @@
             <div class="gender_details">
                 {{ form_row(registrationForm.gender, {
                     'label_attr': {
-                        'class': 'gender',
+                        'class': 'gender form-check-label',
+                    },
+                    'attr':{
+                        'class': 'form-control'
                     }
                 }) }}
             </div>
@@ -87,11 +107,11 @@
             <div class="button">
                 <button class="btn btn-primary" type="submit" value="Register">Register</button>
             </div>
-            {{ form_end(registrationForm) }}
         </div>
         <footer>Already have an account ?
             <a href="{{ path('app_login') }}">Login here</a>
         </footer>
+        {{ form_end(registrationForm) }}
         </div>
         </main>
     {% endif %}
