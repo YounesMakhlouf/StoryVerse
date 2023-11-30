@@ -3,59 +3,55 @@
 {% block title %}Login{% endblock %}
 
 {% block body %}
-    <main id="main" class="p-5">
-        <div class="container">
-            {{ parent() }}
-            <form method="post" id="login">
-                {# checks if there is an error in the login form submission #}
-                {% if error %}
-                    <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-                {% endif %}
+    <main id="main" class="container mx-auto my-5">
+        {{ parent() }}
+        <form method="post" id="login">
+            {# checks if there is an error in the login form submission #}
+            {% if error %}
+                <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            {% endif %}
 
-                {% if app.user %}
-                    <div class="alert alert-success">
-                        You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
-                    </div>
-                {% else %}
-                    <div class="title d-flex mb-4 gap-2">
-                        <img src="{{ asset('build/images/logo.webp') }}" class="img-fluid" alt="Storyverse" width="40"
-                             height="40">
-                        <h1>Please sign in</h1>
-                    </div>
-                    <div class="content">
-                        <fieldset class="user-details mb-4 row">
-                            <div class="input-box mb-3 col-lg">
-                                <label class="details form-label" for="inputEmail">Email</label>
-                                <input class="form-control" type="email" value="{{ last_username }}" name="email"
-                                       placeholder="Enter your email"
-                                       id="inputEmail" autocomplete="email" required autofocus>
-                            </div>
-                            <div class="input-box mb-3 col-lg">
-                                <label class="details form-label" for="inputPassword">Password</label>
-                                <input class="form-control" type="password" name="password" id="inputPassword"
-                                       placeholder="Enter your password"
-                                       autocomplete="current-password" required>
-                            </div>
-                            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-                        </fieldset>
-
-                        <div class="checkbox form-check mb-3">
-                            <label class="form-check-label">
-                                <input class="form-check-input" type="checkbox" name="_remember_me" value="" checked/> Keep me
-                                logged in
-                            </label>
+            {% if app.user %}
+                <div class="alert alert-success">
+                    You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
+                </div>
+            {% else %}
+                <div class="title d-flex mb-4 gap-2">
+                    <img src="{{ asset('build/images/logo.webp') }}" class="img-fluid" alt="Storyverse" width="40"
+                         height="40">
+                    <h1>Please sign in</h1>
+                </div>
+                <div class="content">
+                    <fieldset class="user-details mb-4 row">
+                        <div class="input-box mb-3 col-lg">
+                            <label class="details form-label" for="inputEmail">Email</label>
+                            <input class="form-control" type="email" value="{{ last_username }}" name="email"
+                                   placeholder="Enter your email"
+                                   id="inputEmail" autocomplete="email" required autofocus>
                         </div>
-
-                        <div class="button">
-                            <button class="btn btn-primary" type="submit" value="LogIn">Login</button>
+                        <div class="input-box mb-3 col-lg">
+                            <label class="details form-label" for="inputPassword">Password</label>
+                            <input class="form-control" type="password" name="password" id="inputPassword"
+                                   placeholder="Enter your password"
+                                   autocomplete="current-password" required>
                         </div>
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                    </fieldset>
+
+                    <div class="checkbox form-check mb-3">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" name="_remember_me" value="" checked/> Keep
+                            me
+                            logged in
+                        </label>
                     </div>
-                    <footer class="text-center">Not a member ?
-                        <a href="{{ path('app_register') }}">Sign Up here</a>
-                    </footer>
-                {% endif %}
-            </form>
-        </div>
+                    <button class="btn btn-primary my-3 rounded-1" type="submit" value="LogIn">Login</button>
+                </div>
+                <footer class="text-center">Not a member ?
+                    <a href="{{ path('app_register') }}">Sign Up here</a>
+                </footer>
+            {% endif %}
+        </form>
     </main>
 {% endblock %}
 

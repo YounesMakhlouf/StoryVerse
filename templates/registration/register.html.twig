@@ -6,8 +6,7 @@
 
 {% block body %}
     {{ parent() }}
-    <main id="main" class="p-5">
-    <div class="container">
+    <main id="main" class="container mx-auto my-5">
     {% if app.user %}
         <div class="alert alert-success">
             You are logged in as {{ app.user.username }}, <a href="{{ path('app_logout') }}">Logout</a>
@@ -21,7 +20,7 @@
         <div class="content">
             <div class="user-details mb-3">
                 <fieldset class="row">
-                <div class="input-box mb-3 col-lg-6">
+                    <div class="input-box mb-3 col-lg-6">
                         {{ form_label(registrationForm.first_name) }}
                         {{ form_widget(registrationForm.first_name,{
                             'attr': {
@@ -75,15 +74,12 @@
                     {{ form_errors(registrationForm) }}
                 </div>
             {% endif %}
-            <div class="button">
-                <button class="btn btn-primary" type="submit" value="Register">Register</button>
-            </div>
+                <button class="btn btn-primary my-3 rounded-1" type="submit" value="Register">Register</button>
         </div>
         <footer class="text-center">Already have an account ?
             <a href="{{ path('app_login') }}">Login here</a>
         </footer>
         {{ form_end(registrationForm) }}
-        </div>
         </main>
     {% endif %}
 {% endblock %}

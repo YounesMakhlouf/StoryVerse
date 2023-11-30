@@ -10,11 +10,11 @@ body {
 }
 
 #main {
-  margin-inline: auto;
-  width: min(55ch, 100% - 3rem);
+  width: min(100vw - 3rem, var(--container-max, 60ch));
   background-color: #fff;
   border-radius: 4px;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+  padding: 1.5rem clamp(1rem, 5%, 3rem);
 }
 
 .title {
@@ -27,58 +27,15 @@ body {
 }
 
 input[type="radio"] {
-  margin-left: 22px;
-  margin-top: 20px;
-  height: 1.2rem;
-  width: 1.2rem;
-  margin-right: 0.5rem;
-  border: 0.1rem solid #d9d9d9;
-  background-color: #d9d9d9;
-  border-radius: 50%;
+  margin: 1em 0.5em 0.5em;
+  height: 1em;
+  width: 1em;
 }
 
-/* Button style */
-.button {
-  height: 45px;
-  margin: 35px 0
-}
-
-.button button {
-  height: 100%;
+.btn {
   width: 100%;
-  border-radius: 5px;
-  border: none;
-  color: #fff;
   font-size: 1.125rem;
-  font-weight: 500;
-  letter-spacing: 1px;
-  cursor: pointer;
-  background: linear-gradient(-20deg, #469597 0%, #88d3ce 100%);
-  transition: all 0.3s ease;
-}
-
-.button button:hover {
-  background-color: linear-gradient(-20deg, #469597 0%, #88d3ce 100%);
-}
-
-@include m.mq(small) {
-  .container {
-    max-width: 100%;
-  }
-  .user-details .input-box {
-    margin-bottom: 15px;
-    width: 100%;
-  }
-  .category {
-    width: 100%;
-  }
-  .content .user-details {
-    max-height: 300px;
-    overflow-y: scroll;
-  }
-  .container .content .category {
-    flex-direction: column;
-  }
+  background: linear-gradient(-20deg, #469597 0%, #88d3ce 100%) !important;
 }
 
 @keyframes gradient-bg {
