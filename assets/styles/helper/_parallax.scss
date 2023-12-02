@@ -1,6 +1,5 @@
-body {
-  padding-top: 0;
-  margin: 0;
+.primary-header{
+  margin-bottom: 0 !important;
 }
 
 .parallax {
@@ -22,7 +21,7 @@ body {
   animation-timeline: scroll();
 }
 
-.primary-header,
+.primary-parallax-header,
 .hero {
   --parallax-speed: 10;
   padding-block-start: 1em;

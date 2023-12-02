@@ -1,9 +1,9 @@
 {% block header %}
-    <header>
+    <header class="primary-header sticky-top top-0 mb-5">
         <p class="d-none userid">
             {{ app.user.id }}
         </p>
-        <nav class="navbar navbar-expand fixed-top px-md-4">
+        <nav class="navbar navbar-expand px-md-4">
             <a class="skip-link" href='#main'>Skip to content</a>
             <div class="container-xxl">
                 <a class="navbar-brand" href="{{ path('app_browse_stories') }}">

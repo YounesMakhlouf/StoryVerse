@@ -2,15 +2,35 @@
 @import "~@fortawesome/fontawesome-free/css/all.css";
 
 @import "helper/general";
-@import "./layout/header_home";
-@import "./layout/footer";
 
 @import "./components/hero";
 @import "./components/team";
 @import "./components/trending";
 
-body {
-    padding: 0;
+/*Navigation Menu*/
+.navbar-nav a,
+.navbar-nav a:focus {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  font-family: "Poppins", sans-serif;
+  transition: 0.3s;
+}
+
+.nav-link:before {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 1.25em;
+  background-color: var(--clr-accent);
+  visibility: visible;
+  transition: all 0.3s ease-in-out 0s;
+}
+
+.nav-link:hover:before,
+.navbar-nav .active:before {
+  visibility: visible;
+  width: 2rem;
 }
 
 html{

@@ -1,4 +1,5 @@
 @charset "utf-8";
+
 @use 'abstracts/mixins' as m;
 
 @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
@@ -8,28 +9,8 @@
 
 @import "./helper/general";
 
-@import "./layout/header";
-@import "./layout/footer";
-
 @import "./components/trending";
 @import './components/search';
-
-body {
-  padding-block-start: 5em;
-}
-
-nav {
-  background: var(--clr-primary);
-
-  .navbar-brand {
-    font-size: 1.75rem;
-    font-weight: 700;
-
-    &:hover {
-      color: white;
-    }
-  }
-}
 
 //TODO: Move these to a separate file
 .genre {

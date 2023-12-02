@@ -1,5 +1,31 @@
 @use '../abstracts/mixins' as m;
 
+.primary-header {
+  --_bg: var(--clr-primary);
+  --_logo-color: hsl(0, 0%, 100%);
+  --_opacity: 1;
+
+  opacity: var(--_opacity);
+  background: var(--_bg);
+  transition: all 500ms;
+
+  .navbar-brand {
+    font-size: 1.75rem;
+    font-weight: 700;
+
+    &:hover {
+      color: var(--_logo-color);
+    }
+  }
+
+  //TODO: Change this to use SCSS mix
+  &.sticking {
+    --_bg: hsl(215.1, 75.2%, 62%);
+    --_logo-color: hsl(0, 0%, 50%);
+    --_opacity: 0.95;
+  }
+}
+
 .skip-link {
   background: var(--clr-accent);
   font-weight: 700;
