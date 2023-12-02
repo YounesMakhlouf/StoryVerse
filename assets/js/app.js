@@ -4,7 +4,7 @@ require('bootstrap');
 
 import "./components/AOSInit";
 import "./components/notifications";
-import "./components/navigation_home";
+import "./components/navigation";
 
 // start the Stimulus application
 import "../bootstrap";
