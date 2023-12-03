@@ -8,6 +8,7 @@
   opacity: var(--_opacity);
   background: var(--_bg);
   transition: all 500ms;
+  z-index: 9999;
 
   .navbar-brand {
     font-size: 1.75rem;
