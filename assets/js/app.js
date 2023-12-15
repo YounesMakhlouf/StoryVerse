@@ -1,10 +1,14 @@
+import AOS from "aos";
+import "aos/dist/aos.css";
 import "../styles/app.scss";
-
-require('bootstrap');
-
-import "./components/AOSInit";
 import "./components/notifications";
 import "./components/navigation";
 
-// start the Stimulus application
+require('bootstrap');
 import "../bootstrap";
+
+window.addEventListener("load", () => {
+    AOS.init({
+        duration: 1000, easing: "ease-in-out", once: true, mirror: false,
+    });
+});
