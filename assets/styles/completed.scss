@@ -190,7 +190,7 @@
   background-color: #fff;
   box-shadow: 0 0 20px rgba(0, 0, 0, .2);
   border-radius: 3px;
-  overflow: hidden
+  overflow: clip;
 }
 
 .dialog-ovelay .dialog header {

@@ -1,8 +1,7 @@
 .card {
   position: relative;
-  overflow: hidden;
   padding: 1.25em;
-  margin-bottom: 1.25em;
+  margin-block-end: 1.25em;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.3s;
   min-height: 21em;
@@ -58,12 +57,11 @@
   }
 
   .congratulation {
-    font-size: 1.125rem;
     font-weight: bold;
     color: var(--DarkTurquoise);
     background-color: var(--clr-accent);
-    padding: 10px;
-    border-radius: 5px;
+    padding: 0.5em;
+    border-radius: 4px;
     text-align: center;
   }
 }
