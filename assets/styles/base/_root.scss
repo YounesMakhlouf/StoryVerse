@@ -6,8 +6,8 @@
   }
   --clr-text-on-primary: #333;
 
-  --ff-base: "Lora", serif;
-  --ff-headings: "Playfair Display", serif;
+  --ff-base: system-ui, sans-serif;
+  --ff-headings: 'Segoe Print', 'Bradley Hand', Chilanka, TSCu_Comic, casual, cursive;
 
   --fs-300: clamp(1.00rem, calc(1.00rem + 0.00vw), 1.00rem);
   --fs-400: clamp(1.20rem, calc(1.18rem + 0.08vw), 1.25rem);

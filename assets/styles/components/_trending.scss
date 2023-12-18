@@ -1,9 +1,3 @@
-.section-title h1 {
-  font-weight: 700;
-  text-transform: uppercase;
-  color: var(--DarkTurquoise);
-}
-
 .trending h3 {
   font-weight: 700;
   font-size: 1em;
@@ -15,32 +9,9 @@
 
 .card-img-top {
   aspect-ratio: 1;
-  object-fit: cover; /* ensure the images fill the card without distortion */
-  width: 100%;
-  height: auto;
-  max-height: 100%;
+  object-fit: cover;
 }
 
-.Horror {
-  background: black !important;
-}
-
-.Romance {
-  background: pink !important;
-}
-
-.Fiction {
-  background: silver !important;
-}
-
-.Comedy {
-  background: yellow !important;
-}
-
-.Mystery {
-  background: purple !important;
-}
-
-.Drama {
-  background: #850101 !important;
+.card-footer .badge{
+  background: var(--clr-accent);
 }

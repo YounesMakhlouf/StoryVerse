@@ -48,7 +48,7 @@
 
                 {% block story %}
                     <article class="text rounded-4 col-8 p-4">
-                        <h1 class="display-3">{{ story.title }}</h1>
+                        <h1 class="display-4">{{ story.title }}</h1>
                         {% for contribution in story.contributions %}
                             <p class="contr" id="{{ contribution.author.id }}"
                                aria-live="assertive">{{ contribution.content }}</p>
