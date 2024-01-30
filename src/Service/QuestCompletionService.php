@@ -15,10 +15,7 @@ class QuestCompletionService
 {
     private ObjectRepository|EntityRepository $questRepository;
 
-    public function __construct(private readonly EntityManagerInterface $entityManager,
-                                private readonly RequestStack           $requestStack,
-                                private readonly UrlGeneratorInterface  $urlGenerator,
-                                private readonly TierRepository         $tierRepository)
+    public function __construct(private readonly EntityManagerInterface $entityManager, private readonly RequestStack $requestStack, private readonly UrlGeneratorInterface $urlGenerator, private readonly TierRepository $tierRepository)
     {
         $this->questRepository = $entityManager->getRepository(Quest::class);
     }

@@ -12,10 +12,6 @@
   contain: paint;
 }
 
-.parallax > img {
-  width: 100%;
-}
-
 .parallax > * {
   grid-area: stack;
   animation: parallax linear;

@@ -64,6 +64,9 @@ body {
 }
 
 .description {
+  display: block;
+  -webkit-mask-image: linear-gradient(to bottom, white, transparent);
+  mask-image: linear-gradient(to bottom, white, 70%, transparent);
   color: var(--clr-primary);
   font-style: italic;
 }

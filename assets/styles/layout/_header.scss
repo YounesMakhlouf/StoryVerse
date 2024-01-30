@@ -60,3 +60,7 @@ ul.navbar-nav > li > :is(a, button) {
   padding-block: 0.5rem;
   white-space: normal;
 }
+
+[id] {
+  scroll-padding-block-start: 2em;
+}
