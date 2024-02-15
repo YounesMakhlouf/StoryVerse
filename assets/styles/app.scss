@@ -28,6 +28,10 @@
   &:hover:after, &.selected:after {
     width: 100%;
   }
+
+  img{
+    display: block;
+  }
 }
 
 #genre-description {
