@@ -1,7 +1,11 @@
 @use 'abstracts/mixins' as m;
 
 body {
-  background: #e7dfdb;
+  color: var(--clr-primary);
+  background: var(--contrast);
+  @media (prefers-contrast: more) {
+    background: linear-gradient(to top, currentColor, var(--mix) 10%);
+  }
   margin-bottom: 1.25em;
 }
 
@@ -31,17 +35,17 @@ body {
 }
 
 .level-up-message {
-  background-color: #f8f9fa;
-  border: 1px solid #dee2e6;
+  background: var(--contrast);
+  @media (prefers-contrast: more) {
+    background: linear-gradient(to top, currentColor, var(--mix) 10%);
+  }
+  border: 1px solid color-mix(in lab, currentColor 25%, white);
   border-radius: 0.25em;
   padding: 0.5em;
   margin-bottom: 1em;
-
-  p {
-    font-size: 1.125rem;
-    font-weight: bold;
-    color: var(--DarkTurquoise);
-  }
+  font-size: var(--fs-400);
+  font-weight: bold;
+  color: var(--DarkTurquoise);
 }
 
 .tier-info {

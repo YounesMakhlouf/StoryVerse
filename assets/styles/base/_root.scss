@@ -5,6 +5,8 @@
     --#{$color}: #{$value};
   }
   --clr-text-on-primary: #333;
+  --mix : rgb(255, 255, 255);
+  --contrast: color-mix(in lab, currentColor 10%, var(--mix));
 
   --ff-base: system-ui, sans-serif;
   --ff-headings: 'Segoe Print', 'Bradley Hand', Chilanka, TSCu_Comic, casual, cursive;

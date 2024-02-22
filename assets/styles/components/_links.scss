@@ -2,6 +2,6 @@ a {
   text-decoration: none;
 
   &:hover, &:focus {
-    color: var(--clr-primary);
+    color: color-mix(in lab, currentColor, var(--clr-primary) 70%);
   }
 }
