@@ -8,16 +8,14 @@
     <div class="formbold-main-wrapper">
         <div class="formbold-form-wrapper">
             {{ form_start(form) }}
-            <div class="formbold-input-flex">
-                <div>
-                    {{ form_widget(form.username, {'attr': {'class': "formbold-form-input"}}) }}
-                    {{ form_label(form.username, 'Username',{'attr': {'class': "formbold-form-label"}}) }}
-                </div>
+            <div class="mb-3">
+                {{ form_label(form.username, 'Username',{'attr': {'class': "formbold-form-label"}}) }}
+                {{ form_widget(form.username, {'attr': {'class': "formbold-form-input"}}) }}
             </div>
 
-            <div class="formbold-textarea">
-                {{ form_widget(form.bio, {'attr': {'class': "formbold-form-input"}}) }}
+            <div class="formbold-textarea mb-3">
                 {{ form_label(form.bio, 'Bio',{'attr': {'class': "formbold-form-label"}}) }}
+                {{ form_widget(form.bio, {'attr': {'class': "formbold-form-input"}}) }}
             </div>
 
             <div class="formbold-input-file">

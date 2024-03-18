@@ -42,7 +42,7 @@ class EmailVerifier
         <a href={$context['signedUrl'] }>
         <button style ='
             background-color: #008CBA ;
-            border: none;
+            border-color: transparent;
             color: white;
             padding: 15px 32px;
             text-align: center;
