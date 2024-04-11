@@ -21,8 +21,7 @@ class FollowController extends AbstractController
     public function followUser(User $user): Response
     {
         $currentUser = $this->getUser();
-        $isFollowing = $currentUser->getFollowing()->contains($user);
-        if ($isFollowing) {
+        if ($currentUser->getFollowing()->contains($user)) {
             $this->addFlash('warning', 'You are already following this user');
         } else {
             // Add the target user to the current user's following collection
@@ -38,12 +37,7 @@ class FollowController extends AbstractController
     #[Route('/profile/{id}/is_following', name: 'is_following')]
     public function isFollowing(User $user): JsonResponse
     {
-        if ($this->isGranted('IS_AUTHENTICATED_FULLY')) {
-            $currentUser = $this->getUser();
-            $isFollowing = $currentUser->getFollowing()->contains($user);
-        } else {
-            $isFollowing = false;
-        }
+        $isFollowing = $this->isGranted('IS_AUTHENTICATED_FULLY') ? $this->getUser()->getFollowing()->contains($user) : false;
 
         return $this->json(['isFollowing' => $isFollowing]);
     }
@@ -52,8 +46,7 @@ class FollowController extends AbstractController
     public function unfollowUser(User $user): Response
     {
         $currentUser = $this->getUser();
-        $isFollowing = $currentUser->getFollowing()->contains($user);
-        if ($isFollowing) {
+        if ($currentUser->getFollowing()->contains($user)) {
             // Remove the target user from the current user's following collection
             $currentUser->removeFollowing($user);
             $this->entityManager->flush();

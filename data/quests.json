@@ -1,0 +1,81 @@
+[
+    {
+        "name": "The Legendary Accountant",
+        "type": "Account Creator",
+        "description": "Master the ancient art of account creation on Storyverse. Create a new account and unlock the secrets of the digital realm!",
+        "requirement": "create_account",
+        "points": 50
+    },
+    {
+        "name": "The Storyteller's Genesis",
+        "type": "Story Creator",
+        "description": "Embark on a mythical journey as you breathe life into your first story on Storyverse. Let your imagination run wild and witness the birth of a new literary universe!",
+        "requirement": "post_stories",
+        "points": 100,
+        "amount": 1
+    },
+    {
+        "name": "The Novice Author's Odyssey",
+        "type": "Story Creator",
+        "description": "Unleash your creative prowess and conquer the literary world by publishing not one, not two, but five epic stories on Storyverse. Prepare to become a legend among authors!",
+        "requirement": "post_stories",
+        "points": 600,
+        "amount": 5
+    },
+    {
+        "name": "The Storytelling Maestro",
+        "type": "Story Creator",
+        "description": "Channel your inner storytelling genius and grace the world with ten captivating stories on Storyverse. Claim your rightful place among the gods of imagination!",
+        "requirement": "post_stories",
+        "points": 1500,
+        "amount": 10
+    },
+    {
+        "name": "The Word Weaver",
+        "type": "Contributor",
+        "description": "Contribute to a story on Storyverse and witness the magic unfold. Your words shall weave the fabric of storytelling!",
+        "requirement": "post_contributions",
+        "points": 100,
+        "amount": 1
+    },
+    {
+        "name": "The Storyvore",
+        "type": "Contributor",
+        "description": "Become a true Storyvore by contributing to 10 stories on Storyverse. Your insatiable appetite for storytelling shall be celebrated!",
+        "requirement": "post_contributions",
+        "points": 2000,
+        "amount": 10
+    },
+    {
+        "name": "The Social Butterfly",
+        "type": "Community Quest",
+        "description": "Spread your wings and become the ultimate social butterfly! Engage with the Storyverse community by leaving 10 witty comments on stories and ignite conversations that will go down in history!",
+        "requirement": "post_comments",
+        "points": 1000,
+        "amount": 50
+    },
+    {
+        "name": "The Epic High-Fiver",
+        "type": "Community Quest",
+        "description": "Embrace the power of the high-five! Show your appreciation for fellow storytellers by giving 25 likes to their magnificent tales. Your mighty thumbs shall bring joy to the hearts of many!",
+        "requirement": "post_likes",
+        "points": 1000,
+        "amount": 100
+    },
+    {
+        "name": "The Great Adventurer",
+        "type": "Achievement Quest",
+        "description": "Embark on an epic journey of exploration and discovery! Complete 3 quests of various kinds, showcasing your unwavering determination and insatiable curiosity. Only the bravest and most relentless adventurers can claim this legendary title!",
+        "requirement": "complete_quests",
+        "points": 1000,
+        "amount": 3
+    },
+    {
+        "name": "The Time Traveler",
+        "type": "Achievement Quest",
+        "description": "Bend the fabric of time and rewrite history! Complete 9 quests of various kinds, showcasing your unwavering determination and insatiable curiosity. Only the bravest and most relentless adventurers can claim this legendary title!",
+        "requirement": "complete_quests",
+        "points": 9999,
+        "amount": 9
+    }
+]

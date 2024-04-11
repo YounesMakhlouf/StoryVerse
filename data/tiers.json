@@ -1,0 +1,32 @@
+[
+    {
+        "name": "Story Seeker",
+        "xpThreshold": 0,
+        "description": "Embarking on a journey to discover captivating stories. Your adventure begins!",
+        "imagePath": "story-seeker-badge.webp"
+    },
+    {
+        "name": "Novel Navigator",
+        "xpThreshold": 500,
+        "description": "Navigating through the vast realms of novels. Every chapter is a new discovery.",
+        "imagePath": "novel-navigator-badge.webp"
+    },
+    {
+        "name": "Epic Tale Teller",
+        "xpThreshold": 2000,
+        "description": "Weaving epic tales with your imagination. Legends are brought to life through your words.",
+        "imagePath": "epic-tale-teller-badge.webp"
+    },
+    {
+        "name": "Myth Master",
+        "xpThreshold": 5000,
+        "description": "Mastering the ancient myths and legends. The secrets of the past are yours to reveal.",
+        "imagePath": "myth-master-badge.webp"
+    },
+    {
+        "name": "Literary Legend",
+        "xpThreshold": 10000,
+        "description": "Ascending to the realm of literary legends. Your name shall forever be etched in the annals of storytelling.",
+        "imagePath": "literary-legend-badge.webp"
+    }
+]

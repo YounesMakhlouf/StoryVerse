@@ -47,15 +47,17 @@ class MyProfileController extends AbstractController
     {
         $file = $form->get('avatar')->getData();
         if ($file instanceof UploadedFile) {
-            $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-            $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
-            $newFilename = $safeFilename . '-' . uniqid('', true) . '.' . $file->guessExtension();
-
-            $file->move(
-                $this->getParameter('avatar_directory'),
-                $newFilename
-            );
+            $newFilename = $this->generateFilename($file);
+            $file->move($this->getParameter('avatar_directory'), $newFilename);
             $user->setAvatar($newFilename);
         }
     }
+
+    private function generateFilename(UploadedFile $file): string
+    {
+        $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+        $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
+        return $safeFilename . '-' . uniqid('', true) . '.' . $file->guessExtension();
+    }
+
 }

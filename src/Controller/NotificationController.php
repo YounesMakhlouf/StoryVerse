@@ -21,9 +21,10 @@ class NotificationController extends AbstractController
     public function create(Request $request): Response
     {
         // Retrieve the user, content, and sender from the request
-        $receiver = $this->entityManager->getRepository(User::class)->find($request->request->get('receiver_id'));
+        $receiver = $this->getUserById($request->request->get('receiver_id'));
         $content = $request->request->get('content');
-        $sender = $this->entityManager->getRepository(User::class)->find($request->request->get('sender_id'));
+        $sender = $this->getUserById($request->request->get('sender_id'));
+
         if (!$receiver || !$sender) {
             return $this->json(['success' => false, 'error' => 'Invalid receiver or sender'], 400);
         }
@@ -44,16 +45,24 @@ class NotificationController extends AbstractController
             'receiver' => $user,
         ]);
         // Map the notifications to an array of data
-        $notificationData = array_map(function ($notification) {
-            return [
-                'id' => $notification->getId(),
-                'content' => $notification->getContent(),
-                'sender' => [
-                    'id' => $notification->getSender()->getId(),
-                    'name' => $notification->getSender()->getfirstName(),
-                ],
-            ];
-        }, $notifications);
+        $notificationData = array_map([$this, 'mapNotificationToData'], $notifications);
         return new JsonResponse($notificationData);
+    }
+
+    private function getUserById(int $id): ?User
+    {
+        return $this->entityManager->getRepository(User::class)->find($id);
+    }
+
+    private function mapNotificationToData(Notification $notification): array
+    {
+        return [
+            'id' => $notification->getId(),
+            'content' => $notification->getContent(),
+            'sender' => [
+                'id' => $notification->getSender()->getId(),
+                'name' => $notification->getSender()->getFirstName(),
+            ],
+        ];
     }
 }

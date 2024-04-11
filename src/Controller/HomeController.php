@@ -9,6 +9,8 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends AbstractController
 {
+    private const MAX_TRENDING_STORIES = 3;
+
     #[Route('/', name: 'app_home')]
     public function index(StoryRepository $storyRepository): Response
     {
@@ -16,11 +18,14 @@ class HomeController extends AbstractController
         if ($this->isGranted('ROLE_USER')) {
             return $this->redirectToRoute('app_browse_stories');
         }
-        $trendingStories = $storyRepository->createOrderedByLikesQueryBuilder()->setMaxResults(3)->getQuery()
+
+        $trendingStories = $storyRepository->createOrderedByLikesQueryBuilder()
+            ->setMaxResults(self::MAX_TRENDING_STORIES)
+            ->getQuery()
             ->getResult();
-        $teamMembers = $this->getTeamMembers();
+
         return $this->render('/index.html.twig', [
-            'teamMembers' => $teamMembers,
+            'teamMembers' => $this->getTeamMembers(),
             'trendingStories' => $trendingStories,
         ]);
     }
