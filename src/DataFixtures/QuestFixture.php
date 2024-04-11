@@ -10,8 +10,8 @@ class QuestFixture extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-
-        $questsData = json_decode(file_get_contents(__DIR__ . '../data/quests.json'), true);
+        $dir = dirname(__DIR__, 2);
+        $questsData = json_decode(file_get_contents("{$dir}/data/quests.json"), true);
 
         foreach ($questsData as $questData) {
             $quest = $this->createQuest($questData['name'], $questData['type'], $questData['description'], $questData['requirement'], $questData['points'], $questData['amount']);

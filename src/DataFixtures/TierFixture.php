@@ -10,7 +10,8 @@ class TierFixture  extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
-        $tiersData = json_decode(file_get_contents(__DIR__ . '../data/tiers.json'), true);
+        $dir = dirname(__DIR__, 2);
+        $tiersData = json_decode(file_get_contents("{$dir}/data/tiers.json"), true);
 
         foreach ($tiersData as $tierData) {
             $tier = $this->createTier($tierData['name'], $tierData['xpThreshold'], $tierData['description'], $tierData['imagePath']);
