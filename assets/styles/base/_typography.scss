@@ -28,3 +28,11 @@ h4 {
 ::marker {
   color: var(--DarkTurquoise);
 }
+
+html {
+  hanging-punctuation: first last;
+}
+
+input, textarea {
+  hanging-punctuation: none;
+}

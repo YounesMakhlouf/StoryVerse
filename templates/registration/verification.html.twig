@@ -5,19 +5,19 @@
 {% block body %}
     {{ parent() }}
     <main id="main" class="gradient">
-        <div class="card text-center" style="width: 40rem;">
+        <div class="card text-center" >
             <div class="card-body">
                 {% for flash in app.flashes('info') %}
                     <div class="alert alert-info">{{ flash }}</div>
                 {% endfor %}
-                <h4 class="card-title"><img src="{{ asset('build/images/logo.webp') }}" class="img-fluid" alt="Logo">
+                <h4 class="card-title"><img src="{{ asset('build/images/logo.webp') }}" class="img-fluid" alt="Logo" height="300" width="300">
                     Welcome to StoryVerse <i class="fa fa-heart" style="font-size:30px;color:red;"></i></h4>
                 <div class="card-text">We’ve sent you a welcome email with an activation link. Simply click the link and
                     you’re good to go.
                 </div>
                 <div>Did not receive the email?</div>
                 <footer><a href="{{ path("app_send_verification_email",{'id': id,'resend':'1'}) }}"
-                           class="btn btn-primary">click here to resend</a></footer>
+                           class="btn btn-primary mt-4">click here to resend</a></footer>
             </div>
         </div>
     </main>
@@ -32,7 +32,7 @@
  {% block stylesheets %}
      {{ parent() }}
      {{ encore_entry_link_tags('login') }}
- {% endblock %} 
- 
+ {% endblock %}
+
 {% block footer %} {% endblock %}
 {% block header %} {% endblock %}
