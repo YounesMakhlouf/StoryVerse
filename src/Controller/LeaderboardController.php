@@ -13,7 +13,7 @@ class LeaderboardController extends AbstractController
     public function leaderboard(UserRepository $userRepository): Response
     {
         $users = $userRepository->findBy([], ['xp' => 'DESC']);
-    
+
         return $this->render('leaderboard/index.html.twig', [
             'users' => $users,
         ]);

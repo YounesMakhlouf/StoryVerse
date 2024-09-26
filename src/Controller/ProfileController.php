@@ -2,35 +2,28 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Repository\TierRepository;
-use App\Repository\UserRepository;
 use Doctrine\ORM\NonUniqueResultException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class ProfileController extends AbstractController
 {
     /**
      * @throws NonUniqueResultException
      */
-    #[IsGranted('ROLE_USER')]
-    #[Route('/profile/{id}', name: 'app_profile')]
-    public function showProfile(int $id, UserRepository $userRepository, TierRepository $tierRepository): Response
+    #[Route('/profile/{id}', name: 'app_profile', methods: ['GET'])]
+    public function showProfile(User $user, TierRepository $tierRepository): Response
     {
-        $user = $userRepository->find($id);
-        // Check if the retrieved user exists
-        if (!$user) {
-            throw new NotFoundHttpException('User not found');
-        }
         $contributedStories = $user->getContributedStories();
         $nextTier = $tierRepository->findNextTier($user->getXp());
+
         // Check if the current user is following the target user
         $isFollowing = false;
         $currentUser = $this->getUser();
-        if ($currentUser && $currentUser->getId() !== $id) {
+        if ($currentUser instanceof User && $currentUser !== $user) {
             $isFollowing = $currentUser->getFollowing()->contains($user);
         }
 
@@ -38,29 +31,31 @@ class ProfileController extends AbstractController
             'user' => $user,
             'is_following' => $isFollowing,
             'stories' => $contributedStories,
-            'nextTier' => $nextTier
+            'nextTier' => $nextTier,
         ]);
     }
 
-    #[IsGranted('ROLE_USER')]
-    #[Route('/followers/{id}', name: 'app_followers')]
-    public function showFollowers(int $id, UserRepository $userRepository): Response
+    #[Route('/followers/{id}', name: 'app_followers', methods: ['GET'])]
+    public function showFollowers(User $user): Response
     {
-        $user = $userRepository->find($id);
         $followers = $user->getFollower();
+
         return $this->render('profile/followers.html.twig', [
-            'followers' => $followers
+            'user' => $user,
+            'followers' => $followers,
+            'type' => 'followers',
         ]);
     }
 
-    #[IsGranted('ROLE_USER')]
-    #[Route('/following/{id}', name: 'app_following')]
-    public function showFollowing(int $id, UserRepository $userRepository): Response
+    #[Route('/following/{id}', name: 'app_following', methods: ['GET'])]
+    public function showFollowing(User $user): Response
     {
-        $user = $userRepository->find($id);
         $following = $user->getFollowing();
+
         return $this->render('profile/followers.html.twig', [
-            'followers' => $following
+            'user' => $user,
+            'followers' => $following,
+            'type' => 'following',
         ]);
     }
 }

@@ -81,3 +81,24 @@ select {
     scroll-behavior: auto !important;
   }
 }
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6{
+    text-wrap: balance;
+}
+
+p, li, figcaption{
+    text-wrap: pretty;
+    max-width: 65ch;
+}
+
+body > :is(header, footer),
+main,
+section,
+article{
+    container-type: inline-size;
+}

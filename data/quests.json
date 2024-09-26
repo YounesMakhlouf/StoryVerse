@@ -52,7 +52,7 @@
         "description": "Spread your wings and become the ultimate social butterfly! Engage with the Storyverse community by leaving 10 witty comments on stories and ignite conversations that will go down in history!",
         "requirement": "post_comments",
         "points": 1000,
-        "amount": 50
+        "amount": 10
     },
     {
         "name": "The Epic High-Fiver",

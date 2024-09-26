@@ -4,21 +4,18 @@ namespace App\Service;
 
 use App\Entity\Quest;
 use App\Entity\User;
-use App\Repository\TierRepository;
+use App\Event\QuestCompletedEvent;
+use App\Repository\QuestRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\EntityRepository;
-use Doctrine\Persistence\ObjectRepository;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class QuestCompletionService
 {
-    private ObjectRepository|EntityRepository $questRepository;
+    private const UNSUPPORTED_REQUIREMENT = -1;
 
-    public function __construct(private readonly EntityManagerInterface $entityManager, private readonly RequestStack $requestStack, private readonly UrlGeneratorInterface $urlGenerator, private readonly TierRepository $tierRepository)
-    {
-        $this->questRepository = $entityManager->getRepository(Quest::class);
-    }
+    public function __construct(private readonly TierService $tierService, private readonly RequestStack $requestStack, private readonly EntityManagerInterface $entityManager, private readonly QuestRepository $questRepository, private readonly UrlGeneratorInterface $urlGenerator)
+    {}
 
     public function checkQuestsForCompletion(User $user): void
     {
@@ -38,7 +35,7 @@ class QuestCompletionService
 
         $userRequirement = $user->getUserRequirement($requirement);
 
-        if ($userRequirement === -1) { // Unsupported or unknown quest requirement
+        if ($userRequirement === self::UNSUPPORTED_REQUIREMENT) {
             return;
         }
 
@@ -52,7 +49,8 @@ class QuestCompletionService
         $user->addCompletedQuest($quest);
         $user->addXp($quest->getPoints());
         $this->showQuestCompletedNotification($quest);
-        $this->verifyTierUpdate($user);
+
+        $this->tierService->updateTierForUser($user);
         $this->entityManager->persist($user);
         $this->entityManager->flush();
     }
@@ -93,31 +91,6 @@ class QuestCompletionService
         $request->getSession()->getFlashBag()->add('sweetalert2', $script);
     }
 
-    private function verifyTierUpdate(User $user): void
-    {
-        $tiers = $this->tierRepository->findAllOrderedByXpThresholdAscending();
-        $currentTier = $user->getTier();
-
-        if (!$currentTier) {
-            $user->setTier($tiers[0]);
-            $currentTier = $tiers[0];
-        }
-
-        $userXp = $user->getXp();
-        $nextTier = null;
-
-        foreach ($tiers as $tier) {
-            if ($tier->getXpThreshold() > $userXp) {
-                break;
-            }
-            $nextTier = $tier;
-        }
-
-        if ($nextTier && $nextTier !== $currentTier) {
-            $user->setTier($nextTier);
-        }
-    }
-
     public function calculateQuestProgress(Quest $quest, User $user): float
     {
         $questRequirement = $quest->getRequirement();
@@ -128,7 +101,7 @@ class QuestCompletionService
 
         $userRequirement = $user->getUserRequirement($questRequirement);
 
-        if ($userRequirement === -1) { // Unsupported or unknown quest requirement
+        if ($userRequirement === self::UNSUPPORTED_REQUIREMENT) {
             return 0.0;
         }
 
@@ -136,6 +109,6 @@ class QuestCompletionService
         $progress = ($userRequirement / $quest->getAmount()) * 100;
 
         // Ensure the progress is within the range of 0 to 100
-        return min(max($progress, 0), 100);
+        return min(max($progress, 0.0), 100.0);
     }
 }

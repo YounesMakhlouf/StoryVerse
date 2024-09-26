@@ -35,9 +35,10 @@ class ProfileType extends AbstractType
                         'maxSize' => '1024k',
                         'mimeTypes' => [
                             'image/jpeg',
+                            'image/jpg',
                             'image/png',
                         ],
-                        'mimeTypesMessage' => 'Please upload a valid JPG or PNG image',
+                        'mimeTypesMessage' => 'Please upload a valid image file (JPEG or PNG).',
                     ])
                 ],
             ])

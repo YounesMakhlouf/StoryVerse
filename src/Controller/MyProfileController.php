@@ -3,19 +3,27 @@
 namespace App\Controller;
 
 use App\Form\ProfileType;
+use App\Service\FileUploader;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\File\Exception\FileException;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+// Include SluggerInterface for filename sanitization
+use Symfony\Component\String\Slugger\SluggerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class MyProfileController extends AbstractController
 {
-    public function __construct(private readonly EntityManagerInterface $entityManager)
-    {
+    private EntityManagerInterface $entityManager;
+    private FileUploader $fileUploader;
+
+    public function __construct(
+        EntityManagerInterface $entityManager,
+        FileUploader $fileUploader
+    ) {
+        $this->entityManager = $entityManager;
+        $this->fileUploader = $fileUploader;
     }
 
     #[IsGranted('ROLE_USER')]
@@ -27,13 +35,22 @@ class MyProfileController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            try {
-                $this->handleAvatarUpload($form, $user);
-            } catch (FileException $e) {
-                throw new FileException('Failed to upload file: ' . $e->getMessage());
+            // Handle avatar upload
+            $file = $form->get('avatar')->getData();
+            if ($file) {
+                try {
+                    $newFilename = $this->fileUploader->upload($file);
+                    $user->setAvatar($newFilename);
+                } catch (\Exception $e) {
+                    $this->addFlash('error', 'Failed to upload the avatar. Please try again.');
+                    return $this->redirectToRoute('app_modify_profile');
+                }
             }
+
             $this->entityManager->persist($user);
             $this->entityManager->flush();
+            $this->addFlash('success', 'Your profile has been updated.');
+
             return $this->redirectToRoute('app_profile', ['id' => $user->getId()]);
         }
 
@@ -42,22 +59,4 @@ class MyProfileController extends AbstractController
             'user' => $user
         ]);
     }
-
-    private function handleAvatarUpload($form, $user): void
-    {
-        $file = $form->get('avatar')->getData();
-        if ($file instanceof UploadedFile) {
-            $newFilename = $this->generateFilename($file);
-            $file->move($this->getParameter('avatar_directory'), $newFilename);
-            $user->setAvatar($newFilename);
-        }
-    }
-
-    private function generateFilename(UploadedFile $file): string
-    {
-        $originalFilename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-        $safeFilename = transliterator_transliterate('Any-Latin; Latin-ASCII; [^A-Za-z0-9_] remove; Lower()', $originalFilename);
-        return $safeFilename . '-' . uniqid('', true) . '.' . $file->guessExtension();
-    }
-
 }

@@ -17,7 +17,7 @@ class FollowController extends AbstractController
     }
 
     #[IsGranted('ROLE_USER')]
-    #[Route('/profile/{id}/follow', name: 'follow_user')]
+    #[Route('/profile/{id}/follow', name: 'follow_user', methods: ['POST'])]
     public function followUser(User $user): Response
     {
         $currentUser = $this->getUser();
@@ -28,7 +28,7 @@ class FollowController extends AbstractController
             $currentUser->addFollowing($user);
             $this->entityManager->flush();
         }
-
+        $this->addFlash('success', 'You are now following ' . $user->getUsername());
         // Redirect back to the target user's profile page
         return $this->redirectToRoute('app_profile', ['id' => $user->getId()]);
     }
@@ -42,6 +42,7 @@ class FollowController extends AbstractController
         return $this->json(['isFollowing' => $isFollowing]);
     }
 
+    #[IsGranted('ROLE_USER')]
     #[Route('/profile/{id}/unfollow', name: 'unfollow_user', methods: ['POST'])]
     public function unfollowUser(User $user): Response
     {
@@ -53,7 +54,7 @@ class FollowController extends AbstractController
         } else {
             $this->addFlash('warning', 'You are not following this user');
         }
-
+        $this->addFlash('success', 'You have unfollowed ' . $user->getUsername());
         // Redirect back to the target user's profile page
         return $this->redirectToRoute('app_profile', ['id' => $user->getId()]);
     }

@@ -30,11 +30,11 @@ class NotificationController extends AbstractController
         }
         // Create a new Notification instance
         $notification = new Notification($receiver, $content, $sender);
-        // Save the new Notification instance to the database
+
         $this->entityManager->persist($notification);
         $this->entityManager->flush();
-        // Return a JSON response indicating success
-        return $this->json(['success' => true]);
+
+        return $this->json(['success' => true], 201);
     }
 
     #[Route('/notification/user', name: 'app_notification_user', methods: ['GET'])]
