@@ -4,10 +4,8 @@ namespace App\Tests\Controller;
 
 use App\Entity\Story;
 use App\Entity\User;
-use App\Repository\StoryRepository;
 use DateTime;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Symfony\Component\Cache\Adapter\ArrayAdapter;
 
 class HomeControllerTest extends WebTestCase
 {
@@ -27,19 +25,22 @@ class HomeControllerTest extends WebTestCase
         $this->client->request('GET', '/');
 
         $this->assertResponseIsSuccessful();
-        $this->assertSelectorTextContains('h1', 'Welcome'); // Adjust this based on your actual page content
+        $this->assertSelectorTextContains('h1', 'Welcome');
+        $this->assertSelectorExists('section.trending');
+        $this->assertSelectorExists('section.team');
     }
 
     public function testRedirectForAuthenticatedUser(): void
     {
         // Create a test user with all required fields
         $testUser = new User();
-        $testUser->setEmail('test' . uniqid() . '@example.com'); // Make email unique
+        $testUser->setEmail('test' . uniqid() . '@example.com');
         $testUser->setPassword('password123');
         $testUser->setFirstName('John');
         $testUser->setLastName('Doe');
-        $testUser->setUsername('johndoe' . uniqid()); // Make username unique
+        $testUser->setUsername('johndoe' . uniqid());
         $testUser->setGender('male');
+        $testUser->setBio('Test user bio');
         $testUser->setLastLoginDate(new DateTime());
         $testUser->setRoles(['ROLE_USER']);
 
@@ -59,13 +60,13 @@ class HomeControllerTest extends WebTestCase
     public function testTrendingStoriesAreDisplayed(): void
     {
         // Create some test stories with all required fields
-        for ($i = 0; $i < 3; $i++) {
+        for ($i = 0; $i < 5; $i++) { // Create 5 stories but only 3 should be displayed
             $story = new Story();
             $story->setTitle('Test Story ' . $i);
             $story->setLanguage('english');
             $story->setStatus('pending');
             $story->setGenre('Fiction');
-            $story->setStoryImage('Fiction.jpg'); // Set the story image based on genre
+            $story->setStoryImage('Fiction.jpg');
 
             $this->entityManager->persist($story);
         }
@@ -74,8 +75,9 @@ class HomeControllerTest extends WebTestCase
         $this->client->request('GET', '/');
 
         $this->assertResponseIsSuccessful();
-        $this->assertSelectorExists('section.trending'); // Check for trending section
-        $this->assertSelectorExists('section.trending article'); // Check for story article container
+        $this->assertSelectorExists('section.trending');
+        $this->assertSelectorExists('section.trending article');
+        $this->assertCount(3, $this->client->getCrawler()->filter('section.trending article .col')); // Verify only 3 stories are shown
     }
 
     protected function tearDown(): void

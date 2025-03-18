@@ -29,7 +29,7 @@ class Comment
 
 
     #[ORM\ManyToOne(inversedBy: 'comments')]
-    private ?Story $Story = null;
+    private ?Story $story = null;
 
     #[ORM\ManyToOne(inversedBy: 'comments')]
     #[ORM\JoinColumn(nullable: false)]
@@ -90,12 +90,12 @@ class Comment
 
     public function getStory(): ?Story
     {
-        return $this->Story;
+        return $this->story;
     }
 
-    public function setStory(?Story $Story): self
+    public function setStory(?Story $story): self
     {
-        $this->Story = $Story;
+        $this->story = $story;
 
         return $this;
     }

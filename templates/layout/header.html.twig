@@ -1,8 +1,10 @@
 {% block header %}
     <header class="primary-header sticky-top top-0 mb-5">
-        <p class="d-none userid">
-            {{ app.user.id }}
-        </p>
+        {% if app.user %}
+            <p class="d-none userid">
+                {{ app.user.id }}
+            </p>
+        {% endif %}
         <nav class="navbar navbar-expand px-md-4">
             <a class="skip-link" href='#main'>Skip to content</a>
             <div class="container-xxl">
@@ -74,11 +76,13 @@
             </div>
         </nav>
     </header>
-    <script>
-        const user = {
-            id: {{ app.user.id }},
-            name: '{{ app.user.username }}',
-            email: '{{ app.user.email }}'
-        };
-    </script>
+    {% if app.user %}
+        <script>
+            const user = {
+                id: {{ app.user.id }},
+                name: '{{ app.user.username }}',
+                email: '{{ app.user.email }}'
+            };
+        </script>
+    {% endif %}
 {% endblock %}

@@ -106,8 +106,12 @@ class StoryRepository extends ServiceEntityRepository
         }
     }
 
-    public function searchByTitle(string $searchQuery): array
+    public function searchByTitle(?string $searchQuery): array
     {
+        if ($searchQuery === null) {
+            return [];
+        }
+
         return $this->createQueryBuilder('s')
             ->where('LOWER(s.title) LIKE :searchQuery')
             ->setParameter('searchQuery', '%' . strtolower($searchQuery) . '%')
