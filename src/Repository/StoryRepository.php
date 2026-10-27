@@ -33,7 +33,7 @@ class StoryRepository extends ServiceEntityRepository
         }
     }
 
-    public function createOrderedByLikesQueryBuilder(string $genre = null): QueryBuilder
+    public function createOrderedByLikesQueryBuilder(?string $genre = null): QueryBuilder
     {
         $queryBuilder = $this->addOrderByLikesQueryBuilder();
 
@@ -45,7 +45,7 @@ class StoryRepository extends ServiceEntityRepository
         return $queryBuilder;
     }
 
-    private function addOrderByLikesQueryBuilder(QueryBuilder $queryBuilder = null): QueryBuilder
+    private function addOrderByLikesQueryBuilder(?QueryBuilder $queryBuilder = null): QueryBuilder
     {
         $queryBuilder = $queryBuilder ?? $this->createQueryBuilder('story');
         return $queryBuilder
@@ -55,7 +55,7 @@ class StoryRepository extends ServiceEntityRepository
             ->orderBy('like_count', 'DESC');
     }
 
-    public function findAllOrderedByLikes(string $genre = null): array
+    public function findAllOrderedByLikes(?string $genre = null): array
     {
         $queryBuilder = $this->addOrderByLikesQueryBuilder();
         if ($genre) {

@@ -4,9 +4,7 @@ namespace App\Factory;
 
 use App\Entity\Contribution;
 use App\Repository\ContributionRepository;
-use Zenstruck\Foundry\ModelFactory;
-use Zenstruck\Foundry\Proxy;
-use Zenstruck\Foundry\RepositoryProxy;
+use Zenstruck\Foundry\Persistence\PersistentObjectFactory;
 
 /**
  * @extends ModelFactory<Contribution>
@@ -27,7 +25,7 @@ use Zenstruck\Foundry\RepositoryProxy;
  * @method static Contribution[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
  * @method static Contribution[]|Proxy[] randomSet(int $number, array $attributes = [])
  */
-final class ContributionFactory extends ModelFactory
+final class ContributionFactory extends PersistentObjectFactory
 {
     /**
      * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#factories-as-services
@@ -44,7 +42,7 @@ final class ContributionFactory extends ModelFactory
      *
      * @todo add your default values here
      */
-    protected function getDefaults(): array
+    protected function defaults(): array
     {
         return [
             'content' => self::faker()->text(),
@@ -57,14 +55,7 @@ final class ContributionFactory extends ModelFactory
     /**
      * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#initialization
      */
-    protected function initialize(): self
-    {
-        return $this
-            // ->afterInstantiate(function(Contribution $contribution): void {})
-        ;
-    }
-
-    protected static function getClass(): string
+    public static function class(): string
     {
         return Contribution::class;
     }

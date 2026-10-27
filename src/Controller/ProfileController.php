@@ -5,9 +5,10 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Repository\TierRepository;
 use Doctrine\ORM\NonUniqueResultException;
+use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 
 class ProfileController extends AbstractController
 {
@@ -15,7 +16,7 @@ class ProfileController extends AbstractController
      * @throws NonUniqueResultException
      */
     #[Route('/profile/{id}', name: 'app_profile', methods: ['GET'])]
-    public function showProfile(User $user, TierRepository $tierRepository): Response
+    public function showProfile(#[MapEntity(id: 'id')] User $user, TierRepository $tierRepository): Response
     {
         $contributedStories = $user->getContributedStories();
         $nextTier = $tierRepository->findNextTier($user->getXp());
@@ -36,7 +37,7 @@ class ProfileController extends AbstractController
     }
 
     #[Route('/followers/{id}', name: 'app_followers', methods: ['GET'])]
-    public function showFollowers(User $user): Response
+    public function showFollowers(#[MapEntity(id: 'id')] User $user): Response
     {
         $followers = $user->getFollower();
 
@@ -48,7 +49,7 @@ class ProfileController extends AbstractController
     }
 
     #[Route('/following/{id}', name: 'app_following', methods: ['GET'])]
-    public function showFollowing(User $user): Response
+    public function showFollowing(#[MapEntity(id: 'id')] User $user): Response
     {
         $following = $user->getFollowing();
 

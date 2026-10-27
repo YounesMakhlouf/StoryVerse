@@ -4,9 +4,7 @@ namespace App\Factory;
 
 use App\Entity\Story;
 use App\Repository\StoryRepository;
-use Zenstruck\Foundry\ModelFactory;
-use Zenstruck\Foundry\Proxy;
-use Zenstruck\Foundry\RepositoryProxy;
+use Zenstruck\Foundry\Persistence\PersistentObjectFactory;
 
 /**
  * @extends ModelFactory<Story>
@@ -27,7 +25,7 @@ use Zenstruck\Foundry\RepositoryProxy;
  * @method static Story[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
  * @method static Story[]|Proxy[] randomSet(int $number, array $attributes = [])
  */
-final class StoryFactory extends ModelFactory
+final class StoryFactory extends PersistentObjectFactory
 {
     /**
      * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#factories-as-services
@@ -44,7 +42,7 @@ final class StoryFactory extends ModelFactory
      *
      * @todo add your default values here
      */
-    protected function getDefaults(): array
+    protected function defaults(): array
     {
         $genre=self::faker()->randomElement(['Horror', 'Fiction', 'Mystery','Comedy','Drama','Romance']);
         $storyImage=$genre.'.jpg';
@@ -63,14 +61,7 @@ final class StoryFactory extends ModelFactory
     /**
      * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#initialization
      */
-    protected function initialize(): self
-    {
-        return $this
-            // ->afterInstantiate(function(Story $story): void {})
-        ;
-    }
-
-    protected static function getClass(): string
+    public static function class(): string
     {
         return Story::class;
     }

@@ -4,9 +4,7 @@ namespace App\Factory;
 
 use App\Entity\Comment;
 use App\Repository\CommentRepository;
-use Zenstruck\Foundry\ModelFactory;
-use Zenstruck\Foundry\Proxy;
-use Zenstruck\Foundry\RepositoryProxy;
+use Zenstruck\Foundry\Persistence\PersistentObjectFactory;
 
 /**
  * @extends ModelFactory<Comment>
@@ -27,7 +25,7 @@ use Zenstruck\Foundry\RepositoryProxy;
  * @method static Comment[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
  * @method static Comment[]|Proxy[] randomSet(int $number, array $attributes = [])
  */
-final class CommentFactory extends ModelFactory
+final class CommentFactory extends PersistentObjectFactory
 {
     /**
      * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#factories-as-services
@@ -44,7 +42,7 @@ final class CommentFactory extends ModelFactory
      *
      * @todo add your default values here
      */
-    protected function getDefaults(): array
+    protected function defaults(): array
     {
         return [
             'content' => self::faker()->text(),
@@ -58,14 +56,7 @@ final class CommentFactory extends ModelFactory
     /**
      * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#initialization
      */
-    protected function initialize(): self
-    {
-        return $this
-            // ->afterInstantiate(function(Comment $comment): void {})
-        ;
-    }
-
-    protected static function getClass(): string
+    public static function class(): string
     {
         return Comment::class;
     }

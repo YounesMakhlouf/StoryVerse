@@ -7,14 +7,15 @@ use App\Repository\StoryRepository;
 use App\Service\PdfGeneratorService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class PdfGeneratorController extends AbstractController
 {
     #[IsGranted('ROLE_USER')]
     #[Route('/pdf/{id}', name: 'app_pdf', methods: ['GET'])]
-    public function generateStoryPdf(Story $story, PdfGeneratorService $pdfGeneratorService): Response
+    public function generateStoryPdf(#[MapEntity(id: 'id')] Story $story, PdfGeneratorService $pdfGeneratorService): Response
     {
         try {
             $htmlContent = $this->renderView('pdf_generator/index.html.twig', ['story' => $story]);

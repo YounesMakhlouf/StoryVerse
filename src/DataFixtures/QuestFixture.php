@@ -14,14 +14,14 @@ class QuestFixture extends Fixture
         $questsData = json_decode(file_get_contents("{$dir}/data/quests.json"), true);
 
         foreach ($questsData as $questData) {
-            $quest = $this->createQuest($questData['name'], $questData['type'], $questData['description'], $questData['requirement'], $questData['points'], $questData['amount']);
+            $quest = $this->createQuest($questData['name'], $questData['type'], $questData['description'], $questData['requirement'], $questData['points'], $questData['amount'] ?? null);
             $manager->persist($quest);
         }
 
         $manager->flush();
     }
 
-    private function createQuest(string $name, string $type, string $description, string $requirement, int $points, int $amount = null): Quest
+    private function createQuest(string $name, string $type, string $description, string $requirement, int $points, ?int $amount = null): Quest
     {
         $quest = new Quest();
         $quest->setName($name);

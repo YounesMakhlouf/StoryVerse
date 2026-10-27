@@ -40,14 +40,14 @@ class StoryType extends AbstractType
                 'label' => 'Story Image (JPG or PNG file)',
                 'required' => false,
                 'constraints' => [
-                    new File([
-                        'maxSize' => '2M',
-                        'mimeTypes' => [
+                    new File(
+                        maxSize: '2M',
+                        mimeTypes: [
                             'image/jpeg',
                             'image/png',
                         ],
-                        'mimeTypesMessage' => 'Please upload a valid JPG or PNG image',
-                    ]),
+                        mimeTypesMessage: 'Please upload a valid JPG or PNG image',
+                    ),
                 ],
             ])
             ->add('submit', SubmitType::class, [

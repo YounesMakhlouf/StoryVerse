@@ -4,10 +4,11 @@ namespace App\Controller;
 
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 class FollowController extends AbstractController
@@ -18,7 +19,7 @@ class FollowController extends AbstractController
 
     #[IsGranted('ROLE_USER')]
     #[Route('/profile/{id}/follow', name: 'follow_user', methods: ['POST'])]
-    public function followUser(User $user): Response
+    public function followUser(#[MapEntity(id: 'id')] User $user): Response
     {
         $currentUser = $this->getUser();
         if ($currentUser->getFollowing()->contains($user)) {
@@ -35,7 +36,7 @@ class FollowController extends AbstractController
 
     #[IsGranted('ROLE_USER')]
     #[Route('/profile/{id}/is_following', name: 'is_following')]
-    public function isFollowing(User $user): JsonResponse
+    public function isFollowing(#[MapEntity(id: 'id')] User $user): JsonResponse
     {
         $isFollowing = $this->isGranted('IS_AUTHENTICATED_FULLY') ? $this->getUser()->getFollowing()->contains($user) : false;
 
@@ -44,7 +45,7 @@ class FollowController extends AbstractController
 
     #[IsGranted('ROLE_USER')]
     #[Route('/profile/{id}/unfollow', name: 'unfollow_user', methods: ['POST'])]
-    public function unfollowUser(User $user): Response
+    public function unfollowUser(#[MapEntity(id: 'id')] User $user): Response
     {
         $currentUser = $this->getUser();
         if ($currentUser->getFollowing()->contains($user)) {

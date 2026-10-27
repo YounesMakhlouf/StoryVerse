@@ -2,8 +2,6 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Story;
-use App\Entity\User;
 use App\Repository\CommentRepository;
 use App\Repository\StoryRepository;
 use App\Repository\UserRepository;
@@ -14,12 +12,13 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Config\UserMenu;
+use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
+#[AdminDashboard(routePath: '/admin', routeName: 'app_admin')]
 class DashboardController extends AbstractDashboardController
 {
     public function __construct(private readonly UserRepository    $userRepository,
@@ -29,7 +28,6 @@ class DashboardController extends AbstractDashboardController
     }
 
     #[IsGranted('ROLE_ADMIN')]
-    #[Route('/admin', name: 'app_admin')]
     public function index(): Response
     {
         $nbUsers = $this->getEntityCount($this->userRepository);
@@ -61,10 +59,9 @@ class DashboardController extends AbstractDashboardController
     {
         yield MenuItem::linkToUrl('Homepage', 'fas fa-home', $this->generateUrl('app_home'));
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-dashboard');
-        yield MenuItem::linkToCrud('Users', 'fas fa-users', User::class);
-        yield MenuItem::linkToCrud('Stories', "fa-solid fa-book-open", Story::class);
-        yield MenuItem::linkToCrud('Reported Stories', "fa-solid fa-triangle-exclamation", Story::class)
-            ->setController(ReportedStoryCrudController::class);
+        yield MenuItem::linkTo(UserCrudController::class, 'Users', 'fas fa-users');
+        yield MenuItem::linkTo(StoryCrudController::class, 'Stories', 'fa-solid fa-book-open');
+        yield MenuItem::linkTo(ReportedStoryCrudController::class, 'Reported Stories', 'fa-solid fa-triangle-exclamation');
     }
 
     public function configureUserMenu(UserInterface $user): UserMenu
