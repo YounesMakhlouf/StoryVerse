@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
+use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminRoute;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
@@ -30,7 +31,7 @@ class UserCrudController extends AbstractCrudController
         $addAdminRole = Action::new('Add as admin')
             ->addCssClass('btn btn-success')
             ->setIcon('fa-solid fa-user-plus')
-            ->displayAsButton()
+            ->renderAsButton()
             ->linkToCrudAction('addAdminRole')
             ->setTemplatePath('admin/add_admin.html.twig')
             ->displayIf(fn(User $user) => !in_array("ROLE_ADMIN", $user->getRoles()));
@@ -38,7 +39,7 @@ class UserCrudController extends AbstractCrudController
         $removeAdminRole = Action::new('Deprive Admin Role')
             ->addCssClass('btn btn-danger')
             ->setIcon('fa-solid fa-user-minus')
-            ->displayAsButton()
+            ->renderAsButton()
             ->linkToCrudAction('removeAdminRole')
             ->setTemplatePath('admin/add_admin.html.twig')
             ->displayIf(fn(User $user) => in_array("ROLE_ADMIN", $user->getRoles()));
@@ -72,6 +73,7 @@ class UserCrudController extends AbstractCrudController
         ];
     }
 
+    #[AdminRoute('/{entityId:user.id}/add-admin-role')]
     public function addAdminRole(AdminContext $adminContext, EntityManagerInterface $entityManager, AdminUrlGenerator $adminUrlGenerator): RedirectResponse
     {
         $user = $adminContext->getEntity()->getInstance();
@@ -93,6 +95,7 @@ class UserCrudController extends AbstractCrudController
         return $this->redirect($targetUrl);
     }
 
+    #[AdminRoute('/{entityId:user.id}/remove-admin-role')]
     public function removeAdminRole(AdminContext $adminContext, EntityManagerInterface $entityManager, AdminUrlGenerator $adminUrlGenerator): RedirectResponse
     {
         $user = $adminContext->getEntity()->getInstance();

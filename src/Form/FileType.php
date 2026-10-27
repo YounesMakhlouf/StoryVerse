@@ -17,14 +17,12 @@ class FileType extends AbstractType
             'label' => 'Profile Picture',
             'required' => false,
             'constraints' => [
-                new File([
-                    'maxSize' => '2M',
-                    'mimeTypes' => [
-                        'image/jpeg',
-                        'image/png',
-                    ],
-                    'mimeTypesMessage' => 'Please upload a valid JPEG or PNG image.',
-                ]),
+                new File(
+                    maxSize: '2M',
+                    extensions: ['jpg', 'jpeg', 'png'],
+                    extensionsMessage: 'Please upload a valid JPEG or PNG image.',
+                    mimeTypesMessage: 'Please upload a valid JPEG or PNG image.',
+                ),
             ],
         ]);
     }

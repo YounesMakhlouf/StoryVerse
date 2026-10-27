@@ -50,3 +50,7 @@ services:
   App\Controller\HomeController:
     arguments:
       $teamMembersFile: '%team_members_file%'
+
+when@test:
+  parameters:
+    avatar_directory: '%kernel.cache_dir%/uploads/avatar_directory'

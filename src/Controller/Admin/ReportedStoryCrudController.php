@@ -7,6 +7,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\QueryBuilder;
 use EasyCorp\Bundle\EasyAdminBundle\Collection\FieldCollection;
 use EasyCorp\Bundle\EasyAdminBundle\Collection\FilterCollection;
+use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminRoute;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
@@ -57,6 +58,7 @@ class ReportedStoryCrudController extends StoryCrudController
     /**
      * @throws Exception
      */
+    #[AdminRoute('/{entityId:story.id}/delete-story')]
     public function deleteStory(StoryRepository $storyRepository, AdminContext $adminContext, AdminUrlGenerator $adminUrlGenerator): RedirectResponse
     {
         $story = $adminContext->getEntity()->getInstance();
@@ -70,6 +72,7 @@ class ReportedStoryCrudController extends StoryCrudController
         return $this->redirect($targetUrl);
     }
 
+    #[AdminRoute('/{entityId:story.id}/reject-report')]
     public function rejectReport(AdminContext $adminContext, EntityManagerInterface $entityManager, AdminUrlGenerator $adminUrlGenerator): RedirectResponse
     {
         $story = $adminContext->getEntity()->getInstance();

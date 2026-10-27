@@ -31,15 +31,12 @@ class ProfileType extends AbstractType
                 'mapped' => false,
                 'required' => false,
                 'constraints' => [
-                    new File([
-                        'maxSize' => '1024k',
-                        'mimeTypes' => [
-                            'image/jpeg',
-                            'image/jpg',
-                            'image/png',
-                        ],
-                        'mimeTypesMessage' => 'Please upload a valid image file (JPEG or PNG).',
-                    ])
+                    new File(
+                        maxSize: '1024k',
+                        extensions: ['jpg', 'jpeg', 'png'],
+                        extensionsMessage: 'Please upload a valid image file (JPEG or PNG).',
+                        mimeTypesMessage: 'Please upload a valid image file (JPEG or PNG).',
+                    )
                 ],
             ])
             ->add('submit', SubmitType::class, [

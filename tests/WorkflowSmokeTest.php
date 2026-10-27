@@ -3,11 +3,30 @@
 namespace App\Tests;
 
 use App\Entity\User;
+use App\Entity\Story;
+use App\Factory\StoryFactory;
 use App\Factory\UserFactory;
+use App\Form\FileType as ProfilePictureType;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\Filesystem\Filesystem;
 
 final class WorkflowSmokeTest extends WebTestCase
 {
+    private ?string $uploadDirectory = null;
+    private ?string $sourceDirectory = null;
+
+    protected function tearDown(): void
+    {
+        if ($this->uploadDirectory !== null) {
+            (new Filesystem())->remove($this->uploadDirectory);
+        }
+        if ($this->sourceDirectory !== null) {
+            (new Filesystem())->remove($this->sourceDirectory);
+        }
+
+        parent::tearDown();
+    }
+
     public function testRegistrationLoginAndStoryWorkflows(): void
     {
         $client = static::createClient();
@@ -90,5 +109,76 @@ final class WorkflowSmokeTest extends WebTestCase
         $client->loginUser($admin);
         $client->request('GET', '/admin');
         self::assertResponseIsSuccessful();
+    }
+
+    public function testAdminCrudActions(): void
+    {
+        $client = static::createClient();
+        $admin = UserFactory::createOne(['roles' => ['ROLE_ADMIN']]);
+        $user = UserFactory::createOne(['roles' => ['ROLE_USER']]);
+        $client->loginUser($admin);
+
+        $client->request('GET', '/admin/user');
+        self::assertResponseIsSuccessful();
+        $client->request('POST', '/admin/user/' . $user->getId() . '/add-admin-role');
+        self::assertResponseRedirects();
+        $user = static::getContainer()->get('doctrine')->getRepository(User::class)->find($user->getId());
+        self::assertSame(['ROLE_ADMIN', 'ROLE_USER'], $user->getRoles());
+
+        $client->request('GET', '/admin/user');
+        self::assertResponseIsSuccessful();
+        $client->request('POST', '/admin/user/' . $user->getId() . '/remove-admin-role');
+        self::assertResponseRedirects();
+        $user = static::getContainer()->get('doctrine')->getRepository(User::class)->find($user->getId());
+        self::assertSame(['ROLE_USER'], $user->getRoles());
+
+        $reportedStory = StoryFactory::createOne([
+            'title' => 'Reported workflow ' . bin2hex(random_bytes(4)),
+            'IsReported' => true,
+        ]);
+        $client->request('GET', '/admin/reported-story');
+        self::assertResponseIsSuccessful();
+        $client->request('POST', '/admin/reported-story/' . $reportedStory->getId() . '/reject-report');
+        self::assertResponseRedirects();
+        $reportedStory = static::getContainer()->get('doctrine')->getRepository(Story::class)->find($reportedStory->getId());
+        self::assertFalse($reportedStory->isIsReported());
+    }
+
+    public function testProfileUploadsRequireMatchingImageExtensions(): void
+    {
+        $client = static::createClient();
+        $form = static::getContainer()->get('form.factory')->create(ProfilePictureType::class, null, ['data_class' => null]);
+        self::assertTrue($form->has('profilePicture'));
+
+        $user = UserFactory::createOne(['roles' => ['ROLE_USER']]);
+        $this->uploadDirectory = static::getContainer()->getParameter('avatar_directory');
+        (new Filesystem())->mkdir($this->uploadDirectory);
+        $this->sourceDirectory = sys_get_temp_dir() . '/storyverse-upload-source-' . bin2hex(random_bytes(5));
+        mkdir($this->sourceDirectory);
+        $client->loginUser($user);
+
+        $source = $this->sourceDirectory . '/valid.png';
+        copy(__DIR__ . '/../public/uploads/avatar_directory/female.png', $source);
+        $crawler = $client->request('GET', '/modify-profile');
+        self::assertResponseIsSuccessful();
+        $client->submit($crawler->selectButton('Save changes')->form([
+            'profile[avatar]' => $source,
+        ]));
+        self::assertResponseRedirects();
+        self::assertCount(1, glob($this->uploadDirectory . '/*'));
+        $user = static::getContainer()->get('doctrine')->getRepository(User::class)->find($user->getId());
+        $avatarAfterValidUpload = $user->getAvatar();
+
+        $source = $this->sourceDirectory . '/mismatched.jpg';
+        copy(__DIR__ . '/../public/uploads/avatar_directory/female.png', $source);
+        $crawler = $client->request('GET', '/modify-profile');
+        $client->submit($crawler->selectButton('Save changes')->form([
+            'profile[avatar]' => $source,
+        ]));
+        self::assertResponseIsSuccessful();
+        self::assertStringContainsString('Please upload a valid image file (JPEG or PNG).', $client->getResponse()->getContent());
+        self::assertCount(1, glob($this->uploadDirectory . '/*'));
+        $user = static::getContainer()->get('doctrine')->getRepository(User::class)->find($user->getId());
+        self::assertSame($avatarAfterValidUpload, $user->getAvatar());
     }
 }

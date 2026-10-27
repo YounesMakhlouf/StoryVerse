@@ -3,27 +3,10 @@
 namespace App\Factory;
 
 use App\Entity\Story;
-use App\Repository\StoryRepository;
 use Zenstruck\Foundry\Persistence\PersistentObjectFactory;
 
 /**
- * @extends ModelFactory<Story>
- *
- * @method        Story|Proxy create(array|callable $attributes = [])
- * @method static Story|Proxy createOne(array $attributes = [])
- * @method static Story|Proxy find(object|array|mixed $criteria)
- * @method static Story|Proxy findOrCreate(array $attributes)
- * @method static Story|Proxy first(string $sortedField = 'id')
- * @method static Story|Proxy last(string $sortedField = 'id')
- * @method static Story|Proxy random(array $attributes = [])
- * @method static Story|Proxy randomOrCreate(array $attributes = [])
- * @method static StoryRepository|RepositoryProxy repository()
- * @method static Story[]|Proxy[] all()
- * @method static Story[]|Proxy[] createMany(int $number, array|callable $attributes = [])
- * @method static Story[]|Proxy[] createSequence(iterable|callable $sequence)
- * @method static Story[]|Proxy[] findBy(array $attributes)
- * @method static Story[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
- * @method static Story[]|Proxy[] randomSet(int $number, array $attributes = [])
+ * @extends PersistentObjectFactory<Story>
  */
 final class StoryFactory extends PersistentObjectFactory
 {

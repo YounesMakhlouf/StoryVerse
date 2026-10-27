@@ -42,10 +42,8 @@ class StoryType extends AbstractType
                 'constraints' => [
                     new File(
                         maxSize: '2M',
-                        mimeTypes: [
-                            'image/jpeg',
-                            'image/png',
-                        ],
+                        extensions: ['jpg', 'jpeg', 'png'],
+                        extensionsMessage: 'Please upload a valid JPG or PNG image',
                         mimeTypesMessage: 'Please upload a valid JPG or PNG image',
                     ),
                 ],

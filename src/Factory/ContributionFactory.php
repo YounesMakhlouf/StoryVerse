@@ -3,27 +3,10 @@
 namespace App\Factory;
 
 use App\Entity\Contribution;
-use App\Repository\ContributionRepository;
 use Zenstruck\Foundry\Persistence\PersistentObjectFactory;
 
 /**
- * @extends ModelFactory<Contribution>
- *
- * @method        Contribution|Proxy create(array|callable $attributes = [])
- * @method static Contribution|Proxy createOne(array $attributes = [])
- * @method static Contribution|Proxy find(object|array|mixed $criteria)
- * @method static Contribution|Proxy findOrCreate(array $attributes)
- * @method static Contribution|Proxy first(string $sortedField = 'id')
- * @method static Contribution|Proxy last(string $sortedField = 'id')
- * @method static Contribution|Proxy random(array $attributes = [])
- * @method static Contribution|Proxy randomOrCreate(array $attributes = [])
- * @method static ContributionRepository|RepositoryProxy repository()
- * @method static Contribution[]|Proxy[] all()
- * @method static Contribution[]|Proxy[] createMany(int $number, array|callable $attributes = [])
- * @method static Contribution[]|Proxy[] createSequence(iterable|callable $sequence)
- * @method static Contribution[]|Proxy[] findBy(array $attributes)
- * @method static Contribution[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
- * @method static Contribution[]|Proxy[] randomSet(int $number, array $attributes = [])
+ * @extends PersistentObjectFactory<Contribution>
  */
 final class ContributionFactory extends PersistentObjectFactory
 {
